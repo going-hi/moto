@@ -8,6 +8,9 @@ export default {
     extend: {
       maxWidth: {
         "container": "var(--container-width)"
+      },
+      backgroundColor:{
+        "beige": "var(--beige)"
       }
     },
   },
