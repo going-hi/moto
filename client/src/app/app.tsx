@@ -1,6 +1,10 @@
 import '@/app/styles/index.css'
-import { IconBadge } from '@/shared'
+import { RouterProvider } from './providers/router.provider'
 
 export const App = () => {
-	return <IconBadge count={110} name='Cart' />
+	return (
+		<>
+			<RouterProvider />
+		</>
+	)
 }
