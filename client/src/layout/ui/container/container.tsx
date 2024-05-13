@@ -1,12 +1,16 @@
 import clsx from 'clsx'
 import type { ReactNode } from 'react'
 
-export const Text = ({
+export const Container = ({
 	children,
 	className
 }: {
 	children: ReactNode
 	className?: string
 }) => {
-	return <p className={clsx('inter', className)}>{children}</p>
+	return (
+		<div className={clsx('max-w-container mx-auto my-0', className)}>
+			{children}
+		</div>
+	)
 }

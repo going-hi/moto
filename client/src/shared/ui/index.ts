@@ -1,2 +1,2 @@
-export * from './container'
 export * from './typography'
+export * from './icon'

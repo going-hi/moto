@@ -5,29 +5,5 @@
     "semi": false,
     "singleQuote": true,
     "jsxSingleQuote": true,
-    "arrowParens": "avoid",
-    "plugins": [
-        "@trivago/prettier-plugin-sort-imports"
-    ],
-    "importOrder": [
-        "^[\"'](react)['\"]$",
-        "^(react)(.*)$",
-        "<THIRD_PARTY_MODULES>",
-        "^(@?)app/(.*)$",
-        "^(@?)model/(.*)$",
-        "^(@?)type(s?)/(.*)$",
-        "^(@?)interface(s?)/(.*)$",
-        "^(@?)process/(.*)$",
-        "^(@?)store/(.*)$",
-        "^(@?)pages/(.*)$",
-        "^(@?)widgets/(.*)$",
-        "^(@?)features/(.*)$",
-        "^(@?)entities/(.*)$",
-        "^(@?)shared/(.*)$",
-        "^[./](.*)$",
-        "^((@?).*)(.module).(s?)css$",
-        "^(@?)stories/(.*)$"
-    ],
-    "importOrderSeparation": true,
-    "importOrderSortSpecifiers": true
+    "arrowParens": "avoid"
 }

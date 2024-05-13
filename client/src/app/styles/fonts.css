@@ -1,9 +1,34 @@
 @font-face {
-    font-family: "Inter";
-    src: url("../../../fonts/inter.ttf")
+	font-family: 'Inter';
+	src: url('../../../fonts/inter.ttf');
 }
 
-@font-face{
-    font-family: "Bebas";
-    src: url("../../../fonts/bebas.ttf");
+@font-face {
+	font-family: 'Bebas';
+	src: url('../../../fonts/bebas-bold.ttf');
+	font-weight: 700;
+}
+
+@font-face {
+	font-family: 'Bebas';
+	src: url('../../../fonts/bebas-light.ttf');
+	font-weight: 200;
+}
+
+@font-face {
+	font-family: 'Bebas';
+	src: url('../../../fonts/bebas-book.ttf');
+	font-weight: 300;
+}
+
+@font-face {
+	font-family: 'Bebas';
+	src: url('../../../fonts/bebas-thin.ttf');
+	font-weight: 100;
+}
+
+@font-face {
+	font-family: 'Bebas';
+	src: url('../../../fonts/bebas-regular.ttf');
+	font-weight: 400;
 }
