@@ -24,4 +24,10 @@ export class UserService {
 		const user = this.userRepository.create(dto)
 		return await this.userRepository.save(user)
 	}
+
+	async confirmation(link: string) {
+		const user = await this.userRepository.findOneBy({ link })
+		if (!user) return
+		await this.userRepository.save({ ...user, link: null, isConfirm: true })
+	}
 }
