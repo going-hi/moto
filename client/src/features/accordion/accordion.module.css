@@ -1,0 +1,7 @@
+.close * {
+	@apply text-beige;
+}
+
+.open * {
+	@apply text-black;
+}
