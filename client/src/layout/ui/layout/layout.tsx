@@ -5,11 +5,13 @@ import cl from './layout.module.css'
 export const Layout = ({
 	variant,
 	children,
-	type
+	type,
+	className
 }: {
 	variant: 'full' | 'part'
 	type: 'single' | 'multi'
 	children: ReactNode
+	className?: string
 }) => {
 	const isFull = variant === 'full'
 	const isPart = variant === 'part'
@@ -28,7 +30,8 @@ export const Layout = ({
 				isFull && isSingle && cl.full,
 				isMulti && cl.multi,
 				isPart && 'justify-end',
-				isPart && isSingle && cl.single_part
+				isPart && isSingle && cl.single_part,
+				className
 			)}
 		>
 			{children}
