@@ -1,6 +1,6 @@
 import { ERoles } from '@/common/enums/role.enum'
 import { AbstractEntity } from '@/core/database/entities'
-import { Column, Entity } from 'typeorm'
+import { Column, Entity, Generated } from 'typeorm'
 
 @Entity('users')
 export class UserEntity extends AbstractEntity {
@@ -15,6 +15,10 @@ export class UserEntity extends AbstractEntity {
 
 	@Column()
 	password: string
+
+	@Generated('uuid')
+	@Column({ nullable: true, unique: true })
+	link: string | null
 
 	@Column({ enum: ERoles, default: ERoles.USER })
 	role: ERoles
