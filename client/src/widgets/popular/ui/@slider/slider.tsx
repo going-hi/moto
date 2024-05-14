@@ -1,7 +1,8 @@
 import useEmblaCarousel from 'embla-carousel-react'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
+import { scrollToSlide, Button } from '@/shared'
 import { popularCardsArr } from '../@model'
-import { PopularSlide } from '../@slide/slide'
+import { PopularSlide } from '../@slide'
 
 export const PopularSlider = () => {
 	const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0)
@@ -13,29 +14,37 @@ export const PopularSlider = () => {
 		watchDrag: false
 	})
 
-	const isManualChangeSlide = useRef<boolean>(false)
-
 	const onSlideClick = (index: number) => {
 		if (!popularSliderApi) return
 
 		if (index !== activeSlideIndex) {
+			scrollToSlide({
+				api: popularSliderApi,
+				index,
+				jump: false,
+				direction: -1
+			})
+
 			setActiveSlideIndex(index)
 		}
 	}
 
 	return (
-		<div ref={popularSliderRef} className='overflow-hidden'>
-			<div className='flex'>
-				{popularCardsArr.map((i, index) => (
-					<PopularSlide
-						onClick={onSlideClick}
-						{...i}
-						key={i.image}
-						index={index}
-						isActive={index === activeSlideIndex}
-					/>
-				))}
+		<div className='relative'>
+			<div ref={popularSliderRef} className='overflow-hidden '>
+				<div className='flex'>
+					{popularCardsArr.map((i, index) => (
+						<PopularSlide
+							onClick={onSlideClick}
+							{...i}
+							key={i.image}
+							index={index}
+							isActive={index === activeSlideIndex}
+						/>
+					))}
+				</div>
 			</div>
+			<Button variant='more' path='/catalog' />
 		</div>
 	)
 }

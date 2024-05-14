@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Icon, IconBadge } from '@/shared'
 import { Container } from '../../container'
-import { headerLinksArr } from '../@model'
+import { Navigation } from './@navigation'
 import { Search } from './@search'
 
 export const Header = () => {
@@ -12,20 +12,7 @@ export const Header = () => {
 					<Link to={'/'}>
 						<img src='/logo.png' />
 					</Link>
-					<nav className='self-start pt-[20px]'>
-						<ul className='flex gap-x-[100px]'>
-							{headerLinksArr.map(({ label, path }) => (
-								<li key={path}>
-									<Link
-										className='text-beige text-[16px] font-bold'
-										to={path}
-									>
-										{label}
-									</Link>
-								</li>
-							))}
-						</ul>
-					</nav>
+					<Navigation />
 					<div className='flex justify-between gap-x-[40px] pt-[20px] pr-[25px]'>
 						<Search />
 						<Icon

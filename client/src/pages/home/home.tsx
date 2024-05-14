@@ -3,7 +3,7 @@ import { Header } from '@/layout'
 
 export const HomePage = () => {
 	return (
-		<div className='bg-[#da2424] min-h-[100dvh]'>
+		<div className='bg-red-light'>
 			<Header />
 			<Popular />
 		</div>
