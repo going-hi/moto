@@ -7,7 +7,8 @@ export default {
 				container: 'var(--container-width)'
 			},
 			backgroundColor: {
-				beige: 'var(--beige)'
+				beige: 'var(--beige)',
+				'red-light': 'var(--red-light)'
 			},
 			colors: {
 				beige: 'var(--beige)'

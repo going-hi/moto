@@ -1,4 +1,4 @@
-.full > div {
+.full > {
 	@apply shrink-0 grow basis-full;
 }
 
@@ -6,14 +6,14 @@
 	@apply justify-between;
 }
 
-.multi > div:first-child {
+.multi > :first-child {
 	@apply shrink-0 basis-[42%] grow-0;
 }
 
-.multi > div:nth-child(2) {
+.multi > :nth-child(2) {
 	@apply shrink-0 basis-[58%] grow;
 }
 
-.single_part > div:first-child {
+.single_part > :first-child {
 	@apply shrink-0 basis-[58%] grow-0;
 }
