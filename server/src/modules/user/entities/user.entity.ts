@@ -16,8 +16,8 @@ export class UserEntity extends AbstractEntity {
 	@Column()
 	password: string
 
-	@Generated('uuid')
 	@Column({ nullable: true, unique: true })
+	@Generated('uuid')
 	link: string | null
 
 	@Column({ enum: ERoles, default: ERoles.USER })

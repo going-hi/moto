@@ -1,21 +1,21 @@
 import { IsEmail, IsString, MaxLength, MinLength } from 'class-validator'
 
 export class CreateUserDto {
-	@IsEmail()
+	@IsEmail({}, { message: 'Некорректный email' })
 	email: string
 
-	@IsString()
-	@MinLength(8)
-	@MaxLength(32)
+	@IsString({ message: 'Пароль должен быть строкой' })
+	@MinLength(8, { message: 'Минимальная длина пароля 8 символов' })
+	@MaxLength(32, { message: 'Максимальная длина пароля 32 символов' })
 	password: string
 
-	@MinLength(2)
-	@MaxLength(32)
-	@IsString()
+	@IsString({ message: 'Имя должно быть строкой' })
+	@MinLength(2, { message: 'Минимальная длина имени 2 символов' })
+	@MaxLength(32, { message: 'Максимальная длина имени 32 символов' })
 	name: string
 
-	@MinLength(2)
-	@MaxLength(32)
-	@IsString()
+	@IsString({ message: 'Фамилия должна быть строкой' })
+	@MinLength(2, { message: 'Минимальная длина фамилии 2 символов' })
+	@MaxLength(32, { message: 'Максимальная длина фамилии 32 символов' })
 	surname: string
 }
