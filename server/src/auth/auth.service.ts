@@ -11,13 +11,15 @@ import {
 import { HashService } from '@/core/hash/hash.service'
 import { UserService } from '@/modules/user/user.service'
 import { TokenService } from './token.service'
+import { MailService } from '@/mail/mail.service'
 
 @Injectable()
 export class AuthService {
 	constructor(
 		private readonly userService: UserService,
 		private readonly tokenService: TokenService,
-		private readonly hashService: HashService
+		private readonly hashService: HashService,
+		private readonly mailService: MailService
 	) {}
 
 	async login({ email, password }: LoginDto) {
@@ -42,7 +44,7 @@ export class AuthService {
 			password: hashPassword
 		})
 
-		// * Отправка писька
+		this.mailService.sendActiveLink(user.email, user.link)
 		const { refreshToken } = this.tokenService.generateTokens(user)
 		await this.tokenService.saveToken(refreshToken, user.id)
 		return refreshToken

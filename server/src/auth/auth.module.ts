@@ -8,13 +8,15 @@ import { UserModule } from '@/modules/user/user.module'
 import { TokenService } from './token.service'
 import { JwtModule } from '@nestjs/jwt'
 import { AccessJwtStrategy, RefreshJwtStrategy } from './strategies'
+import { MailModule } from '@/mail/mail.module'
 
 @Module({
 	imports: [
 		TypeOrmModule.forFeature([SessionEntity]),
 		HashModule,
 		UserModule,
-		JwtModule.register({})
+		JwtModule.register({}),
+		MailModule
 	],
 	controllers: [AuthController],
 	providers: [AuthService, TokenService, AccessJwtStrategy, RefreshJwtStrategy]
