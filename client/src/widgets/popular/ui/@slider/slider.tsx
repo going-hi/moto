@@ -11,8 +11,8 @@ export const PopularSlider = () => {
 				watchDrag: false
 			}}
 		>
-			{cards.map((i, index, id) => (
-				<PopularSlide {...i} key={String(id)} index={index} />
+			{cards.map((i, index) => (
+				<PopularSlide {...i} key={String(i.id)} index={index} />
 			))}
 		</Slider>
 	)

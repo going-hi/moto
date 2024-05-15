@@ -19,6 +19,9 @@ export default {
 		},
 		aspectRatio: {
 			square: '1 / 1'
+		},
+		transitionProperty: {
+			width: 'width'
 		}
 	},
 	plugins: []
