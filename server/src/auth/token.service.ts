@@ -15,8 +15,8 @@ export class TokenService {
 		private readonly configService: ConfigService
 	) {}
 
-	generateTokens({ id, email, name, role }: JwtPayload) {
-		const payload = { id, email, name, role }
+	generateTokens({ id, email, name, role, isConfirm }: JwtPayload) {
+		const payload = { id, email, name, role, isConfirm }
 
 		const accessToken = this.jwtService.sign(payload, {
 			secret: this.configService.get('ACCESS_JWT_SECRET'),

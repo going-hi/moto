@@ -28,6 +28,11 @@ export class UserService {
 	async confirmation(link: string) {
 		const user = await this.userRepository.findOneBy({ link })
 		if (!user) return
+		if (!user.link) return
 		await this.userRepository.save({ ...user, link: null, isConfirm: true })
+	}
+
+	async changePassword(id: number, hashPassword: string) {
+		return await this.userRepository.update({ id }, { password: hashPassword })
 	}
 }

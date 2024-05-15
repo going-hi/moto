@@ -1,5 +1,13 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
-import { RegistrationDto, LoginDto, RefreshDto, JwtPayload } from './dto'
+import {
+	RegistrationDto,
+	LoginDto,
+	RefreshDto,
+	JwtPayload,
+	ChangePasswordDto,
+	ProfileDto
+	// RecoveryPasswordDto
+} from './dto'
 import { HashService } from '@/core/hash/hash.service'
 import { UserService } from '@/modules/user/user.service'
 import { TokenService } from './token.service'
@@ -37,6 +45,7 @@ export class AuthService {
 		// * Отправка писька
 		const { refreshToken } = this.tokenService.generateTokens(user)
 		await this.tokenService.saveToken(refreshToken, user.id)
+		return refreshToken
 	}
 
 	async refresh(
@@ -54,12 +63,33 @@ export class AuthService {
 		const tokens = this.tokenService.generateTokens(profile)
 		await this.tokenService.saveToken(tokens.refreshToken, profile.id)
 
-		return { tokens, profile }
+		return {
+			tokens,
+			profile: new ProfileDto(profile)
+		}
 	}
 
 	async logout(refresh: string) {
 		const token = await this.tokenService.byToken(refresh)
 		if (token) await this.tokenService.removeTokenFromDb(refresh)
+	}
+
+	// ! потом сделать
+	//* async recoveryPassword(dto: RecoveryPasswordDto) {}
+
+	async changePassword(dto: ChangePasswordDto, userId: number) {
+		if (dto.newPassword === dto.password) {
+			throw new BadRequestException('Нельзя менять на тот же пароль')
+		}
+
+		const user = await this.userService.byId(userId)
+
+		const isMatch = await this.hashService.compare(dto.password, user.password)
+		if (!isMatch) throw new BadRequestException('Неверный пароль')
+
+		const newHashPassword = await this.hashService.hash(dto.newPassword)
+		await this.userService.changePassword(userId, newHashPassword)
+		return
 	}
 
 	async active(link: string) {

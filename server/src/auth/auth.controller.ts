@@ -7,15 +7,19 @@ import {
 	HttpCode,
 	Res,
 	UnauthorizedException,
-	Param
+	Param,
+	UsePipes,
+	ValidationPipe
 } from '@nestjs/common'
 import { AuthService } from './auth.service'
-import { LoginDto, RegistrationDto } from './dto'
+import { LoginDto, RegistrationDto, ChangePasswordDto } from './dto'
 import type { CookieOptions, Response } from 'express'
 import { Cookie, User } from '@/common/decorators'
-import { RefreshGuard } from './guards'
+import { AccessGuard, RefreshGuard } from './guards'
 import { ConfigService } from '@nestjs/config'
+import { isUUID } from 'class-validator'
 
+@UsePipes(new ValidationPipe({ whitelist: true }))
 @Controller('auth')
 export class AuthController {
 	constructor(
@@ -70,6 +74,18 @@ export class AuthController {
 		return { accessToken, profile }
 	}
 
+	// * доделать
+	// @HttpCode(HttpStatus.OK)
+	// @Post('password/recovery')
+	// recoveryPassword(@Body() dto: RecoveryPasswordDto) {}
+
+	@AccessGuard()
+	@HttpCode(HttpStatus.NO_CONTENT)
+	@Post('password/change')
+	changePassword(@Body() dto: ChangePasswordDto, @User('id') id: number) {
+		return this.authService.changePassword(dto, id)
+	}
+
 	@HttpCode(HttpStatus.OK)
 	@Get('logout')
 	logout(@Cookie('refresh') refresh: string, @Res({ passthrough: true }) res: Response) {
@@ -80,7 +96,8 @@ export class AuthController {
 
 	@Get('active/:link')
 	async active(@Param('link') link: string, @Res() res: Response) {
-		await this.authService.active(link)
+		const is = isUUID(link)
+		if (is) await this.authService.active(link)
 		return res.redirect(this.configService.get('CLIENT_URL'))
 	}
 }
