@@ -7,11 +7,13 @@ import { SliderProvider } from './@provider'
 export const Slider = ({
 	children,
 	options,
-	plugins = []
+	plugins = [],
+	more
 }: {
 	children: ReactNode
 	options: EmblaOptionsType
 	plugins?: EmblaPluginType[]
+	more?: string
 }) => {
 	const [sliderRef, sliderApi] = useEmblaCarousel(options, plugins)
 
@@ -21,7 +23,7 @@ export const Slider = ({
 				<div ref={sliderRef} className='overflow-hidden '>
 					<div className='flex'>{children}</div>
 				</div>
-				<Button variant='more' path='/catalog' />
+				{!!more && <Button variant='more' path={more} />}
 			</div>
 		</SliderProvider>
 	)

@@ -11,6 +11,7 @@ export const ReviewsSlider = () => {
 				align: 'start',
 				watchDrag: false
 			}}
+			more='/reviews'
 		>
 			{reviews.map((i, index) => (
 				<ReviewsSlide index={index} {...i} key={String(i.id)} />
