@@ -1,6 +1,6 @@
 import clsx from 'clsx'
-import { Typography } from '@/shared'
-import type { TPopularCardItem } from '../@model'
+import type { TCard } from '@/entities/card'
+import { Typography, useSlider } from '@/shared'
 
 const { Title, Text } = Typography
 
@@ -8,20 +8,18 @@ export const PopularSlide = ({
 	name,
 	price,
 	image,
-	onClick,
-	index,
-	isActive
-}: TPopularCardItem & {
-	onClick: (i: number) => void
+	index
+}: TCard & {
 	index: number
-	isActive: boolean
 }) => {
+	const { activeIndex, onClick } = useSlider()
+
 	return (
 		<aside
 			onClick={() => onClick(index)}
 			className={clsx(
-				'shrink-0 grow-0 basis-[700px] pr-[50px] group',
-				!isActive && 'cursor-pointer'
+				'shrink-0 grow-0 basis-[700px] pr-[50px] group p-[16px]',
+				index !== activeIndex && 'cursor-pointer'
 			)}
 		>
 			<div className='duration-700 group-hover:scale-[102%]'>
@@ -32,7 +30,7 @@ export const PopularSlide = ({
 						alt={name}
 					/>
 				</div>
-				<div className='flex justify-between text-beige px-[5px]'>
+				<div className='flex justify-between text-beige'>
 					<Title variant='h4' className=''>
 						{name}
 					</Title>
