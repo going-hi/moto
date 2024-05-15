@@ -7,13 +7,13 @@
 }
 
 .multi > :first-child {
-	@apply shrink-0 basis-[42%] grow-0;
+	@apply shrink-0 basis-[40%] grow-0;
 }
 
 .multi > :nth-child(2) {
-	@apply shrink-0 basis-[58%] grow;
+	@apply shrink-0 basis-[60%] grow;
 }
 
 .single_part > :first-child {
-	@apply shrink-0 basis-[58%] grow-0;
+	@apply shrink-0 basis-[60%] grow-0;
 }

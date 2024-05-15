@@ -25,7 +25,7 @@ export const Footer = () => {
 						/>
 						<Link
 							to='/'
-							className='opacity-70 text-beige hover:underline'
+							className='opacity-70 text-beige hover:underline leading-[30px]'
 						>
 							ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ
 						</Link>
@@ -45,7 +45,7 @@ export const Footer = () => {
 							</div>
 						</nav>
 						<Title
-							className='text-beige font-extrabold leading-[50px]'
+							className='text-beige font-extrabold leading-[85px]'
 							variant='h2'
 						>
 							+7 (920) 909-58-24

@@ -11,7 +11,8 @@ export default {
 				'red-light': 'var(--red-light)'
 			},
 			colors: {
-				beige: 'var(--beige)'
+				beige: 'var(--beige)',
+				'red-light': 'var(--red-light)'
 			}
 		},
 		letterSpacing: {

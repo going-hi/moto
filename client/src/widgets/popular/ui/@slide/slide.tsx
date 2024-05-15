@@ -18,7 +18,7 @@ export const PopularSlide = ({
 		<aside
 			onClick={() => onClick(index)}
 			className={clsx(
-				'shrink-0 grow-0 basis-[700px] pr-[50px] group p-[16px]',
+				'shrink-0 grow-0 basis-[670px] pr-[50px] group p-[6px]',
 				index !== activeIndex && 'cursor-pointer'
 			)}
 		>

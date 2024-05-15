@@ -13,7 +13,7 @@ export const Container = ({
 	return (
 		<div className={clsx('max-w-container mx-auto my-0', className)}>
 			{bodyClassName ? (
-				<div className={clsx('px-[16px]', bodyClassName)}>
+				<div className={clsx('px-[30px]', bodyClassName)}>
 					{children}
 				</div>
 			) : (
