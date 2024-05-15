@@ -6,8 +6,8 @@ const { Title } = Typography
 
 export const Reviews = () => {
 	return (
-		<section className='bg-black'>
-			<Container>
+		<section>
+			<Container bodyClassName='bg-black py-[50px]'>
 				<Layout type='single' variant='part'>
 					<Title variant='h2' className='text-white opacity-20'>
 						ОТЗЫВЫ

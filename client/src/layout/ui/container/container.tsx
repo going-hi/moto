@@ -3,19 +3,22 @@ import type { ReactNode } from 'react'
 
 export const Container = ({
 	children,
-	className
+	className,
+	bodyClassName
 }: {
 	children: ReactNode
 	className?: string
+	bodyClassName?: string
 }) => {
 	return (
-		<div
-			className={clsx(
-				'max-w-container mx-auto my-0 px-[16px]',
-				className
+		<div className={clsx('max-w-container mx-auto my-0', className)}>
+			{bodyClassName ? (
+				<div className={clsx('px-[16px]', bodyClassName)}>
+					{children}
+				</div>
+			) : (
+				children
 			)}
-		>
-			{children}
 		</div>
 	)
 }
