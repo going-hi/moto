@@ -9,7 +9,12 @@ export const Container = ({
 	className?: string
 }) => {
 	return (
-		<div className={clsx('max-w-container mx-auto my-0', className)}>
+		<div
+			className={clsx(
+				'max-w-container mx-auto my-0 px-[16px]',
+				className
+			)}
+		>
 			{children}
 		</div>
 	)

@@ -6,7 +6,7 @@ const { Title } = Typography
 
 export const Popular = () => {
 	return (
-		<div className='bg-black'>
+		<section className='bg-black'>
 			<Container>
 				<Layout type='single' variant='part'>
 					<Title className='text-white opacity-20' variant='h2'>
@@ -15,6 +15,6 @@ export const Popular = () => {
 				</Layout>
 				<PopularSlider />
 			</Container>
-		</div>
+		</section>
 	)
 }
