@@ -7,7 +7,7 @@ import { Search } from './@search'
 export const Header = () => {
 	return (
 		<header className='py-[20px]'>
-			<Container>
+			<Container bodyClassName='block'>
 				<div className='flex justify-between '>
 					<Link to={'/'}>
 						<img src='/logo.png' alt='logo' />

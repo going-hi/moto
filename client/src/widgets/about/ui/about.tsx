@@ -5,31 +5,37 @@ const { Title, Text } = Typography
 
 export const About = () => {
 	return (
-		<section className='bg-red py-[100px]'>
-			<Container>
+		<section className='bg-light-red py-[100px]'>
+			<Container bodyClassName='pl-0 pr-[40px]'>
 				<div className='mb-[20px] '>
 					<div className='flex float-right'>
 						{[1, 2, 3].map(() => (
-							<img src='/helmet.png' alt='helmet' />
+							<img
+								src='/helmet.png'
+								alt='helmet'
+								className='w-[340px]'
+							/>
 						))}
 					</div>
 					<Title
 						className='text-beige leading-[103px] text-right'
 						variant='h2'
 					>
-						В ТЕХНАРЬ 33, УДОВЛЕТВОРЕНИЕ КЛИЕНТОВ НА ПЕРВОМ МЕСТЕ,
+						В ТЕХНАРЬ 33, УДОВЛЕТВОРЕНИЕ КЛИЕНТОВ НА <br /> ПЕРВОМ
+						МЕСТЕ,
+						<br />
 						МЫ СТРЕМИМСЯ ПРЕВЗОЙТИ ОЖИДАНИЯ И ПРЕДЛОЖИТЬ УНИКАЛЬНЫЕ
 						ТОВАРЫ И УСЛУГУ, УДОВЛЕТВОРЯЮЩИЕ ПОТРЕБНОСТИ КАЖДОГО.
 					</Title>
 				</div>
-				<div className='flex justify-center'>
-					<Text className='text-beige max-w-[380px] '>
-						Ознакомьтесь с нашей обширной коллекцией мотоциклов - от
-						классических круизеров до мощных спортбайков, среди
-						которых найдется идеальный вариант для каждого водителя
-					</Text>
-				</div>
 			</Container>
+			<div className='flex justify-center'>
+				<Text className='text-beige max-w-[340px] -tracking-2per uppercase leading-[18px]'>
+					Ознакомьтесь с нашей обширной коллекцией мотоциклов - от
+					классических круизеров до мощных спортбайков, среди которых
+					найдется идеальный вариант для каждого водителя
+				</Text>
+			</div>
 		</section>
 	)
 }
