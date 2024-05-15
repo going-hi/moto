@@ -1,5 +1,4 @@
-import { Slider } from '@/shared'
-import { popularCardsArr } from '../../model'
+import { Slider, cards } from '@/shared'
 import { PopularSlide } from '../@slide'
 
 export const PopularSlider = () => {
@@ -12,7 +11,7 @@ export const PopularSlider = () => {
 				watchDrag: false
 			}}
 		>
-			{popularCardsArr.map((i, index, id) => (
+			{cards.map((i, index, id) => (
 				<PopularSlide {...i} key={String(id)} index={index} />
 			))}
 		</Slider>

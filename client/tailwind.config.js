@@ -16,6 +16,9 @@ export default {
 		},
 		letterSpacing: {
 			'2per': 'calc(1em / 40)'
+		},
+		aspectRatio: {
+			square: '1 / 1'
 		}
 	},
 	plugins: []

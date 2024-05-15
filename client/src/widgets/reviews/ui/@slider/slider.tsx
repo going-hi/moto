@@ -1,5 +1,5 @@
-import { Slider } from '@/shared'
-import { reviewItemsArr } from '../../model'
+import { Slider, reviews } from '@/shared'
+
 import { ReviewsSlide } from '../@slide'
 
 export const ReviewsSlider = () => {
@@ -12,7 +12,7 @@ export const ReviewsSlider = () => {
 				watchDrag: false
 			}}
 		>
-			{reviewItemsArr.map((i, index) => (
+			{reviews.map((i, index) => (
 				<ReviewsSlide index={index} {...i} key={String(i.id)} />
 			))}
 		</Slider>

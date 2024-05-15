@@ -1,3 +1,4 @@
+import { NewProducts } from '@/widgets/new-products'
 import { Popular } from '@/widgets/popular'
 import { Reviews } from '@/widgets/reviews'
 import { Header } from '@/layout'
@@ -8,6 +9,7 @@ export const HomePage = () => {
 			<Header />
 			<Popular />
 			<Reviews />
+			<NewProducts />
 		</div>
 	)
 }
