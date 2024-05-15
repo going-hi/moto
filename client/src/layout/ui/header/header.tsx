@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Icon, IconBadge } from '@/shared'
-import { Container } from '../../container'
+import { Container } from '../container'
 import { Navigation } from './@navigation'
 import { Search } from './@search'
 
@@ -10,7 +10,7 @@ export const Header = () => {
 			<Container>
 				<div className='flex justify-between '>
 					<Link to={'/'}>
-						<img src='/logo.png' />
+						<img src='/logo.png' alt='logo' />
 					</Link>
 					<Navigation />
 					<div className='flex justify-between gap-x-[40px] pt-[20px] pr-[25px]'>

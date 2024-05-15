@@ -12,7 +12,7 @@ export const Icon = ({
 	name: TIconName
 	className?: string
 	color?: string
-	onClick: (e: MouseEvent<HTMLOrSVGElement>) => void
+	onClick?: (e: MouseEvent<HTMLOrSVGElement>) => void
 }) => {
 	const Svg = getIcon(name)
 

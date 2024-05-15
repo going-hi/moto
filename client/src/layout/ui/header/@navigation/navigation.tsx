@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { UnderlineWave } from '@/shared'
-import { headerLinksArr } from '../../@model'
+import { headerLinksArr } from '../@model'
 
 export const Navigation = () => {
 	return (

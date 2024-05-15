@@ -10,6 +10,7 @@ export const PopularSlider = () => {
 				align: 'start',
 				watchDrag: false
 			}}
+			more='/cards'
 		>
 			{cards.map((i, index) => (
 				<PopularSlide {...i} key={String(i.id)} index={index} />

@@ -1,9 +1,6 @@
-type THeaderItem = {
-	label: string
-	path: string
-}
+import type { TNavItem } from '@/shared'
 
-export const headerLinksArr: THeaderItem[] = [
+export const headerLinksArr: TNavItem[] = [
 	{
 		path: '/catalog',
 		label: 'КАТАЛОГ'
