@@ -18,7 +18,9 @@ import { Cookie, User } from '@/common/decorators'
 import { AccessGuard, RefreshGuard } from './guards'
 import { ConfigService } from '@nestjs/config'
 import { isUUID } from 'class-validator'
-
+import { ApiTags } from '@nestjs/swagger'
+import { AuthSwaggerController } from './swagger'
+@ApiTags('Auth')
 @UsePipes(new ValidationPipe({ whitelist: true }))
 @Controller('auth')
 export class AuthController {
@@ -33,6 +35,7 @@ export class AuthController {
 		path: '/api/auth'
 	}
 
+	@AuthSwaggerController.login()
 	@HttpCode(HttpStatus.NO_CONTENT)
 	@Post('login')
 	async login(@Body() dto: LoginDto, @Res({ passthrough: true }) res: Response) {
@@ -41,6 +44,7 @@ export class AuthController {
 		return
 	}
 
+	@AuthSwaggerController.registration()
 	@HttpCode(HttpStatus.NO_CONTENT)
 	@Post('registration')
 	async registration(@Body() dto: RegistrationDto, @Res({ passthrough: true }) res: Response) {
@@ -49,6 +53,7 @@ export class AuthController {
 		return
 	}
 
+	@AuthSwaggerController.refresh()
 	@RefreshGuard()
 	@HttpCode(HttpStatus.OK)
 	@Get('refresh')
@@ -79,6 +84,7 @@ export class AuthController {
 	// @Post('password/recovery')
 	// recoveryPassword(@Body() dto: RecoveryPasswordDto) {}
 
+	@AuthSwaggerController.changePassword()
 	@AccessGuard()
 	@HttpCode(HttpStatus.NO_CONTENT)
 	@Post('password/change')
@@ -86,6 +92,7 @@ export class AuthController {
 		return this.authService.changePassword(dto, id)
 	}
 
+	@AuthSwaggerController.logout()
 	@HttpCode(HttpStatus.OK)
 	@Get('logout')
 	logout(@Cookie('refresh') refresh: string, @Res({ passthrough: true }) res: Response) {
@@ -94,6 +101,7 @@ export class AuthController {
 		return
 	}
 
+	@AuthSwaggerController.activeLink()
 	@Get('active/:link')
 	async active(@Param('link') link: string, @Res() res: Response) {
 		const is = isUUID(link)
