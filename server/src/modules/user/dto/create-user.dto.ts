@@ -1,12 +1,11 @@
+import { PasswordValidation } from '@/auth/decorators'
 import { IsEmail, IsString, MaxLength, MinLength } from 'class-validator'
 
 export class CreateUserDto {
 	@IsEmail({}, { message: 'Некорректный email' })
 	email: string
 
-	@IsString({ message: 'Пароль должен быть строкой' })
-	@MinLength(8, { message: 'Минимальная длина пароля 8 символов' })
-	@MaxLength(32, { message: 'Максимальная длина пароля 32 символов' })
+	@PasswordValidation
 	password: string
 
 	@IsString({ message: 'Имя должно быть строкой' })
