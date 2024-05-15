@@ -31,6 +31,20 @@ export class EnvironmentVariables {
 
 	@IsString()
 	REFRESH_JWT_SECRET: string
+
+	// * mail
+	@IsString()
+	SMTP_HOST: string
+
+	@IsString()
+	SMTP_USER: string
+
+	@Type(() => Number)
+	@IsInt()
+	SMTP_PORT: number
+
+	@IsString()
+	SMTP_PASSWORD: string
 }
 
 export const EnvConfigOptions: ConfigModuleOptions = {
