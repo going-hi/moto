@@ -11,7 +11,7 @@ export const ReviewsSlide = ({
 	card: { id: cardId, name: cardName }
 }: TReview & { index: number }) => {
 	return (
-		<Slide className='basis-[670px] p-[6px] pr-[50px]' index={index}>
+		<Slide className='basis-[718px] p-[6px] pr-[50px]' index={index}>
 			<div className='border-[#56544f] border-[1px] border-solid p-[30px] hover:scale-[102%] duration-700'>
 				<div className='mb-[130px]'>
 					<div className='mb-[30px]'>

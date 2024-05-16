@@ -25,7 +25,7 @@ export const Button = ({
 			return (
 				<Link
 					className={clsx(
-						'absolute bg-red-light font-extrabold text-[20px] top-[50%] -translate-y-[55%] right-[20%] w-[220px] h-[220px] flex items-center justify-center text-beige rounded-[50%] hover:scale-95 duration-700',
+						'absolute bg-red-light font-extrabold text-[20px] top-[50%] -translate-y-[55%] right-[13%] w-[220px] h-[220px] flex items-center justify-center text-beige rounded-[50%] hover:scale-95 duration-700',
 						cl.underline
 					)}
 					to={path ?? ''}
