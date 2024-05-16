@@ -23,6 +23,12 @@ export default {
 		},
 		transitionProperty: {
 			width: 'width'
+		},
+		backgroundPosition: {
+			'banner-ps': '0 40px'
+		},
+		backgroundSize: {
+			'banner-sz': '100% 110%'
 		}
 	},
 	plugins: []
