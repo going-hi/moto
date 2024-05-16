@@ -1,6 +1,7 @@
 import { About } from '@/widgets/about'
 import { AboutUs } from '@/widgets/about-us'
 import { Banner } from '@/widgets/banner'
+import { Faq } from '@/widgets/faq'
 import { NewProducts } from '@/widgets/new-products'
 import { Popular } from '@/widgets/popular'
 import { Reviews } from '@/widgets/reviews'
@@ -15,6 +16,7 @@ export const HomePage = () => {
 			<Reviews />
 			<NewProducts />
 			<AboutUs />
+			<Faq />
 			<Footer />
 		</div>
 	)

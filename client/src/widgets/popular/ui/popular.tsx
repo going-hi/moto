@@ -9,7 +9,7 @@ export const Popular = () => {
 		<section>
 			<Container bodyClassName='bg-black py-[50px]'>
 				<Layout type='single' variant='part'>
-					<Title className='text-white opacity-20' variant='h2'>
+					<Title className='text-gray-light' variant='h2'>
 						ПОПУЛЯРНЫЕ ТОВАРЫ
 					</Title>
 				</Layout>

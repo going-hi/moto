@@ -12,7 +12,8 @@ export default {
 			},
 			colors: {
 				beige: 'var(--beige)',
-				'red-light': 'var(--red-light)'
+				'red-light': 'var(--red-light)',
+				'gray-light': 'var(--gray-list)'
 			}
 		},
 		letterSpacing: {

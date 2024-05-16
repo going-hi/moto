@@ -9,7 +9,7 @@ export const Reviews = () => {
 		<section>
 			<Container bodyClassName='bg-black py-[50px]'>
 				<Layout type='single' variant='part'>
-					<Title variant='h2' className='text-white opacity-20'>
+					<Title variant='h2' className='text-gray-light'>
 						ОТЗЫВЫ
 					</Title>
 				</Layout>
