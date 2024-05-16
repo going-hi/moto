@@ -1,6 +1,11 @@
 import clsx from 'clsx'
 import { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
+import { Typography } from '../typography'
+import { UnderlineWave } from '../underline-wave'
+import cl from './button.index.module.css'
+
+const { Text } = Typography
 
 export const Button = ({
 	variant,
@@ -9,7 +14,7 @@ export const Button = ({
 	className,
 	children
 }: {
-	variant: 'more' | 'parentheses'
+	variant: 'more' | 'parentheses' | 'catalog'
 	path?: string
 	isMain?: boolean
 	className?: string
@@ -19,10 +24,15 @@ export const Button = ({
 		case 'more':
 			return (
 				<Link
-					className='absolute bg-red-light font-extrabold text-[20px] top-[50%] -translate-y-[55%] right-[20%] w-[220px] h-[220px] flex items-center justify-center text-beige rounded-[50%] hover:scale-95 duration-700'
+					className={clsx(
+						'absolute bg-red-light font-extrabold text-[20px] top-[50%] -translate-y-[55%] right-[20%] w-[220px] h-[220px] flex items-center justify-center text-beige rounded-[50%] hover:scale-95 duration-700',
+						cl.underline
+					)}
 					to={path ?? ''}
 				>
-					БОЛЬШЕ
+					<UnderlineWave>
+						<Text>БОЛЬШЕ</Text>
+					</UnderlineWave>
 				</Link>
 			)
 		case 'parentheses':
@@ -39,6 +49,20 @@ export const Button = ({
 						</div>
 						<span>]</span>
 					</div>
+				</Link>
+			)
+		case 'catalog':
+			return (
+				<Link
+					className={clsx(
+						'absolute bg-black font-extrabold text-[20px] top-[15%] right-[35%] w-[220px] h-[220px] flex items-center justify-center text-beige rounded-[50%] hover:scale-95 duration-700 hover will-change-transform',
+						cl.underline
+					)}
+					to='/catalog'
+				>
+					<UnderlineWave>
+						<Text>КАТАЛОГ</Text>
+					</UnderlineWave>
 				</Link>
 			)
 		default:

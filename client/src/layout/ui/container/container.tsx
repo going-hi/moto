@@ -11,9 +11,14 @@ export const Container = ({
 	bodyClassName?: string
 }) => {
 	return (
-		<div className={clsx('max-w-container mx-auto my-0', className)}>
+		<div
+			className={clsx(
+				'max-w-container mx-auto my-0 px-[30px]',
+				className
+			)}
+		>
 			{bodyClassName ? (
-				<div className={clsx('px-[30px]', bodyClassName)}>
+				<div className={clsx('px-[15px]', bodyClassName)}>
 					{children}
 				</div>
 			) : (
