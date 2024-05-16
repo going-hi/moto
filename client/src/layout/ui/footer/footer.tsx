@@ -25,7 +25,7 @@ export const Footer = () => {
 						/>
 						<Link
 							to='/'
-							className='opacity-70 text-beige hover:underline leading-[30px]'
+							className='opacity-70 text-beige hover:underline leading-[30px] self-start'
 						>
 							ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ
 						</Link>
