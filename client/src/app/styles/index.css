@@ -20,3 +20,7 @@ body {
 *:focus {
 	outline: none;
 }
+
+.transition-all {
+	transition: all 0.7s ease;
+}
