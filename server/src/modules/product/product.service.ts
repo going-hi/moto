@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { ProductEntity } from './entities'
-import { Repository } from 'typeorm'
+import { Between, Repository } from 'typeorm'
 import { CreateProductDto, ImageDto, ProductAllQueryDto, UpdateProductDto } from './dto'
 import { FileService } from '@/core/file/file.service'
 import { CharacteristicEntity } from '../characteristic/entities'
@@ -52,10 +52,16 @@ export class ProductService {
 		if (!product) throw new NotFoundException(`Товар с id: ${id} не найден`)
 		return product
 	}
-	async getAll({ count, page }: ProductAllQueryDto) {
+	async getAll({ count, page, sortBy, sortOrder, price }: ProductAllQueryDto) {
 		const where = {}
+		if (price) {
+			const sortedPrice = price.sort()
+			where['price'] = Between(sortedPrice[0], sortedPrice[1])
+		}
 		const [products, total] = await this.productRepository.findAndCount({
-			order: {},
+			order: {
+				[sortBy]: sortOrder
+			},
 			where,
 			take: count,
 			skip: skipCount(page, count)
