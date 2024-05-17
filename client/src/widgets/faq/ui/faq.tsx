@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Accordion, Typography } from '@/shared'
 import { faqItemsArr } from '../@model'
 import { Container, Layout } from '@/layout'
@@ -6,8 +5,6 @@ import { Container, Layout } from '@/layout'
 const { Title } = Typography
 
 export const Faq = () => {
-	const [activeIndex, setActiveIndex] = useState<number>(0)
-
 	return (
 		<section>
 			<Container bodyClassName='bg-black !px-0 pb-[50px]'>
@@ -18,11 +15,9 @@ export const Faq = () => {
 				</Layout>
 				{faqItemsArr.map(({ title, description }, index) => (
 					<Accordion
-						variant='faq'
+						variant='catalog'
 						title={title}
 						index={index + 1}
-						onClick={() => setActiveIndex(index)}
-						isOpen={activeIndex === index}
 						isLast={faqItemsArr.length === index + 1}
 						key={String(index)}
 					>
