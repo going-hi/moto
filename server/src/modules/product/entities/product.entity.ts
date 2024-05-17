@@ -16,9 +16,6 @@ export class ProductEntity extends AbstractEntity {
 	@Column()
 	price: number
 
-	@Column()
-	preview: string
-
 	@Column({ type: 'simple-array' })
 	images: string[]
 
