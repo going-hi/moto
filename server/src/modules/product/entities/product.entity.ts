@@ -1,3 +1,4 @@
+import { ECategory } from '@/common/enums'
 import { AbstractEntity } from '@/core/database/entities'
 import { CharacteristicEntity } from '@/modules/characteristic/entities'
 import { Column, Entity, OneToMany } from 'typeorm'
@@ -19,10 +20,11 @@ export class ProductEntity extends AbstractEntity {
 	@Column({ type: 'simple-array' })
 	images: string[]
 
-	// * мейби json
-	//* deliveries: string[]
+	@Column({ type: 'enum', enum: ECategory })
+	category: ECategory
 
-	//* payMethods: string[]
+	@Column()
+	type: string
 
 	@OneToMany(() => CharacteristicEntity, char => char.product, { cascade: true })
 	characteristics: CharacteristicEntity[]
