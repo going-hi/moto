@@ -55,13 +55,15 @@ export const Button = ({
 		case 'catalog':
 			return (
 				<Link
-					className={clsx(
-						'absolute font-extrabold text-[20px] top-[15%] right-[35%] w-[230px] h-[230px] border-beige border-[1px] text-beige rounded-[50%] dhover:hover:scale-95 duration-700 will-change-transform p-[8px]',
-						cl.underline
-					)}
+					className='absolute font-extrabold text-[20px] top-[15%] right-[35%] w-[230px] h-[230px] border-beige border-[1px] text-beige rounded-[50%] dhover:hover:scale-95 duration-700 will-change-transform p-[8px]'
 					to='/catalog'
 				>
-					<div className='bg-black flex items-center justify-center h-full rounded-[50%]'>
+					<div
+						className={clsx(
+							'bg-black flex items-center justify-center h-full rounded-[50%]',
+							cl.underline
+						)}
+					>
 						<UnderlineWave>
 							<Text>КАТАЛОГ</Text>
 						</UnderlineWave>
