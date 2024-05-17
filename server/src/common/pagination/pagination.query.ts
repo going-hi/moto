@@ -15,5 +15,5 @@ export class PaginationQuery {
 	@Type(() => Number)
 	@IsInt({ message: 'Параметр количество элементов должен быть числом' })
 	@Min(1, { message: 'Параметр количество элементов должен быть больше 0' })
-	count: number = 1
+	count: number = 10
 }
