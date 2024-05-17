@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { Icon, Typography } from '@/shared'
 import { formatCount } from './@libs'
 import cl from './accordion.module.css'
@@ -12,27 +12,36 @@ export const Accordion = ({
 	index,
 	title,
 	children,
-	isLast,
-	isOpen,
-	onClick
+	isLast
 }: {
 	variant: 'faq' | 'catalog'
 	index: number
 	title: string
 	children: ReactNode
 	isLast?: boolean
-	isOpen: boolean
-	onClick: () => void
 }) => {
+	const [isOpen, setIsOpen] = useState<boolean>(false)
+
+	console.log(isOpen)
+
+	const onClick = () => {
+		if (variant === 'catalog') {
+			return
+		}
+
+		setIsOpen(!isOpen)
+	}
+
 	return (
 		<div
-			onClick={onClick}
 			className={clsx(
-				isOpen
-					? `bg-beige ${cl.open} `
-					: `bg-black ${cl.close} border-gray-light border-t-[1px]`,
+				isOpen && variant === 'faq'
+					? `bg-beige ${cl.open}`
+					: `bg-black ${cl.close}`,
 				isLast && !isOpen && 'border-b-[1px]',
-				'cursor-pointer select-none p-[15px] duration-700 relative'
+				variant === 'catalog' &&
+					`hover:bg-beige bg-black ${cl.close} ${cl.open_h}`,
+				'select-none p-[15px] relative border-gray-light border-t-[1px] group'
 			)}
 		>
 			<Layout variant='full' type='multi'>
@@ -66,7 +75,10 @@ export const Accordion = ({
 							</Title>
 						</div>
 						{variant === 'faq' && !isOpen && (
-							<div className='w-[30px] h-[30px] flex items-center'>
+							<div
+								onClick={onClick}
+								className='w-[35px] p-[5px] h-[35px] flex items-center cursor-pointer'
+							>
 								<Icon name={isOpen ? 'Minus' : 'Plus'} />
 							</div>
 						)}
@@ -77,13 +89,15 @@ export const Accordion = ({
 				variant='full'
 				type='multi'
 				className={clsx(
-					'duration-700 overflow-hidden ',
-					isOpen ? 'max-h-[1000px]' : 'max-h-0'
+					'overflow-hidden ',
+					isOpen && variant === 'faq' && 'max-h-[1000px]',
+					variant === 'catalog' && 'group-hover:max-h-[1000px]',
+					'max-h-0'
 				)}
 			>
 				<div className='self-end'>
-					{variant === 'catalog' && isOpen && (
-						<Text className='text-[40px] font-medium -skew-x-[10deg] leading-[40px]'>
+					{variant === 'catalog' && (
+						<Text className='text-[40px] font-medium -skew-x-[10deg] leading-[40px] hidden group-hover:block'>
 							{formatCount(index)}
 						</Text>
 					)}
@@ -100,7 +114,10 @@ export const Accordion = ({
 							{children}
 						</div>
 						{variant === 'faq' && isOpen && (
-							<div className='w-[30px] h-[30px] flex items-center'>
+							<div
+								onClick={onClick}
+								className='w-[35px] p-[5px] h-[35px] flex items-center  cursor-pointer'
+							>
 								<Icon name={isOpen ? 'Minus' : 'Plus'} />
 							</div>
 						)}

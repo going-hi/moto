@@ -1,3 +1,5 @@
+import type { Config } from 'tailwindcss'
+
 /** @type {import('tailwindcss').Config} */
 export default {
 	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
@@ -30,7 +32,10 @@ export default {
 		},
 		backgroundSize: {
 			'banner-sz': '100% 110%'
+		},
+		screens: {
+			dhover: { raw: '(hover: hover) and (pointer:fine)' }
 		}
 	},
 	plugins: []
-}
+} satisfies Config

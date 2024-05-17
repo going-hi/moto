@@ -33,7 +33,7 @@ export const AboutUs = () => {
 				<Layout
 					type='multi'
 					variant='full'
-					className='text-[32px] font-medium leading-[40px]'
+					className='text-[32px] font-medium leading-[37px]'
 				>
 					<div className='pr-[45px] max-w-[90%]'>
 						<Text className='text-right mb-[20px]'>

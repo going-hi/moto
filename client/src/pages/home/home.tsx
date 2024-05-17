@@ -13,9 +13,9 @@ export const HomePage = () => {
 			<Banner />
 			<Popular />
 			<About />
-			<Reviews />
 			<NewProducts />
 			<AboutUs />
+			<Reviews />
 			<Faq />
 			<Footer />
 		</div>

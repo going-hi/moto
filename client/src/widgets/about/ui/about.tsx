@@ -9,8 +9,9 @@ export const About = () => {
 			<Container bodyClassName='pl-0 pr-[40px]'>
 				<div className='mb-[20px] '>
 					<div className='flex float-right'>
-						{[1, 2, 3].map(() => (
+						{[1, 2, 3].map(i => (
 							<img
+								key={String(i)}
 								src='/helmet.png'
 								alt='helmet'
 								className='w-[340px]'
