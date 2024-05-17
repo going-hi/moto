@@ -30,7 +30,7 @@ export const List = ({
 			)}
 			<div className='flex flex-wrap gap-x-[50px] gap-y-[30px]'>
 				{list.map(i => (
-					<Card {...i} key={i.id} />
+					<Card {...i} key={i.id} type='small' />
 				))}
 				<More />
 			</div>
