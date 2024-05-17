@@ -11,10 +11,10 @@ export const ReviewsSlider = () => {
 				align: 'start',
 				watchDrag: false
 			}}
-			more='/reviews'
+			length={reviews.length}
 		>
-			{reviews.map((i, index) => (
-				<ReviewsSlide index={index} {...i} key={String(i.id)} />
+			{reviews.map(i => (
+				<ReviewsSlide {...i} key={String(i.id)} />
 			))}
 		</Slider>
 	)

@@ -24,6 +24,7 @@ export const Faq = () => {
 						onClick={() => setActiveIndex(index)}
 						isOpen={activeIndex === index}
 						isLast={faqItemsArr.length === index + 1}
+						key={String(index)}
 					>
 						{description}
 					</Accordion>

@@ -5,15 +5,14 @@ import { Slide, Typography } from '@/shared'
 const { Text } = Typography
 
 export const ReviewsSlide = ({
-	index,
 	user: { image, name: userName },
 	text,
 	card: { id: cardId, name: cardName }
-}: TReview & { index: number }) => {
+}: TReview) => {
 	return (
-		<Slide className='basis-[718px] p-[6px] pr-[50px]' index={index}>
+		<Slide className='basis-[718px] p-[6px] pr-[50px]'>
 			<div className='border-[#56544f] border-[1px] border-solid p-[30px] dhover:hover:scale-[102%] duration-700'>
-				<div className='mb-[130px]'>
+				<div className='mb-[60px]'>
 					<div className='mb-[30px]'>
 						<img
 							className='rounded-[50%] w-[100px] h-[100px] mb-[4px]'
@@ -24,7 +23,7 @@ export const ReviewsSlide = ({
 							{userName}
 						</Text>
 					</div>
-					<Text className='text-beige text-[20px] leading-[22px]'>
+					<Text className='text-beige text-[20px] leading-[22px] min-h-[90px]'>
 						{text}
 					</Text>
 				</div>
