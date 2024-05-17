@@ -22,7 +22,7 @@ export const PopularSlide = ({
 				index !== activeIndex && 'cursor-pointer'
 			)}
 		>
-			<div className='duration-700 group-hover:scale-[102%]'>
+			<div className='duration-700 dhover:group-hover:scale-[102%]'>
 				<div className='relative pb-[60%]'>
 					<img
 						className='absolute top-0 left-0 object-cover max-h-full w-full'

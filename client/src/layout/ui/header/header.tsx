@@ -17,17 +17,17 @@ export const Header = () => {
 						<Search />
 						<Icon
 							name='Profile'
-							className='cursor-pointer hover:scale-125 duration-700'
+							className='cursor-pointer dhover:hover:scale-125 duration-700'
 						/>
 						<IconBadge
 							name='Favourite'
 							count={1}
-							className='cursor-pointer hover:scale-125 duration-700 self-start'
+							className='cursor-pointer dhover:hover:scale-125 duration-700 self-start'
 						/>
 						<IconBadge
 							name='Cart'
 							count={1}
-							className='cursor-pointer hover:scale-125 duration-700 self-start'
+							className='cursor-pointer dhover:hover:scale-125 duration-700 self-start'
 						/>
 					</div>
 				</div>

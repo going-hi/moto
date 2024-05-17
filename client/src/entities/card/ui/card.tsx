@@ -8,7 +8,7 @@ export const Card = ({ image, id, name }: TCard) => {
 	return (
 		<Link
 			to={`/card/${id}`}
-			className='basis-[17.5%] hover:scale-105 duration-700'
+			className='basis-[17.5%] dhover:scale-105 duration-700'
 		>
 			<div>
 				<div className='relative mb-[10px] pb-[100%] bg-white'>

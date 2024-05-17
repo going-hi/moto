@@ -25,7 +25,7 @@ export const Button = ({
 			return (
 				<Link
 					className={clsx(
-						'absolute bg-red-light font-extrabold text-[20px] top-[50%] -translate-y-[55%] right-[13%] w-[220px] h-[220px] flex items-center justify-center text-beige rounded-[50%] hover:scale-95 duration-700',
+						'absolute bg-red-light font-extrabold text-[20px] top-[50%] -translate-y-[55%] right-[13%] w-[220px] h-[220px] flex items-center justify-center text-beige rounded-[50%] dhover:hover:scale-95 duration-700',
 						cl.underline
 					)}
 					to={path ?? ''}
@@ -43,7 +43,7 @@ export const Button = ({
 				>
 					<div className='bg-black text-white font-bold text-[18px] leading-[25px] justify-center flex will-change-transform'>
 						<span>[</span>
-						<div className='mx-[28px] group-hover:mx-[20px] duration-700'>
+						<div className='mx-[28px] dhover:group-hover:mx-[20px] duration-700'>
 							<span>{children}</span>
 							<span className='w-full bg-white h-[2px] block -mt-[4px]' />
 						</div>
@@ -55,7 +55,7 @@ export const Button = ({
 			return (
 				<Link
 					className={clsx(
-						'absolute bg-black font-extrabold text-[20px] top-[15%] right-[35%] w-[220px] h-[220px] flex items-center justify-center text-beige rounded-[50%] hover:scale-95 duration-700 hover will-change-transform',
+						'absolute bg-black font-extrabold text-[20px] top-[15%] right-[35%] w-[220px] h-[220px] flex items-center justify-center text-beige rounded-[50%] dhover:hover:scale-95 duration-700 will-change-transform',
 						cl.underline
 					)}
 					to='/catalog'
