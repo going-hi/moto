@@ -15,7 +15,7 @@ export const Faq = () => {
 				</Layout>
 				{faqItemsArr.map(({ title, description }, index) => (
 					<Accordion
-						variant='catalog'
+						variant='faq'
 						title={title}
 						index={index + 1}
 						isLast={faqItemsArr.length === index + 1}
