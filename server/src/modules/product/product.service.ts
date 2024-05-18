@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { ProductEntity } from './entities'
-import { Between, ILike, Or, Repository } from 'typeorm'
+import { Between, ILike, In, Or, Repository } from 'typeorm'
 import {
 	CreateProductDto,
 	ImageDto,
@@ -147,5 +147,26 @@ export class ProductService {
 			skip: skipCount(page, count)
 		})
 		return new PaginationDto(products, total)
+	}
+
+	async getByIds(ids: number[]) {
+		const products = await this.productRepository.find({
+			where: { id: In(ids) }
+		})
+
+		const errorMessages = []
+
+		ids.map(id => {
+			const product = products.some(g => g.id === id)
+			if (!product) {
+				errorMessages.push(`Товар с id: ${id} не найден`)
+			}
+		})
+
+		if (errorMessages.length) {
+			throw new BadRequestException(errorMessages)
+		}
+
+		return products
 	}
 }
