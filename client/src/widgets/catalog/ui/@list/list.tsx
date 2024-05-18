@@ -3,10 +3,11 @@ import { Card } from '@/entities/card'
 import { cards } from '@/shared'
 import { getElementClass } from '../../libs'
 import { CatalogMore } from '../@more'
+import { Container } from '@/layout'
 
 export const CatalogList = () => {
 	return (
-		<>
+		<Container>
 			<div className='grid gap-[30px] grid-cols-3 grid-rows-3 mb-[50px]'>
 				{cards.slice(0, 7).map((i, index) => (
 					<Card
@@ -18,6 +19,6 @@ export const CatalogList = () => {
 				))}
 			</div>
 			<CatalogMore isLoading={false} />
-		</>
+		</Container>
 	)
 }

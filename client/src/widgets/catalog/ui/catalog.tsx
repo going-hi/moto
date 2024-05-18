@@ -1,8 +1,9 @@
 import { CategoriesEnumModel, Typography, useValidParams } from '@/shared'
 import { CatalogFilter } from './@filter'
+import { CatalogHeader } from './@header'
 import { CatalogList } from './@list'
 import { CatalogSort } from './@sort'
-import { Container, Footer } from '@/layout'
+import { Container, Footer, Header } from '@/layout'
 
 const { Text } = Typography
 
@@ -14,7 +15,9 @@ export const Catalog = () => {
 	}
 
 	return (
-		<section>
+		<>
+			<Header />
+			<CatalogHeader name={name} />
 			<div className='relative'>
 				<Container>
 					<div className='flex justify-between mb-[30px]'>
@@ -23,10 +26,8 @@ export const Catalog = () => {
 					</div>
 				</Container>
 			</div>
-			<Container>
-				<CatalogList />
-			</Container>
+			<CatalogList />
 			<Footer />
-		</section>
+		</>
 	)
 }
