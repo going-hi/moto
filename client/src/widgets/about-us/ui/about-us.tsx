@@ -78,7 +78,7 @@ export const AboutUs = () => {
 							</Text>
 							<Button
 								className='max-w-[200px]'
-								variant='parentheses'
+								variant='parentheses-link'
 								isMain
 							>
 								ПОДРОБНЕЕ

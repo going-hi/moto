@@ -1,11 +1,9 @@
 import clsx from 'clsx'
 import { ButtonHTMLAttributes, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import { Typography } from '../typography'
-import { UnderlineWave } from '../underline-wave'
-import cl from './button.module.css'
-
-const { Text } = Typography
+import { Catalog } from './@catalog'
+import { More } from './@more'
+import { Parentheses } from './@parentheses'
 
 export const Button = ({
 	variant,
@@ -15,7 +13,7 @@ export const Button = ({
 	children,
 	...props
 }: {
-	variant: 'more' | 'parentheses' | 'catalog'
+	variant: 'more' | 'parentheses-button' | 'catalog' | 'parentheses-link'
 	path?: string
 	isMain?: boolean
 	className?: string
@@ -23,53 +21,27 @@ export const Button = ({
 } & ButtonHTMLAttributes<HTMLButtonElement>) => {
 	switch (variant) {
 		case 'more':
-			return (
-				<button
-					{...props}
-					className={clsx(
-						'absolute bg-red-light font-extrabold text-[20px] top-[50%] -translate-y-[55%] right-[13%] w-[220px] h-[220px] flex items-center justify-center text-beige rounded-[50%] dhover:hover:scale-95 duration-700',
-						cl.underline
-					)}
-				>
-					<UnderlineWave>
-						<Text>БОЛЬШЕ</Text>
-					</UnderlineWave>
-				</button>
-			)
-		case 'parentheses':
+			return <More />
+		case 'parentheses-link':
 			return (
 				<Link
 					className={clsx(isMain && 'group', className, 'block')}
 					to={path ?? ''}
 				>
-					<div className='bg-black text-white font-bold text-[18px] leading-[25px] justify-center flex will-change-transform'>
-						<span>[</span>
-						<div className='mx-[28px] dhover:group-hover:mx-[20px] duration-700'>
-							<span>{children}</span>
-							<span className='w-full bg-white h-[2px] block -mt-[4px]' />
-						</div>
-						<span>]</span>
-					</div>
+					<Parentheses>{children}</Parentheses>
 				</Link>
+			)
+		case 'parentheses-button':
+			return (
+				<button
+					{...props}
+					className={clsx(isMain && 'group', className)}
+				>
+					<Parentheses>{children}</Parentheses>
+				</button>
 			)
 		case 'catalog':
-			return (
-				<Link
-					className='absolute font-extrabold text-[20px] top-[15%] right-[35%] w-[230px] h-[230px] border-beige border-[1px] text-beige rounded-[50%] dhover:hover:scale-95 duration-700 will-change-transform p-[8px]'
-					to='/catalog'
-				>
-					<div
-						className={clsx(
-							'bg-black flex items-center justify-center h-full rounded-[50%]',
-							cl.underline
-						)}
-					>
-						<UnderlineWave>
-							<Text>КАТАЛОГ</Text>
-						</UnderlineWave>
-					</div>
-				</Link>
-			)
+			return <Catalog />
 		default:
 			return <></>
 	}
