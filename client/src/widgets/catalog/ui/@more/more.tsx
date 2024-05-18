@@ -1,18 +1,14 @@
-import { Dispatch, SetStateAction } from 'react'
 import { Button } from '@/shared'
+import { useParamsStore } from '../../model'
 
-export const CatalogMore = ({
-	isLoading,
-	setPage
-}: {
-	isLoading: boolean
-	setPage: Dispatch<SetStateAction<number>>
-}) => {
+export const CatalogMore = ({ isLoading }: { isLoading: boolean }) => {
+	const { incrementPage } = useParamsStore()
+
 	return (
 		<div className='flex justify-center mb-[50px]'>
 			<Button
 				disabled={isLoading}
-				onClick={() => setPage(prev => prev + 1)}
+				onClick={incrementPage}
 				variant='parentheses-button'
 			>
 				ПОКАЗАТЬ ЕЩЕ

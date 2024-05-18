@@ -1,6 +1,6 @@
 import { CategoriesEnumModel, Typography, useValidParams } from '@/shared'
 import { CatalogList } from './@list'
-import { CatalogMore } from './@more'
+import { CatalogSort } from './@sort'
 import { Container, Footer } from '@/layout'
 
 const { Text } = Typography
@@ -15,6 +15,9 @@ export const Catalog = () => {
 	return (
 		<section>
 			<Container>
+				<div className='flex justify-between mb-[30px]'>
+					<CatalogSort />
+				</div>
 				<CatalogList />
 			</Container>
 			<Footer />
