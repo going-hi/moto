@@ -2,7 +2,13 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { InjectRepository } from '@nestjs/typeorm'
 import { ProductEntity } from './entities'
 import { Between, ILike, Or, Repository } from 'typeorm'
-import { CreateProductDto, ImageDto, ProductAllQueryDto, UpdateProductDto } from './dto'
+import {
+	CreateProductDto,
+	ImageDto,
+	ProductAllQueryDto,
+	SearchProductDto,
+	UpdateProductDto
+} from './dto'
 import { FileService } from '@/core/file/file.service'
 import { CharacteristicEntity } from '../characteristic/entities'
 import { skipCount } from '@/core/utils'
@@ -131,5 +137,15 @@ export class ProductService {
 			throw new NotFoundException(`Товар с id: ${id} не найден`)
 		}
 		return product
+	}
+
+	async search({ count, page, query }: SearchProductDto) {
+		const like = ILike(`%${query}%`)
+		const [products, total] = await this.productRepository.findAndCount({
+			where: [{ brand: like }, { type: like }, { description: like }, { name: like }],
+			take: count,
+			skip: skipCount(page, count)
+		})
+		return new PaginationDto(products, total)
 	}
 }

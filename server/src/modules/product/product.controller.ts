@@ -18,7 +18,13 @@ import {
 } from '@nestjs/common'
 import { ProductService } from './product.service'
 import { ApiConsumes, ApiTags } from '@nestjs/swagger'
-import { CreateProductDto, ImageDto, ProductAllQueryDto, UpdateProductDto } from './dto'
+import {
+	CreateProductDto,
+	ImageDto,
+	ProductAllQueryDto,
+	SearchProductDto,
+	UpdateProductDto
+} from './dto'
 import { REGEX_FILE_TYPE_IMG } from '@/common/constants'
 import { GetByIdParamsDto } from '@/common/dto'
 import { FilesInterceptor } from '@nestjs/platform-express'
@@ -44,6 +50,12 @@ export class ProductController {
 		files: Express.Multer.File[]
 	) {
 		return this.productService.create(dto, files)
+	}
+
+	@HttpCode(HttpStatus.OK)
+	@Get('search')
+	search(@Query() dto: SearchProductDto) {
+		return this.productService.search(dto)
 	}
 
 	// * обсудить
