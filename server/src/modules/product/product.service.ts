@@ -58,7 +58,7 @@ export class ProductService {
 		if (!product) throw new NotFoundException(`Товар с id: ${id} не найден`)
 		return product
 	}
-	async getAll({ count, page, sortBy, sortOrder, price, filters }: ProductAllQueryDto) {
+	async getAll({ count, page, sortBy, sortOrder, price, filters, category }: ProductAllQueryDto) {
 		const where = {}
 		if (price) {
 			const sortedPrice = price.sort()
@@ -76,6 +76,9 @@ export class ProductService {
 
 			where['characteristics'] = array
 		}
+
+		category ? (where['category'] = category) : {}
+
 		const [products, total] = await this.productRepository.findAndCount({
 			order: {
 				[sortBy]: sortOrder

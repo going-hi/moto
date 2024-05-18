@@ -1,5 +1,5 @@
 import { IsKeyArrayObject } from '@/common/decorators'
-import { ESortOrder } from '@/common/enums'
+import { ECategory, ESortOrder } from '@/common/enums'
 import { PaginationQuery } from '@/common/pagination'
 import { ApiProperty } from '@nestjs/swagger'
 import { Type } from 'class-transformer'
@@ -30,6 +30,11 @@ export class ProductAllQueryDto extends PaginationQuery {
 	@ArrayMaxSize(2, { message: 'Максимальная длина массива интервала цен 2 элемента' })
 	@Type(() => Number)
 	price?: number[]
+
+	@ApiProperty()
+	@IsOptional()
+	@IsEnum(ECategory)
+	category?: ECategory
 
 	@ApiProperty()
 	@IsOptional()
