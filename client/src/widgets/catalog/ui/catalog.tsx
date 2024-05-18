@@ -1,6 +1,7 @@
 import { CategoriesEnumModel, Typography, useValidParams } from '@/shared'
 import { CatalogList } from './@list'
-import { Container } from '@/layout'
+import { CatalogMore } from './@more'
+import { Container, Footer } from '@/layout'
 
 const { Text } = Typography
 
@@ -16,6 +17,7 @@ export const Catalog = () => {
 			<Container>
 				<CatalogList />
 			</Container>
+			<Footer />
 		</section>
 	)
 }
