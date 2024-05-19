@@ -64,5 +64,166 @@ export const cards: TCard[] = [
 		id: 8,
 		createDate: 'date',
 		updateDate: 'date'
+	},
+	{
+		image: 'https://cdn.izap24.ru/images/moto_img/buell/xb12r-firebolt_2004_1.jpg',
+		price: 120000,
+		name: 'MOTOLAND XR 250 LITE',
+		id: 9,
+		createDate: 'date',
+		updateDate: 'date'
+	},
+	{
+		image: 'https://cdn.izap24.ru/images/moto_img/buell/xb12r-firebolt_2004_1.jpg',
+		price: 120000,
+		name: 'MOTOLAND XR 250 LITE',
+		id: 10,
+		createDate: 'date',
+		updateDate: 'date'
+	},
+	{
+		image: 'https://cdn.izap24.ru/images/moto_img/buell/xb12r-firebolt_2004_1.jpg',
+		price: 120000,
+		name: 'MOTOLAND XR 250 LITE',
+		id: 11,
+		createDate: 'date',
+		updateDate: 'date'
+	},
+	{
+		image: 'https://cdn.izap24.ru/images/moto_img/buell/xb12r-firebolt_2004_1.jpg',
+		price: 120000,
+		name: 'MOTOLAND XR 250 LITE',
+		id: 12,
+		createDate: 'date',
+		updateDate: 'date'
+	},
+	{
+		image: 'https://cdn.izap24.ru/images/moto_img/buell/xb12r-firebolt_2004_1.jpg',
+		price: 120000,
+		name: 'MOTOLAND XR 250 LITE',
+		id: 13,
+		createDate: 'date',
+		updateDate: 'date'
+	},
+	{
+		image: 'https://cdn.izap24.ru/images/moto_img/buell/xb12r-firebolt_2004_1.jpg',
+		price: 120000,
+		name: 'MOTOLAND XR 250 LITE',
+		id: 14,
+		createDate: 'date',
+		updateDate: 'date'
+	},
+	{
+		image: 'https://cdn.izap24.ru/images/moto_img/buell/xb12r-firebolt_2004_1.jpg',
+		price: 120000,
+		name: 'MOTOLAND XR 250 LITE',
+		id: 15,
+		createDate: 'date',
+		updateDate: 'date'
+	},
+	{
+		image: 'https://cdn.izap24.ru/images/moto_img/buell/xb12r-firebolt_2004_1.jpg',
+		price: 120000,
+		name: 'MOTOLAND XR 250 LITE',
+		id: 16,
+		createDate: 'date',
+		updateDate: 'date'
+	},
+	{
+		image: 'https://cdn.izap24.ru/images/moto_img/buell/xb12r-firebolt_2004_1.jpg',
+		price: 120000,
+		name: 'MOTOLAND XR 250 LITE',
+		id: 17,
+		createDate: 'date',
+		updateDate: 'date'
+	},
+	{
+		image: 'https://cdn.izap24.ru/images/moto_img/buell/xb12r-firebolt_2004_1.jpg',
+		price: 120000,
+		name: 'MOTOLAND XR 250 LITE',
+		id: 18,
+		createDate: 'date',
+		updateDate: 'date'
+	},
+	{
+		image: 'https://cdn.izap24.ru/images/moto_img/buell/xb12r-firebolt_2004_1.jpg',
+		price: 120000,
+		name: 'MOTOLAND XR 250 LITE',
+		id: 19,
+		createDate: 'date',
+		updateDate: 'date'
+	},
+	{
+		image: 'https://cdn.izap24.ru/images/moto_img/buell/xb12r-firebolt_2004_1.jpg',
+		price: 120000,
+		name: 'MOTOLAND XR 250 LITE',
+		id: 20,
+		createDate: 'date',
+		updateDate: 'date'
+	},
+	{
+		image: 'https://cdn.izap24.ru/images/moto_img/buell/xb12r-firebolt_2004_1.jpg',
+		price: 120000,
+		name: 'MOTOLAND XR 250 LITE',
+		id: 21,
+		createDate: 'date',
+		updateDate: 'date'
+	},
+	{
+		image: 'https://cdn.izap24.ru/images/moto_img/buell/xb12r-firebolt_2004_1.jpg',
+		price: 120000,
+		name: 'MOTOLAND XR 250 LITE',
+		id: 22,
+		createDate: 'date',
+		updateDate: 'date'
+	},
+	{
+		image: 'https://cdn.izap24.ru/images/moto_img/buell/xb12r-firebolt_2004_1.jpg',
+		price: 120000,
+		name: 'MOTOLAND XR 250 LITE',
+		id: 23,
+		createDate: 'date',
+		updateDate: 'date'
+	},
+	{
+		image: 'https://cdn.izap24.ru/images/moto_img/buell/xb12r-firebolt_2004_1.jpg',
+		price: 120000,
+		name: 'MOTOLAND XR 250 LITE',
+		id: 24,
+		createDate: 'date',
+		updateDate: 'date'
+	},
+	{
+		image: 'https://cdn.izap24.ru/images/moto_img/buell/xb12r-firebolt_2004_1.jpg',
+		price: 120000,
+		name: 'MOTOLAND XR 250 LITE',
+		id: 25,
+		createDate: 'date',
+		updateDate: 'date'
+	},
+
+	{
+		image: 'https://cdn.izap24.ru/images/moto_img/buell/xb12r-firebolt_2004_1.jpg',
+		price: 120000,
+		name: 'MOTOLAND XR 250 LITE',
+		id: 26,
+		createDate: 'date',
+		updateDate: 'date'
+	},
+	{
+		image: 'https://cdn.izap24.ru/images/moto_img/buell/xb12r-firebolt_2004_1.jpg',
+		price: 120000,
+		name: 'MOTOLAND XR 250 LITE',
+		id: 27,
+		createDate: 'date',
+		updateDate: 'date'
+	},
+	{
+		image: 'https://cdn.izap24.ru/images/moto_img/buell/xb12r-firebolt_2004_1.jpg',
+		price: 120000,
+		name: 'MOTOLAND XR 250 LITE',
+		id: 28,
+		createDate: 'date',
+		updateDate: 'date'
 	}
 ]

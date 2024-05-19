@@ -20,7 +20,7 @@ export const CatalogPage = () => {
 	}
 
 	return (
-		<div className='bg-red-light'>
+		<div className='bg-red-light pb-[10px]'>
 			<Header />
 			<CatalogHeader />
 			<Catalog />

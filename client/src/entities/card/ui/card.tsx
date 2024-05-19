@@ -11,8 +11,13 @@ export const Card = ({
 	name,
 	type,
 	price,
-	className
-}: TCard & { type: 'small' | 'large'; className?: string }) => {
+	className,
+	classNameImageBody
+}: TCard & {
+	type: 'small' | 'large'
+	className?: string
+	classNameImageBody?: string
+}) => {
 	return (
 		<Link
 			to={`/card/${id}`}
@@ -24,11 +29,12 @@ export const Card = ({
 					: 'dhover:hover:scale-[102%]'
 			)}
 		>
-			<div className={clsx(type === 'large' && 'bg-white')}>
+			<div className={clsx(type === 'large' && 'bg-white h-full')}>
 				<div
 					className={clsx(
 						'relative mb-[10px] bg-white',
-						type === 'small' ? 'pb-[100%]' : 'pb-[80%]'
+						type === 'small' ? 'pb-[100%]' : 'pb-[80%]',
+						classNameImageBody
 					)}
 				>
 					<img
