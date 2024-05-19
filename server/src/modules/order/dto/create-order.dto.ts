@@ -13,7 +13,7 @@ export class CreateOrderDto {
 	@ArrayMinSize(1, {
 		message: `Массив товаров должен содержать не меньше ${1} элементов`
 	})
-	@IsArray()
+	@IsArray({ message: 'Продукты должны быть массивом объектов' })
 	@Type(() => ProductItem)
 	@ValidateNested({ each: true })
 	products: ProductItem[]
