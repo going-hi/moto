@@ -3,11 +3,12 @@ import { Column, Entity, ManyToOne } from 'typeorm'
 import { OrderEntity } from './order.entity'
 import { AbstractEntity } from '@/core/database/entities'
 
-@Entity('OrderItem')
+@Entity('orderItems')
 export class OrderItemEntity extends AbstractEntity {
 	@Column()
 	count: number
 
+	// * Price of product
 	@Column()
 	price: number
 
