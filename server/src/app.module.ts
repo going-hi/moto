@@ -7,6 +7,7 @@ import { MailModule } from '@/mail/mail.module'
 import { FileModule } from '@/core/file/file.module'
 import { ProductModule } from './modules/product/product.module'
 import { CharacteristicModule } from './modules/characteristic/characteristic.module'
+import { OrderModule } from './modules/order/order.module'
 
 @Module({
 	imports: [
@@ -17,7 +18,8 @@ import { CharacteristicModule } from './modules/characteristic/characteristic.mo
 		FileModule,
 		// * @/modules
 		ProductModule,
-		CharacteristicModule
+		CharacteristicModule,
+		OrderModule
 	]
 })
 export class AppModule {}

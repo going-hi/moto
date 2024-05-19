@@ -1,6 +1,7 @@
 import { ERoles } from '@/common/enums/role.enum'
 import { AbstractEntity } from '@/core/database/entities'
-import { Column, Entity, Generated } from 'typeorm'
+import { OrderEntity } from '@/modules/order/entities'
+import { Column, Entity, Generated, OneToMany } from 'typeorm'
 
 @Entity('users')
 export class UserEntity extends AbstractEntity {
@@ -25,4 +26,7 @@ export class UserEntity extends AbstractEntity {
 
 	@Column({ default: false })
 	isConfirm: boolean
+
+	@OneToMany(() => OrderEntity, order => order.user, { cascade: true })
+	orders: OrderEntity
 }
