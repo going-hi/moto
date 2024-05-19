@@ -8,10 +8,12 @@ import {
 	UsePipes,
 	ValidationPipe,
 	HttpCode,
-	HttpStatus
+	HttpStatus,
+	Patch,
+	Query
 } from '@nestjs/common'
 import { OrderService } from './order.service'
-import { CreateOrderDto, OrderAllQueryDto, OrderAllQueryDtoWithUser } from './dto'
+import { CreateOrderDto, OrderAllQueryDto, OrderAllQueryDtoWithUser, UpdateStatusDto } from './dto'
 import { ApiTags } from '@nestjs/swagger'
 import { GetByIdParamsDto } from '@/common/dto'
 import { AccessGuard } from '@/auth/guards'
@@ -32,10 +34,26 @@ export class OrderController {
 		return this.orderService.create(dto, userId)
 	}
 
+	// * For admins
+
+	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
+	@HttpCode(HttpStatus.OK)
+	@Get('admin')
+	findAll(@Query() dto: OrderAllQueryDtoWithUser) {
+		return this.orderService.findAll(dto)
+	}
+
+	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
+	@HttpCode(HttpStatus.OK)
+	@Get(':id/admin')
+	findOne(@Param() { id }: GetByIdParamsDto) {
+		return this.orderService.findOne(id)
+	}
+
 	@AccessGuard()
 	@HttpCode(HttpStatus.OK)
 	@Get()
-	findAllByUser(@User('id') userId: number, @Body() dto: OrderAllQueryDto) {
+	findAllByUser(@User('id') userId: number, @Query() dto: OrderAllQueryDto) {
 		return this.orderService.findAll({ ...dto, user: userId })
 	}
 
@@ -46,19 +64,11 @@ export class OrderController {
 		return this.orderService.findOne(id, userId)
 	}
 
-	// * For admins
 	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
 	@HttpCode(HttpStatus.OK)
-	@Get(':id/admin')
-	findOne(@Param() { id }: GetByIdParamsDto) {
-		return this.orderService.findOne(id)
-	}
-
-	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
-	@HttpCode(HttpStatus.OK)
-	@Get('admin')
-	findAll(@Body() dto: OrderAllQueryDtoWithUser) {
-		return this.orderService.findAll(dto)
+	@Patch(':id/status')
+	updateStatus(@Param() { id }: GetByIdParamsDto, @Body() { status }: UpdateStatusDto) {
+		return this.orderService.updateStatus(id, status)
 	}
 
 	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)

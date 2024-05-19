@@ -6,6 +6,7 @@ import { Repository } from 'typeorm'
 import { ProductService } from '../product/product.service'
 import { PaginationDto } from '@/common/pagination'
 import { skipCount } from '@/core/utils'
+import { EOrderStatus } from '@/common/enums'
 
 @Injectable()
 export class OrderService {
@@ -39,11 +40,10 @@ export class OrderService {
 		return await this.orderRepository.save(order)
 	}
 
-	async findAll({ count, page, sortBy, sortOrder, user }: OrderAllQueryDtoWithUser) {
+	async findAll({ count, page, sortBy, sortOrder, user, status }: OrderAllQueryDtoWithUser) {
 		const where = {}
-
 		user ? (where['user'] = { id: user }) : {}
-
+		status ? (where['status'] = status) : {}
 		const [items, total] = await this.orderRepository.findAndCount({
 			where,
 			order: {
@@ -70,9 +70,14 @@ export class OrderService {
 		return new PaginationDto(items, total)
 	}
 
+	// TODO: какие поля нужны из продукта???
 	async findOne(id: number, userId?: number) {
+		const where = { id }
+
+		userId ? (where['user'] = { id: userId }) : {}
+
 		const order = await this.orderRepository.findOne({
-			where: userId ? { user: { id: userId } } : {},
+			where,
 			relations: {
 				items: {
 					product: true
@@ -94,11 +99,23 @@ export class OrderService {
 		return order
 	}
 
-	async delete(id: number) {
+	async byId(id: number, withError = false) {
 		const order = await this.orderRepository.findOneBy({ id })
-		if (!order) {
+
+		if (!order && withError) {
 			throw new NotFoundException(`Заказ с id: ${id} не найден`)
 		}
+		return order
+	}
+
+	async delete(id: number) {
+		await this.byId(id, true)
 		await this.orderRepository.delete({ id })
+	}
+
+	async updateStatus(id: number, status: EOrderStatus) {
+		const order = await this.byId(id, true)
+		order.status = status
+		return await this.orderRepository.save(order)
 	}
 }
