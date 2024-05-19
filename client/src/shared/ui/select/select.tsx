@@ -39,12 +39,12 @@ export const Select = ({
 			>
 				<div
 					className={clsx(
-						'flex gap-x-[10px] items-center cursor-pointer',
+						'flex gap-x-[10px] items-center cursor-pointer group',
 						position === 'right' ? 'justify-start' : 'justify-end'
 					)}
 					onClick={() => setIsOpen(!isOpen)}
 				>
-					<Text className='text-white font-bold text-[18px] uppercase'>
+					<Text className='text-white font-bold text-[18px] uppercase group-hover:underline'>
 						{label}
 					</Text>
 					<img
