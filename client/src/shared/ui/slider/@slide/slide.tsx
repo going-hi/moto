@@ -6,7 +6,7 @@ export const Slide = ({
 	className
 }: {
 	children: ReactNode
-	className: string
+	className?: string
 }) => {
 	return (
 		<aside className={clsx('shrink-0 grow-0', className)}>{children}</aside>

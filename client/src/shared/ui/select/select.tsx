@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import type { ReactNode } from 'react'
+import { Icon } from '../icon'
 import { Typography } from '../typography'
 
 const { Text } = Typography
@@ -47,9 +48,8 @@ export const Select = ({
 					<Text className='text-white font-bold text-[18px] uppercase group-hover:underline'>
 						{label}
 					</Text>
-					<img
-						src='/arrow-down.svg'
-						alt='sort'
+					<Icon
+						name='ArrowDown'
 						className={clsx(
 							isOpen ? 'rotate-180' : 'rotate-0',
 							'duration-500'

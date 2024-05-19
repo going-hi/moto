@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { Accordion, Button } from '@/shared'
-import type { TCatalogAccordionItem } from '../@model'
+import type { TCatalogAccordionItem } from '../model'
 import cl from './item.module.css'
 
 export const CatalogItem = ({

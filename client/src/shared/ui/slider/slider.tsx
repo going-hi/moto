@@ -1,38 +1,30 @@
-import { EmblaOptionsType, EmblaPluginType } from 'embla-carousel'
-import useEmblaCarousel from 'embla-carousel-react'
-import { type ReactNode, useCallback, useState } from 'react'
-import { Button } from '@/shared'
+import clsx from 'clsx'
+import { type ReactNode, useCallback } from 'react'
+import { useSlider, Button } from '@/shared'
 
 export const Slider = ({
 	children,
-	options,
-	plugins = [],
-	length
+	type,
+	classNameBody
 }: {
 	children: ReactNode
-	options: EmblaOptionsType
-	plugins?: EmblaPluginType[]
-	length: number
+	type: 'more' | 'default'
+	classNameBody?: string
 }) => {
-	const [sliderRef, api] = useEmblaCarousel(options, plugins)
-	const [activeIndex, setActiveIndex] = useState<number>(0)
+	const { sliderApi, sliderRef } = useSlider()
 
-	const onClick = useCallback(() => {
-		if (!api) return
+	const onClickMore = useCallback(() => {
+		if (!sliderApi) return
 
-		const index = activeIndex + 1 > length ? 1 : activeIndex + 1
-
-		api.scrollTo(index, false)
-
-		setActiveIndex(index)
-	}, [activeIndex, api, length])
+		sliderApi.scrollNext()
+	}, [sliderApi])
 
 	return (
 		<div className='relative'>
 			<div ref={sliderRef} className='overflow-hidden '>
-				<div className='flex'>{children}</div>
+				<div className={clsx('flex', classNameBody)}>{children}</div>
 			</div>
-			<Button variant='more' onClick={onClick} />
+			{type === 'more' && <Button variant='more' onClick={onClickMore} />}
 		</div>
 	)
 }
