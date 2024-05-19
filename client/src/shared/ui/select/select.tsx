@@ -21,8 +21,6 @@ export const Select = ({
 	setIsOpen: (o: boolean) => void
 	position: 'left' | 'right'
 }) => {
-	console.log(width !== 'w-[100dvw]')
-
 	return (
 		<>
 			<div

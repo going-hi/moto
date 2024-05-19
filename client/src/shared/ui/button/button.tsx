@@ -21,7 +21,7 @@ export const Button = ({
 } & ButtonHTMLAttributes<HTMLButtonElement>) => {
 	switch (variant) {
 		case 'more':
-			return <More />
+			return <More {...props} />
 		case 'parentheses-link':
 			return (
 				<Link

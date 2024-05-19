@@ -1,0 +1,12 @@
+.item {
+	@apply relative pl-[20px];
+}
+
+.item:before {
+	content: '';
+	@apply absolute top-[30%] left-0 w-[7px] h-[7px] rounded-[50%] bg-black;
+}
+
+.button * {
+	@apply !text-beige;
+}
