@@ -22,8 +22,6 @@ export const Accordion = ({
 }) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false)
 
-	console.log(isOpen)
-
 	const onClick = () => {
 		if (variant === 'catalog') {
 			return
