@@ -10,6 +10,7 @@ export const CatalogMore = ({ isLoading }: { isLoading: boolean }) => {
 				disabled={isLoading}
 				onClick={incrementPage}
 				variant='parentheses-button'
+				isMain
 			>
 				ПОКАЗАТЬ ЕЩЕ
 			</Button>

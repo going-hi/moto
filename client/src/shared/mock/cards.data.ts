@@ -7,7 +7,10 @@ export const cards: TCard[] = [
 		name: 'MOTOLAND XR 250 LITE',
 		id: 1,
 		createDate: 'date',
-		updateDate: 'date'
+		updateDate: 'date',
+		description: `На MOTOLAND XR 250 Lite установлен двигатель 172 FMM мощностью 21 л.с. и объёмом  250 кубов. 
+		Пятиступенчатая коробка передач с отличным подъемом с низких оборотов. Дисковые тормоза обеспечат надежную остановку и безопасность. 
+		Бюджетный MOTOLAND XR 250 Lite станет отличным приобретением как для новичка и так и уже зрелого мотоциклиста.`
 	},
 	{
 		image: 'https://hdpic.club/uploads/posts/2022-01/1642021689_26-hdpic-club-p-mototsikla-na-belom-fone-39.jpg',

@@ -14,22 +14,20 @@ export const OtherModelsTop = () => {
 	}
 
 	return (
-		<>
-			<Layout type='multi' variant='full'>
-				<Title variant='h2' className='text-gray-light'>
-					ДРУГИЕ МОДЕЛИ
-				</Title>
-				<div className='flex gap-x-[15px] items-center pl-[190px]'>
-					<OtherModelsArrow
-						onClick={() => onClick('back')}
-						variant='left'
-					/>
-					<OtherModelsArrow
-						onClick={() => onClick('forward')}
-						variant='right'
-					/>
-				</div>
-			</Layout>
-		</>
+		<Layout type='multi' variant='full'>
+			<Title variant='h2' className='text-gray-light'>
+				ДРУГИЕ МОДЕЛИ
+			</Title>
+			<div className='flex gap-x-[15px] items-center pl-[165px]'>
+				<OtherModelsArrow
+					onClick={() => onClick('back')}
+					variant='left'
+				/>
+				<OtherModelsArrow
+					onClick={() => onClick('forward')}
+					variant='right'
+				/>
+			</div>
+		</Layout>
 	)
 }

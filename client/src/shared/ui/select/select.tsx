@@ -49,6 +49,7 @@ export const Select = ({
 						{label}
 					</Text>
 					<Icon
+						color='white'
 						name='ArrowDown'
 						className={clsx(
 							isOpen ? 'rotate-180' : 'rotate-0',

@@ -16,15 +16,18 @@ export const Header = () => {
 					<div className='flex justify-between gap-x-[40px] pt-[20px] pr-[25px]'>
 						<Search />
 						<Icon
+							color='white'
 							name='Profile'
 							className='cursor-pointer dhover:hover:scale-125 duration-700'
 						/>
 						<IconBadge
+							color='white'
 							name='Favourite'
 							count={1}
 							className='cursor-pointer dhover:hover:scale-125 duration-700 self-start'
 						/>
 						<IconBadge
+							color='white'
 							name='Cart'
 							count={1}
 							className='cursor-pointer dhover:hover:scale-125 duration-700 self-start'
