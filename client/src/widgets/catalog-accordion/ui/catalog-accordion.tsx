@@ -1,5 +1,5 @@
+import { catalogAccordionItemsArr } from '../model'
 import { CatalogItem } from './@item'
-import { catalogAccordionItemsArr } from './@model'
 import { Container } from '@/layout'
 
 export const CatalogAccordion = () => {

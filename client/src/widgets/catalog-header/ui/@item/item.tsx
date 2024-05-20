@@ -13,8 +13,8 @@ export const CatalogHeaderItem = ({ keyMap }: { keyMap: string }) => {
 			<UnderlineWave>
 				<Link
 					className={clsx(
-						'font-medium text-[18px]',
-						name === label && 'bg-black'
+						'font-medium text-[18px] px-[3px]',
+						name === keyMap && 'bg-black'
 					)}
 					to={`/catalog/${keyMap}`}
 				>

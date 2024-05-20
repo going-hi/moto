@@ -1,5 +1,5 @@
 import { Accordion, Typography } from '@/shared'
-import { faqItemsArr } from '../@model'
+import { faqItemsArr } from '../model'
 import { Container, Layout } from '@/layout'
 
 const { Title } = Typography

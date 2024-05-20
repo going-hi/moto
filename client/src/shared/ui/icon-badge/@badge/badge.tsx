@@ -1,4 +1,4 @@
-import { formatCount } from '../@utils'
+import { formatCount } from '../@libs'
 
 export const Badge = ({ count }: { count: number }) => {
 	return (

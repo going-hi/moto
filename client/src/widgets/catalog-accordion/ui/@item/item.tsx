@@ -1,6 +1,6 @@
 import clsx from 'clsx'
-import { Accordion, Button } from '@/shared'
-import type { TCatalogAccordionItem } from '../@model'
+import { Accordion, Button, ListItem } from '@/shared'
+import type { TCatalogAccordionItem } from '../../model'
 import cl from './item.module.css'
 
 export const CatalogItem = ({
@@ -16,9 +16,9 @@ export const CatalogItem = ({
 				<div className='basis-[900px]'>
 					<ul className='flex flex-col gap-y-[8px] mb-[34px] w-full'>
 						{text.split('\n').map(i => (
-							<li className={cl.item} key={i}>
+							<ListItem variant='center' key={i}>
 								{i}
-							</li>
+							</ListItem>
 						))}
 					</ul>
 					<Button

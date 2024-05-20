@@ -13,6 +13,7 @@ export const Search = () => {
 			<Icon
 				onClick={() => inputRef.current?.focus()}
 				name='Search'
+				color='white'
 				className='cursor-pointer dhover:group-hover:scale-125 duration-700 peer-focus:scale-125'
 			/>
 		</div>

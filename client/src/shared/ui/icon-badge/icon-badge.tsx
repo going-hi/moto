@@ -7,16 +7,18 @@ export const IconBadge = ({
 	count,
 	name,
 	className,
-	iconClassName
+	iconClassName,
+	color
 }: {
 	count: number
 	name: TIconName
 	className?: string
 	iconClassName?: string
+	color?: string
 }) => {
 	return (
 		<div className={clsx('relative inline-block', className)}>
-			<Icon name={name} className={iconClassName} />
+			<Icon color={color} name={name} className={iconClassName} />
 			<Badge count={count} />
 		</div>
 	)

@@ -24,3 +24,8 @@ body {
 .transition-all {
 	transition: all 0.7s ease;
 }
+
+ul {
+	list-style-type: none;
+	padding: 0;
+}

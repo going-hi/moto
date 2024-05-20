@@ -6,27 +6,29 @@ import type { TCard } from '../model'
 const { Text } = Typography
 
 export const Card = ({
-	image,
+	images,
 	id,
 	name,
 	type,
 	price,
 	className,
-	classNameImageBody
+	classNameImageBody,
+	textColor
 }: TCard & {
 	type: 'small' | 'large'
 	className?: string
 	classNameImageBody?: string
+	textColor?: string
 }) => {
 	return (
 		<Link
 			to={`/card/${id}`}
 			className={clsx(
 				'duration-700',
-				className,
 				type === 'small'
 					? 'basis-[17.5%] dhover:hover:scale-105'
-					: 'dhover:hover:scale-[102%]'
+					: 'dhover:hover:scale-[102%]',
+				className
 			)}
 		>
 			<div className={clsx(type === 'large' && 'bg-white h-full')}>
@@ -44,12 +46,17 @@ export const Card = ({
 								: 'w-[70%] h-[70%] object-contain',
 							'absolute left-[50%] top-[50%] -translate-y-[50%] -translate-x-[50%] '
 						)}
-						src={image}
+						src={images[0]}
 						alt={name}
 					/>
 				</div>
 				{type === 'small' ? (
-					<Text className='text-[16px] font-medium text-black'>
+					<Text
+						className={clsx(
+							'text-[16px] font-medium text-black',
+							textColor
+						)}
+					>
 						{name}
 					</Text>
 				) : (

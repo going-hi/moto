@@ -20,7 +20,7 @@ export const Icon = ({
 		<Svg
 			onClick={onClick}
 			color={color}
-			className={clsx(cl.root, color && cl.root_color, className)}
+			className={clsx(cl.root, className)}
 		/>
 	)
 }
