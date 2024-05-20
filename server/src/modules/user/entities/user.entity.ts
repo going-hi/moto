@@ -1,5 +1,6 @@
 import { ERoles } from '@/common/enums/role.enum'
 import { AbstractEntity } from '@/core/database/entities'
+import { BasketEntity } from '@/modules/basket/entities'
 import { OrderEntity } from '@/modules/order/entities'
 import { Column, Entity, Generated, OneToMany } from 'typeorm'
 
@@ -29,4 +30,7 @@ export class UserEntity extends AbstractEntity {
 
 	@OneToMany(() => OrderEntity, order => order.user, { cascade: true })
 	orders: OrderEntity
+
+	@OneToMany(() => BasketEntity, basket => basket.user, { cascade: true })
+	baskets: BasketEntity[]
 }
