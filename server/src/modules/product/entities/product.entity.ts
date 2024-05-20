@@ -2,6 +2,7 @@ import { ECategory } from '@/common/enums'
 import { AbstractEntity } from '@/core/database/entities'
 import { BasketEntity } from '@/modules/basket/entities'
 import { CharacteristicEntity } from '@/modules/characteristic/entities'
+import { FavouritesEntity } from '@/modules/favourites/entities'
 import { OrderItemEntity } from '@/modules/order/entities'
 import { Column, Entity, OneToMany } from 'typeorm'
 
@@ -36,4 +37,7 @@ export class ProductEntity extends AbstractEntity {
 
 	@OneToMany(() => BasketEntity, basket => basket.product, { cascade: true })
 	baskets: BasketEntity[]
+
+	@OneToMany(() => FavouritesEntity, favourites => favourites.product, { cascade: true })
+	favorites: FavouritesEntity[]
 }
