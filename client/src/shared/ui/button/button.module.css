@@ -1,0 +1,11 @@
+.underline > div:after {
+	content: '';
+	@apply duration-700 absolute bottom-0 left-0 h-[2px] bg-beige max-w-0 w-full;
+}
+
+@media (hover: hover) {
+	.underline:hover > div:after {
+		content: '';
+		@apply duration-700 w-full max-w-full;
+	}
+}

@@ -1,0 +1,31 @@
+@import './fonts.css';
+@import './variables.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.inter {
+	font-family: 'Inter', sans-serif;
+}
+
+.bebas {
+	font-family: 'Bebas', sans-serif;
+}
+
+body {
+	font-family: 'Inter', sans-serif;
+}
+
+*:focus {
+	outline: none;
+}
+
+.transition-all {
+	transition: all 0.7s ease;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+}

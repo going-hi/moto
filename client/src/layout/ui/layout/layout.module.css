@@ -1,0 +1,19 @@
+.full > {
+	@apply shrink-0 grow basis-full;
+}
+
+.multi {
+	@apply justify-between;
+}
+
+.multi > :first-child {
+	@apply shrink-0 basis-[40.6%] grow-0;
+}
+
+.multi > :nth-child(2) {
+	@apply shrink-0 basis-[59.4%] grow;
+}
+
+.single_part > :first-child {
+	@apply shrink-0 basis-[59.4%] grow-0;
+}
