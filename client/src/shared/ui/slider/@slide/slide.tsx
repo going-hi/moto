@@ -3,12 +3,16 @@ import type { ReactNode } from 'react'
 
 export const Slide = ({
 	children,
-	className
+	className,
+	onClick
 }: {
 	children: ReactNode
 	className?: string
+	onClick?: () => void
 }) => {
 	return (
-		<aside className={clsx('shrink-0 grow-0', className)}>{children}</aside>
+		<aside onClick={onClick} className={clsx('shrink-0 grow-0', className)}>
+			{children}
+		</aside>
 	)
 }

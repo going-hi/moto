@@ -6,7 +6,7 @@ import type { TCard } from '../model'
 const { Text } = Typography
 
 export const Card = ({
-	image,
+	images,
 	id,
 	name,
 	type,
@@ -46,7 +46,7 @@ export const Card = ({
 								: 'w-[70%] h-[70%] object-contain',
 							'absolute left-[50%] top-[50%] -translate-y-[50%] -translate-x-[50%] '
 						)}
-						src={image}
+						src={images[0]}
 						alt={name}
 					/>
 				</div>
