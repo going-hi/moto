@@ -18,11 +18,14 @@ export const Footer = () => {
 			<Container bodyClassName='bg-black pt-[25px] pb-[15px]'>
 				<Layout variant='full' type='multi'>
 					<div className='flex flex-col justify-between'>
-						<img
-							src='/logo.png'
-							alt='logo'
-							className='w-[120px] h-[120px]'
-						/>
+						<Link to='/'>
+							<img
+								src='/logo.png'
+								alt='logo'
+								className='w-[120px] h-[120px]'
+							/>
+						</Link>
+
 						<Link
 							to='/'
 							className='opacity-70 text-beige dhover:hover:underline leading-[30px] self-start text-[12px]'

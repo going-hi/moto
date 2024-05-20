@@ -5,8 +5,8 @@ const { Text } = Typography
 
 export const CardBodyPaymentMethod = () => {
 	return (
-		<CardBodyAccordion title='Способы оплаты'>
-			<ul>
+		<CardBodyAccordion type='container' title='Способы оплаты'>
+			<ul className='pb-[15px]'>
 				<ListItem variant='top'>
 					<Text className='mb-[10px]'>
 						Оплата наличными при получении товара
@@ -28,9 +28,7 @@ export const CardBodyPaymentMethod = () => {
 						При данном способе оплаты менеджер подтверждает Ваш
 						заказ, после чего выставляет счёт на оплату.
 					</Text>
-					<Text className='mb-[10px]'>
-						Счёт действует в течение 5 рабочих дней.
-					</Text>
+					<Text>Счёт действует в течение 5 рабочих дней.</Text>
 				</ListItem>
 			</ul>
 		</CardBodyAccordion>

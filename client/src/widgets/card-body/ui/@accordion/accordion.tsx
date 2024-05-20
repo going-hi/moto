@@ -7,11 +7,13 @@ const { Title } = Typography
 export const CardBodyAccordion = ({
 	title,
 	children,
-	isLast
+	isLast,
+	type
 }: {
 	title: string
 	isLast?: boolean
 	children: ReactNode
+	type: 'full' | 'container'
 }) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false)
 
@@ -35,8 +37,9 @@ export const CardBodyAccordion = ({
 			</div>
 			<div
 				className={clsx(
-					'overflow-hidden max-w-[520px] font-medium text-[18px] -tracking-2per',
-					isOpen ? 'max-h-[100dvh]' : 'max-h-0'
+					'overflow-hidden font-medium text-[18px] -tracking-2per',
+					isOpen ? 'max-h-[100dvh]' : 'max-h-0',
+					type === 'container' ? 'max-w-[520px]' : 'max-w-full'
 				)}
 			>
 				{children}

@@ -2,9 +2,11 @@ import { AddToCartButton } from '@/features/add-to-cart'
 import { AddToFavouritesButton } from '@/features/add-to-favourites'
 import type { TCard } from '@/entities/card'
 import { Typography } from '@/shared'
+import { specifications } from '@/shared'
 import { CardBodyDelivery } from './@delivery'
 import { CardBodyDescription } from './@description'
 import { CardBodyPaymentMethod } from './@payment-method'
+import { Specifications } from './@specifications'
 
 const { Title, Text } = Typography
 
@@ -25,6 +27,7 @@ export const CardBody = ({ name, price, description }: TCard) => {
 				<AddToCartButton />
 			</div>
 			<div>
+				<Specifications list={specifications} />
 				<CardBodyPaymentMethod />
 				<CardBodyDelivery />
 			</div>

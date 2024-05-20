@@ -5,7 +5,7 @@ const { Text } = Typography
 
 export const CardBodyDelivery = () => {
 	return (
-		<CardBodyAccordion title='Доставка' isLast>
+		<CardBodyAccordion type='container' title='Доставка' isLast>
 			<ul>
 				<ListItem variant='top' className='mb-[20px]'>
 					<Text className='mb-[10px]'>

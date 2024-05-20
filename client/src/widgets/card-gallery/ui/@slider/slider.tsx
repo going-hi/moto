@@ -4,9 +4,9 @@ import { CardGalleryItem } from '../@item'
 
 export const CardGallerySlider = ({ images, name }: TCard) => {
 	return (
-		<Slider type='default'>
-			{images.map(i => (
-				<CardGalleryItem key={i} image={i} name={name} />
+		<Slider type='default' classNameBody='gap-x-[15px]'>
+			{images.slice(1).map((i, index) => (
+				<CardGalleryItem index={index} key={i} image={i} name={name} />
 			))}
 		</Slider>
 	)
