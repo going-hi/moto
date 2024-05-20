@@ -38,7 +38,7 @@ export const CardBodyAccordion = ({
 			<div
 				className={clsx(
 					'overflow-hidden font-medium text-[18px] -tracking-2per',
-					isOpen ? 'max-h-[100dvh]' : 'max-h-0',
+					isOpen ? 'max-h-[10000px]' : 'max-h-0',
 					type === 'container' ? 'max-w-[520px]' : 'max-w-full'
 				)}
 			>
