@@ -13,6 +13,7 @@ import { FileService } from '@/core/file/file.service'
 import { CharacteristicEntity } from '../characteristic/entities'
 import { skipCount } from '@/core/utils'
 import { PaginationDto } from '@/common/pagination'
+import { productGenerate } from '@/core/seeder/generate'
 
 @Injectable()
 export class ProductService {
@@ -171,5 +172,14 @@ export class ProductService {
 		}
 
 		return products
+	}
+
+	async _seeding(count: number = 10) {
+		const products = []
+		for (let i = 0; i < count; i++) {
+			const newProduct = productGenerate()
+			products.push(newProduct)
+		}
+		await this.productRepository.save(products)
 	}
 }
