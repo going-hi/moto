@@ -9,10 +9,11 @@ import {
 	UnauthorizedException,
 	Param,
 	UsePipes,
-	ValidationPipe
+	ValidationPipe,
+	Query
 } from '@nestjs/common'
 import { AuthService } from './auth.service'
-import { LoginDto, RegistrationDto, ChangePasswordDto } from './dto'
+import { LoginDto, RegistrationDto, ChangePasswordDto, ResetPasswordDto, CodeDto } from './dto'
 import type { CookieOptions, Response } from 'express'
 import { Cookie, User } from '@/common/decorators'
 import { AccessGuard, RefreshGuard } from './guards'
@@ -90,6 +91,16 @@ export class AuthController {
 	@Post('password/change')
 	changePassword(@Body() dto: ChangePasswordDto, @User('id') id: number) {
 		return this.authService.changePassword(dto, id)
+	}
+
+	@Get('password/reset')
+	resetPassword(@Query() { email }: ResetPasswordDto) {
+		return this.authService.generateCodeForReset(email)
+	}
+
+	@Post('password/reset/code')
+	async codeConfirmation(@Body() dto: CodeDto) {
+		return this.authService.codeConfirmation(dto)
 	}
 
 	@AuthSwaggerController.logout()

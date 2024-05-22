@@ -5,13 +5,15 @@ import {
 	RefreshDto,
 	JwtPayload,
 	ChangePasswordDto,
-	ProfileDto
+	ProfileDto,
+	CodeDto
 	// RecoveryPasswordDto
 } from './dto'
 import { HashService } from '@/core/hash/hash.service'
 import { UserService } from '@/modules/user/user.service'
 import { TokenService } from './token.service'
 import { MailService } from '@/mail/mail.service'
+import { generateRandomCode, generateRandomPassword } from '@/core/utils'
 
 @Injectable()
 export class AuthService {
@@ -82,8 +84,24 @@ export class AuthService {
 		if (token) await this.tokenService.removeTokenFromDb(refresh)
 	}
 
-	// ! потом сделать
-	//* async recoveryPassword(dto: RecoveryPasswordDto) {}
+	async resetPassword(email: string) {
+		const candidate = await this.userService.byEmail(email)
+		if (!candidate) throw new BadRequestException('Пользователь с таким email не найден')
+	}
+
+	async generateCodeForReset(email: string) {
+		const code = generateRandomCode()
+		await this.userService.setCode(email, code)
+		await this.mailService.sendCodeForResetPassword(email, code)
+	}
+
+	async codeConfirmation({ email, code }: CodeDto) {
+		const user = await this.userService.checkCode(email, code)
+		const randomPassword = generateRandomPassword()
+		await this.mailService.sendNewRandomPassword(email, randomPassword)
+		const hashPassword = await this.hashService.hash(randomPassword)
+		await this.userService.changePassword(user.id, hashPassword)
+	}
 
 	async changePassword(dto: ChangePasswordDto, userId: number) {
 		if (dto.newPassword === dto.password) {
