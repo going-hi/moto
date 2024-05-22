@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
-import { type TSortItem, sortItemsArr } from './sort.data'
+import { type TSortItem, sortItemsArr } from '../data'
 
 type TParamsStore = {
 	page: number

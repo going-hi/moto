@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import type { TCard } from '../model'
+import type { TCard } from '../types'
 
 export type TCardProps = TCard & {
 	type: 'small' | 'large'

@@ -1,1 +1,1 @@
-export * from './faq.data'
+export * from './data'

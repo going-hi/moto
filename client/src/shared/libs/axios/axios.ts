@@ -1,5 +1,6 @@
-import axios from "axios";
+import axios from 'axios'
+import { axiosConfig } from '../../config'
 
-const $api = axios.create()
+const $api = axios.create(axiosConfig)
 
-export {$api}
+export { $api }

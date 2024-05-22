@@ -1,0 +1,38 @@
+import type { ReactNode } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { Icon, Typography } from '@/shared'
+
+const { Title } = Typography
+
+export const AuthModal = ({ children }: { children: ReactNode }) => {
+	const navigate = useNavigate()
+
+	return (
+		<div
+			className='w-[100dvw] h-[100dvh] top-0 left-0 right-0 bottom-0 bg-modal fixed z-30 flex items-center justify-center'
+			onClick={() => navigate('/')}
+		>
+			<div
+				onClick={e => e.stopPropagation()}
+				className='bg-beige w-[40dvw] relative min-h-[50dvh]'
+			>
+				<Link
+					to='/'
+					className='absolute top-[20px] right-[20px] p-[5px] block'
+				>
+					<Icon className='w-[25px] h-[25px]' name='Close' />
+				</Link>
+
+				<div className='py-[40px] px-[90px]'>
+					<Title
+						className='mb-[10px] uppercase text-center'
+						variant='h3'
+					>
+						Личный кабинет
+					</Title>
+					{children}
+				</div>
+			</div>
+		</div>
+	)
+}

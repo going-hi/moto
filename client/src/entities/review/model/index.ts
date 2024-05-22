@@ -1,1 +1,2 @@
-export * from './review.entity'
+export * from './schema'
+export * from './types'

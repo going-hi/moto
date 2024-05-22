@@ -1,1 +1,1 @@
-export * from './catalog-accordion.data'
+export * from './data'
