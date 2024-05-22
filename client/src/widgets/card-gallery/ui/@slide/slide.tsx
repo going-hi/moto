@@ -3,7 +3,7 @@ import type { TCard } from '@/entities/card'
 import { Slide } from '@/shared'
 import { useCardGalleryStore } from '../../@model'
 
-export const CardGalleryItem = ({
+export const CardGallerySlide = ({
 	image,
 	name,
 	index
