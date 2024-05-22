@@ -20,6 +20,11 @@ export class UserService {
 		return user
 	}
 
+	async byPhone(phone: string) {
+		const user = await this.userRepository.findOneBy({ phone })
+		return user
+	}
+
 	async create(dto: CreateUserDto) {
 		const user = this.userRepository.create(dto)
 		return await this.userRepository.save(user)

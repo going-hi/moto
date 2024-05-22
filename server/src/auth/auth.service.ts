@@ -37,7 +37,7 @@ export class AuthService {
 	async registration(dto: RegistrationDto) {
 		const candidate = await this.userService.byEmail(dto.email)
 		if (candidate) throw new BadRequestException('Пользователь с таким email уже существует')
-
+		await this.checkPhone(dto.phone)
 		const hashPassword = await this.hashService.hash(dto.password)
 		const user = await this.userService.create({
 			...dto,
@@ -48,6 +48,12 @@ export class AuthService {
 		const { refreshToken } = this.tokenService.generateTokens(user)
 		await this.tokenService.saveToken(refreshToken, user.id)
 		return refreshToken
+	}
+
+	async checkPhone(phone: string) {
+		const user = await this.userService.byPhone(phone)
+		if (user) throw new BadRequestException('Пользователь с таким телефоном уже существует')
+		return true
 	}
 
 	async refresh(
