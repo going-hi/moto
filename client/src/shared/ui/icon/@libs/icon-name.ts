@@ -5,6 +5,7 @@ import ArrowLeft from '@assets/arrow-left.svg?react'
 import ArrowRight from '@assets/arrow-right.svg?react'
 import Cart from '@assets/cart.svg?react'
 import Favourite from '@assets/favourite.svg?react'
+import FullHeart from '@assets/full-heart.svg?react'
 import Heart from '@assets/heart.svg?react'
 import Minus from '@assets/minus.svg?react'
 import Plus from '@assets/plus.svg?react'
@@ -21,7 +22,8 @@ export const iconNames = {
 	ArrowDown,
 	ArrowLeft,
 	ArrowRight,
-	Heart
+	Heart,
+	FullHeart
 }
 
 export type TIconName = keyof typeof iconNames

@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { z } from 'zod'
-import { CardBody, scrollPage } from '@/widgets/card-body'
+import { CardBody } from '@/widgets/card-body'
 import { CardGallery } from '@/widgets/card-gallery'
 import { OtherModels } from '@/widgets/other-models'
 import { Typography, cards, useValidParams } from '@/shared'
@@ -10,18 +10,6 @@ const { Text } = Typography
 
 export const CardPage = () => {
 	const cardBodyRef = useRef<HTMLDivElement | null>(null)
-
-	useEffect(() => {
-		const scroll = (e: WheelEvent) => {
-			scrollPage(e, cardBodyRef)
-		}
-
-		// window.addEventListener('wheel', scroll)
-
-		// return () => {
-		// 	window.removeEventListener('wheel', scroll)
-		// }
-	}, [])
 
 	const { id } = useValidParams({
 		id: z.string().regex(/^[0-9]+$/)

@@ -1,7 +1,6 @@
-import clsx from 'clsx'
-import { Card } from '@/entities/card'
 import { cards } from '@/shared'
 import { getElementClass, getSlicedArr } from '../../libs'
+import { CatalogItem } from '../@item'
 import { CatalogMore } from '../@more'
 import { Container } from '@/layout'
 
@@ -21,14 +20,10 @@ export const CatalogList = () => {
 							)
 
 							return (
-								<Card
+								<CatalogItem
 									{...i}
-									key={String(i.id)}
-									type='large'
 									className={cl}
-									classNameImageBody={clsx(
-										!!cl && 'pb-[90%]'
-									)}
+									key={String(i.id)}
 								/>
 							)
 						})}
