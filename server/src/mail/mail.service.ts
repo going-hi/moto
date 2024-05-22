@@ -30,4 +30,42 @@ export class MailService {
 			this.logger.error(e.message)
 		}
 	}
+
+	async sendCodeForResetPassword(to: string, code: number) {
+		try {
+			await this.mailerService.sendMail({
+				to,
+				from: this.configService.get('SMTP_USER'),
+				subject: 'Подтверждение почты',
+				text: '',
+				html: `
+                    <div>
+                    <h1>Ваша код подтверждения для онлайн магазина Moto</h1>
+					<h1>${code}</h1>
+                    </div>
+                `
+			})
+		} catch (e) {
+			this.logger.error(e.message)
+		}
+	}
+
+	async sendNewRandomPassword(to: string, password: string) {
+		try {
+			await this.mailerService.sendMail({
+				to,
+				from: this.configService.get('SMTP_USER'),
+				subject: 'Подтверждение почты',
+				text: '',
+				html: `
+                    <div>
+                    <h1>Ваш новый пароль от онлайн магазина Moto, после входа в систему обязательно смените его</h1>
+					<h1>${password}</h1>
+                    </div>
+                `
+			})
+		} catch (e) {
+			this.logger.error(e.message)
+		}
+	}
 }
