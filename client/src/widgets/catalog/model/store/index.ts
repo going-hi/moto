@@ -1,1 +1,1 @@
-export * from './params.store'
+export * from './search-query.store'

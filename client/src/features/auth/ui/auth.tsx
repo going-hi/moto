@@ -22,6 +22,7 @@ export const Auth = () => {
 					options={authNavigationItemsArr}
 					activeValue={activeValue}
 					setActiveValue={setActiveValue}
+					className='mb-[50px]'
 				/>
 				{activeValue === 'login' ? <AuthLogin /> : <AuthRegistration />}
 			</AuthModal>

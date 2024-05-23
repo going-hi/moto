@@ -8,7 +8,10 @@ const { Text } = Typography
 // eslint-disable-next-line react/display-name
 export const AuthInput = forwardRef<
 	HTMLInputElement,
-	InputHTMLAttributes<HTMLInputElement> & { label: string }
+	Omit<InputHTMLAttributes<HTMLInputElement>, 'value'> & {
+		label: string
+		value?: string | number | readonly string[] | boolean
+	}
 >(
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	({ label, onChange, value, name, ...props }, ref) => {
@@ -18,7 +21,7 @@ export const AuthInput = forwardRef<
 			formState: { errors: formErrors }
 		} = useFormContext<TLogin>()
 
-		const errors = (name ? formErrors[name as TLoginFields] : {}) as
+		const err = (name ? formErrors[name as TLoginFields] : {}) as
 			| TFormError
 			| undefined
 
@@ -29,7 +32,7 @@ export const AuthInput = forwardRef<
 						{label}
 					</label>
 					{props.required &&
-						!!errors &&
+						!!err &&
 						((value ?? '') as string).length === 0 && (
 							<Text className='text-red-700'>
 								Заполните это поле
@@ -45,8 +48,8 @@ export const AuthInput = forwardRef<
 					onChange={onChange}
 					{...props}
 				/>
-				{errors?.message && (
-					<Text className='text-red-700'>{errors.message}</Text>
+				{err?.message && (
+					<Text className='text-red-700'>{err.message}</Text>
 				)}
 			</div>
 		)

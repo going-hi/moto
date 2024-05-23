@@ -1,31 +1,34 @@
-import { Dispatch, SetStateAction } from 'react'
+import clsx from 'clsx'
+import { forwardRef } from 'react'
+import { ControllerRenderProps } from 'react-hook-form'
 import { Icon } from '../icon'
 
-export const Checkbox = ({
-	isCheck,
-	setIsCheck,
-	required,
-	id
-}: {
-	isCheck: boolean
-	setIsCheck: Dispatch<SetStateAction<boolean>>
-	required?: boolean
-	id: string
-}) => {
+// eslint-disable-next-line react/display-name
+export const Checkbox = forwardRef<
+	HTMLInputElement,
+	{
+		id: string
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		field: ControllerRenderProps<any, any>
+		className?: string
+	}
+>(({ id, field, className }, ref) => {
 	return (
 		<label
 			htmlFor={id}
-			className='w-[25px] h-[25px] border-gray-dark border flex items-center justify-center cursor-pointer'
+			className={clsx(
+				'w-[25px] h-[25px] border-gray-dark border flex items-center justify-center cursor-pointer',
+				className
+			)}
 		>
 			<input
-				required={required}
 				id={id}
-				checked={isCheck}
 				type='checkbox'
-				onChange={e => setIsCheck(e.target.checked)}
-				className='hidden'
+				className='w-0 h-0'
+				{...field}
+				ref={ref}
 			/>
-			{isCheck && <Icon name='Check' />}
+			{field.value === true && <Icon name='Check' />}
 		</label>
 	)
-}
+})

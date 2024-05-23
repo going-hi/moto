@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useEffect, type ReactNode } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Icon, Typography } from '@/shared'
 
@@ -7,14 +7,30 @@ const { Title } = Typography
 export const AuthModal = ({ children }: { children: ReactNode }) => {
 	const navigate = useNavigate()
 
+	useEffect(() => {
+		document.body.style.overflow = 'hidden'
+
+		const clickEsc = (e: KeyboardEvent) => {
+			if (e.key !== 'Escape') return
+			navigate('/')
+		}
+
+		window.addEventListener('keyup', clickEsc)
+
+		return () => {
+			document.body.style.overflow = 'auto'
+			window.removeEventListener('keyup', clickEsc)
+		}
+	}, [navigate])
+
 	return (
 		<div
-			className='w-[100dvw] h-[100dvh] top-0 left-0 right-0 bottom-0 bg-modal fixed z-30 flex items-center justify-center'
+			className='w-[100dvw] h-[100dvh] top-0 left-0 right-0 bottom-0 bg-modal fixed z-30 flex items-center justify-center '
 			onClick={() => navigate('/')}
 		>
 			<div
 				onClick={e => e.stopPropagation()}
-				className='bg-beige w-[40dvw] relative min-h-[50dvh]'
+				className='bg-beige w-[45dvw] relative min-h-[50dvh] max-h-[70dvh] overflow-y-auto'
 			>
 				<Link
 					to='/'

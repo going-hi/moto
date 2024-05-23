@@ -9,7 +9,7 @@ type TParamsStore = {
 	setSort: (s: TSortItem) => void
 }
 
-export const useParamsStore = create<TParamsStore>()(
+export const useSearchQueryStore = create<TParamsStore>()(
 	immer(set => ({
 		page: 1,
 		sort: sortItemsArr[0],

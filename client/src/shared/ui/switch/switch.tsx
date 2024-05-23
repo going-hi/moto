@@ -12,14 +12,16 @@ export type TSwitchOption = {
 export const Switch = ({
 	options,
 	activeValue,
-	setActiveValue
+	setActiveValue,
+	className
 }: {
 	options: [TSwitchOption, TSwitchOption]
 	activeValue: string
 	setActiveValue: Dispatch<SetStateAction<string>>
+	className?: string
 }) => {
 	return (
-		<div className='w-full flex border-black border'>
+		<div className={clsx('w-full flex border-black border', className)}>
 			{options.map(({ value, label }) => (
 				<div
 					onClick={() => setActiveValue(value)}
