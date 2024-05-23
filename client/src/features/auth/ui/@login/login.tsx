@@ -31,12 +31,16 @@ export const AuthLogin = () => {
 							key={i.name}
 							control={control}
 							render={({ field }) => (
-								<AuthInput {...i} {...field} />
+								<AuthInput
+									{...i}
+									{...field}
+									isForgot={field.name === 'password'}
+								/>
 							)}
 						/>
 					))}
 				</div>
-				<AuthButton variant='login' isPending={isPending} />
+				<AuthButton variant='continue' isPending={isPending} />
 				{error?.message && (
 					<Text className='text-red-700 mt-[5px]'>
 						{error?.message}

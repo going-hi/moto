@@ -26,7 +26,9 @@ export const AuthRegistration = () => {
 	const { handleSubmit, control } = form
 
 	const onSubmit = (data: TRegistration) => {
-		registrationMutation(data)
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { confirmPassword, confirmRules, ...user } = data
+		registrationMutation(user)
 	}
 
 	return (
@@ -51,7 +53,7 @@ export const AuthRegistration = () => {
 						)}
 					/>
 				</div>
-				<AuthButton isPending={isPending} variant='registration' />
+				<AuthButton isPending={isPending} variant='create' />
 				{error?.message && (
 					<Text className='text-red-700 mt-[5px]'>
 						{error?.message}

@@ -4,7 +4,7 @@ import type { ReactNode } from 'react'
 const classes = {
 	h1: 'text-[125px] bebas font-bold -tracking-2per',
 	h2: 'text-[115px] bebas font-bold -tracking-2per',
-	h3: 'text-[80px] bebas font-bold -tracking-2per',
+	h3: 'text-[70px] bebas font-bold -tracking-2per leading-[70px]',
 	h4: 'text-[40px] bebas font-bold -tracking-2per',
 	h5: 'text-[24px] inter font-extrabold'
 }

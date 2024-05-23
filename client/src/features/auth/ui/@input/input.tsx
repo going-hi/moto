@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { InputHTMLAttributes, forwardRef, useId } from 'react'
 import { useFormContext } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 import { Typography, type TFormError } from '@/shared'
 import { TLogin, TLoginFields } from '../../model'
 
@@ -12,10 +13,11 @@ export const AuthInput = forwardRef<
 	Omit<InputHTMLAttributes<HTMLInputElement>, 'value'> & {
 		label: string
 		value?: string | number | readonly string[] | boolean
+		isForgot?: boolean
 	}
 >(
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	({ label, onChange, value, name, ...props }, ref) => {
+	({ label, onChange, value, name, isForgot, className, ...props }, ref) => {
 		const id = useId()
 
 		const {
@@ -27,7 +29,7 @@ export const AuthInput = forwardRef<
 			| undefined
 
 		return (
-			<div>
+			<div className={className}>
 				<div className='flex justify-between mb-[10px]'>
 					<label className='uppercase font-medium' htmlFor={id}>
 						{label} {props.required && <span>*</span>}
@@ -39,6 +41,14 @@ export const AuthInput = forwardRef<
 								Заполните это поле
 							</Text>
 						)}
+					{isForgot && (
+						<Link
+							to='/auth/reset'
+							className='uppercase font-medium -tracking-2per text-gray-dark'
+						>
+							Забыли пароль?
+						</Link>
+					)}
 				</div>
 				<input
 					ref={ref}

@@ -1,6 +1,5 @@
 import { $api } from '@/shared'
-import { TRegistration } from '../model'
+import { TRegistrationDto } from '../model'
 
-export const registration = (body: Omit<TRegistration, 'confirmPassword'>) => {
-	return $api.post('/auth/registration', body)
-}
+export const registration = (body: TRegistrationDto) =>
+	$api.post('/auth/registration', body)

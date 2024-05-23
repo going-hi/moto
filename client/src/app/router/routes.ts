@@ -19,6 +19,10 @@ export const routes: TRouteItem[] = [
 		path: '/auth'
 	},
 	{
+		Page: HomePage,
+		path: '/auth/reset'
+	},
+	{
 		Page: CatalogPage,
 		path: '/catalog/:name'
 	},

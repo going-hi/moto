@@ -8,8 +8,7 @@ export const useLogin = () => {
 
 	return useAppMutation<TLogin>({
 		mutationFn: login,
-		onSuccess: res => {
-			console.log(res)
+		onSuccess: () => {
 			navigate('/')
 		}
 	})

@@ -5,6 +5,7 @@ import { authNavigationItemsArr } from '../model'
 import { AuthLogin } from './@login'
 import { AuthModal } from './@modal'
 import { AuthRegistration } from './@registration'
+import { AuthReset } from './@reset'
 
 export const Auth = () => {
 	const [activeValue, setActiveValue] = useState<string>(
@@ -13,11 +14,15 @@ export const Auth = () => {
 
 	const { pathname } = useLocation()
 
-	if (pathname !== '/auth') return
+	if (!['/auth', '/auth/reset'].includes(pathname)) return
+
+	if (pathname === '/auth/reset') {
+		return <AuthReset />
+	}
 
 	return (
 		<>
-			<AuthModal>
+			<AuthModal variant='large'>
 				<Switch
 					options={authNavigationItemsArr}
 					activeValue={activeValue}
