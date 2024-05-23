@@ -1,3 +1,9 @@
 import { z } from 'zod'
 
-export const ProfileSchema = z.object({})
+export const ProfileSchema = z.object({
+	email: z.string().email(),
+	id: z.number(),
+	isConfirm: z.boolean(),
+	name: z.string(),
+	role: z.tuple([z.literal('owner'), z.literal('admin'), z.literal('user')])
+})

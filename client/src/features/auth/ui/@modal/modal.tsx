@@ -39,7 +39,7 @@ export const AuthModal = ({
 			<div
 				onClick={e => e.stopPropagation()}
 				className={clsx(
-					'bg-beige  relative min-h-[50dvh] max-h-[70dvh] overflow-y-auto',
+					'bg-beige  relative max-h-[70dvh] overflow-y-auto',
 					variant === 'large' ? 'w-[39dvw]' : 'w-[35.5dvw]'
 				)}
 			>
