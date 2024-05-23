@@ -29,7 +29,7 @@ export const RegistrationSchema = z
 			.string({
 				message: 'Телефон должен быть строкой'
 			})
-			.regex(/^\+7[0-9]{9}$/, {
+			.regex(/^\+7[0-9]{10}$/, {
 				message: 'Неверный формат телефона. Пример: +79999999999'
 			}),
 		confirmRules: z.boolean().refine(val => val, {

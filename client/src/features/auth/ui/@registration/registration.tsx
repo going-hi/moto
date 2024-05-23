@@ -23,13 +23,11 @@ export const AuthRegistration = () => {
 		}
 	})
 
-	const {
-		handleSubmit,
-		control,
-		formState: { errors }
-	} = form
+	const { handleSubmit, control } = form
 
-	const onSubmit = (data: TRegistration) => {}
+	const onSubmit = (data: TRegistration) => {
+		registrationMutation(data)
+	}
 
 	return (
 		<FormProvider {...form}>

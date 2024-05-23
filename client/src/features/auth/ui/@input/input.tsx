@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { InputHTMLAttributes, forwardRef, useId } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { Typography, type TFormError } from '@/shared'
@@ -29,7 +30,7 @@ export const AuthInput = forwardRef<
 			<div>
 				<div className='flex justify-between mb-[10px]'>
 					<label className='uppercase font-medium' htmlFor={id}>
-						{label}
+						{label} {props.required && <span>*</span>}
 					</label>
 					{props.required &&
 						!!err &&
@@ -42,8 +43,10 @@ export const AuthInput = forwardRef<
 				<input
 					ref={ref}
 					spellCheck={false}
-					className='px-[15px] py-[20px] w-full bg-transparent border-gray-dark border'
-					placeholder='Имя'
+					className={clsx(
+						'px-[15px] py-[20px] w-full bg-transparent border-gray-dark border placeholder:text-[#9B978B]',
+						!!err?.message && 'border-red-700'
+					)}
 					id={id}
 					onChange={onChange}
 					{...props}
