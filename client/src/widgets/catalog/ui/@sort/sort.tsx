@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useState } from 'react'
 import { Typography, Radio, Select } from '@/shared'
-import { type TSortItem, sortItemsArr, useParamsStore } from '../../model'
+import { type TSortItem, sortItemsArr, useSearchQueryStore } from '../../model'
 
 const { Text } = Typography
 
@@ -9,7 +9,7 @@ export const CatalogSort = () => {
 	const {
 		setSort,
 		sort: { label }
-	} = useParamsStore()
+	} = useSearchQueryStore()
 
 	const [isOpen, setIsOpen] = useState<boolean>(false)
 

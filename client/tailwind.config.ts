@@ -10,7 +10,8 @@ export default {
 			},
 			backgroundColor: {
 				beige: 'var(--beige)',
-				'red-light': 'var(--red-light)'
+				'red-light': 'var(--red-light)',
+				modal: 'rgba(0, 0, 0, 0.3)'
 			},
 			colors: {
 				beige: 'var(--beige)',
@@ -36,6 +37,19 @@ export default {
 		},
 		screens: {
 			dhover: { raw: '(hover: hover) and (pointer:fine)' }
+		},
+		keyframes: {
+			spin: {
+				'0%': {
+					transform: 'rotate(0deg)'
+				},
+				'100%': {
+					transform: 'rotate(360deg)'
+				}
+			}
+		},
+		animation: {
+			'spin-1000': 'spin 1s linear infinite'
 		}
 	},
 	plugins: []

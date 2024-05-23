@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { Link } from 'react-router-dom'
 import { Typography } from '@/shared'
-import type { TCardProps } from '../types'
+import type { TCardProps } from '../model/types'
 
 const { Text } = Typography
 

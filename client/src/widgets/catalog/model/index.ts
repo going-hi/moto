@@ -1,2 +1,2 @@
-export * from './sort.data'
-export * from './params.store'
+export * from './data'
+export * from './store'

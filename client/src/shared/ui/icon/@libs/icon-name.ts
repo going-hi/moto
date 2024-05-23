@@ -4,9 +4,12 @@ import ArrowDown from '@assets/arrow-down.svg?react'
 import ArrowLeft from '@assets/arrow-left.svg?react'
 import ArrowRight from '@assets/arrow-right.svg?react'
 import Cart from '@assets/cart.svg?react'
+import Check from '@assets/check.svg?react'
+import Close from '@assets/close.svg?react'
 import Favourite from '@assets/favourite.svg?react'
 import FullHeart from '@assets/full-heart.svg?react'
 import Heart from '@assets/heart.svg?react'
+import Loading from '@assets/loading.svg?react'
 import Minus from '@assets/minus.svg?react'
 import Plus from '@assets/plus.svg?react'
 import Profile from '@assets/profile.svg?react'
@@ -23,7 +26,10 @@ export const iconNames = {
 	ArrowLeft,
 	ArrowRight,
 	Heart,
-	FullHeart
+	FullHeart,
+	Close,
+	Check,
+	Loading
 }
 
 export type TIconName = keyof typeof iconNames
