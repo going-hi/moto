@@ -84,11 +84,6 @@ export class AuthService {
 		if (token) await this.tokenService.removeTokenFromDb(refresh)
 	}
 
-	async resetPassword(email: string) {
-		const candidate = await this.userService.byEmail(email)
-		if (!candidate) throw new BadRequestException('Пользователь с таким email не найден')
-	}
-
 	async generateCodeForReset(email: string) {
 		const code = generateRandomCode()
 		await this.userService.setCode(email, code)

@@ -44,6 +44,9 @@ export class UserService {
 	async setCode(email: string, code: number) {
 		const user = await this.byEmail(email)
 		if (!user) throw new BadRequestException('Пользователь с таким email не найден')
+		if (!user.isConfirm) {
+			throw new BadRequestException('Сначала вам следует подтвердить почту')
+		}
 		user.code = code
 		await this.userRepository.save(user)
 	}
