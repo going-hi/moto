@@ -32,8 +32,7 @@ export class AuthController {
 
 	private readonly refreshCookieOptions: CookieOptions = {
 		httpOnly: true,
-		maxAge: 30 * 24 * 60 * 60 * 1000,
-		path: '/api/auth/'
+		maxAge: 30 * 24 * 60 * 60 * 1000
 	}
 
 	@AuthSwaggerController.login()
