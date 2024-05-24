@@ -1,0 +1,5 @@
+import { z } from 'zod'
+
+export const EnvSchema = z.object({
+	VITE_API_URL: z.string({ message: 'переменная API_URL обязательна' })
+})

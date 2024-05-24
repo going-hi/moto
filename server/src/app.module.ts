@@ -9,6 +9,7 @@ import { ProductModule } from '@/modules/product/product.module'
 import { CharacteristicModule } from '@/modules/characteristic/characteristic.module'
 import { OrderModule } from '@/modules/order/order.module'
 import { BasketModule } from '@/modules/basket/basket.module'
+import { FavouritesModule } from '@/modules/favourites/favourites.module'
 
 @Module({
 	imports: [
@@ -21,7 +22,8 @@ import { BasketModule } from '@/modules/basket/basket.module'
 		ProductModule,
 		CharacteristicModule,
 		OrderModule,
-		BasketModule
+		BasketModule,
+		FavouritesModule
 	]
 })
 export class AppModule {}

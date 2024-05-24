@@ -15,11 +15,13 @@ export const Header = () => {
 					<Navigation />
 					<div className='flex justify-between gap-x-[40px] pt-[20px] pr-[25px]'>
 						<Search />
-						<Icon
-							color='white'
-							name='Profile'
-							className='cursor-pointer dhover:hover:scale-125 duration-700'
-						/>
+						<Link to='/auth'>
+							<Icon
+								color='white'
+								name='Profile'
+								className='cursor-pointer dhover:hover:scale-125 duration-700'
+							/>
+						</Link>
 						<IconBadge
 							color='white'
 							name='Favourite'

@@ -5,6 +5,7 @@ import { Icon, TIconName } from '../icon'
 import { Catalog } from './@catalog'
 import { More } from './@more'
 import { Parentheses } from './@parentheses'
+import { Primary } from './@primary'
 
 export const Button = ({
 	variant,
@@ -23,6 +24,7 @@ export const Button = ({
 		| 'catalog'
 		| 'parentheses-link'
 		| 'icon'
+		| 'primary'
 	path?: string
 	isMain?: boolean
 	className?: string
@@ -57,7 +59,7 @@ export const Button = ({
 				</button>
 			)
 		case 'catalog':
-			return <Catalog />
+			return <Catalog {...props} />
 		case 'icon':
 			return (
 				<button {...props} className={className}>
@@ -70,6 +72,8 @@ export const Button = ({
 					)}
 				</button>
 			)
+		case 'primary':
+			return <Primary {...props}>{children}</Primary>
 		default:
 			return <></>
 	}

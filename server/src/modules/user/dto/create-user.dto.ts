@@ -1,6 +1,6 @@
 import { PasswordValidation } from '@/auth/decorators'
 import { ApiProperty } from '@nestjs/swagger'
-import { IsEmail, IsString, MaxLength, MinLength } from 'class-validator'
+import { IsEmail, IsPhoneNumber, IsString, MaxLength, MinLength } from 'class-validator'
 
 export class CreateUserDto {
 	@ApiProperty()
@@ -22,4 +22,8 @@ export class CreateUserDto {
 	@MinLength(2, { message: 'Минимальная длина фамилии 2 символов' })
 	@MaxLength(32, { message: 'Максимальная длина фамилии 32 символов' })
 	surname: string
+
+	@ApiProperty()
+	@IsPhoneNumber('RU', { message: 'Невалидный номер телефона' })
+	phone: string
 }

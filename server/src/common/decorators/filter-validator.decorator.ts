@@ -10,7 +10,6 @@ export function IsKeyArrayObject(validationOptions?: ValidationOptions) {
 			options: validationOptions,
 			validator: {
 				validate(value: unknown) {
-					console.log(value, 'fs')
 					if (typeof value !== 'object') return false
 
 					for (const key in value) {

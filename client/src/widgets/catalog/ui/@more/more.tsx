@@ -1,8 +1,8 @@
 import { Button } from '@/shared'
-import { useParamsStore } from '../../model'
+import { useSearchQueryStore } from '../../model'
 
 export const CatalogMore = ({ isLoading }: { isLoading: boolean }) => {
-	const { incrementPage } = useParamsStore()
+	const { incrementPage } = useSearchQueryStore()
 
 	return (
 		<div className='flex justify-center mb-[50px]'>

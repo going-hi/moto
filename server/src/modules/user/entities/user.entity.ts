@@ -1,6 +1,7 @@
 import { ERoles } from '@/common/enums/role.enum'
 import { AbstractEntity } from '@/core/database/entities'
 import { BasketEntity } from '@/modules/basket/entities'
+import { FavouritesEntity } from '@/modules/favourites/entities'
 import { OrderEntity } from '@/modules/order/entities'
 import { Column, Entity, Generated, OneToMany } from 'typeorm'
 
@@ -8,6 +9,9 @@ import { Column, Entity, Generated, OneToMany } from 'typeorm'
 export class UserEntity extends AbstractEntity {
 	@Column({ unique: true })
 	email: string
+
+	@Column({ unique: true })
+	phone: string
 
 	@Column()
 	name: string
@@ -22,6 +26,9 @@ export class UserEntity extends AbstractEntity {
 	@Generated('uuid')
 	link: string | null
 
+	@Column({ nullable: true })
+	code: number | null
+
 	@Column({ enum: ERoles, default: ERoles.USER })
 	role: ERoles
 
@@ -33,4 +40,7 @@ export class UserEntity extends AbstractEntity {
 
 	@OneToMany(() => BasketEntity, basket => basket.user, { cascade: true })
 	baskets: BasketEntity[]
+
+	@OneToMany(() => FavouritesEntity, favourites => favourites.user, { cascade: true })
+	favorites: FavouritesEntity[]
 }
