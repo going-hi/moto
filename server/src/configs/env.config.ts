@@ -1,7 +1,8 @@
 import { envValidate } from '@/core/utils'
+import { ENodeEnv } from '@/common/enums'
 import { ConfigModuleOptions } from '@nestjs/config'
 import { Type } from 'class-transformer'
-import { IsBoolean, IsInt, IsOptional, IsString } from 'class-validator'
+import { IsBoolean, IsEnum, IsInt, IsOptional, IsString } from 'class-validator'
 
 export class EnvironmentVariables {
 	@Type(() => Number)
@@ -49,6 +50,10 @@ export class EnvironmentVariables {
 
 	@IsString()
 	SMTP_PASSWORD: string
+
+	@IsOptional()
+	@IsEnum(ENodeEnv)
+	NODE_ENV: ENodeEnv
 }
 
 export const EnvConfigOptions: ConfigModuleOptions = {
