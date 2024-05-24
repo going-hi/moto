@@ -8,7 +8,7 @@ export const refresh = async (
 ): Promise<TRefreshDto | null> => {
 	if (isInterceptor) {
 		try {
-			const res = await axios.get<TRefreshDto>(
+			const res = await axios.get(
 				envConfig.getValue('VITE_API_URL') + 'auth/refresh',
 				{
 					withCredentials: true,
@@ -24,6 +24,6 @@ export const refresh = async (
 	}
 
 	return $api
-		.get<TRefreshDto>('/auth/refresh')
+		.get('/auth/refresh')
 		.then(res => RefreshDtoSchema.parse(res.data))
 }
