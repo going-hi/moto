@@ -1,12 +1,11 @@
 import axios from 'axios'
-import { $api } from '@/shared'
-import { envConfig } from '@/shared/config'
+import { $api, envConfig } from '@/shared'
 import { TRefreshDto, RefreshDtoSchema } from '../model'
 
 export const refresh = async (
 	isInterceptor?: boolean
 ): Promise<TRefreshDto | null> => {
-	if (isInterceptor) {
+	if (isInterceptor === false) {
 		try {
 			const res = await axios.get(
 				envConfig.getValue('VITE_API_URL') + 'auth/refresh',
@@ -17,8 +16,10 @@ export const refresh = async (
 					}
 				}
 			)
+
 			return RefreshDtoSchema.parse(res.data)
 		} catch (e) {
+			console.log(e)
 			return null
 		}
 	}

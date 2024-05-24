@@ -5,5 +5,5 @@ export const ProfileSchema = z.object({
 	id: z.number(),
 	isConfirm: z.boolean(),
 	name: z.string(),
-	role: z.tuple([z.literal('owner'), z.literal('admin'), z.literal('user')])
+	role: z.union([z.literal('owner'), z.literal('admin'), z.literal('user')])
 })

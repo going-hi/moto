@@ -18,11 +18,14 @@ $api.interceptors.response.use(
 		if (err.response && err.response.status == 401 && !origin._isRetry) {
 			origin._isRetry = true
 
-			const refreshResult = await refresh(true)
+			const refreshResult = await refresh(false)
 
 			if (!refreshResult) {
 				window.location.replace('/')
+				return
 			}
+
+			useAuthStore.getState().setAccessToken(refreshResult.accessToken)
 
 			return $api(origin)
 		}

@@ -23,6 +23,7 @@ export const AuthRoute = ({
 	}
 
 	if (variant === 'unauthorized') {
+		console.log(accessToken)
 		return accessToken ? <Navigate to='/' /> : children
 	}
 
