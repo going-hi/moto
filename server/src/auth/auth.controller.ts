@@ -9,10 +9,11 @@ import {
 	UnauthorizedException,
 	Param,
 	UsePipes,
-	ValidationPipe
+	ValidationPipe,
+	Query
 } from '@nestjs/common'
 import { AuthService } from './auth.service'
-import { LoginDto, RegistrationDto, ChangePasswordDto } from './dto'
+import { LoginDto, RegistrationDto, ChangePasswordDto, ResetPasswordDto, CodeDto } from './dto'
 import type { CookieOptions, Response } from 'express'
 import { Cookie, User } from '@/common/decorators'
 import { AccessGuard, RefreshGuard } from './guards'
@@ -89,11 +90,6 @@ export class AuthController {
 		return { accessToken, profile }
 	}
 
-	// * доделать
-	// @HttpCode(HttpStatus.OK)
-	// @Post('password/recovery')
-	// recoveryPassword(@Body() dto: RecoveryPasswordDto) {}
-
 	@AuthSwaggerController.changePassword()
 	@AccessGuard()
 	@HttpCode(HttpStatus.NO_CONTENT)
@@ -102,15 +98,27 @@ export class AuthController {
 		return this.authService.changePassword(dto, id)
 	}
 
+	@HttpCode(HttpStatus.NO_CONTENT)
+	@Get('password/reset')
+	resetPassword(@Query() { email }: ResetPasswordDto) {
+		return this.authService.generateCodeForReset(email)
+	}
+
+	@HttpCode(HttpStatus.NO_CONTENT)
+	@Post('password/reset/code')
+	async codeConfirmation(@Body() dto: CodeDto) {
+		return this.authService.codeConfirmation(dto)
+	}
+
 	@AuthSwaggerController.logout()
-	@HttpCode(HttpStatus.OK)
+	@HttpCode(HttpStatus.NO_CONTENT)
 	@Get('logout')
 	logout(@Cookie('refresh') refresh: string, @Res({ passthrough: true }) res: Response) {
 		this.authService.logout(refresh)
 		res.clearCookie('refresh', { path: this.refreshCookieOptions.path })
 		return
 	}
-
+	@HttpCode(HttpStatus.OK)
 	@AuthSwaggerController.activeLink()
 	@Get('active/:link')
 	async active(@Param('link') link: string, @Res() res: Response) {
