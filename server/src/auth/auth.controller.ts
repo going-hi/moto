@@ -36,21 +36,31 @@ export class AuthController {
 	}
 
 	@AuthSwaggerController.login()
-	@HttpCode(HttpStatus.NO_CONTENT)
+	@HttpCode(HttpStatus.OK)
 	@Post('login')
 	async login(@Body() dto: LoginDto, @Res({ passthrough: true }) res: Response) {
-		const refreshToken = await this.authService.login(dto)
+		const {
+			tokens: { refreshToken, accessToken },
+			profile
+		} = await this.authService.login(dto)
+
 		res.cookie('refresh', refreshToken, this.refreshCookieOptions)
-		return
+
+		return { accessToken, profile }
 	}
 
 	@AuthSwaggerController.registration()
-	@HttpCode(HttpStatus.NO_CONTENT)
+	@HttpCode(HttpStatus.OK)
 	@Post('registration')
 	async registration(@Body() dto: RegistrationDto, @Res({ passthrough: true }) res: Response) {
-		const refreshToken = await this.authService.registration(dto)
+		const {
+			tokens: { refreshToken, accessToken },
+			profile
+		} = await this.authService.registration(dto)
+
 		res.cookie('refresh', refreshToken, this.refreshCookieOptions)
-		return
+
+		return { accessToken, profile }
 	}
 
 	@AuthSwaggerController.refresh()
