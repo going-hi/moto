@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 import { z } from 'zod'
 import { CardBody } from '@/widgets/card-body'
 import { CardGallery } from '@/widgets/card-gallery'
@@ -9,8 +8,6 @@ import { Header, Footer, Container } from '@/layout'
 const { Text } = Typography
 
 export const CardPage = () => {
-	const cardBodyRef = useRef<HTMLDivElement | null>(null)
-
 	const { id } = useValidParams({
 		id: z.string().regex(/^[0-9]+$/)
 	})
@@ -25,7 +22,7 @@ export const CardPage = () => {
 			<Container className='mb-[10px]'>
 				<section className='flex max-h-[874px]'>
 					<CardGallery />
-					<CardBody ref={cardBodyRef} {...cards[0]} />
+					<CardBody {...cards[0]} />
 				</section>
 			</Container>
 			<OtherModels />
