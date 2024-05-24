@@ -1,4 +1,5 @@
 export * from './login'
 export * from './registration'
-export * from './reset'
+export * from './reset-email'
 export * from './refresh'
+export * from './reset-code'

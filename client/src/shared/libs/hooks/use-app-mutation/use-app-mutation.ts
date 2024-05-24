@@ -8,15 +8,14 @@ export const useAppMutation = <Ctx, Res>(
 
 	const error = mutate.error as AxiosError<{ message: string }>
 
-	Object.assign(mutate, {
+	return {
+		...mutate,
 		error: mutate.error
 			? {
 					...mutate.error,
 					message:
-						error?.response?.data.message ?? 'Неожиданная ошибка'
+						error?.response?.data?.message ?? 'Неожиданная ошибка'
 				}
 			: null
-	})
-
-	return mutate
+	}
 }
