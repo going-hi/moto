@@ -31,9 +31,12 @@ export class AuthService {
 		const isMatch = await this.hashService.compare(password, candidate.password)
 		if (!isMatch) throw new BadRequestException('Неверный пароль')
 
-		const { refreshToken } = this.tokenService.generateTokens(candidate)
-		await this.tokenService.saveToken(refreshToken, candidate.id)
-		return refreshToken
+		const tokens = this.tokenService.generateTokens(candidate)
+		await this.tokenService.saveToken(tokens.refreshToken, candidate.id)
+		return {
+			tokens,
+			profile: new ProfileDto(candidate)
+		}
 	}
 
 	async registration(dto: RegistrationDto) {
@@ -47,9 +50,12 @@ export class AuthService {
 		})
 
 		this.mailService.sendActiveLink(user.email, user.link)
-		const { refreshToken } = this.tokenService.generateTokens(user)
-		await this.tokenService.saveToken(refreshToken, user.id)
-		return refreshToken
+		const tokens = this.tokenService.generateTokens(user)
+		await this.tokenService.saveToken(tokens.refreshToken, user.id)
+		return {
+			tokens,
+			profile: new ProfileDto(user)
+		}
 	}
 
 	async checkPhone(phone: string) {
@@ -88,6 +94,7 @@ export class AuthService {
 		const code = generateRandomCode()
 		await this.userService.setCode(email, code)
 		await this.mailService.sendCodeForResetPassword(email, code)
+		return { email }
 	}
 
 	async codeConfirmation({ email, code }: CodeDto) {

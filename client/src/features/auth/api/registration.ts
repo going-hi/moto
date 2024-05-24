@@ -1,5 +1,7 @@
 import { $api } from '@/shared'
-import { TRegistrationDto } from '../model'
+import { AuthDtoSchema, TRegistrationDto } from '../model'
 
 export const registration = (body: TRegistrationDto) =>
-	$api.post('/auth/registration', body)
+	$api
+		.post('/auth/registration', body)
+		.then(res => AuthDtoSchema.parse(res.data))

@@ -1,14 +1,14 @@
 import axios from 'axios'
-import { $api } from '@/shared'
-import { envConfig } from '@/shared/config'
-import { TRefreshDto, RefreshDtoSchema } from '../model'
+import { ZodError } from 'zod'
+import { $api, envConfig } from '@/shared'
+import { TAuthDto, AuthDtoSchema } from '../model'
 
 export const refresh = async (
 	isInterceptor?: boolean
-): Promise<TRefreshDto | null> => {
-	if (isInterceptor) {
+): Promise<TAuthDto | null> => {
+	if (isInterceptor === false) {
 		try {
-			const res = await axios.get<TRefreshDto>(
+			const res = await axios.get(
 				envConfig.getValue('VITE_API_URL') + 'auth/refresh',
 				{
 					withCredentials: true,
@@ -17,13 +17,15 @@ export const refresh = async (
 					}
 				}
 			)
-			return RefreshDtoSchema.parse(res.data)
+
+			return AuthDtoSchema.parse(res.data)
 		} catch (e) {
+			if (e instanceof ZodError) {
+				console.log('Zod parse error')
+			}
 			return null
 		}
 	}
 
-	return $api
-		.get<TRefreshDto>('/auth/refresh')
-		.then(res => RefreshDtoSchema.parse(res.data))
+	return $api.get('/auth/refresh').then(res => AuthDtoSchema.parse(res.data))
 }
