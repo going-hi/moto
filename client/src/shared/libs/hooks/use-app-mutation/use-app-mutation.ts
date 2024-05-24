@@ -1,13 +1,8 @@
 import { useMutation, type UseMutationOptions } from '@tanstack/react-query'
-import type { AxiosError, AxiosResponse } from 'axios'
+import type { AxiosError } from 'axios'
 
-export const useAppMutation = <Ctx>(
-	options: UseMutationOptions<
-		AxiosResponse<unknown, unknown>,
-		AxiosError,
-		Ctx,
-		unknown
-	>
+export const useAppMutation = <Ctx, Res>(
+	options: UseMutationOptions<Res, AxiosError, Ctx, unknown>
 ) => {
 	const mutate = useMutation(options)
 

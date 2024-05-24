@@ -6,7 +6,7 @@ import { TReset } from '../../model'
 export const useReset = () => {
 	const navigate = useNavigate()
 
-	return useAppMutation<TReset>({
+	return useAppMutation<TReset, unknown>({
 		mutationFn: reset,
 		onSuccess: () => {
 			navigate('/auth')

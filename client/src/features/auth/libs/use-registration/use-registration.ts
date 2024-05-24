@@ -1,20 +1,16 @@
-import { useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { useAppMutation } from '@/shared'
 import { registration } from '../../api'
-import { TRegistrationDto } from '../../model'
+import { TAuthDto, TRegistrationDto, useAuthStore } from '../../model'
 
 export const useRegistration = () => {
 	const navigate = useNavigate()
+	const { setAccessToken } = useAuthStore()
 
-	const queryClient = useQueryClient()
-
-	return useAppMutation<TRegistrationDto>({
+	return useAppMutation<TRegistrationDto, TAuthDto>({
 		mutationFn: registration,
-		onSuccess: () => {
-			queryClient.removeQueries({
-				queryKey: ['profile/refresh']
-			})
+		onSuccess: ({ accessToken }) => {
+			setAccessToken(accessToken)
 			navigate('/')
 		}
 	})
