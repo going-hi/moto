@@ -33,8 +33,7 @@ export class AuthController {
 	private readonly refreshCookieOptions: CookieOptions = {
 		httpOnly: true,
 		maxAge: 30 * 24 * 60 * 60 * 1000,
-		path: '/api/auth/',
-		secure: this.configService.get('NODE_ENV') === 'production'
+		path: '/api/auth/'
 	}
 
 	@AuthSwaggerController.login()
