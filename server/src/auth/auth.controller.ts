@@ -98,7 +98,7 @@ export class AuthController {
 		return this.authService.changePassword(dto, id)
 	}
 
-	@HttpCode(HttpStatus.NO_CONTENT)
+	@HttpCode(HttpStatus.OK)
 	@Get('password/reset')
 	resetPassword(@Query() { email }: ResetPasswordDto) {
 		return this.authService.generateCodeForReset(email)

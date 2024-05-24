@@ -94,6 +94,7 @@ export class AuthService {
 		const code = generateRandomCode()
 		await this.userService.setCode(email, code)
 		await this.mailService.sendCodeForResetPassword(email, code)
+		return { email }
 	}
 
 	async codeConfirmation({ email, code }: CodeDto) {
