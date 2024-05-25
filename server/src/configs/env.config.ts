@@ -2,6 +2,7 @@ import { envValidate } from '@/core/utils'
 import { ConfigModuleOptions } from '@nestjs/config'
 import { Type } from 'class-transformer'
 import { IsBoolean, IsInt, IsOptional, IsString } from 'class-validator'
+import { join } from 'path'
 
 export class EnvironmentVariables {
 	@Type(() => Number)
@@ -54,5 +55,5 @@ export class EnvironmentVariables {
 export const EnvConfigOptions: ConfigModuleOptions = {
 	validate: envValidate(EnvironmentVariables),
 	isGlobal: true,
-	envFilePath: '../../../.env'
+	envFilePath: join(__dirname, '../../../', `/.env`)
 }

@@ -3,7 +3,6 @@ import { validateSync } from 'class-validator'
 
 export const envValidate = <T extends object>(environment: new (...args: unknown[]) => T) => {
 	return function (config: Record<string, unknown>) {
-		console.log(config, 'config')
 		const validatedConfig = plainToInstance(environment, config, {
 			enableImplicitConversion: true
 		})
