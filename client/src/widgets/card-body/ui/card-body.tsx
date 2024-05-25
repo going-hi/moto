@@ -16,7 +16,7 @@ export const CardBody = ({ name, price, description }: TCard) => {
 	return (
 		<div
 			className={clsx(
-				'basis-[50%] bg-beige p-[20px] flex flex-col gap-y-[50px] overflow-y-scroll',
+				'basis-[50%] bg-beige p-[20px] flex flex-col gap-y-[50px] overflow-y-scroll max-h-full',
 				cl.root
 			)}
 		>
