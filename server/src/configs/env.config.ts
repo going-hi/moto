@@ -6,7 +6,7 @@ import { IsBoolean, IsInt, IsOptional, IsString } from 'class-validator'
 export class EnvironmentVariables {
 	@Type(() => Number)
 	@IsInt()
-	PORT: number
+	SERVER_PORT: number
 
 	// * DataBase
 	@IsString()
@@ -53,5 +53,6 @@ export class EnvironmentVariables {
 
 export const EnvConfigOptions: ConfigModuleOptions = {
 	validate: envValidate(EnvironmentVariables),
-	isGlobal: true
+	isGlobal: true,
+	envFilePath: '../../../.env'
 }
