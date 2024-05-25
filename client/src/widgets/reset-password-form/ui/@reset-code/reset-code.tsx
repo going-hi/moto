@@ -1,24 +1,28 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
 import { FormProvider, useForm, Controller } from 'react-hook-form'
+import { AuthButton, AuthInput, AuthModal } from '@/features/auth'
+import {
+	useResetCode,
+	type TResetCode,
+	useResetStore,
+	ResetCodeSchema
+} from '@/features/reset-password'
 import { Typography } from '@/shared'
-import { useResetCode } from '../../libs'
-import { TResetCode, useResetStore } from '../../model'
-import { AuthButton } from '../@button'
-import { AuthInput } from '../@input'
-import { AuthModal } from '../@modal'
 
 const { Text } = Typography
 
-export const AuthResetCode = () => {
+export const ResetCodeForm = () => {
 	const { email, setEmail } = useResetStore()
 	const { isPending, error, mutate } = useResetCode()
 
-	const form = useForm<TResetCode>()
+	const form = useForm<TResetCode>({
+		resolver: zodResolver(ResetCodeSchema)
+	})
 
 	const { control, handleSubmit } = form
 
 	const onSubmit = (data: TResetCode) => {
-		// @ts-expect-error component will be render only if email exist
 		mutate({ ...data, email })
 	}
 

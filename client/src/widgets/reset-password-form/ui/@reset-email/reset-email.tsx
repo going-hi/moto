@@ -1,15 +1,16 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
+import { AuthButton, AuthInput, AuthModal } from '@/features/auth'
+import {
+	useResetEmail,
+	type TResetEmail,
+	ResetEmailSchema
+} from '@/features/reset-password'
 import { Typography } from '@/shared'
-import { useResetEmail } from '../../libs/'
-import { TResetEmail, ResetEmailSchema } from '../../model'
-import { AuthButton } from '../@button'
-import { AuthInput } from '../@input'
-import { AuthModal } from '../@modal'
 
 const { Text } = Typography
 
-export const AuthResetEmail = () => {
+export const ResetEmailForm = () => {
 	const form = useForm<TResetEmail>({
 		resolver: zodResolver(ResetEmailSchema)
 	})
