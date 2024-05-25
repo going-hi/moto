@@ -44,7 +44,7 @@ export const AuthInput = forwardRef<
 					{isForgot && (
 						<Link
 							to='/auth/reset'
-							className='uppercase font-medium -tracking-2per text-gray-dark'
+							className='uppercase font-medium -tracking-2per text-gray-dark dhover:hover:underline'
 						>
 							Забыли пароль?
 						</Link>
@@ -54,7 +54,7 @@ export const AuthInput = forwardRef<
 					ref={ref}
 					spellCheck={false}
 					className={clsx(
-						'px-[15px] py-[20px] w-full bg-transparent border-gray-dark border placeholder:text-[#9B978B]',
+						'px-[15px] py-[20px] w-full bg-transparent border-gray-dark border placeholder:text-[#9B978B] dhover:hover:scale-[101%] duration-700',
 						!!err?.message && 'border-red-700'
 					)}
 					id={id}

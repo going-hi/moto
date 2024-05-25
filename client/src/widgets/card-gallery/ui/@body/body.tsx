@@ -1,5 +1,5 @@
 import { cards } from '@/shared'
-import { useCardGalleryStore } from '../../@model'
+import { useCardGalleryStore } from '../../model'
 
 export const CardGalleryBody = () => {
 	const { activeIndex } = useCardGalleryStore()

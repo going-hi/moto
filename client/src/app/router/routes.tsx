@@ -2,6 +2,8 @@ import { createBrowserRouter } from 'react-router-dom'
 import { CardPage } from '@/pages/card'
 import { CatalogPage, RedirectCatalogPage } from '@/pages/catalog'
 import { HomePage } from '@/pages/home'
+import { AuthForm } from '@/widgets/auth-form'
+import { ResetPasswordForm } from '@/widgets/reset-password-form'
 import { AuthRoute } from '@/features/auth'
 
 export const router = createBrowserRouter([
@@ -11,23 +13,25 @@ export const router = createBrowserRouter([
 			<AuthRoute variant='public'>
 				<HomePage />
 			</AuthRoute>
-		)
-	},
-	{
-		path: '/auth',
-		element: (
-			<AuthRoute variant='unauthorized'>
-				<HomePage />
-			</AuthRoute>
-		)
-	},
-	{
-		path: '/auth/reset',
-		element: (
-			<AuthRoute variant='unauthorized'>
-				<HomePage />
-			</AuthRoute>
-		)
+		),
+		children: [
+			{
+				path: '/auth',
+				element: (
+					<AuthRoute variant='unauthorized'>
+						<AuthForm />
+					</AuthRoute>
+				)
+			},
+			{
+				path: '/auth/reset',
+				element: (
+					<AuthRoute variant='unauthorized'>
+						<ResetPasswordForm />
+					</AuthRoute>
+				)
+			}
+		]
 	},
 	{
 		path: '/catalog',

@@ -4,7 +4,7 @@ import { CardGallerySlider } from './@slider'
 
 export const CardGallery = () => {
 	return (
-		<div className='basis-[50%] bg-white py-[65px] px-[12px] self-start'>
+		<div className='basis-[50%] bg-white py-[65px] px-[12px]'>
 			<SliderProvider
 				options={{
 					loop: true,

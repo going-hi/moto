@@ -1,0 +1,32 @@
+version: "3.5"
+
+services:
+  moto-database:
+    restart: always
+    image: postgres:16-alpine
+    container_name: moto-database
+    env_file:
+      - path: ./.env
+        required: true
+    ports:
+      - '${POSTGRES_PORT}:5432'
+  moto-server:
+    build: "./server"
+    container_name: moto-server
+    env_file:
+      - path: './.env'
+        required: true
+    ports:
+      - '${SERVER_PORT}:${SERVER_PORT}'
+  moto-client:
+    container_name: moto-client
+    env_file:
+      - path: "./.env"
+        required: true
+    build: 
+      context: "./client"
+      args:
+        - 'VITE_API_URL=$VITE_API_URL'
+    ports:
+      - '${CLIENT_PORT}:80'
+    
