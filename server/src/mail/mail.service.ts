@@ -12,7 +12,7 @@ export class MailService {
 
 	async sendActiveLink(to: string, link: string) {
 		const API_URL = this.configService.get('API_URL')
-		const PORT = this.configService.get('PORT')
+		const PORT = this.configService.get('SERVER_PORT')
 		try {
 			await this.mailerService.sendMail({
 				to,
