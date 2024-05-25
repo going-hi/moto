@@ -1,15 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, FormProvider, Controller } from 'react-hook-form'
-import { Typography } from '@/shared'
-import { useRegistration } from '../../libs'
 import {
-	RegistrationSchema,
-	TRegistration,
-	registrationFieldsArr
-} from '../../model'
-import { AuthButton } from '../@button'
+	AuthButton,
+	AuthInput,
+	useRegistration,
+	type TRegistration,
+	RegistrationSchema
+} from '@/features/auth'
+import { Typography } from '@/shared'
+import { registrationFieldsArr } from '../../model'
 import { AuthConfirmRules } from '../@confirm-rules'
-import { AuthInput } from '../@input'
 
 const { Text } = Typography
 

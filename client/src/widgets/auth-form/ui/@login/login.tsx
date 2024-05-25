@@ -1,10 +1,14 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm, FormProvider } from 'react-hook-form'
+import {
+	AuthButton,
+	AuthInput,
+	useLogin,
+	LoginSchema,
+	type TLogin
+} from '@/features/auth'
 import { Typography } from '@/shared'
-import { useLogin } from '../../libs'
-import { loginFieldsArr, LoginSchema, type TLogin } from '../../model'
-import { AuthButton } from '../@button'
-import { AuthInput } from '../@input'
+import { loginFieldsArr } from '../../model'
 
 const { Text } = Typography
 

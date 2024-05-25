@@ -23,6 +23,7 @@ export const ResetCodeForm = () => {
 	const { control, handleSubmit } = form
 
 	const onSubmit = (data: TResetCode) => {
+		// @ts-expect-error - component will be render only if email exist
 		mutate({ ...data, email })
 	}
 
