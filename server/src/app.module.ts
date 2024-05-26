@@ -10,6 +10,7 @@ import { CharacteristicModule } from '@/modules/characteristic/characteristic.mo
 import { OrderModule } from '@/modules/order/order.module'
 import { BasketModule } from '@/modules/basket/basket.module'
 import { FavouritesModule } from '@/modules/favourites/favourites.module'
+import { RoleModule } from './modules/role/role.module'
 
 @Module({
 	imports: [
@@ -23,7 +24,8 @@ import { FavouritesModule } from '@/modules/favourites/favourites.module'
 		CharacteristicModule,
 		OrderModule,
 		BasketModule,
-		FavouritesModule
+		FavouritesModule,
+		RoleModule
 	]
 })
 export class AppModule {}
