@@ -19,7 +19,7 @@ import { ApiTags } from '@nestjs/swagger'
 import { AccessGuard } from '@/auth/guards'
 import { User } from '@/common/decorators'
 import { GetByIdParamsDto } from '@/common/dto'
-import { BasketAllQueryDto, BasketAllQueryDtoForUser } from './dto'
+import { BasketAllForUserQueryDto, BasketAllQueryDto } from './dto'
 import { RolesAuthGuard } from '@/auth/guards/role.guard'
 import { ERoles } from '@/common/enums'
 
@@ -48,7 +48,7 @@ export class BasketController {
 	@AccessGuard()
 	@HttpCode(HttpStatus.OK)
 	@Get()
-	findAll(@User('id') userId: number, @Query() query: BasketAllQueryDtoForUser) {
+	findAll(@User('id') userId: number, @Query() query: BasketAllForUserQueryDto) {
 		return this.basketService.findAll({ ...query, user: userId })
 	}
 
