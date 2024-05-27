@@ -6,6 +6,7 @@ import { BasketEntity } from './entities'
 import { ProductService } from '../product/product.service'
 import { skipCount } from '@/core/utils'
 import { PaginationDto } from '@/common/pagination'
+import { selectUserDto } from '../user/dto'
 
 @Injectable()
 export class BasketService {
@@ -53,13 +54,7 @@ export class BasketService {
 				product: true
 			},
 			select: {
-				user: {
-					id: true,
-					email: true,
-					name: true,
-					role: true,
-					avatar: true
-				}
+				user: selectUserDto
 			}
 		})
 		const data = new PaginationDto(items, total)
@@ -79,13 +74,7 @@ export class BasketService {
 				product: true
 			},
 			select: {
-				user: {
-					id: true,
-					email: true,
-					name: true,
-					role: true,
-					avatar: true
-				}
+				user: selectUserDto
 			}
 		})
 		if (!basket) throw new NotFoundException(`Корзина с id: ${id} не найдена`)

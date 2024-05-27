@@ -7,6 +7,7 @@ import { ProductService } from '../product/product.service'
 import { PaginationDto } from '@/common/pagination'
 import { skipCount } from '@/core/utils'
 import { EOrderStatus } from '@/common/enums'
+import { selectUserDto } from '../user/dto'
 
 @Injectable()
 export class OrderService {
@@ -58,12 +59,7 @@ export class OrderService {
 				}
 			},
 			select: {
-				user: {
-					id: true,
-					email: true,
-					name: true,
-					role: true
-				}
+				user: selectUserDto
 			}
 		})
 
@@ -85,12 +81,7 @@ export class OrderService {
 				user: true
 			},
 			select: {
-				user: {
-					id: true,
-					email: true,
-					name: true,
-					role: true
-				}
+				user: selectUserDto
 			}
 		})
 		if (!order) {
