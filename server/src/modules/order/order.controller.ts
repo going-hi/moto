@@ -13,7 +13,7 @@ import {
 	Query
 } from '@nestjs/common'
 import { OrderService } from './order.service'
-import { CreateOrderDto, OrderAllQueryDto, OrderAllQueryDtoWithUser, UpdateStatusDto } from './dto'
+import { CreateOrderDto, OrderAllQueryDto, OrderAllForUserQueryDto, UpdateStatusDto } from './dto'
 import { ApiTags } from '@nestjs/swagger'
 import { GetByIdParamsDto } from '@/common/dto'
 import { AccessGuard } from '@/auth/guards'
@@ -35,14 +35,14 @@ export class OrderController {
 	}
 
 	// * For admins
-
 	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
 	@HttpCode(HttpStatus.OK)
 	@Get('admin')
-	findAll(@Query() dto: OrderAllQueryDtoWithUser) {
+	findAll(@Query() dto: OrderAllQueryDto) {
 		return this.orderService.findAll(dto)
 	}
 
+	// * For admins
 	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
 	@HttpCode(HttpStatus.OK)
 	@Get(':id/admin')
@@ -53,8 +53,8 @@ export class OrderController {
 	@AccessGuard()
 	@HttpCode(HttpStatus.OK)
 	@Get()
-	findAllByUser(@User('id') userId: number, @Query() dto: OrderAllQueryDto) {
-		return this.orderService.findAll({ ...dto, user: userId })
+	findAllByUser(@User('id') userId: number, @Query() query: OrderAllForUserQueryDto) {
+		return this.orderService.findAll({ ...query, user: userId })
 	}
 
 	@AccessGuard()

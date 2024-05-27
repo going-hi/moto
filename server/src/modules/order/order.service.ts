@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
-import { CreateOrderDto, OrderAllQueryDtoWithUser } from './dto'
+import { CreateOrderDto, OrderAllQueryDto } from './dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { OrderEntity, OrderItemEntity } from './entities'
 import { Repository } from 'typeorm'
@@ -7,6 +7,7 @@ import { ProductService } from '../product/product.service'
 import { PaginationDto } from '@/common/pagination'
 import { skipCount } from '@/core/utils'
 import { EOrderStatus } from '@/common/enums'
+import { selectUserDto } from '../user/dto'
 
 @Injectable()
 export class OrderService {
@@ -40,7 +41,7 @@ export class OrderService {
 		return await this.orderRepository.save(order)
 	}
 
-	async findAll({ count, page, sortBy, sortOrder, user, status }: OrderAllQueryDtoWithUser) {
+	async findAll({ count, page, sortBy, sortOrder, user, status }: OrderAllQueryDto) {
 		const where = {}
 		user ? (where['user'] = { id: user }) : {}
 		status ? (where['status'] = status) : {}
@@ -58,12 +59,7 @@ export class OrderService {
 				}
 			},
 			select: {
-				user: {
-					id: true,
-					email: true,
-					name: true,
-					role: true
-				}
+				user: selectUserDto
 			}
 		})
 
@@ -85,12 +81,7 @@ export class OrderService {
 				user: true
 			},
 			select: {
-				user: {
-					id: true,
-					email: true,
-					name: true,
-					role: true
-				}
+				user: selectUserDto
 			}
 		})
 		if (!order) {

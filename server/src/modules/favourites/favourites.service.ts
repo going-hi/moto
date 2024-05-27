@@ -6,6 +6,7 @@ import { Repository } from 'typeorm'
 import { ProductService } from '../product/product.service'
 import { skipCount } from '@/core/utils'
 import { PaginationDto } from '@/common/pagination'
+import { selectUserDto } from '../user/dto'
 
 @Injectable()
 export class FavouritesService {
@@ -61,12 +62,7 @@ export class FavouritesService {
 				product: true
 			},
 			select: {
-				user: {
-					id: true,
-					email: true,
-					name: true,
-					role: true
-				}
+				user: selectUserDto
 			}
 		})
 
@@ -85,12 +81,7 @@ export class FavouritesService {
 				product: true
 			},
 			select: {
-				user: {
-					id: true,
-					email: true,
-					name: true,
-					role: true
-				}
+				user: selectUserDto
 			}
 		})
 		if (!favourites) throw new NotFoundException(`Избранное с id: ${id} не найдена`)
