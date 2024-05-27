@@ -34,6 +34,13 @@ export class BasketService {
 	async findAll({ count, page, user, sortBy, sortOrder }: BasketAllQueryDto) {
 		const where = {}
 		user ? (where['user'] = { id: user }) : {}
+		const { totalPrice } = await this.basketRepository
+			.createQueryBuilder('baskets')
+			.leftJoinAndSelect('products', 'p', 'baskets.productId = p.id')
+			.select('SUM(p.price * baskets.count)', 'totalPrice')
+			.where(user ? 'baskets.userId = :user' : '', { user })
+			.getRawOne()
+
 		const [items, total] = await this.basketRepository.findAndCount({
 			where,
 			order: {
@@ -50,12 +57,14 @@ export class BasketService {
 					id: true,
 					email: true,
 					name: true,
-					role: true
+					role: true,
+					avatar: true
 				}
 			}
 		})
-
-		return new PaginationDto(items, total)
+		const data = new PaginationDto(items, total)
+		data.meta['totalPrice'] = +totalPrice || 0
+		return data
 	}
 
 	async findOne(id: number, userId?: number) {
@@ -74,7 +83,8 @@ export class BasketService {
 					id: true,
 					email: true,
 					name: true,
-					role: true
+					role: true,
+					avatar: true
 				}
 			}
 		})
