@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
-import { CreateOrderDto, OrderAllQueryDtoWithUser } from './dto'
+import { CreateOrderDto, OrderAllQueryDto } from './dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { OrderEntity, OrderItemEntity } from './entities'
 import { Repository } from 'typeorm'
@@ -40,7 +40,7 @@ export class OrderService {
 		return await this.orderRepository.save(order)
 	}
 
-	async findAll({ count, page, sortBy, sortOrder, user, status }: OrderAllQueryDtoWithUser) {
+	async findAll({ count, page, sortBy, sortOrder, user, status }: OrderAllQueryDto) {
 		const where = {}
 		user ? (where['user'] = { id: user }) : {}
 		status ? (where['status'] = status) : {}
