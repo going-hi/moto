@@ -176,10 +176,43 @@ export class ProductService {
 		return products
 	}
 
-	getFilter({ type, category }: FilterDto) {
+	async getFilter({ type, category }: FilterDto) {
 		const filterCategory = filterData[category]
-		console.log(filterCategory)
-		if (filterCategory?.common) return filterCategory['char']
+
+		if (filterCategory?.common) {
+			const price = await this.intervalPrice(category)
+			filterCategory['char']['цена'] = price
+			return filterCategory['char']
+		}
+		const price = await this.intervalPrice(category, type)
+		const filterType = filterCategory[type]
+		if (!filterType) throw new NotFoundException()
+		filterType['цена'] = price
 		return filterCategory[type]
+	}
+
+	async intervalPrice(category: string, type?: string) {
+		const queryMax = this.productRepository
+			.createQueryBuilder('p')
+			.select('MAX(p.price)', 'max')
+			.where('category = :category', { category })
+
+		const queryMin = this.productRepository
+			.createQueryBuilder('p')
+			.select('MIN(p.price)', 'min')
+			.where('category = :category', { category })
+
+		let min = 0
+		let max = 100000000
+		if (type) {
+			console.log('time')
+			max = (await queryMax.andWhere('type = :type', { type }).getRawOne()).max || max
+			min = (await queryMin.andWhere('type = :type', { type }).getRawOne()).min || min
+		} else {
+			max = (await queryMax.getRawOne()).max || max
+			min = (await queryMin.getRawOne()).min || min
+		}
+
+		return [min, max]
 	}
 }
