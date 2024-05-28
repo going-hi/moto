@@ -55,5 +55,5 @@ export class EnvironmentVariables {
 export const EnvConfigOptions: ConfigModuleOptions = {
 	validate: envValidate(EnvironmentVariables),
 	isGlobal: true,
-	envFilePath: join(__dirname, '../../../', `/.env`)
+	envFilePath: join(__dirname, '../../../', `/.env.development`)
 }
