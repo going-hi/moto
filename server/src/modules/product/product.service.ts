@@ -4,6 +4,7 @@ import { ProductEntity } from './entities'
 import { Between, ILike, In, Or, Repository } from 'typeorm'
 import {
 	CreateProductDto,
+	FilterDto,
 	ImageDto,
 	ProductAllQueryDto,
 	SearchProductDto,
@@ -13,6 +14,7 @@ import { FileService } from '@/core/file/file.service'
 import { CharacteristicEntity } from '../characteristic/entities'
 import { skipCount } from '@/core/utils'
 import { PaginationDto } from '@/common/pagination'
+import * as filterData from './dto/filter.json'
 
 @Injectable()
 export class ProductService {
@@ -60,6 +62,7 @@ export class ProductService {
 	}
 	async getAll({ count, page, sortBy, sortOrder, price, filters, category }: ProductAllQueryDto) {
 		const where = {}
+
 		if (price) {
 			const sortedPrice = price.sort()
 			where['price'] = Between(sortedPrice[0], sortedPrice[1])
@@ -171,5 +174,12 @@ export class ProductService {
 		}
 
 		return products
+	}
+
+	getFilter({ type, category }: FilterDto) {
+		const filterCategory = filterData[category]
+		console.log(filterCategory)
+		if (filterCategory?.common) return filterCategory['char']
+		return filterCategory[type]
 	}
 }

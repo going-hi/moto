@@ -20,6 +20,7 @@ import { ProductService } from './product.service'
 import { ApiConsumes, ApiTags } from '@nestjs/swagger'
 import {
 	CreateProductDto,
+	FilterDto,
 	ImageDto,
 	ProductAllQueryDto,
 	SearchProductDto,
@@ -50,6 +51,11 @@ export class ProductController {
 		files: Express.Multer.File[]
 	) {
 		return this.productService.create(dto, files)
+	}
+
+	@Get('filter')
+	getFilter(@Query() query: FilterDto) {
+		return this.productService.getFilter(query)
 	}
 
 	@HttpCode(HttpStatus.OK)
