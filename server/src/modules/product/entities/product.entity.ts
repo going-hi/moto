@@ -26,8 +26,8 @@ export class ProductEntity extends AbstractEntity {
 	@Column({ type: 'enum', enum: ECategory })
 	category: ECategory
 
-	@Column()
-	type: string
+	@Column({ nullable: true })
+	type?: string | null
 
 	@OneToMany(() => CharacteristicEntity, char => char.product, { cascade: true })
 	characteristics: CharacteristicEntity[]
