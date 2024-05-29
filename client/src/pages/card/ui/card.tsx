@@ -20,7 +20,7 @@ export const CardPage = () => {
 		<div className='bg-red-light pb-[10px]'>
 			<Header />
 			<Container className='mb-[10px]'>
-				<section className='flex max-h-[874px]'>
+				<section className='flex h-[874px]'>
 					<CardGallery />
 					<CardBody {...cards[0]} />
 				</section>

@@ -1,14 +1,13 @@
 import { EOrderStatus, ESortOrder } from '@/common/enums'
-import { PaginationQuery } from '@/common/pagination'
-import { ApiProperty } from '@nestjs/swagger'
-import { Type } from 'class-transformer'
-import { IsEnum, IsInt, IsOptional } from 'class-validator'
+import { PaginationUserQuery } from '@/common/pagination'
+import { ApiProperty, OmitType } from '@nestjs/swagger'
+import { IsEnum, IsOptional } from 'class-validator'
 
 enum ESort {
 	CREATE_DATE = 'createDate'
 }
 
-export class OrderAllQueryDto extends PaginationQuery {
+export class OrderAllQueryDto extends PaginationUserQuery {
 	@ApiProperty({ enum: ESort })
 	@IsEnum(ESort)
 	sortBy: ESort = ESort.CREATE_DATE
@@ -23,10 +22,4 @@ export class OrderAllQueryDto extends PaginationQuery {
 	status: EOrderStatus
 }
 
-export class OrderAllQueryDtoWithUser extends OrderAllQueryDto {
-	@ApiProperty()
-	@IsOptional()
-	@Type(() => Number)
-	@IsInt({ message: 'Id пользователя должно быть числом' })
-	user?: number
-}
+export class OrderAllForUserQueryDto extends OmitType(OrderAllQueryDto, ['user']) {}

@@ -10,6 +10,9 @@ export class UserEntity extends AbstractEntity {
 	@Column({ unique: true })
 	email: string
 
+	@Column({ default: null })
+	avatar: string | null
+
 	@Column({ unique: true })
 	phone: string
 

@@ -20,6 +20,7 @@ import { ProductService } from './product.service'
 import { ApiConsumes, ApiTags } from '@nestjs/swagger'
 import {
 	CreateProductDto,
+	FilterDto,
 	ImageDto,
 	ProductAllQueryDto,
 	SearchProductDto,
@@ -28,6 +29,10 @@ import {
 import { REGEX_FILE_TYPE_IMG } from '@/common/constants'
 import { GetByIdParamsDto } from '@/common/dto'
 import { FilesInterceptor } from '@nestjs/platform-express'
+import { RolesAuthGuard, UserNoRequiredAuthGuard } from '@/auth/guards'
+import { User } from '@/common/decorators'
+import { JwtPayload } from '@/auth/dto'
+import { ERoles } from '@/common/enums'
 
 @ApiTags('Product')
 @UsePipes(new ValidationPipe({ whitelist: true }))
@@ -35,6 +40,7 @@ import { FilesInterceptor } from '@nestjs/platform-express'
 export class ProductController {
 	constructor(private readonly productService: ProductService) {}
 
+	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
 	@ApiConsumes('multipart/form-data')
 	@HttpCode(HttpStatus.CREATED)
 	@UseInterceptors(FilesInterceptor('images'))
@@ -52,6 +58,11 @@ export class ProductController {
 		return this.productService.create(dto, files)
 	}
 
+	@Get('filter')
+	getFilter(@Query() query: FilterDto) {
+		return this.productService.getFilter(query)
+	}
+
 	@HttpCode(HttpStatus.OK)
 	@Get('search')
 	search(@Query() dto: SearchProductDto) {
@@ -59,30 +70,35 @@ export class ProductController {
 	}
 
 	// * обсудить
+	@UserNoRequiredAuthGuard()
 	@HttpCode(HttpStatus.OK)
 	@Get(':id')
-	getOne(@Param() { id }: GetByIdParamsDto) {
-		return this.productService.getOne(id)
+	getOne(@Param() { id }: GetByIdParamsDto, @User() user?: JwtPayload | undefined) {
+		return this.productService.getOne(id, user)
 	}
 
+	@UserNoRequiredAuthGuard()
 	@HttpCode(HttpStatus.OK)
 	@Get()
-	getAll(@Query() query: ProductAllQueryDto) {
-		return this.productService.getAll(query)
+	getAll(@Query() query: ProductAllQueryDto, @User() user?: JwtPayload | undefined) {
+		return this.productService.getAll(query, user)
 	}
 
+	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
 	@HttpCode(HttpStatus.OK)
 	@Put(':id')
 	update(@Param() { id }: GetByIdParamsDto, @Body() dto: UpdateProductDto) {
 		return this.productService.update(id, dto)
 	}
 
+	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
 	@HttpCode(HttpStatus.NO_CONTENT)
 	@Delete(':id')
 	delete(@Param() { id }: GetByIdParamsDto) {
 		return this.productService.delete(id)
 	}
 
+	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
 	@ApiConsumes('multipart/form-data')
 	@HttpCode(HttpStatus.OK)
 	@UseInterceptors(FilesInterceptor('images'))
@@ -100,6 +116,7 @@ export class ProductController {
 		return this.productService.addImages(id, files)
 	}
 
+	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
 	@HttpCode(HttpStatus.NO_CONTENT)
 	@Delete('album/:id')
 	deleteFiles(@Body() dto: ImageDto, @Param() { id }: GetByIdParamsDto) {

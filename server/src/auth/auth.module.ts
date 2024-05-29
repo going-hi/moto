@@ -19,6 +19,7 @@ import { MailModule } from '@/mail/mail.module'
 		MailModule
 	],
 	controllers: [AuthController],
-	providers: [AuthService, TokenService, AccessJwtStrategy, RefreshJwtStrategy]
+	providers: [AuthService, TokenService, AccessJwtStrategy, RefreshJwtStrategy],
+	exports: [TokenService]
 })
 export class AuthModule {}

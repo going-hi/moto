@@ -12,7 +12,7 @@ import {
 	Query
 } from '@nestjs/common'
 import { FavouritesService } from './favourites.service'
-import { CreateFavouritesDto, FavouritesAllQueryDtoForUser } from './dto'
+import { CreateFavouritesDto, FavouritesAllForUserQueryDto } from './dto'
 import { ApiTags } from '@nestjs/swagger'
 import { GetByIdParamsDto } from '@/common/dto'
 import { AccessGuard } from '@/auth/guards'
@@ -33,7 +33,7 @@ export class FavouritesController {
 
 	@HttpCode(HttpStatus.OK)
 	@Get()
-	findAll(@User('id') userId: number, @Query() query: FavouritesAllQueryDtoForUser) {
+	findAll(@User('id') userId: number, @Query() query: FavouritesAllForUserQueryDto) {
 		return this.favouritesService.findAll({ ...query, user: userId })
 	}
 
