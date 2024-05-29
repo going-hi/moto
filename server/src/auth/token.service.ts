@@ -43,6 +43,16 @@ export class TokenService {
 		return this.sessionRepository.save({ token, user: { id: userId } })
 	}
 
+	async validateAccessToken(accessToken: string) {
+		try {
+			return this.jwtService.verify(accessToken, {
+				secret: this.configService.get('ACCESS_JWT_SECRET')
+			})
+		} catch (e) {
+			return null
+		}
+	}
+
 	async findToken(token: string) {
 		return await this.sessionRepository.findOne({ where: { token } })
 	}
