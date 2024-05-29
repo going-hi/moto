@@ -8,7 +8,8 @@ import {
 	ImageDto,
 	ProductAllQueryDto,
 	SearchProductDto,
-	UpdateProductDto
+	UpdateProductDto,
+	AddCountOrders
 } from './dto'
 import { FileService } from '@/core/file/file.service'
 import { CharacteristicEntity } from '../characteristic/entities'
@@ -105,6 +106,7 @@ export class ProductService {
 			take: count,
 			skip: skipCount(page, count)
 		})
+
 		let arrayIsLikeProducts = []
 		if (user) {
 			const ids = products.map(product => product.id)
@@ -131,6 +133,20 @@ export class ProductService {
 			})
 		}
 		return array
+	}
+
+	async addCountOrders(dto: AddCountOrders[]) {
+		try {
+			dto.forEach(async data => {
+				const product = await this.byId(data.id)
+				await this.productRepository.save({
+					...product,
+					countOrders: product.countOrders + data.count
+				})
+			})
+		} catch (e) {
+			return null
+		}
 	}
 
 	async update(id: number, dto: UpdateProductDto) {
