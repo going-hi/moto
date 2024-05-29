@@ -1,4 +1,10 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common'
+import {
+	ForbiddenException,
+	Inject,
+	Injectable,
+	NotFoundException,
+	forwardRef
+} from '@nestjs/common'
 import { CreateFavouritesDto, FavouritesAllQueryDto } from './dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { FavouritesEntity } from './entities'
@@ -13,6 +19,7 @@ export class FavouritesService {
 	constructor(
 		@InjectRepository(FavouritesEntity)
 		private readonly favouritesRepository: Repository<FavouritesEntity>,
+		@Inject(forwardRef(() => ProductService))
 		private readonly productService: ProductService
 	) {}
 
@@ -98,5 +105,16 @@ export class FavouritesService {
 		const favourites = await this.findOne(id)
 		if (favourites.user.id !== userId) throw new ForbiddenException()
 		return favourites
+	}
+
+	async getByUser(userId: number) {
+		const favorites = await this.favouritesRepository.find({
+			where: { user: { id: userId } },
+			relations: { product: true },
+			select: {
+				product: { id: true }
+			}
+		})
+		return favorites
 	}
 }
