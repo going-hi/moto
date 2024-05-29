@@ -8,7 +8,9 @@ import { CartProvider } from './@provider'
 
 export const Cart = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false)
-	const { items } = useCartStore()
+	const {
+		data: { items }
+	} = useCartStore()
 
 	useGetCart()
 

@@ -1,21 +1,24 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
-import { TCardCart } from '../types'
+import { TGetCartDto } from '../types'
 
 type TBasketStore = {
-	items: TCardCart[]
-	setData: (data: { items: TCardCart[]; total: number }) => void
-	total: number
+	data: TGetCartDto
+	setData: (data: TGetCartDto) => void
 }
 
 export const useCartStore = create<TBasketStore>()(
 	immer(set => ({
-		items: [],
-		total: 0,
-		setData: ({ items, total }) =>
+		data: {
+			items: [],
+			meta: {
+				total: 0,
+				totalPrice: 0
+			}
+		},
+		setData: data =>
 			set(state => {
-				state.items = items
-				state.total = total
+				state.data = data
 			})
 	}))
 )

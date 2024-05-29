@@ -6,7 +6,12 @@ import { CartList } from '../@list'
 const { Title } = Typography
 
 export const CartInfo = () => {
-	const { total, items } = useCartStore()
+	const {
+		data: {
+			items,
+			meta: { totalPrice }
+		}
+	} = useCartStore()
 	return (
 		<>
 			<CartList list={items} />
@@ -14,7 +19,7 @@ export const CartInfo = () => {
 				<div className='flex justify-between items-center after:w-full after:h-[2px] after:content-[""] after:bg-gray-medium relative after:absolute after:bottom-0 after:left-0 mb-[50px]'>
 					<Title variant='h4'>ИТОГО</Title>
 					<Title variant='h4'>
-						{total}
+						{totalPrice}
 						<span className='text-[38px] ml-[3px] font-normal'>
 							₽
 						</span>

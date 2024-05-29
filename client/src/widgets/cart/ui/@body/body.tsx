@@ -13,7 +13,9 @@ export const CartBody = ({
 }: {
 	setIsOpen: Dispatch<SetStateAction<boolean>>
 }) => {
-	const { items } = useCartStore()
+	const {
+		data: { items }
+	} = useCartStore()
 	const { isLoading } = useContext(CartContext)
 
 	return (
