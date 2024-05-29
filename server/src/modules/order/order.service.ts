@@ -8,6 +8,7 @@ import { PaginationDto } from '@/common/pagination'
 import { skipCount } from '@/core/utils'
 import { EOrderStatus } from '@/common/enums'
 import { selectUserDto } from '../user/dto'
+import { AddCountOrders } from '../product/dto'
 
 @Injectable()
 export class OrderService {
@@ -23,9 +24,11 @@ export class OrderService {
 		const productIds = dto.products.map(prod => prod.id)
 		const products = await this.productService.getByIds(productIds)
 		let total = 0
+		const arrayOrdersCount: AddCountOrders[] = []
 		const orderItems = dto.products.map(product => {
 			const { price } = products.find(p => p.id === product.id)
 			const count = product.count
+			arrayOrdersCount.push({ id: product.id, count: product.count })
 			total += count * price
 			return this.orderItemRepository.create({
 				count,
@@ -33,6 +36,7 @@ export class OrderService {
 				product: { id: product.id }
 			})
 		})
+		await this.productService.addCountOrders(arrayOrdersCount)
 		const order = this.orderRepository.create({
 			items: orderItems,
 			total,

@@ -23,11 +23,14 @@ export class ProductEntity extends AbstractEntity {
 	@Column({ type: 'simple-array' })
 	images: string[]
 
+	@Column({ default: 0 })
+	countOrders: number
+
 	@Column({ type: 'enum', enum: ECategory })
 	category: ECategory
 
-	@Column()
-	type: string
+	@Column({ nullable: true })
+	type?: string | null
 
 	@OneToMany(() => CharacteristicEntity, char => char.product, { cascade: true })
 	characteristics: CharacteristicEntity[]
