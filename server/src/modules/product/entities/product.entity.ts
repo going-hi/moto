@@ -23,6 +23,9 @@ export class ProductEntity extends AbstractEntity {
 	@Column({ type: 'simple-array' })
 	images: string[]
 
+	@Column({ default: 0 })
+	countOrders: number
+
 	@Column({ type: 'enum', enum: ECategory })
 	category: ECategory
 
