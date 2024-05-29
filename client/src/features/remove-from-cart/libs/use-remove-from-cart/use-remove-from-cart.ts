@@ -1,8 +1,8 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { useContext, useEffect } from 'react'
+import { removeFromCart } from '@/entities/cart'
 import { useAppMutation } from '@/shared'
 
-import { removeFromCart } from '../../api'
 import type { TContext } from '../../model'
 
 export const useRemoveFromCart = (ctx: TContext) => {

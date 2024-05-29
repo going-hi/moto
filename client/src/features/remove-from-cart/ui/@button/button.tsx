@@ -1,5 +1,5 @@
-import { useRemoveFromCart } from '../libs'
-import type { TContext } from '../model'
+import { useRemoveFromCart } from '../../libs'
+import type { TContext } from '../../model'
 
 export const RemoveFromCardButton = ({
 	id,

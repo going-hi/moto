@@ -1,8 +1,8 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
-import { TGetCartDto } from '../types'
+import type { TGetCartDto } from '../types'
 
-type TBasketStore = {
+type TBasketStore<> = {
 	data: TGetCartDto
 	setData: (data: TGetCartDto) => void
 }

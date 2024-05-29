@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@feature-sliced/eslint-config": "^0.1.1",
+    "@tanstack/react-query-devtools": "^5.40.0",
     "@types/node": "^20.12.11",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",

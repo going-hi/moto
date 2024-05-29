@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useContext } from 'react'
+import { useCartStore } from '@/entities/cart'
 import { Icon, Typography } from '@/shared'
-import { useCartStore } from '../../model'
 import { CartContext } from '../../model'
 import { CartEmpty } from '../@empty'
 import { CartInfo } from '../@info'

@@ -1,24 +1,22 @@
 import { useEffect, useContext } from 'react'
 import { useAuthStore } from '@/features/auth-user'
+import { type TGetCartDto, useCartStore } from '@/entities/cart'
 import { useAppQuery } from '@/shared'
 import { getCart } from '../../api'
-import { useCartStore, type TGetCartDto, CartContext } from '../../model'
+import { CartContext } from '../../model'
 
 export const useGetCart = () => {
 	const { setIsLoading } = useContext(CartContext)
 	const { setData } = useCartStore()
 	const { accessToken } = useAuthStore()
-	const { data, refetch, isLoading } = useAppQuery<TGetCartDto>({
+
+	const { data, isLoading } = useAppQuery<TGetCartDto>({
 		queryFn: getCart,
 		queryKey: ['user/cart'],
 		retry: false,
 		throwOnError: false,
-		enabled: false
+		enabled: !!accessToken
 	})
-
-	useEffect(() => {
-		if (accessToken) refetch()
-	}, [accessToken, refetch])
 
 	useEffect(() => {
 		setIsLoading(isLoading)

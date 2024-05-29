@@ -1,8 +1,8 @@
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
+import { useCartStore } from '@/entities/cart'
 import { IconBadge } from '@/shared'
 import { useGetCart } from '../libs'
-import { useCartStore } from '../model'
 import { CartBody } from './@body'
 import { CartProvider } from './@provider'
 

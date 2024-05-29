@@ -1,9 +1,7 @@
 import clsx from 'clsx'
 import { ToggleCartButton } from '@/features/toggle-cart'
 import { ToggleFavouritesButton } from '@/features/toggle-favourites'
-import { Typography } from '@/shared'
-import { specifications } from '@/shared'
-import { SliderProvider } from '@/shared'
+import { Typography, SliderProvider, specifications } from '@/shared'
 import { useGetCard } from '../libs'
 import { CardGalleryBody } from './@body'
 import { CardBodyDelivery } from './@delivery'
@@ -60,7 +58,7 @@ export const CardBody = ({ id }: { id: number }) => {
 				<CardBodyDescription description={data.description} />
 				<div className='flex gap-x-[15px]'>
 					<ToggleFavouritesButton variant='button' isActive={false} />
-					<ToggleCartButton />
+					<ToggleCartButton id={id} />
 				</div>
 				<div>
 					<Specifications list={specifications} />

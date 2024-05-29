@@ -1,6 +1,6 @@
+import { useCartStore } from '@/entities/cart'
 import { Typography } from '@/shared'
 import { Button } from '@/shared'
-import { useCartStore } from '../../model'
 import { CartList } from '../@list'
 
 const { Title } = Typography
