@@ -15,13 +15,16 @@ import { CharacteristicEntity } from '../characteristic/entities'
 import { skipCount } from '@/core/utils'
 import { PaginationDto } from '@/common/pagination'
 import * as filterData from './dto/filter.json'
+import { JwtPayload } from '@/auth/dto'
+import { FavouritesService } from '../favourites/favourites.service'
 
 @Injectable()
 export class ProductService {
 	constructor(
 		@InjectRepository(ProductEntity)
 		private readonly productRepository: Repository<ProductEntity>,
-		private readonly fileService: FileService
+		private readonly fileService: FileService,
+		private readonly favouritesService: FavouritesService
 	) {}
 
 	async create(dto: CreateProductDto, images: Express.Multer.File[]) {
@@ -49,18 +52,30 @@ export class ProductService {
 		return await this.productRepository.save(product)
 	}
 
-	async getOne(id: number) {
+	async getOne(id: number, user: JwtPayload | null) {
 		const product = await this.productRepository.findOne({
 			where: { id },
 			relations: {
 				characteristics: true
 			}
 		})
+		let arrayIsLikeProducts = []
+		if (user) {
+			arrayIsLikeProducts = await this.getIsLikeProducts([id], user.id)
+		}
+
+		const isLike = arrayIsLikeProducts.length
+			? arrayIsLikeProducts.find(obj => obj.id === product.id).isLike
+			: false
+		product['isLike'] = isLike
 
 		if (!product) throw new NotFoundException(`Товар с id: ${id} не найден`)
 		return product
 	}
-	async getAll({ count, page, sortBy, sortOrder, price, filters, category }: ProductAllQueryDto) {
+	async getAll(
+		{ count, page, sortBy, sortOrder, price, filters, category }: ProductAllQueryDto,
+		user?: JwtPayload | null
+	) {
 		const where = {}
 
 		if (price) {
@@ -90,7 +105,32 @@ export class ProductService {
 			take: count,
 			skip: skipCount(page, count)
 		})
+		let arrayIsLikeProducts = []
+		if (user) {
+			const ids = products.map(product => product.id)
+			arrayIsLikeProducts = await this.getIsLikeProducts(ids, user.id)
+		}
+		for (const product of products) {
+			const isLike = arrayIsLikeProducts.length
+				? arrayIsLikeProducts.find(obj => obj.id === product.id).isLike
+				: false
+			product['isLike'] = isLike
+		}
 		return new PaginationDto(products, total)
+	}
+
+	async getIsLikeProducts(productIds: number[], userId: number) {
+		const favorites = await this.favouritesService.getByUser(userId)
+		const favoritesProduct = favorites.map(fav => fav.product.id)
+
+		const array = []
+		for (const id of productIds) {
+			array.push({
+				id,
+				isLike: favoritesProduct.includes(id)
+			})
+		}
+		return array
 	}
 
 	async update(id: number, dto: UpdateProductDto) {
