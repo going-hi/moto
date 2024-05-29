@@ -14,6 +14,10 @@ export const List = ({
 	mainTitle?: string
 	title: string
 }) => {
+	if (!list) {
+		return <></>
+	}
+
 	return (
 		<div>
 			{mainTitle ? (

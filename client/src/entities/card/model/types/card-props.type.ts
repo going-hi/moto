@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import type { TCard } from '../types'
 
 export type TCardProps = TCard & {
@@ -7,5 +7,5 @@ export type TCardProps = TCard & {
 	classNameImageBody?: string
 	textColor?: string
 	children?: ReactNode
-	BodyComponent?: FC
+	BodyComponent?: ReactNode
 }

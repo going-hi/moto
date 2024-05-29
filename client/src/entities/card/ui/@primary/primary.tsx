@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { Link } from 'react-router-dom'
-import { Typography } from '@/shared'
+import { Image, Typography } from '@/shared'
 import { TCardProps } from '../../model'
 
 const { Text } = Typography
@@ -29,7 +29,7 @@ export const CardPrimary = ({
 							classNameImageBody
 						)}
 					>
-						<img
+						<Image
 							className='w-[80%] h-[60%] object-cover absolute left-[50%] top-[50%] -translate-y-[50%] -translate-x-[50%] '
 							src={images[0]}
 							alt={name}

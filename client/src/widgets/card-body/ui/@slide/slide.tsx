@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import type { TCard } from '@/entities/card'
-import { Slide } from '@/shared'
+import { Image, Slide } from '@/shared'
 import { useCardGalleryStore } from '../../model'
 
 export const CardGallerySlide = ({
@@ -21,7 +21,7 @@ export const CardGallerySlide = ({
 			)}
 		>
 			<div className='h-full border-[#d9d9d9] border border-solid'>
-				<img
+				<Image
 					className={clsx(
 						'w-full h-full ',
 						index === activeIndex && '!border-black !border-[3px]',

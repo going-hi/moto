@@ -1,8 +1,7 @@
 import { z } from 'zod'
 import { CardBody } from '@/widgets/card-body'
-import { CardGallery } from '@/widgets/card-gallery'
 import { OtherModels } from '@/widgets/other-models'
-import { Typography, cards, useValidParams } from '@/shared'
+import { Typography, useValidParams } from '@/shared'
 import { Header, Footer, Container } from '@/layout'
 
 const { Text } = Typography
@@ -20,10 +19,7 @@ export const CardPage = () => {
 		<div className='bg-red-light pb-[10px]'>
 			<Header />
 			<Container className='mb-[10px]'>
-				<section className='flex h-[874px]'>
-					<CardGallery />
-					<CardBody {...cards[0]} />
-				</section>
+				<CardBody id={+id} />
 			</Container>
 			<OtherModels />
 			<Footer />

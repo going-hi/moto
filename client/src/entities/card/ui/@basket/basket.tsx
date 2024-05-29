@@ -1,4 +1,4 @@
-import { Typography } from '@/shared'
+import { Image, Typography } from '@/shared'
 import type { TCardProps } from '../../model'
 
 const { Title, Text } = Typography
@@ -14,8 +14,8 @@ export const CardBasket = ({
 	return (
 		<li className='flex justify-between gap-x-[20px] py-[20px] relative before:w-full before:h-[2px] before:content-[""] before:bg-gray-medium before:absolute before:top-0 before:left-0'>
 			<div className='relative pb-[24%] basis-[24%] bg-white'>
-				<img
-					className='absolute top-[50%] left-[50%] w-[80%] h-[60%] -translate-x-[50%] -translate-y-[50%]'
+				<Image
+					className='absolute top-[50%] left-[50%] w-full h-[70%] -translate-x-[50%] -translate-y-[50%]'
 					src={images[0]}
 				/>
 			</div>
@@ -33,7 +33,7 @@ export const CardBasket = ({
 							₽
 						</span>
 					</Text>
-					{BodyComponent && <BodyComponent />}
+					{BodyComponent}
 				</div>
 			</div>
 		</li>
