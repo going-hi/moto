@@ -6,7 +6,7 @@ import {
 	useRegistration,
 	type TRegistration,
 	RegistrationSchema
-} from '@/features/auth'
+} from '@/features/auth-user'
 import { Typography } from '@/shared'
 import { registrationFieldsArr } from '../../model'
 import { AuthConfirmRules } from '../@confirm-rules'

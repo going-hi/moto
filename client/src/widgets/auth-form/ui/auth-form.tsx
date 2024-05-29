@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AuthModal } from '@/features/auth'
+import { AuthModal } from '@/features/auth-user'
 import { Switch } from '@/shared'
 import { authNavigationItemsArr } from '../model'
 import { AuthLogin } from './@login'

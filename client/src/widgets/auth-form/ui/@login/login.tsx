@@ -6,7 +6,7 @@ import {
 	useLogin,
 	LoginSchema,
 	type TLogin
-} from '@/features/auth'
+} from '@/features/auth-user'
 import { Typography } from '@/shared'
 import { loginFieldsArr } from '../../model'
 

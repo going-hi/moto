@@ -1,6 +1,6 @@
 import { Button } from '@/shared'
 
-export const AddToCartButton = () => {
+export const ToggleCartButton = () => {
 	return (
 		<Button
 			variant='parentheses-button'

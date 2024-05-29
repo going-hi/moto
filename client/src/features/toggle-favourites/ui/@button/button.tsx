@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { Button } from '@/shared'
 
-export const AddToFavouritesButton = ({
+export const ToggleFavouritesButton = ({
 	variant,
 	isActive,
 	className

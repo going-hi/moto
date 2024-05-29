@@ -1,4 +1,4 @@
-import type { TLogin } from '@/features/auth'
+import type { TLogin } from '@/features/auth-user'
 import type { TAuthField } from '../types'
 
 type TLoginFields = keyof TLogin

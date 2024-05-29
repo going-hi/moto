@@ -5,15 +5,18 @@ import type { TCard } from '@/entities/card'
 
 type TBasketStore = {
 	items: TCard[]
-	setItems: (items: TCard[]) => void
+	setData: (data: { items: TCard[]; total: number }) => void
+	total: number
 }
 
 export const useBasketStore = create<TBasketStore>()(
 	immer(set => ({
 		items: [],
-		setItems: items =>
+		total: 0,
+		setData: ({ items, total }) =>
 			set(state => {
 				state.items = items
+				state.total = total
 			})
 	}))
 )

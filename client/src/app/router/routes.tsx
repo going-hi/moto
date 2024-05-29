@@ -4,7 +4,7 @@ import { CatalogPage, RedirectCatalogPage } from '@/pages/catalog'
 import { HomePage } from '@/pages/home'
 import { AuthForm } from '@/widgets/auth-form'
 import { ResetPasswordForm } from '@/widgets/reset-password-form'
-import { AuthRoute } from '@/features/auth'
+import { AuthRoute } from '@/features/auth-user'
 
 export const router = createBrowserRouter([
 	{

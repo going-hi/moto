@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useState, type ReactNode } from 'react'
 import { Icon, Typography } from '@/shared'
-import { formatCount } from './@libs'
+import { formatCount } from '@/shared/libs'
 import cl from './accordion.module.css'
 import { Layout } from '@/layout'
 

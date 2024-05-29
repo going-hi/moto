@@ -2,17 +2,22 @@ import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import { IconBadge } from '@/shared'
 import { useBasketStore } from '../model'
-import { BasketBody } from './@body'
+import { CartBody } from './@body'
 
-export const Basket = () => {
-	const [isOpen, setIsOpen] = useState<boolean>(false)
+export const Cart = () => {
+	const [isOpen, setIsOpen] = useState<boolean>(true)
 	const { items } = useBasketStore()
 
 	useEffect(() => {
 		return () => {
-			setIsOpen(false)
+			// setIsOpen(false)
+			document.body.style.overflow = 'auto'
 		}
 	}, [])
+
+	useEffect(() => {
+		document.body.style.overflow = isOpen ? 'hidden' : 'auto'
+	}, [isOpen])
 
 	return (
 		<>
@@ -37,7 +42,7 @@ export const Basket = () => {
 					isOpen ? 'translate-x-0' : 'translate-x-full'
 				)}
 			>
-				<BasketBody setIsOpen={setIsOpen} />
+				<CartBody setIsOpen={setIsOpen} />
 			</div>
 		</>
 	)

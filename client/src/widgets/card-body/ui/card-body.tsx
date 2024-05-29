@@ -1,6 +1,6 @@
 import clsx from 'clsx'
-import { AddToCartButton } from '@/features/add-to-cart'
-import { AddToFavouritesButton } from '@/features/add-to-favourites'
+import { ToggleCartButton } from '@/features/toggle-cart'
+import { ToggleFavouritesButton } from '@/features/toggle-favourites'
 import type { TCard } from '@/entities/card'
 import { Typography } from '@/shared'
 import { specifications } from '@/shared'
@@ -30,8 +30,8 @@ export const CardBody = ({ name, price, description }: TCard) => {
 			</div>
 			<CardBodyDescription description={description} />
 			<div className='flex gap-x-[15px]'>
-				<AddToFavouritesButton variant='button' isActive={false} />
-				<AddToCartButton />
+				<ToggleFavouritesButton variant='button' isActive={false} />
+				<ToggleCartButton />
 			</div>
 			<div>
 				<Specifications list={specifications} />
