@@ -1,6 +1,8 @@
 import { z } from 'zod'
 import { CardSchema } from '@/entities/card'
+import { BaseSchema } from '@/shared'
 
-export const CardCartSchema = CardSchema.extend({
-	count: z.number()
+export const CardCartSchema = BaseSchema.extend({
+	count: z.number(),
+	product: z.lazy(() => CardSchema)
 })

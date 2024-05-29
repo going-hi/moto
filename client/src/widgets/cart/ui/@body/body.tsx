@@ -1,8 +1,10 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useContext } from 'react'
 import { Icon, Typography } from '@/shared'
 import { useCartStore } from '../../model'
+import { CartContext } from '../../model'
 import { CartEmpty } from '../@empty'
 import { CartInfo } from '../@info'
+import { CartLoader } from '../@loader'
 
 const { Title } = Typography
 
@@ -12,6 +14,7 @@ export const CartBody = ({
 	setIsOpen: Dispatch<SetStateAction<boolean>>
 }) => {
 	const { items } = useCartStore()
+	const { isLoading } = useContext(CartContext)
 
 	return (
 		<div className='p-[50px]'>
@@ -26,13 +29,19 @@ export const CartBody = ({
 				</div>
 				<Icon
 					name='Close'
-					className='h-[25px] w-[25px] cursor-pointer'
+					className='h-[30px] w-[30px] cursor-pointer p-[5px]'
 					onClick={() => {
 						setIsOpen(false)
 					}}
 				/>
 			</div>
-			{items.length ? <CartInfo /> : <CartEmpty />}
+			{isLoading ? (
+				<CartLoader />
+			) : items.length ? (
+				<CartInfo />
+			) : (
+				<CartEmpty />
+			)}
 		</div>
 	)
 }

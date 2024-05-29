@@ -1,11 +1,10 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
-
-import type { TCard } from '@/entities/card'
+import { TCardCart } from '../types'
 
 type TBasketStore = {
-	items: TCard[]
-	setData: (data: { items: TCard[]; total: number }) => void
+	items: TCardCart[]
+	setData: (data: { items: TCardCart[]; total: number }) => void
 	total: number
 }
 

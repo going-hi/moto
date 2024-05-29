@@ -1,16 +1,20 @@
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import { IconBadge } from '@/shared'
+import { useGetCart } from '../libs'
 import { useCartStore } from '../model'
 import { CartBody } from './@body'
+import { CartProvider } from './@provider'
 
 export const Cart = () => {
-	const [isOpen, setIsOpen] = useState<boolean>(true)
+	const [isOpen, setIsOpen] = useState<boolean>(false)
 	const { items } = useCartStore()
+
+	useGetCart()
 
 	useEffect(() => {
 		return () => {
-			// setIsOpen(false)
+			setIsOpen(false)
 			document.body.style.overflow = 'auto'
 		}
 	}, [])
@@ -42,7 +46,9 @@ export const Cart = () => {
 					isOpen ? 'translate-x-0' : 'translate-x-full'
 				)}
 			>
-				<CartBody setIsOpen={setIsOpen} />
+				<CartProvider>
+					<CartBody setIsOpen={setIsOpen} />
+				</CartProvider>
 			</div>
 		</>
 	)

@@ -7,14 +7,16 @@ import { TCardCart } from '../../model'
 export const CartItem = (card: TCardCart) => {
 	const [counter, setCounter] = useState<number>(card.count)
 
+	console.log(card.product.images)
+
 	return (
 		<Card
-			{...card}
+			{...card.product}
 			count={counter}
 			variant='basket'
 			BodyComponent={RemoveFromCardButton}
 		>
-			<CounterCartButton {...card} count={counter} />
+			<CounterCartButton {...card.product} count={counter} />
 		</Card>
 	)
 }

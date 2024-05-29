@@ -1,4 +1,4 @@
-import { cart, Typography } from '@/shared'
+import { Typography } from '@/shared'
 import { Button } from '@/shared'
 import { useCartStore } from '../../model'
 import { CartList } from '../@list'
@@ -6,10 +6,10 @@ import { CartList } from '../@list'
 const { Title } = Typography
 
 export const CartInfo = () => {
-	const { total } = useCartStore()
+	const { total, items } = useCartStore()
 	return (
 		<>
-			<CartList list={cart} />
+			<CartList list={items} />
 			<div className='pr-[20px]'>
 				<div className='flex justify-between items-center after:w-full after:h-[2px] after:content-[""] after:bg-gray-medium relative after:absolute after:bottom-0 after:left-0 mb-[50px]'>
 					<Title variant='h4'>ИТОГО</Title>

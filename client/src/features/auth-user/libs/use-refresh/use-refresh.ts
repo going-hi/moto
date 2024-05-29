@@ -4,13 +4,19 @@ import { refresh } from '../../api'
 import { useAuthStore } from '../../model'
 
 export const useRefresh = () => {
-	const { isLoading, data } = useQuery({
+	const { setAccessToken, accessToken } = useAuthStore()
+
+	const { isLoading, data, refetch } = useQuery({
 		queryFn: () => refresh(false),
 		queryKey: ['profile/refresh'],
 		retry: false
 	})
 
-	const { setAccessToken } = useAuthStore()
+	useEffect(() => {
+		if (!accessToken) {
+			refetch()
+		}
+	}, [accessToken, refetch])
 
 	useEffect(() => {
 		if (data) {

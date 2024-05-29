@@ -17,7 +17,9 @@ export const reviews: TReview[] = [
 				'https://sportishka.com/uploads/posts/2021-12/1639215757_28-sportishka-com-p-mototsikl-bez-fona-sport-krasivo-foto-28.jpg'
 			],
 			name: 'Motoland XR 250 lite',
-			price: 177000
+			price: 177000,
+			category: '',
+			type: ''
 		},
 		createDate: 'date',
 		updateDate: 'date',
@@ -40,7 +42,9 @@ export const reviews: TReview[] = [
 				'https://sportishka.com/uploads/posts/2021-12/1639215757_28-sportishka-com-p-mototsikl-bez-fona-sport-krasivo-foto-28.jpg'
 			],
 			name: 'Motoland XR 250 lite',
-			price: 177000
+			price: 177000,
+			category: '',
+			type: ''
 		},
 		createDate: 'date',
 		updateDate: 'date',
@@ -63,7 +67,9 @@ export const reviews: TReview[] = [
 				'https://sportishka.com/uploads/posts/2021-12/1639215757_28-sportishka-com-p-mototsikl-bez-fona-sport-krasivo-foto-28.jpg'
 			],
 			name: 'Motoland XR 250 lite',
-			price: 177000
+			price: 177000,
+			category: '',
+			type: ''
 		},
 		createDate: 'date',
 		updateDate: 'date',
@@ -86,7 +92,9 @@ export const reviews: TReview[] = [
 				'https://sportishka.com/uploads/posts/2021-12/1639215757_28-sportishka-com-p-mototsikl-bez-fona-sport-krasivo-foto-28.jpg'
 			],
 			name: 'Motoland XR 250 lite',
-			price: 177000
+			price: 177000,
+			category: '',
+			type: ''
 		},
 		createDate: 'date',
 		updateDate: 'date',
