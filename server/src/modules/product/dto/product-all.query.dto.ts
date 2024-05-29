@@ -5,9 +5,10 @@ import { ApiProperty } from '@nestjs/swagger'
 import { Type } from 'class-transformer'
 import { ArrayMaxSize, ArrayMinSize, IsEnum, IsOptional, IsPositive } from 'class-validator'
 
-enum ESort {
+export enum EProductSort {
 	PRICE = 'price',
-	CREATE_DATE = 'createDate'
+	CREATE_DATE = 'createDate',
+	BY_POPULARITY = 'countOrders'
 }
 
 class Filter {
@@ -15,9 +16,9 @@ class Filter {
 }
 
 export class ProductAllQueryDto extends PaginationQuery {
-	@ApiProperty({ enum: ESort })
-	@IsEnum(ESort)
-	sortBy: ESort = ESort.CREATE_DATE
+	@ApiProperty({ enum: EProductSort })
+	@IsEnum(EProductSort)
+	sortBy: EProductSort = EProductSort.CREATE_DATE
 
 	@ApiProperty({ enum: ESortOrder })
 	@IsEnum(ESortOrder)
