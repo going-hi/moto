@@ -8,16 +8,21 @@ export const IconBadge = ({
 	name,
 	className,
 	iconClassName,
-	color
+	color,
+	onClick
 }: {
 	count: number
 	name: TIconName
 	className?: string
 	iconClassName?: string
 	color?: string
+	onClick?: () => void
 }) => {
 	return (
-		<div className={clsx('relative inline-block', className)}>
+		<div
+			onClick={onClick}
+			className={clsx('relative inline-block', className)}
+		>
 			<Icon color={color} name={name} className={iconClassName} />
 			<Badge count={count} />
 		</div>

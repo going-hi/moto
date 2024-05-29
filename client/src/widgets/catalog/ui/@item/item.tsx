@@ -3,11 +3,11 @@ import { AddToFavouritesButton } from '@/features/add-to-favourites'
 import { Card } from '@/entities/card'
 import type { TCardProps } from '@/entities/card'
 
-export const CatalogItem = (card: Omit<TCardProps, 'children' | 'type'>) => {
+export const CatalogItem = (card: Omit<TCardProps, 'children' | 'variant'>) => {
 	return (
 		<Card
 			classNameImageBody={clsx(!!card.className && 'pb-[90%]')}
-			type='large'
+			variant='catalog'
 			{...card}
 		>
 			<AddToFavouritesButton
