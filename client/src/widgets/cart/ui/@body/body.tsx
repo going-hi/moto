@@ -1,7 +1,8 @@
 import { Dispatch, SetStateAction } from 'react'
-import { Button, Icon, Typography, cart } from '@/shared'
-import { useBasketStore } from '../../model'
-import { CartList } from '../@list'
+import { Icon, Typography } from '@/shared'
+import { useCartStore } from '../../model'
+import { CartEmpty } from '../@empty'
+import { CartInfo } from '../@info'
 
 const { Title } = Typography
 
@@ -10,7 +11,7 @@ export const CartBody = ({
 }: {
 	setIsOpen: Dispatch<SetStateAction<boolean>>
 }) => {
-	const { items, total } = useBasketStore()
+	const { items } = useCartStore()
 
 	return (
 		<div className='p-[50px]'>
@@ -31,19 +32,7 @@ export const CartBody = ({
 					}}
 				/>
 			</div>
-			<CartList list={cart} />
-			<div className='pr-[20px]'>
-				<div className='flex justify-between items-center after:w-full after:h-[2px] after:content-[""] after:bg-gray-medium relative after:absolute after:bottom-0 after:left-0 mb-[50px]'>
-					<Title variant='h4'>ИТОГО</Title>
-					<Title variant='h4'>
-						{total}
-						<span className='text-[38px] ml-[3px] font-normal'>
-							₽
-						</span>
-					</Title>
-				</div>
-				<Button variant='primary'>ПЕРЕЙТИ К ОФОРМЛЕНИЮ</Button>
-			</div>
+			{items.length ? <CartInfo /> : <CartEmpty />}
 		</div>
 	)
 }

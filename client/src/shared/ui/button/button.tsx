@@ -73,7 +73,11 @@ export const Button = ({
 				</button>
 			)
 		case 'primary':
-			return <Primary {...props}>{children}</Primary>
+			return (
+				<Primary path={path} {...props} className={className}>
+					{children}
+				</Primary>
+			)
 		default:
 			return <></>
 	}

@@ -1,12 +1,12 @@
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import { IconBadge } from '@/shared'
-import { useBasketStore } from '../model'
+import { useCartStore } from '../model'
 import { CartBody } from './@body'
 
 export const Cart = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(true)
-	const { items } = useBasketStore()
+	const { items } = useCartStore()
 
 	useEffect(() => {
 		return () => {

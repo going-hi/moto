@@ -9,7 +9,7 @@ type TBasketStore = {
 	total: number
 }
 
-export const useBasketStore = create<TBasketStore>()(
+export const useCartStore = create<TBasketStore>()(
 	immer(set => ({
 		items: [],
 		total: 0,
