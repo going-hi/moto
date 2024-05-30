@@ -11,7 +11,6 @@ export const useToggleCart = (variant: 'add' | 'remove') => {
 		mutationKey: ['cart/toggle'],
 		mutationFn: variant === 'add' ? addToCart : removeFromCart,
 		onSuccess: () => {
-			console.log('ok')
 			queryClient.invalidateQueries({
 				queryKey: ['user/cart']
 			})

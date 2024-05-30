@@ -15,7 +15,7 @@ export const CardBasket = ({
 		<li className='flex justify-between gap-x-[20px] py-[20px] relative before:w-full before:h-[2px] before:content-[""] before:bg-gray-medium before:absolute before:top-0 before:left-0'>
 			<div className='relative pb-[24%] basis-[24%] bg-white'>
 				<Image
-					className='absolute top-[50%] left-[50%] w-full h-[70%] -translate-x-[50%] -translate-y-[50%]'
+					className='absolute top-[50%] left-[50%] w-full h-full -translate-x-[50%] -translate-y-[50%] object-contain'
 					src={images[0]}
 				/>
 			</div>

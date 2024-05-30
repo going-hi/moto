@@ -1,9 +1,7 @@
 import { Dispatch, SetStateAction } from 'react'
 import { useCartStore } from '@/entities/cart'
 import { Icon, Typography } from '@/shared'
-import { CartEmpty } from '../@empty'
 import { CartInfo } from '../@info'
-import { CartLoader } from '../@loader'
 
 const { Title } = Typography
 
@@ -13,8 +11,7 @@ export const CartBody = ({
 	setIsOpen: Dispatch<SetStateAction<boolean>>
 }) => {
 	const {
-		data: { items },
-		isLoading
+		data: { items }
 	} = useCartStore()
 
 	return (
@@ -36,13 +33,7 @@ export const CartBody = ({
 					}}
 				/>
 			</div>
-			{isLoading ? (
-				<CartLoader />
-			) : items.length ? (
-				<CartInfo />
-			) : (
-				<CartEmpty />
-			)}
+			<CartInfo />
 		</div>
 	)
 }
