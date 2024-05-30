@@ -5,5 +5,7 @@ import type { TGetCardDto } from '../../model'
 export const useGetCard = (id: number) =>
 	useAppQuery<TGetCardDto>({
 		queryKey: ['catalog/card'],
-		queryFn: () => getCard(id)
+		queryFn: () => getCard(id),
+		retry: false,
+		throwOnError: false
 	})

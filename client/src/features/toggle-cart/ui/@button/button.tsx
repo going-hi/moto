@@ -5,7 +5,13 @@ import { useCartStore } from '@/entities/cart'
 import { Button, Icon } from '@/shared'
 import { useToggleCart } from '../../libs'
 
-export const ToggleCartButton = ({ id }: { id: number }) => {
+export const ToggleCartButton = ({
+	id,
+	variant
+}: {
+	id: number
+	variant: 'primary' | 'parentheses-button'
+}) => {
 	const {
 		data: { items },
 		isLoading
@@ -22,12 +28,13 @@ export const ToggleCartButton = ({ id }: { id: number }) => {
 
 	return (
 		<Button
-			variant={isPending || isLoading ? 'primary' : 'parentheses-button'}
+			variant={isPending || isLoading ? 'primary' : variant}
 			className={clsx(
 				'h-full basis-[100%] duration-700 will-change-transform',
 				isPending || isLoading
 					? '!py-[20px]'
-					: 'dhover:hover:scale-[101%]'
+					: 'dhover:hover:scale-[101%]',
+				variant === 'primary' && 'max-h-[64px] !py-[20px]'
 			)}
 			bodyClassName={clsx(
 				addedItem

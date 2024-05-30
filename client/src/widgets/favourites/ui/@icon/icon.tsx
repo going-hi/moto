@@ -2,12 +2,15 @@ import { Link } from 'react-router-dom'
 import { useAuthStore } from '@/features/auth-user'
 import { useFavouritesStore } from '@/entities/favourites'
 import { Icon, IconBadge } from '@/shared'
+import { useGetFavourites } from '../../libs'
 
 export const FavouritesIcon = () => {
 	const {
 		data: { items },
 		isLoading
 	} = useFavouritesStore()
+
+	useGetFavourites()
 
 	const { accessToken } = useAuthStore()
 

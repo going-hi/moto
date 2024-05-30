@@ -63,7 +63,10 @@ export const CardBody = ({ id }: { id: number }) => {
 								variant='button'
 								isActive={false}
 							/>
-							<ToggleCartButton id={id} />
+							<ToggleCartButton
+								variant='parentheses-button'
+								id={id}
+							/>
 						</div>
 						<div>
 							<Specifications list={specifications} />

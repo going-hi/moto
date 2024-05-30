@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useAuthStore } from '@/features/auth-user'
 import {
 	useFavouritesStore,
 	type TGetFavouritesDto
@@ -8,10 +9,15 @@ import { getFavourites } from '../../api'
 
 export const useGetFavourites = () => {
 	const { setIsLoading, setData } = useFavouritesStore()
+	const { accessToken } = useAuthStore()
 
 	const { isFetching, data } = useAppQuery<TGetFavouritesDto>({
 		queryKey: ['user/favourites'],
-		queryFn: getFavourites
+		queryFn: getFavourites,
+		retry: false,
+		throwOnError: false,
+		refetchOnMount: false,
+		enabled: !!accessToken
 	})
 
 	useEffect(() => {
