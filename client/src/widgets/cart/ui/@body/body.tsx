@@ -1,7 +1,6 @@
-import { Dispatch, SetStateAction, useContext } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import { useCartStore } from '@/entities/cart'
 import { Icon, Typography } from '@/shared'
-import { CartContext } from '../../model'
 import { CartEmpty } from '../@empty'
 import { CartInfo } from '../@info'
 import { CartLoader } from '../@loader'
@@ -14,9 +13,9 @@ export const CartBody = ({
 	setIsOpen: Dispatch<SetStateAction<boolean>>
 }) => {
 	const {
-		data: { items }
+		data: { items },
+		isLoading
 	} = useCartStore()
-	const { isLoading } = useContext(CartContext)
 
 	return (
 		<div className='p-[50px]'>

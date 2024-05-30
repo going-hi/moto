@@ -5,6 +5,8 @@ import type { TGetCartDto } from '../types'
 type TBasketStore<> = {
 	data: TGetCartDto
 	setData: (data: TGetCartDto) => void
+	isLoading: boolean
+	setIsLoading: (l: boolean) => void
 }
 
 export const useCartStore = create<TBasketStore>()(
@@ -19,6 +21,11 @@ export const useCartStore = create<TBasketStore>()(
 		setData: data =>
 			set(state => {
 				state.data = data
+			}),
+		isLoading: false,
+		setIsLoading: (isLoading: boolean) =>
+			set(state => {
+				state.isLoading = isLoading
 			})
 	}))
 )

@@ -4,7 +4,6 @@ import { useCartStore } from '@/entities/cart'
 import { IconBadge } from '@/shared'
 import { useGetCart } from '../libs'
 import { CartBody } from './@body'
-import { CartProvider } from './@provider'
 
 export const Cart = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -48,9 +47,7 @@ export const Cart = () => {
 					isOpen ? 'translate-x-0' : 'translate-x-full'
 				)}
 			>
-				<CartProvider>
-					<CartBody setIsOpen={setIsOpen} />
-				</CartProvider>
+				<CartBody setIsOpen={setIsOpen} />
 			</div>
 		</>
 	)

@@ -1,14 +1,7 @@
 import { useRemoveFromCart } from '../../libs'
-import type { TContext } from '../../model'
 
-export const RemoveFromCardButton = ({
-	id,
-	ctx
-}: {
-	id: number
-	ctx: TContext
-}) => {
-	const { mutate } = useRemoveFromCart(ctx)
+export const RemoveFromCartButton = ({ id }: { id: number }) => {
+	const { mutate } = useRemoveFromCart()
 
 	return (
 		<button

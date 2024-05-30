@@ -1,12 +1,10 @@
 import { useQueryClient } from '@tanstack/react-query'
-import { useContext, useEffect } from 'react'
-import { removeFromCart } from '@/entities/cart'
+import { useEffect } from 'react'
+import { removeFromCart, useCartStore } from '@/entities/cart'
 import { useAppMutation } from '@/shared'
 
-import type { TContext } from '../../model'
-
-export const useRemoveFromCart = (ctx: TContext) => {
-	const { setIsLoading } = useContext(ctx)
+export const useRemoveFromCart = () => {
+	const { setIsLoading } = useCartStore()
 
 	const queryClient = useQueryClient()
 

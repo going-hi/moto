@@ -1,13 +1,17 @@
 import clsx from 'clsx'
 import { useMemo } from 'react'
+import { useAuthStore } from '@/features/auth-user'
 import { useCartStore } from '@/entities/cart'
 import { Button, Icon } from '@/shared'
 import { useToggleCart } from '../../libs'
 
 export const ToggleCartButton = ({ id }: { id: number }) => {
 	const {
-		data: { items }
+		data: { items },
+		isLoading
 	} = useCartStore()
+
+	const { accessToken } = useAuthStore()
 
 	const addedItem = useMemo(
 		() => items.find(i => i.product.id === id),
@@ -30,10 +34,12 @@ export const ToggleCartButton = ({ id }: { id: number }) => {
 			)}
 			isMain
 			disabled={isPending}
-			onClick={() => mutate(addedItem ? addedItem.id : id)}
+			onClick={() =>
+				accessToken ? mutate(addedItem ? addedItem.id : id) : {}
+			}
 			lineClassName={addedItem ? '!bg-black' : 'bg-beige'}
 		>
-			{isPending ? (
+			{isPending || isLoading ? (
 				<Icon
 					name='Loading'
 					className='w-[25px] h-[25px] animate-spin-1000'

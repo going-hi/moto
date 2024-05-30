@@ -25,7 +25,8 @@ export default {
 			'2per': 'calc(1em / 40)'
 		},
 		aspectRatio: {
-			square: '1 / 1'
+			square: '1 / 1',
+			auto: 'auto'
 		},
 		transitionProperty: {
 			width: 'width'

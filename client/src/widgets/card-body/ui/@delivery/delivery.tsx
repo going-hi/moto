@@ -27,7 +27,7 @@ export const CardBodyDelivery = () => {
 						</li>
 					</ol>
 				</ListItem>
-				<ListItem variant='top' className='mb-[20px] before:top-[3%]'>
+				<ListItem variant='top' className='mb-[20px] before:top-[10px]'>
 					<Text className='mb-[10px]'>
 						Транспортная доставка по Владимирской области
 					</Text>
@@ -51,7 +51,7 @@ export const CardBodyDelivery = () => {
 						</li>
 					</ol>
 				</ListItem>
-				<ListItem variant='top' className='mb-[20px] before:top-[3%]'>
+				<ListItem variant='top' className='mb-[20px] before:top-[10px]'>
 					<Text className='mb-[10px]'>
 						Доставка СДЕК по России. Экспресс-доставка
 					</Text>
