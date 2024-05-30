@@ -47,10 +47,19 @@ export default {
 				'100%': {
 					transform: 'rotate(360deg)'
 				}
+			},
+			'skeleton-loading': {
+				'0%': {
+					backgroundColor: '#f3f3f3'
+				},
+				'100%': {
+					backgroundColor: '#d0cfcf'
+				}
 			}
 		},
 		animation: {
-			'spin-1000': 'spin 1s linear infinite'
+			'spin-1000': 'spin 1s linear infinite',
+			'skeleton-loading': 'skeleton-loading .5s linear infinite alternate'
 		}
 	},
 	plugins: []

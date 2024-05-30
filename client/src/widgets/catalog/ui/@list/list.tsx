@@ -1,6 +1,7 @@
 import { TCard } from '@/entities/card'
 import { getElementClass, getSlicedArr } from '../../libs'
 import { CatalogItem } from '../@item'
+import { CatalogItemSkeleton } from '../@item-skeleton'
 import { CatalogMore } from '../@more'
 import { Container } from '@/layout'
 
@@ -23,11 +24,16 @@ export const CatalogList = ({ list }: { list: TCard[] }) => {
 								indexSub + 1
 							)
 
-							return (
+							return i ? (
 								<CatalogItem
 									{...i}
 									className={cl}
 									key={String(i.id)}
+								/>
+							) : (
+								<CatalogItemSkeleton
+									className={cl}
+									key={String(indexItem)}
 								/>
 							)
 						})}
