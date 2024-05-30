@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { CardPage } from '@/pages/card'
 import { CatalogPage, RedirectCatalogPage } from '@/pages/catalog'
+import { FavouritesPage } from '@/pages/favourites'
 import { HomePage } from '@/pages/home'
 import { AuthForm } from '@/widgets/auth-form'
 import { ResetPasswordForm } from '@/widgets/reset-password-form'
@@ -54,6 +55,14 @@ export const router = createBrowserRouter([
 		element: (
 			<AuthRoute variant='public'>
 				<CardPage />
+			</AuthRoute>
+		)
+	},
+	{
+		path: '/favourites',
+		element: (
+			<AuthRoute variant='authorized'>
+				<FavouritesPage />
 			</AuthRoute>
 		)
 	}

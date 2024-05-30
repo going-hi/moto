@@ -7,11 +7,11 @@ import { Faq } from '@/widgets/faq'
 import { NewProducts } from '@/widgets/new-products'
 import { Popular } from '@/widgets/popular'
 import { Reviews } from '@/widgets/reviews'
-import { Footer } from '@/layout'
+import { Footer, Wrapper } from '@/layout'
 
 export const HomePage = () => {
 	return (
-		<div className='bg-red-light flex gap-y-[10px] flex-col pb-[10px]'>
+		<Wrapper className='flex gap-y-[10px] flex-col'>
 			<Outlet />
 			<Banner />
 			<CatalogAccordion />
@@ -22,6 +22,6 @@ export const HomePage = () => {
 			<Reviews />
 			<Faq />
 			<Footer />
-		</div>
+		</Wrapper>
 	)
 }
