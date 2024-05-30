@@ -3,10 +3,12 @@ import { ReactNode } from 'react'
 
 export const Parentheses = ({
 	children,
-	bodyClassName
+	bodyClassName,
+	lineClassName
 }: {
 	children: ReactNode
 	bodyClassName?: string
+	lineClassName?: string
 }) => {
 	return (
 		<div
@@ -18,7 +20,12 @@ export const Parentheses = ({
 			<span>[</span>
 			<div className='mx-[28px] dhover:group-hover:mx-[20px] duration-700'>
 				<span>{children}</span>
-				<span className='w-full bg-white h-[2px] block -mt-[4px]' />
+				<span
+					className={clsx(
+						'w-full bg-white h-[2px] block -mt-[4px]',
+						lineClassName
+					)}
+				/>
 			</div>
 			<span>]</span>
 		</div>

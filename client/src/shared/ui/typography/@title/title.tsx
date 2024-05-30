@@ -18,7 +18,7 @@ export const Title = ({
 	children: ReactNode
 	className?: string
 }) => {
-	const classNames = clsx(className, classes[variant])
+	const classNames = clsx(classes[variant], className)
 
 	switch (variant) {
 		case 'h1':

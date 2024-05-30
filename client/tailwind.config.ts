@@ -17,14 +17,16 @@ export default {
 				beige: 'var(--beige)',
 				'red-light': 'var(--red-light)',
 				'gray-light': 'var(--gray-light)',
-				'gray-dark': 'var(--gray-dark)'
+				'gray-dark': 'var(--gray-dark)',
+				'gray-medium': 'var(--gray-medium)'
 			}
 		},
 		letterSpacing: {
 			'2per': 'calc(1em / 40)'
 		},
 		aspectRatio: {
-			square: '1 / 1'
+			square: '1 / 1',
+			auto: 'auto'
 		},
 		transitionProperty: {
 			width: 'width'
@@ -46,10 +48,19 @@ export default {
 				'100%': {
 					transform: 'rotate(360deg)'
 				}
+			},
+			'skeleton-loading': {
+				'0%': {
+					backgroundColor: '#F0F0F0'
+				},
+				'100%': {
+					backgroundColor: '#d0cfcf'
+				}
 			}
 		},
 		animation: {
-			'spin-1000': 'spin 1s linear infinite'
+			'spin-1000': 'spin 1s linear infinite',
+			'skeleton-loading': 'skeleton-loading .5s linear infinite alternate'
 		}
 	},
 	plugins: []

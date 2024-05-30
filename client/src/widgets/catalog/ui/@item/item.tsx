@@ -1,16 +1,16 @@
 import clsx from 'clsx'
-import { AddToFavouritesButton } from '@/features/add-to-favourites'
+import { ToggleFavouritesButton } from '@/features/toggle-favourites'
 import { Card } from '@/entities/card'
 import type { TCardProps } from '@/entities/card'
 
-export const CatalogItem = (card: Omit<TCardProps, 'children' | 'type'>) => {
+export const CatalogItem = (card: Omit<TCardProps, 'children' | 'variant'>) => {
 	return (
 		<Card
 			classNameImageBody={clsx(!!card.className && 'pb-[90%]')}
-			type='large'
+			variant='catalog'
 			{...card}
 		>
-			<AddToFavouritesButton
+			<ToggleFavouritesButton
 				className='absolute top-[20px] right-[20px] z-10 p-[10px] opacity-0 dhover:group-hover:opacity-100 duration-500'
 				variant='label'
 				isActive={false}

@@ -1,4 +1,4 @@
-import { TRegistration } from '@/features/auth'
+import { TRegistration } from '@/features/auth-user'
 import type { TAuthField } from '../types'
 
 type TRegistrationFields = keyof TRegistration

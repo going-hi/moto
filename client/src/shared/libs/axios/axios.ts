@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios'
-import { useAuthStore, refresh } from '@/features/auth'
+import { useAuthStore, refresh } from '@/features/auth-user'
 import { axiosConfig } from '../../config'
 
 const $api = axios.create(axiosConfig)

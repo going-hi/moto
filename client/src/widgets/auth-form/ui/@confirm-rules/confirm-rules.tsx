@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { forwardRef, useId } from 'react'
 import { useFormContext, type ControllerRenderProps } from 'react-hook-form'
 import { Link } from 'react-router-dom'
-import { TRegistration } from '@/features/auth'
+import { TRegistration } from '@/features/auth-user'
 import { Checkbox, Typography } from '@/shared'
 
 const { Text } = Typography

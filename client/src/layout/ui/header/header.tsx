@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Cart } from '@/widgets/cart'
 import { Icon, IconBadge } from '@/shared'
 import { Container } from '../container'
 import { Navigation } from './@navigation'
@@ -28,12 +29,7 @@ export const Header = () => {
 							count={1}
 							className='cursor-pointer dhover:hover:scale-125 duration-700 self-start'
 						/>
-						<IconBadge
-							color='white'
-							name='Cart'
-							count={1}
-							className='cursor-pointer dhover:hover:scale-125 duration-700 self-start'
-						/>
+						<Cart />
 					</div>
 				</div>
 			</Container>

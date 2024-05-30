@@ -1,8 +1,8 @@
 import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 
-export const useAppQuery = (
-	options: UseQueryOptions<unknown, AxiosError, unknown>
+export const useAppQuery = <T>(
+	options: UseQueryOptions<unknown, AxiosError, T>
 ) => {
 	const query = useQuery(options)
 

@@ -1,9 +1,12 @@
+import { useGetCards } from '../libs'
 import { CatalogFilter } from './@filter'
 import { CatalogList } from './@list'
 import { CatalogSort } from './@sort'
 import { Container } from '@/layout'
 
 export const Catalog = () => {
+	const { isLoading, data } = useGetCards()
+
 	return (
 		<>
 			<div className='relative'>
@@ -14,7 +17,9 @@ export const Catalog = () => {
 					</div>
 				</Container>
 			</div>
-			<CatalogList />
+			<CatalogList
+				list={isLoading ? [...new Array(9)] : data?.items ?? []}
+			/>
 		</>
 	)
 }
