@@ -5,7 +5,7 @@ import { Card } from '@/entities/card'
 import { type TCardCart, useCartStore } from '@/entities/cart'
 
 export const CartItem = (card: TCardCart) => {
-	const [counter, setCounter] = useState<number>(card.count)
+	const [count, setCount] = useState<number>(card.count)
 	const { isLoading } = useCartStore()
 
 	return isLoading ? (
@@ -13,11 +13,16 @@ export const CartItem = (card: TCardCart) => {
 	) : (
 		<Card
 			{...card.product}
-			count={counter}
+			count={count}
 			variant='basket'
 			BodyComponent={<RemoveFromCartButton id={card?.id} />}
 		>
-			<CounterCartButton {...card.product} count={counter} />
+			<CounterCartButton
+				{...card.product}
+				id={card.id}
+				count={count}
+				setCount={setCount}
+			/>
 		</Card>
 	)
 }

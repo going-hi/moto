@@ -10,6 +10,7 @@ export const useToggleCart = (variant: 'add' | 'remove') => {
 	return useAppMutation({
 		mutationKey: ['cart/toggle'],
 		mutationFn: variant === 'add' ? addToCart : removeFromCart,
+
 		onSuccess: () => {
 			queryClient.invalidateQueries({
 				queryKey: ['user/cart']

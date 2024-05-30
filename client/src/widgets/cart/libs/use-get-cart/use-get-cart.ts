@@ -8,7 +8,7 @@ export const useGetCart = () => {
 	const { setData, setIsLoading } = useCartStore()
 	const { accessToken } = useAuthStore()
 
-	const { data, isLoading } = useAppQuery<TGetCartDto>({
+	const { data, isFetching } = useAppQuery<TGetCartDto>({
 		queryFn: getCart,
 		queryKey: ['user/cart'],
 		retry: false,
@@ -17,8 +17,8 @@ export const useGetCart = () => {
 	})
 
 	useEffect(() => {
-		setIsLoading(isLoading)
-	}, [isLoading, setIsLoading])
+		setIsLoading(isFetching)
+	}, [isFetching, setIsLoading])
 
 	useEffect(() => {
 		if (data) {

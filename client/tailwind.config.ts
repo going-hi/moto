@@ -51,7 +51,7 @@ export default {
 			},
 			'skeleton-loading': {
 				'0%': {
-					backgroundColor: '#f3f3f3'
+					backgroundColor: '#F0F0F0'
 				},
 				'100%': {
 					backgroundColor: '#d0cfcf'
