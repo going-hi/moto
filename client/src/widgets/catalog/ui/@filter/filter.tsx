@@ -8,7 +8,7 @@ export const CatalogFilter = () => {
 		<Select
 			isOpen={isOpen}
 			setIsOpen={setIsOpen}
-			width='w-[100dvw]'
+			width='w-[99.76dvw]'
 			maxHeight='max-h-[200px]'
 			label='фильтрация'
 			position='left'

@@ -37,7 +37,7 @@ export const CounterCartButton = ({
 	return (
 		<>
 			<div className='border-gray-light border px-[15px] py-[4px] flex gap-x-[15px] w-[110px] items-center mb-[10px] '>
-				<button onClick={() => onClick('remove')}>
+				<button disabled={count < 2} onClick={() => onClick('remove')}>
 					<Icon name='Minus' className='w-[15px] h-[15px]' />
 				</button>
 				<span className='text-[20px] -tracking-2per leading-[20px]'>
