@@ -1,5 +1,7 @@
 import { $api } from '@/shared'
-import { GetCardsDtoSchema } from '../model'
+import { GetCardsDtoSchema, TGetCards } from '../model'
 
-export const getCards = () =>
-	$api.get('/product').then(res => GetCardsDtoSchema.parse(res.data))
+export const getCards = (options: TGetCards = {}) =>
+	$api
+		.get('/product', { params: { ...options } })
+		.then(res => GetCardsDtoSchema.parse(res.data))

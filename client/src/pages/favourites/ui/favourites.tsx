@@ -7,7 +7,7 @@ export const FavouritesPage = () => {
 		<Wrapper>
 			<Header />
 			<Favourites />
-			<OtherModels />
+			<OtherModels body={{}} />
 			<Footer />
 		</Wrapper>
 	)

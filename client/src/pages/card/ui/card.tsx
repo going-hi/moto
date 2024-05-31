@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { z } from 'zod'
-import { CardBody } from '@/widgets/card-body'
+import { CardBody, useCardStore } from '@/widgets/card-body'
 import { OtherModels } from '@/widgets/other-models'
 import { Typography, useValidParams } from '@/shared'
 import { Header, Footer, Container, Wrapper } from '@/layout'
@@ -11,6 +11,8 @@ export const CardPage = () => {
 	const { id } = useValidParams({
 		id: z.string().regex(/^[0-9]+$/)
 	})
+
+	const { data, isLoading } = useCardStore()
 
 	useEffect(() => {
 		scrollTo(0, 0)
@@ -26,7 +28,10 @@ export const CardPage = () => {
 			<Container className='mb-[10px]'>
 				<CardBody id={+id} />
 			</Container>
-			<OtherModels />
+			<OtherModels
+				isCardLoading={isLoading}
+				body={{ category: data?.category }}
+			/>
 			<Footer />
 		</Wrapper>
 	)
