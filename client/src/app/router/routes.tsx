@@ -3,6 +3,7 @@ import { CardPage } from '@/pages/card'
 import { CatalogPage, RedirectCatalogPage } from '@/pages/catalog'
 import { FavouritesPage } from '@/pages/favourites'
 import { HomePage } from '@/pages/home'
+import { NotFoundPage } from '@/pages/not-found'
 import { AuthForm } from '@/widgets/auth-form'
 import { ResetPasswordForm } from '@/widgets/reset-password-form'
 import { AuthRoute } from '@/features/auth-user'
@@ -65,5 +66,9 @@ export const router = createBrowserRouter([
 				<FavouritesPage />
 			</AuthRoute>
 		)
+	},
+	{
+		path: '*',
+		element: <NotFoundPage />
 	}
 ])
