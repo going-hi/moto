@@ -7,5 +7,6 @@ export const useGetCard = (id: number) =>
 		queryKey: ['catalog/card'],
 		queryFn: () => getCard(id),
 		retry: false,
-		throwOnError: false
+		throwOnError: false,
+		gcTime: 0
 	})

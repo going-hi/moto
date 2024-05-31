@@ -1,5 +1,6 @@
-import { Slider, SliderProvider, cards } from '@/shared'
-import { PopularSlide } from '../@slide'
+import { Slider, SliderProvider } from '@/shared'
+
+// FIX
 
 export const PopularSlider = () => {
 	return (
@@ -12,9 +13,10 @@ export const PopularSlider = () => {
 			}}
 		>
 			<Slider type='more'>
-				{cards.map((i, index) => (
+				<></>
+				{/* {cards.map((i, index) => (
 					<PopularSlide {...i} key={String(i.id)} index={index} />
-				))}
+				))} */}
 			</Slider>
 		</SliderProvider>
 	)
