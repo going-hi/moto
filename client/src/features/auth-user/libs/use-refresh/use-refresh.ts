@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useRef } from 'react'
-import { Token } from '@/shared'
+import { useEffect } from 'react'
 import { refresh } from '../../api'
+import { useAuthStore } from '../../model'
 
 export const useRefresh = () => {
-	const accessToken = useRef(Token.getValue())
+	const { setAccessToken, accessToken } = useAuthStore()
 
 	const { isLoading, data, refetch } = useQuery({
 		queryFn: () => refresh(false),
@@ -14,16 +14,16 @@ export const useRefresh = () => {
 	})
 
 	useEffect(() => {
-		if (!accessToken.current) {
+		if (!accessToken) {
 			refetch()
 		}
-	}, [refetch])
+	}, [refetch, accessToken])
 
 	useEffect(() => {
 		if (data) {
-			Token.setValue(data.accessToken)
+			setAccessToken(data.accessToken)
 		}
-	}, [data])
+	}, [data, setAccessToken])
 
 	return { isLoading, data }
 }
