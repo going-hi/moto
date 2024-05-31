@@ -1,5 +1,7 @@
 import { Type } from 'class-transformer'
-import { ArrayMinSize, IsArray, IsInt, IsPositive, ValidateNested } from 'class-validator'
+import { ArrayMinSize, IsArray, IsEnum, IsInt, IsPositive, ValidateNested } from 'class-validator'
+import { PaymentMethod, ShippingMethod } from '../enum'
+import { ApiProperty } from '@nestjs/swagger'
 
 class ProductItem {
 	@IsInt({ message: 'Id товара должен быть числом' })
@@ -17,4 +19,12 @@ export class CreateOrderDto {
 	@Type(() => ProductItem)
 	@ValidateNested({ each: true })
 	products: ProductItem[]
+
+	@ApiProperty({ enum: PaymentMethod })
+	@IsEnum(PaymentMethod)
+	paymentMethod: PaymentMethod
+
+	@ApiProperty({ enum: ShippingMethod })
+	@IsEnum(ShippingMethod)
+	shippingMethod: ShippingMethod
 }
