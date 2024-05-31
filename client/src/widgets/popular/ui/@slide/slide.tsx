@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import type { TCard } from '@/entities/card'
-import { Typography, Slide } from '@/shared'
+import { Typography, Slide, Image } from '@/shared'
 
 const { Title, Text } = Typography
 
@@ -17,7 +17,7 @@ export const PopularSlide = ({
 			<Link to={`/card/${id}`}>
 				<div className='duration-700 dhover:group-hover:scale-[102%]'>
 					<div className='relative pb-[60%]'>
-						<img
+						<Image
 							className='absolute top-0 left-0 object-cover max-h-full w-full'
 							src={images[0]}
 							alt={name}
