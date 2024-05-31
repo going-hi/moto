@@ -13,7 +13,8 @@ export const useGetCart = () => {
 		queryKey: ['user/cart'],
 		retry: false,
 		throwOnError: false,
-		enabled: !!accessToken
+		enabled: !!accessToken,
+		refetchOnMount: false
 	})
 
 	useEffect(() => {

@@ -4,4 +4,9 @@ import { getCards } from '../../api'
 import { TCardsDto } from '../../model'
 
 export const useGetCards = () =>
-	useAppQuery<TCardsDto>({ queryFn: getCards, queryKey: ['catalog/cards'] })
+	useAppQuery<TCardsDto>({
+		queryFn: getCards,
+		queryKey: ['catalog/cards'],
+		retry: false,
+		throwOnError: false
+	})

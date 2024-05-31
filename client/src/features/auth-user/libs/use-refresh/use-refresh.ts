@@ -9,7 +9,8 @@ export const useRefresh = () => {
 	const { isLoading, data, refetch } = useQuery({
 		queryFn: () => refresh(false),
 		queryKey: ['profile/refresh'],
-		retry: false
+		retry: false,
+		refetchOnMount: false
 	})
 
 	useEffect(() => {
@@ -24,5 +25,5 @@ export const useRefresh = () => {
 		}
 	}, [data, setAccessToken])
 
-	return { isLoading }
+	return { isLoading, data }
 }

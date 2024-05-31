@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Catalog } from '@/widgets/catalog'
 import { CatalogHeader, useParamNameStore } from '@/widgets/catalog-header'
 import { Typography, useValidParams, CategoriesEnumModel } from '@/shared'
-import { Footer, Header } from '@/layout'
+import { Footer, Header, Wrapper } from '@/layout'
 
 const { Text } = Typography
 
@@ -20,11 +20,11 @@ export const CatalogPage = () => {
 	}
 
 	return (
-		<div className='bg-red-light pb-[10px]'>
+		<Wrapper>
 			<Header />
 			<CatalogHeader />
 			<Catalog />
 			<Footer />
-		</div>
+		</Wrapper>
 	)
 }

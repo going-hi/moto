@@ -1,26 +1,88 @@
 import clsx from 'clsx'
-import { Button } from '@/shared'
+import { useMemo } from 'react'
+import { useAuthStore } from '@/features/auth-user'
+import { useFavouritesStore } from '@/entities/favourites'
+import { Button, Icon } from '@/shared'
+import { useAddToFavourites, useRemoveFromFavourites } from '../../libs'
 
 export const ToggleFavouritesButton = ({
 	variant,
-	isActive,
-	className
+	className,
+	id
 }: {
 	variant: 'button' | 'label'
-	isActive: boolean
 	className?: string
+	id: number
 }) => {
+	const {
+		isLoading: isFavouritesLoading,
+		data: { items }
+	} = useFavouritesStore()
+	const { accessToken } = useAuthStore()
+
+	const { isPending: isAddPending, mutate: add } = useAddToFavourites()
+	const { isPending: isRemovePending, mutate: remove } =
+		useRemoveFromFavourites()
+
+	const isLoading = isAddPending || isRemovePending || isFavouritesLoading
+
+	console.log(isLoading)
+
+	const favouritesItem = useMemo(
+		() => items.find(i => i.product.id === id),
+		[items, id]
+	)
+
+	if (!accessToken) {
+		return <></>
+	}
+
+	if (isLoading && variant === 'label') {
+		return (
+			<Icon
+				name='Loading'
+				color='black'
+				className={clsx(
+					className,
+					'w-[30px] h-[30px] p-0 animate-spin-1000'
+				)}
+			/>
+		)
+	}
+
 	return (
 		<Button
-			iconName={isActive ? 'FullHeart' : 'Heart'}
+			iconName={
+				isLoading ? 'Loading' : favouritesItem ? 'FullHeart' : 'Heart'
+			}
 			variant='icon'
-			color={variant === 'label' ? 'black' : '#D8CDC5'}
+			color={
+				variant === 'label'
+					? 'black'
+					: favouritesItem
+						? '#000'
+						: '#D8CDC5'
+			}
 			className={clsx(
+				variant === 'button'
+					? 'group dhover:hover:scale-105 duration-700 aspect-square h-full will-change-transform'
+					: 'p-[20px]',
+				className,
 				variant === 'button' &&
-					'bg-black p-[20px] group dhover:hover:scale-105 duration-700',
-				className
+					(favouritesItem
+						? 'bg-beige border-black border'
+						: 'bg-black')
 			)}
-			bodyClassName='dhover:group-hover:scale-105 duration-700'
+			bodyClassName={clsx(
+				'dhover:group-hover:scale-105 duration-700',
+				isLoading && 'animate-spin-1000 w-[28px] h-[28px]'
+			)}
+			disabled={isLoading}
+			onClick={() =>
+				favouritesItem
+					? remove({ id: favouritesItem.id })
+					: add({ product: id })
+			}
 		/>
 	)
 }
