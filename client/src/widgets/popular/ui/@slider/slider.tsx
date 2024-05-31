@@ -1,8 +1,16 @@
+import clsx from 'clsx'
+import type { TCardsDto } from '@/entities/card'
 import { Slider, SliderProvider } from '@/shared'
+import { PopularSlide } from '../@slide'
+import { PopularSlideSkeleton } from '../@slide-skeleton'
 
-// FIX
-
-export const PopularSlider = () => {
+export const PopularSlider = ({
+	list,
+	isLoading
+}: {
+	list: TCardsDto['items']
+	isLoading: boolean
+}) => {
 	return (
 		<SliderProvider
 			options={{
@@ -12,11 +20,17 @@ export const PopularSlider = () => {
 				watchDrag: false
 			}}
 		>
-			<Slider type='more'>
-				<></>
-				{/* {cards.map((i, index) => (
-					<PopularSlide {...i} key={String(i.id)} index={index} />
-				))} */}
+			<Slider
+				type='more'
+				classNameBody={clsx(isLoading && 'gap-x-[50px]')}
+			>
+				{list.map((i, index) =>
+					i ? (
+						<PopularSlide {...i} key={String(i.id)} index={index} />
+					) : (
+						<PopularSlideSkeleton key={String(index)} />
+					)
+				)}
 			</Slider>
 		</SliderProvider>
 	)

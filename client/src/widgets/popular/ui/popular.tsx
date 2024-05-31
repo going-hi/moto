@@ -1,3 +1,4 @@
+import { useGetCards } from '@/entities/card'
 import { Typography } from '@/shared'
 import { PopularSlider } from './@slider'
 import { Layout, Container } from '@/layout'
@@ -5,6 +6,8 @@ import { Layout, Container } from '@/layout'
 const { Title } = Typography
 
 export const Popular = () => {
+	const { isLoading, data } = useGetCards({ sortBy: 'countOrders' })
+
 	return (
 		<section>
 			<Container bodyClassName='bg-black py-[50px]'>
@@ -13,7 +16,10 @@ export const Popular = () => {
 						ПОПУЛЯРНЫЕ ТОВАРЫ
 					</Title>
 				</Layout>
-				<PopularSlider />
+				<PopularSlider
+					isLoading={isLoading}
+					list={isLoading ? [...new Array(6)] : data?.items ?? []}
+				/>
 			</Container>
 		</section>
 	)
