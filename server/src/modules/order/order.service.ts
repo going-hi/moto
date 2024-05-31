@@ -38,6 +38,7 @@ export class OrderService {
 		})
 		await this.productService.addCountOrders(arrayOrdersCount)
 		const order = this.orderRepository.create({
+			...dto,
 			items: orderItems,
 			total,
 			user: { id: userId }
