@@ -21,7 +21,7 @@ $api.interceptors.response.use(
 			const refreshResult = await refresh(false)
 
 			if (!refreshResult) {
-				window.location.replace('/')
+				useAuthStore.getState().setAccessToken(null)
 				return
 			}
 
