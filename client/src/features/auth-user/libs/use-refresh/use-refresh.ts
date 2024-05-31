@@ -17,7 +17,7 @@ export const useRefresh = () => {
 		if (!accessToken) {
 			refetch()
 		}
-	}, [accessToken, refetch])
+	}, [refetch, accessToken])
 
 	useEffect(() => {
 		if (data) {

@@ -5,6 +5,7 @@ import { TAuthDto, TRegistrationDto, useAuthStore } from '../../model'
 
 export const useRegistration = () => {
 	const navigate = useNavigate()
+
 	const { setAccessToken } = useAuthStore()
 
 	return useAppMutation<TRegistrationDto, TAuthDto>({

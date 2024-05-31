@@ -17,7 +17,9 @@ export const useAddToFavourites = () => {
 		}
 	})
 
-	useEffect(() => {}, [isPending, setIsLoading])
+	useEffect(() => {
+		setIsLoading(isPending)
+	}, [isPending, setIsLoading])
 
 	return { isPending, mutate }
 }

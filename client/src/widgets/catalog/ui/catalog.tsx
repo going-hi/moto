@@ -1,4 +1,4 @@
-import { useGetCards } from '../libs'
+import { useGetCards } from '@/entities/card'
 import { CatalogFilter } from './@filter'
 import { CatalogList } from './@list'
 import { CatalogSort } from './@sort'

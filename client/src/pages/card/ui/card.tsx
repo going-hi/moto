@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { z } from 'zod'
 import { CardBody } from '@/widgets/card-body'
 import { OtherModels } from '@/widgets/other-models'
@@ -10,6 +11,10 @@ export const CardPage = () => {
 	const { id } = useValidParams({
 		id: z.string().regex(/^[0-9]+$/)
 	})
+
+	useEffect(() => {
+		scrollTo(0, 0)
+	}, [])
 
 	if (!id) {
 		return <Text>Параметр id карточки должен быть числом</Text>

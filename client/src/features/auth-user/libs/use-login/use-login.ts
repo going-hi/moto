@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useAppMutation } from '@/shared'
 import { login } from '../../api'
-import { useAuthStore, type TAuthDto, type TLogin } from '../../model'
+import { type TAuthDto, type TLogin, useAuthStore } from '../../model'
 
 export const useLogin = () => {
 	const navigate = useNavigate()
