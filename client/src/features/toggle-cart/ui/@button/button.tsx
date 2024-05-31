@@ -30,13 +30,14 @@ export const ToggleCartButton = ({
 		<Button
 			variant={isPending || isLoading ? 'primary' : variant}
 			className={clsx(
-				'h-full basis-[100%] duration-700 will-change-transform',
+				'basis-full duration-700 will-change-transform ',
 				isPending || isLoading
 					? '!py-[20px]'
 					: 'dhover:hover:scale-[101%]',
-				variant === 'primary' && 'max-h-[64px] !py-[20px]'
+				variant === 'primary' && 'max-h-[66px] !py-[20px]'
 			)}
 			bodyClassName={clsx(
+				'py-[21px] max-h-[66px]',
 				addedItem
 					? `!bg-beige border-black border !text-black`
 					: `!bg-black `

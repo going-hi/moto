@@ -59,10 +59,7 @@ export const CardBody = ({ id }: { id: number }) => {
 						</div>
 						<CardBodyDescription description={data?.description} />
 						<div className='flex gap-x-[15px]'>
-							<ToggleFavouritesButton
-								variant='button'
-								isActive={false}
-							/>
+							<ToggleFavouritesButton id={id} variant='button' />
 							<ToggleCartButton
 								variant='parentheses-button'
 								id={id}

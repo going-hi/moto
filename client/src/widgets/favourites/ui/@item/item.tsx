@@ -9,7 +9,7 @@ export const FavouritesItem = (props: TCard) => {
 				<ToggleFavouritesButton
 					className='absolute top-[20px] right-[20px] z-10 p-[10px] opacity-0 dhover:group-hover:opacity-100 duration-500'
 					variant='label'
-					isActive={false}
+					id={props.id}
 				/>
 			</Card>
 			<ToggleCartButton variant='primary' id={props.id} />
