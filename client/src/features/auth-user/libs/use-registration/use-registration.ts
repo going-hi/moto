@@ -1,16 +1,15 @@
 import { useNavigate } from 'react-router-dom'
-import { useAppMutation } from '@/shared'
+import { Token, useAppMutation } from '@/shared'
 import { registration } from '../../api'
-import { TAuthDto, TRegistrationDto, useAuthStore } from '../../model'
+import { TAuthDto, TRegistrationDto } from '../../model'
 
 export const useRegistration = () => {
 	const navigate = useNavigate()
-	const { setAccessToken } = useAuthStore()
 
 	return useAppMutation<TRegistrationDto, TAuthDto>({
 		mutationFn: registration,
 		onSuccess: ({ accessToken }) => {
-			setAccessToken(accessToken)
+			Token.setValue(accessToken)
 			navigate('/')
 		}
 	})

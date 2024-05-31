@@ -12,7 +12,11 @@ export const FavouritesItem = (props: TCard) => {
 					id={props.id}
 				/>
 			</Card>
-			<ToggleCartButton variant='primary' id={props.id} />
+			<ToggleCartButton
+				variant='primary'
+				id={props.id}
+				className='!py-[21px]'
+			/>
 		</li>
 	)
 }

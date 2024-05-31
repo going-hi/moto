@@ -7,10 +7,12 @@ import { useToggleCart } from '../../libs'
 
 export const ToggleCartButton = ({
 	id,
-	variant
+	variant,
+	className
 }: {
 	id: number
 	variant: 'primary' | 'parentheses-button'
+	className?: string
 }) => {
 	const {
 		data: { items },
@@ -34,7 +36,8 @@ export const ToggleCartButton = ({
 				isPending || isLoading
 					? '!py-[20px]'
 					: 'dhover:hover:scale-[101%]',
-				variant === 'primary' && 'max-h-[66px] !py-[20px]'
+				variant === 'primary' && 'max-h-[66px] !py-[20px]',
+				className
 			)}
 			bodyClassName={clsx(
 				'py-[21px] max-h-[66px]',

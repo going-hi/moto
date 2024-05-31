@@ -25,7 +25,7 @@ export const Favourites = () => {
 						</span>
 					)}
 				</div>
-				{!!items && !isLoading ? (
+				{!items.length && !isLoading ? (
 					<FavouritesEmpty />
 				) : (
 					<FavouritesList

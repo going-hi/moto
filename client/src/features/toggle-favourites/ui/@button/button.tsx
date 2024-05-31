@@ -1,6 +1,5 @@
 import clsx from 'clsx'
 import { useMemo } from 'react'
-import { useAuthStore } from '@/features/auth-user'
 import { useFavouritesStore } from '@/entities/favourites'
 import { Button } from '@/shared'
 import { useAddToFavourites, useRemoveFromFavourites } from '../../libs'
@@ -16,7 +15,6 @@ export const ToggleFavouritesButton = ({
 		isLoading: isFavouritesLoading,
 		data: { items }
 	} = useFavouritesStore()
-	const { accessToken } = useAuthStore()
 
 	const { isPending: isAddPending, mutate: add } = useAddToFavourites()
 	const { isPending: isRemovePending, mutate: remove } =
@@ -28,10 +26,6 @@ export const ToggleFavouritesButton = ({
 		() => items.find(i => i.product.id === id),
 		[items, id]
 	)
-
-	if (!accessToken) {
-		return <></>
-	}
 
 	return (
 		<Button
