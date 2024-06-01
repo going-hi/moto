@@ -7,7 +7,7 @@ export const ProfileMenu = () => {
 	const { pathname } = useLocation()
 
 	return (
-		<aside>
+		<aside className='basis-[10%]'>
 			<nav className='mb-[50px]'>
 				<ul className='flex flex-col gap-y-[20px]'>
 					{profileMenuItemsArr.map(i => (

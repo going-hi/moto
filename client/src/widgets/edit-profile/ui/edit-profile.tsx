@@ -10,7 +10,7 @@ export const EditProfile = () => {
 	)
 
 	return (
-		<div>
+		<div className='basis-[53%] shrink-0 grow-0'>
 			<EditProfileSwitch
 				value={switchOption}
 				setValue={setSwitchOption}

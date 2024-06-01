@@ -10,6 +10,7 @@ type TProfileStore = {
 	setData: (d: { profile: TProfile; accessToken: string }) => void
 	accessToken: string | null
 	logout: () => void
+	setProfile: (p: TProfile) => void
 }
 
 const useProfileStore = create<TProfileStore>()(
@@ -26,6 +27,10 @@ const useProfileStore = create<TProfileStore>()(
 				set(state => {
 					state.accessToken = null
 					state.profile = null
+				}),
+			setProfile: profile =>
+				set(state => {
+					state.profile = profile
 				})
 		}))
 	)

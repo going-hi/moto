@@ -10,7 +10,7 @@ export const EditProfileSwitch = ({
 	setValue: Dispatch<SetStateAction<string>>
 }) => {
 	return (
-		<div className='mb-[30px] relative after:absolute after:bottom after:right-0 after:bg-[#9F9C91] after:w-full after:h-[1px] w-[450px]'>
+		<div className='mb-[30px] relative after:absolute after:bottom after:right-0 after:bg-[#9F9C91] after:w-full after:h-[1px] w-[48%]'>
 			<ul className='flex justify-between items-center'>
 				{editProfileSwitchItemsArr.map(i => (
 					<li
