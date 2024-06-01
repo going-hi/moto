@@ -7,6 +7,44 @@ import { PaymentMethod, ShippingMethod } from '../enum'
 
 @Entity('orders')
 export class OrderEntity extends AbstractEntity {
+	@Column()
+	name: string
+
+	@Column()
+	surname: string
+
+	@Column()
+	patronymic: string
+
+	@Column()
+	email: string
+
+	@Column()
+	phone: string
+
+	@Column({ nullable: true })
+	postIndex: string | null
+
+	@Column({ nullable: true })
+	region: string | null
+
+	@Column({ nullable: true })
+	city: string | null
+
+	// * квартира
+	@Column({ nullable: true })
+	flat: string | null
+
+	// * район
+	@Column({ nullable: true })
+	district: string | null
+
+	@Column({ nullable: true })
+	street: string | null
+
+	@Column({ nullable: true })
+	home: string | null
+
 	@Column({ enum: PaymentMethod })
 	paymentMethod: PaymentMethod
 
