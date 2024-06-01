@@ -11,7 +11,7 @@ export const AuthRoute = ({
 	children: ReactNode
 	variant: 'public' | 'authorized' | 'unauthorized'
 }) => {
-	const { isLoading } = useRefresh()
+	const { isLoading, data } = useRefresh()
 	const { accessToken } = useAuthStore()
 
 	if (isLoading) {
@@ -19,11 +19,11 @@ export const AuthRoute = ({
 	}
 
 	if (variant === 'authorized') {
-		return accessToken ? children : <Navigate to='/' />
+		return accessToken || data ? children : <Navigate to='/' />
 	}
 
 	if (variant === 'unauthorized') {
-		return accessToken ? <Navigate to='/' /> : children
+		return accessToken || data ? <Navigate to='/' /> : children
 	}
 
 	return children

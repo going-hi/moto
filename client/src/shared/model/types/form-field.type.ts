@@ -1,4 +1,4 @@
-export type TAuthField<T> = {
+export type TFormField<T> = {
 	label: string
 	required?: boolean
 	name: T

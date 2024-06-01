@@ -10,6 +10,7 @@ import Favourite from '@assets/favourite.svg?react'
 import FullHeart from '@assets/full-heart.svg?react'
 import Heart from '@assets/heart.svg?react'
 import Loading from '@assets/loading.svg?react'
+import Logout from '@assets/logout.svg?react'
 import Minus from '@assets/minus.svg?react'
 import Plus from '@assets/plus.svg?react'
 import Profile from '@assets/profile.svg?react'
@@ -29,7 +30,8 @@ export const iconNames = {
 	FullHeart,
 	Close,
 	Check,
-	Loading
+	Loading,
+	Logout
 }
 
 export type TIconName = keyof typeof iconNames
