@@ -1,5 +1,16 @@
 import { Type } from 'class-transformer'
-import { ArrayMinSize, IsArray, IsEnum, IsInt, IsPositive, ValidateNested } from 'class-validator'
+import {
+	ArrayMinSize,
+	IsArray,
+	IsEmail,
+	IsEnum,
+	IsInt,
+	IsOptional,
+	IsPhoneNumber,
+	IsPositive,
+	IsString,
+	ValidateNested
+} from 'class-validator'
 import { PaymentMethod, ShippingMethod } from '../enum'
 import { ApiProperty } from '@nestjs/swagger'
 
@@ -27,4 +38,51 @@ export class CreateOrderDto {
 	@ApiProperty({ enum: ShippingMethod })
 	@IsEnum(ShippingMethod)
 	shippingMethod: ShippingMethod
+
+	@IsString({ message: 'Имя должно быть строкой' })
+	name: string
+
+	@IsString({ message: 'Фамилия должна быть строкой' })
+	surname: string
+
+	@IsOptional()
+	@IsString({ message: 'Отчество должно быть строкой' })
+	patronymic?: string
+
+	@IsOptional()
+	@IsEmail({}, { message: 'Некорректный email' })
+	email?: string
+
+	@IsPhoneNumber('RU', { message: 'Некорректный телефон' })
+	phone: string
+
+	@IsOptional()
+	@IsString({ message: 'Индекс должен быть  строкой' })
+	postIndex?: string | null
+
+	@IsOptional()
+	@IsString({ message: 'Регион должен быть строкой' })
+	region?: string | null
+
+	@IsOptional()
+	@IsString({ message: 'Город должен быть строкой' })
+	city?: string | null
+
+	// * квартира
+	@IsOptional()
+	@IsString({ message: 'Квартира должна быть строкой' })
+	flat?: string | null
+
+	// * район
+	@IsOptional()
+	@IsString({ message: 'Район должен быть строкой' })
+	district?: string | null
+
+	@IsOptional()
+	@IsString({ message: 'Улица должна быть строкой' })
+	street?: string
+
+	@IsOptional()
+	@IsString({ message: 'Дом должен быть строкой' })
+	home: string | null
 }

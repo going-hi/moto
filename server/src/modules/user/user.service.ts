@@ -88,22 +88,22 @@ export class UserService {
 
 	async profile(id: number) {
 		const user = await this.byId(id, true)
-		delete user.link
-		delete user.code
-		delete user.password
 		return user
 	}
 
 	async updateAvatar(userId: number, avatar: Express.Multer.File | null) {
 		const user = await this.byId(userId, true)
-		let link: string | null = null
+		let url: string | null = null
 		if (avatar) {
-			link = await this.fileService.uploadFile(avatar)
+			url = await this.fileService.uploadFile(avatar)
 		} else {
 			user.avatar ? await this.fileService.deleteFile(user.avatar) : {}
 		}
-		user.avatar = link
-		return await this.userRepository.save(user)
+		user.avatar = url
+
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { link, code, password, ...updatedUser } = await this.userRepository.save(user)
+		return updatedUser
 	}
 
 	async update(userId: number, dto: UpdateUserDto) {
@@ -122,10 +122,11 @@ export class UserService {
 			await this.changeEmail(userId, dto.email)
 		}
 
-		const updatedUser = await this.userRepository.save({ ...user, ...dto })
-		delete updatedUser.link
-		delete updatedUser.code
-		delete updatedUser.password
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { link, code, password, ...updatedUser } = await this.userRepository.save({
+			...user,
+			...dto
+		})
 		return updatedUser
 	}
 
@@ -136,8 +137,6 @@ export class UserService {
 		}
 		const link = randomUUID()
 		await this.userRepository.update({ id }, { link, isConfirm: false, email: newEmail })
-
-		console.log(await this.byId(id))
 		await this.mailService.sendActiveLink(newEmail, link)
 	}
 }
