@@ -4,6 +4,7 @@ import { BasketEntity } from '@/modules/basket/entities'
 import { CharacteristicEntity } from '@/modules/characteristic/entities'
 import { FavouritesEntity } from '@/modules/favourites/entities'
 import { OrderItemEntity } from '@/modules/order/entities'
+import { ReviewEntity } from '@/modules/review/entities/review.entity'
 import { Column, Entity, OneToMany } from 'typeorm'
 
 @Entity('products')
@@ -43,4 +44,7 @@ export class ProductEntity extends AbstractEntity {
 
 	@OneToMany(() => FavouritesEntity, favourites => favourites.product, { cascade: true })
 	favorites: FavouritesEntity[]
+
+	@OneToMany(() => ReviewEntity, review => review.product, { cascade: true })
+	reviews: ReviewEntity[]
 }
