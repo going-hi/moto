@@ -13,11 +13,11 @@ export class OrderEntity extends AbstractEntity {
 	@Column()
 	surname: string
 
-	@Column()
-	patronymic: string
+	@Column({ nullable: true })
+	patronymic?: string | null
 
-	@Column()
-	email: string
+	@Column({ nullable: true })
+	email?: string | null
 
 	@Column()
 	phone: string

@@ -45,11 +45,13 @@ export class CreateOrderDto {
 	@IsString({ message: 'Фамилия должна быть строкой' })
 	surname: string
 
+	@IsOptional()
 	@IsString({ message: 'Отчество должно быть строкой' })
-	patronymic: string
+	patronymic?: string
 
+	@IsOptional()
 	@IsEmail({}, { message: 'Некорректный email' })
-	email: string
+	email?: string
 
 	@IsPhoneNumber('RU', { message: 'Некорректный телефон' })
 	phone: string
