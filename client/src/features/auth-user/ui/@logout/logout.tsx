@@ -9,8 +9,8 @@ export const AuthLogout = () => {
 	}
 
 	return (
-		<button onClick={mutate}>
-			<span className='text-[18px] mb-[5px]'>ВЫЙТИ</span>
+		<button onClick={mutate} className='flex items-center gap-x-[5px]'>
+			<span className='text-[18px]'>ВЫЙТИ</span>
 			<Icon name='Logout' />
 		</button>
 	)

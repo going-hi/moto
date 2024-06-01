@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useMemo } from 'react'
-import { useAuthStore } from '@/features/auth-user'
 import { useFavouritesStore } from '@/entities/favourites'
+import { useProfileStore } from '@/entities/profile'
 import { Button, Icon } from '@/shared'
 import { useRemoveFromFavourites, useAddToFavourites } from '../../libs'
 
@@ -16,7 +16,7 @@ export const ToggleFavouritesLabel = ({
 		isLoading: isFavouritesLoading,
 		data: { items }
 	} = useFavouritesStore()
-	const { accessToken } = useAuthStore()
+	const { accessToken } = useProfileStore()
 
 	const { isPending: isAddPending, mutate: add } = useAddToFavourites()
 	const { isPending: isRemovePending, mutate: remove } =

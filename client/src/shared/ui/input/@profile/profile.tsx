@@ -23,10 +23,10 @@ export const ProfileInput = forwardRef<HTMLInputElement, TInputProps>(
 
 		return (
 			<div className={className}>
-				<div className='flex justify-between mb-[10px]'>
+				<div className='flex justify-between mb-[5px]'>
 					<label
 						htmlFor={id}
-						className='text-[18px] font-medium block mb-[5px] -tracking-2per'
+						className='text-[18px] font-medium -tracking-2per'
 					>
 						{label}
 					</label>
@@ -44,7 +44,7 @@ export const ProfileInput = forwardRef<HTMLInputElement, TInputProps>(
 					ref={ref}
 					onChange={onChange}
 					className={clsx(
-						'placeholder:text-[#9B978B] bg-beige px-[10px] py-[16px] w-full border-[#41403B] border',
+						'placeholder:text-[#9B978B] bg-beige px-[10px] py-[12px] w-full border-[#41403B] border',
 						classNameBody
 					)}
 				/>

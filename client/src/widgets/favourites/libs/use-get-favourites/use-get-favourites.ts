@@ -1,15 +1,15 @@
 import { useEffect } from 'react'
-import { useAuthStore } from '@/features/auth-user'
 import {
 	useFavouritesStore,
 	type TGetFavouritesDto
 } from '@/entities/favourites'
+import { useProfileStore } from '@/entities/profile'
 import { useAppQuery } from '@/shared'
 import { getFavourites } from '../../api'
 
 export const useGetFavourites = () => {
 	const { setIsLoading, setData } = useFavouritesStore()
-	const { accessToken } = useAuthStore()
+	const { accessToken } = useProfileStore()
 
 	const { isFetching, data } = useAppQuery<TGetFavouritesDto>({
 		queryKey: ['user/favourites'],

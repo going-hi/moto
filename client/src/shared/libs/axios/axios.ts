@@ -1,11 +1,13 @@
 import axios, { AxiosError } from 'axios'
-import { useAuthStore, refresh } from '@/features/auth-user'
+import { refresh } from '@/features/auth-user'
+import { useProfileStore } from '@/entities/profile'
 import { axiosConfig } from '../../config'
 
 const $api = axios.create(axiosConfig)
 
 $api.interceptors.request.use(req => {
-	req.headers.authorization = 'Bearer ' + useAuthStore.getState().accessToken
+	req.headers.authorization =
+		'Bearer ' + useProfileStore.getState().accessToken
 	req.headers['Content-Type'] = 'application/json'
 	return req
 })
@@ -21,11 +23,11 @@ $api.interceptors.response.use(
 			const refreshResult = await refresh(false)
 
 			if (!refreshResult) {
-				useAuthStore.getState().setAccessToken(null)
+				useProfileStore.getState().logout()
 				return
 			}
 
-			useAuthStore.getState().setAccessToken(refreshResult.accessToken)
+			useProfileStore.getState().setData(refreshResult)
 
 			return $api(origin)
 		}

@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
-import { useAuthStore } from '@/features/auth-user'
 import { type TGetCartDto, useCartStore } from '@/entities/cart'
+import { useProfileStore } from '@/entities/profile'
 import { useAppQuery } from '@/shared'
 import { getCart } from '../../api'
 
 export const useGetCart = () => {
 	const { setData, setIsLoading } = useCartStore()
-	const { accessToken } = useAuthStore()
+	const { accessToken } = useProfileStore()
 
 	const { data, isFetching } = useAppQuery<TGetCartDto>({
 		queryFn: getCart,

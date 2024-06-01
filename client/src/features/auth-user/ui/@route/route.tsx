@@ -1,8 +1,8 @@
 import { ReactNode } from 'react'
 import { Navigate } from 'react-router-dom'
+import { useProfileStore } from '@/entities/profile'
 import { FullLoader } from '@/shared'
 import { useRefresh } from '../../libs'
-import { useAuthStore } from '../../model'
 
 export const AuthRoute = ({
 	children,
@@ -12,7 +12,7 @@ export const AuthRoute = ({
 	variant: 'public' | 'authorized' | 'unauthorized'
 }) => {
 	const { isLoading, data } = useRefresh()
-	const { accessToken } = useAuthStore()
+	const { accessToken } = useProfileStore()
 
 	if (isLoading) {
 		return <FullLoader />

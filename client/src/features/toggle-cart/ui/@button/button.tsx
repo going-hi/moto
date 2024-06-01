@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useMemo } from 'react'
-import { useAuthStore } from '@/features/auth-user'
 import { useCartStore } from '@/entities/cart'
+import { useProfileStore } from '@/entities/profile'
 import { Button, Icon } from '@/shared'
 import { useToggleCart } from '../../libs'
 
@@ -19,7 +19,7 @@ export const ToggleCartButton = ({
 		isLoading
 	} = useCartStore()
 
-	const { accessToken } = useAuthStore()
+	const { accessToken } = useProfileStore()
 
 	const addedItem = useMemo(
 		() => items.find(i => i.product.id === id),

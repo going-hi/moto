@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
+import { useProfileStore } from '@/entities/profile'
 import { refresh } from '../../api'
-import { useAuthStore } from '../../model'
 
 export const useRefresh = () => {
-	const { setAccessToken, accessToken } = useAuthStore()
+	const { setData, accessToken } = useProfileStore()
 
 	const { isLoading, data, refetch } = useQuery({
 		queryFn: () => refresh(false),
@@ -21,9 +21,9 @@ export const useRefresh = () => {
 
 	useEffect(() => {
 		if (data) {
-			setAccessToken(data.accessToken)
+			setData(data)
 		}
-	}, [data, setAccessToken])
+	}, [data, setData])
 
 	return { isLoading, data }
 }

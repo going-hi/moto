@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { editProfileSwitchItemsArr } from '../model'
+import { EditProfileInfoForm } from './@edit-info-form'
 import { EditProfilePasswordForm } from './@edit-password-form'
-import { EditProfileProfileForm } from './@edit-profile-form'
 import { EditProfileSwitch } from './@switch'
 
 export const EditProfile = () => {
@@ -16,7 +16,7 @@ export const EditProfile = () => {
 				setValue={setSwitchOption}
 			/>
 			{switchOption === 'edit-profile' ? (
-				<EditProfileProfileForm />
+				<EditProfileInfoForm />
 			) : (
 				<EditProfilePasswordForm />
 			)}

@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react'
-import { useAuthStore } from '@/features/auth-user'
 import { useCartStore } from '@/entities/cart'
+import { useProfileStore } from '@/entities/profile'
 import { IconBadge, Icon } from '@/shared'
 
 export const CartIcon = ({
@@ -10,7 +10,7 @@ export const CartIcon = ({
 	isOpen: boolean
 	setIsOpen: Dispatch<SetStateAction<boolean>>
 }) => {
-	const { accessToken } = useAuthStore()
+	const { accessToken } = useProfileStore()
 	const {
 		isLoading,
 		data: { items }
