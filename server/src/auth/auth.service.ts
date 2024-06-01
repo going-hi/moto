@@ -106,10 +106,6 @@ export class AuthService {
 	}
 
 	async changePassword(dto: ChangePasswordDto, userId: number) {
-		if (dto.newPassword === dto.password) {
-			throw new BadRequestException('Нельзя менять на тот же пароль')
-		}
-
 		const user = await this.userService.byId(userId)
 
 		const isMatch = await this.hashService.compare(dto.password, user.password)
