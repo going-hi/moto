@@ -1,5 +1,6 @@
 import {
 	Body,
+	ClassSerializerInterceptor,
 	Controller,
 	Delete,
 	FileTypeValidator,
@@ -26,6 +27,7 @@ import { FileInterceptor } from '@nestjs/platform-express'
 import { UpdateUserDto, UserAllQueryDto } from './dto'
 import { REGEX_FILE_TYPE_IMG } from '@/common/constants'
 
+@UseInterceptors(ClassSerializerInterceptor)
 @ApiTags('User')
 @UsePipes(new ValidationPipe({ whitelist: true }))
 @Controller('user')
