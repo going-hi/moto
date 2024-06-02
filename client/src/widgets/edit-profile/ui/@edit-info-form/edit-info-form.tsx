@@ -6,15 +6,23 @@ import {
 	useEditInfo
 } from '@/features/edit-profile'
 import { useProfileStore } from '@/entities/profile'
-import { Button, Icon, Input } from '@/shared'
+import { Button, Icon, Input, Typography } from '@/shared'
 import { editInfoFieldsArr } from '../../model'
 
+const { Text } = Typography
+
 export const EditProfileInfoForm = () => {
-	const {} = useProfileStore()
+	const { profile } = useProfileStore()
 	const { mutate, isPending, error } = useEditInfo()
 
 	const form = useForm<TEditProfileInfo>({
-		resolver: zodResolver(EditInfoSchema)
+		resolver: zodResolver(EditInfoSchema),
+		defaultValues: {
+			name: profile?.name,
+			surname: profile?.surname,
+			email: profile?.email,
+			phone: profile?.phone
+		}
 	})
 
 	const { handleSubmit, control } = form
@@ -50,6 +58,11 @@ export const EditProfileInfoForm = () => {
 						'Сохранить'
 					)}
 				</Button>
+				{error?.message && (
+					<Text className='text-red-700 mt-[5px]'>
+						{error?.message}
+					</Text>
+				)}
 			</form>
 		</FormProvider>
 	)
