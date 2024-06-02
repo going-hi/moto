@@ -30,12 +30,13 @@ export const ToggleCartButton = ({
 
 	return (
 		<Button
-			variant={isPending || isLoading ? 'primary' : variant}
+			variant={
+				!accessToken || isPending || isLoading ? 'primary' : variant
+			}
 			className={clsx(
 				'basis-full duration-700 will-change-transform ',
-				isPending || isLoading
-					? '!py-[20px]'
-					: 'dhover:hover:scale-[101%]',
+				isPending || (isLoading && '!py-[20px]'),
+				!!accessToken && 'dhover:hover:scale-[101%]',
 				variant === 'primary' && 'max-h-[66px] !py-[20px]',
 				className
 			)}
@@ -46,7 +47,7 @@ export const ToggleCartButton = ({
 					: `!bg-black `
 			)}
 			isMain
-			disabled={isPending || isLoading}
+			disabled={!accessToken || isPending || isLoading}
 			onClick={() =>
 				accessToken ? mutate(addedItem ? addedItem.id : id) : {}
 			}

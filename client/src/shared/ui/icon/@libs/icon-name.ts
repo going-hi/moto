@@ -12,6 +12,7 @@ import Heart from '@assets/heart.svg?react'
 import Loading from '@assets/loading.svg?react'
 import Logout from '@assets/logout.svg?react'
 import Minus from '@assets/minus.svg?react'
+import Pencil from '@assets/pencil.svg?react'
 import Plus from '@assets/plus.svg?react'
 import Profile from '@assets/profile.svg?react'
 import Search from '@assets/search.svg?react'
@@ -31,7 +32,8 @@ export const iconNames = {
 	Close,
 	Check,
 	Loading,
-	Logout
+	Logout,
+	Pencil
 }
 
 export type TIconName = keyof typeof iconNames

@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from 'react'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import {
 	EditInfoSchema,
@@ -6,8 +7,9 @@ import {
 	useEditInfo
 } from '@/features/edit-profile'
 import { useProfileStore } from '@/entities/profile'
-import { Button, Icon, Input, Typography } from '@/shared'
+import { Input, Typography } from '@/shared'
 import { editInfoFieldsArr } from '../../model'
+import { EditProfileInfoButton } from '../@edit-info-button'
 
 const { Text } = Typography
 
@@ -18,14 +20,21 @@ export const EditProfileInfoForm = () => {
 	const form = useForm<TEditProfileInfo>({
 		resolver: zodResolver(EditInfoSchema),
 		defaultValues: {
-			name: profile?.name,
-			surname: profile?.surname,
-			email: profile?.email,
-			phone: profile?.phone
+			name: '',
+			surname: '',
+			email: '',
+			phone: ''
 		}
 	})
 
-	const { handleSubmit, control } = form
+	const { handleSubmit, control, reset } = form
+
+	useEffect(() => {
+		if (profile) {
+			const { name, surname, phone, email } = profile
+			reset({ name, surname, email, phone })
+		}
+	}, [profile, reset])
 
 	const onSubmit = (data: TEditProfileInfo) => {
 		mutate(data)
@@ -46,18 +55,13 @@ export const EditProfileInfoForm = () => {
 									variant='profile'
 									{...i}
 									{...field}
+									disabled
 								/>
 							)}
 						/>
 					))}
 				</div>
-				<Button variant='primary' className='!py-[18px] uppercase'>
-					{isPending ? (
-						<Icon name='Loading' className='w-[21px] h-[21px]' />
-					) : (
-						'Сохранить'
-					)}
-				</Button>
+				<EditProfileInfoButton isPending={isPending} />
 				{error?.message && (
 					<Text className='text-red-700 mt-[5px]'>
 						{error?.message}

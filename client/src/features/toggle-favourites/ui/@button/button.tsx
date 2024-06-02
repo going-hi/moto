@@ -1,8 +1,9 @@
 import clsx from 'clsx'
 import { useMemo } from 'react'
 import { useFavouritesStore } from '@/entities/favourites'
+import { useProfileStore } from '@/entities/profile'
 import { Button } from '@/shared'
-import { useAddToFavourites, useRemoveFromFavourites } from '../../libs'
+import { useToggleFavourites } from '../../libs'
 
 export const ToggleFavouritesButton = ({
 	className,
@@ -16,16 +17,18 @@ export const ToggleFavouritesButton = ({
 		data: { items }
 	} = useFavouritesStore()
 
-	const { isPending: isAddPending, mutate: add } = useAddToFavourites()
-	const { isPending: isRemovePending, mutate: remove } =
-		useRemoveFromFavourites()
-
-	const isLoading = isAddPending || isRemovePending || isFavouritesLoading
+	const { accessToken } = useProfileStore()
 
 	const favouritesItem = useMemo(
 		() => items.find(i => i.product.id === id),
 		[items, id]
 	)
+
+	const { mutate, isPending } = useToggleFavourites(
+		favouritesItem ? 'remove' : 'add'
+	)
+
+	const isLoading = isPending || isFavouritesLoading
 
 	return (
 		<Button
@@ -35,20 +38,18 @@ export const ToggleFavouritesButton = ({
 			variant='icon'
 			color={favouritesItem ? '#000' : '#D8CDC5'}
 			className={clsx(
-				'group dhover:hover:scale-105 duration-700 aspect-square h-full will-change-transform',
+				'group duration-700 aspect-square h-full will-change-transform',
 				className,
-				favouritesItem ? 'bg-beige border-black border' : 'bg-black'
+				favouritesItem ? 'bg-beige border-black border' : 'bg-black',
+				!isLoading && !!accessToken && 'dhover:hover:scale-105'
 			)}
 			bodyClassName={clsx(
-				'dhover:group-hover:scale-105 duration-700',
+				'duration-700',
+				!isLoading && !!accessToken && 'dhover:hover:scale-105',
 				isLoading && 'animate-spin-1000 w-[28px] h-[28px]'
 			)}
-			disabled={isLoading}
-			onClick={() =>
-				favouritesItem
-					? remove({ id: favouritesItem.id })
-					: add({ product: id })
-			}
+			disabled={!accessToken || isLoading}
+			onClick={() => mutate({ id: favouritesItem?.id, product: id })}
 		/>
 	)
 }

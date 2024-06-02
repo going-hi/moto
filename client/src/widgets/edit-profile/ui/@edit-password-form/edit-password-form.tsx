@@ -26,7 +26,7 @@ export const EditProfilePasswordForm = () => {
 
 	return (
 		<FormProvider {...form}>
-			<form onSubmit={handleSubmit(onSubmit)}>
+			<form className='w-[48%]' onSubmit={handleSubmit(onSubmit)}>
 				<div className='flex flex-col gap-y-[20px] mb-[30px]'>
 					{editPasswordFieldsArr.map(i => (
 						<Controller

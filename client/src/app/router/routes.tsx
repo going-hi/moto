@@ -7,6 +7,7 @@ import { NotFoundPage } from '@/pages/not-found'
 import { ProfilePage, RedirectProfilePage } from '@/pages/profile'
 import { AuthForm } from '@/widgets/auth-form'
 import { EditProfile } from '@/widgets/edit-profile'
+import { MyOrders } from '@/widgets/my-orders'
 import { ResetPasswordForm } from '@/widgets/reset-password-form'
 import { AuthRoute } from '@/features/auth-user'
 
@@ -90,6 +91,14 @@ export const router = createBrowserRouter([
 				element: (
 					<AuthRoute variant='authorized'>
 						<RedirectProfilePage />
+					</AuthRoute>
+				)
+			},
+			{
+				path: 'orders',
+				element: (
+					<AuthRoute variant='authorized'>
+						<MyOrders />
 					</AuthRoute>
 				)
 			}

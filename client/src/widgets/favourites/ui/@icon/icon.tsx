@@ -18,6 +18,8 @@ export const FavouritesIcon = () => {
 		return <></>
 	}
 
+	console.log('favourites', items)
+
 	return (
 		<Link to='/favourites'>
 			{isLoading ? (

@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { useFavouritesStore } from '@/entities/favourites'
 import { useProfileStore } from '@/entities/profile'
 import { Button, Icon } from '@/shared'
-import { useRemoveFromFavourites, useAddToFavourites } from '../../libs'
+import { useToggleFavourites } from '../../libs'
 
 export const ToggleFavouritesLabel = ({
 	className,
@@ -18,16 +18,16 @@ export const ToggleFavouritesLabel = ({
 	} = useFavouritesStore()
 	const { accessToken } = useProfileStore()
 
-	const { isPending: isAddPending, mutate: add } = useAddToFavourites()
-	const { isPending: isRemovePending, mutate: remove } =
-		useRemoveFromFavourites()
-
-	const isLoading = isAddPending || isRemovePending || isFavouritesLoading
-
 	const favouritesItem = useMemo(
 		() => items.find(i => i.product.id === id),
 		[items, id]
 	)
+
+	const { isPending, mutate } = useToggleFavourites(
+		favouritesItem ? 'remove' : 'add'
+	)
+
+	const isLoading = isPending || isFavouritesLoading
 
 	if (!accessToken) {
 		return <></>
@@ -59,11 +59,7 @@ export const ToggleFavouritesLabel = ({
 				isLoading && 'animate-spin-1000 w-[28px] h-[28px]'
 			)}
 			disabled={isLoading}
-			onClick={() =>
-				favouritesItem
-					? remove({ id: favouritesItem.id })
-					: add({ product: id })
-			}
+			onClick={() => mutate({ id: favouritesItem?.id, product: id })}
 		/>
 	)
 }

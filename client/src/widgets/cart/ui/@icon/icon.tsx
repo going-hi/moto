@@ -20,6 +20,8 @@ export const CartIcon = ({
 		return <></>
 	}
 
+	console.log('cart', items)
+
 	return isLoading ? (
 		<IconBadge name='Cart' color='white'>
 			<Icon
