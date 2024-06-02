@@ -108,6 +108,7 @@ export class UserService {
 
 	async update(userId: number, dto: UpdateUserDto) {
 		const user = await this.byId(userId, true)
+		let isConfirm = user.isConfirm
 		delete user.isConfirm
 		delete user.link
 		if (user.phone !== dto.phone) {
@@ -118,8 +119,8 @@ export class UserService {
 		}
 
 		if (user.email !== dto.email) {
-			console.log('email')
 			await this.changeEmail(userId, dto.email)
+			isConfirm = false
 		}
 
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -127,7 +128,7 @@ export class UserService {
 			...user,
 			...dto
 		})
-		return updatedUser
+		return { ...updatedUser, isConfirm }
 	}
 
 	async changeEmail(id: number, newEmail: string) {
