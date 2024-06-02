@@ -1,6 +1,5 @@
 import axios from 'axios'
-import { ZodError } from 'zod'
-import { $api, envConfig } from '@/shared'
+import { $api, ZodParseError, envConfig } from '@/shared'
 import { TAuthDto, AuthDtoSchema } from '../model'
 
 export const refresh = async (
@@ -18,14 +17,15 @@ export const refresh = async (
 				}
 			)
 
-			return AuthDtoSchema.parse(res.data)
+			return new ZodParseError<TAuthDto>(AuthDtoSchema, res.data).result()
 		} catch (e) {
-			if (e instanceof ZodError) {
-				console.log('Zod parse error')
-			}
 			return null
 		}
 	}
 
-	return $api.get('/auth/refresh').then(res => AuthDtoSchema.parse(res.data))
+	return $api
+		.get('/auth/refresh')
+		.then(res =>
+			new ZodParseError<TAuthDto>(AuthDtoSchema, res.data).result()
+		)
 }

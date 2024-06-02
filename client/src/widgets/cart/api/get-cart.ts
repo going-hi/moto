@@ -1,5 +1,9 @@
-import { GetCartDtoSchema } from '@/entities/cart'
-import { $api } from '@/shared'
+import { GetCartDtoSchema, TGetCartDto } from '@/entities/cart'
+import { $api, ZodParseError } from '@/shared'
 
 export const getCart = () =>
-	$api.get('/basket').then(res => GetCartDtoSchema.parse(res.data))
+	$api
+		.get('/basket')
+		.then(res =>
+			new ZodParseError<TGetCartDto>(GetCartDtoSchema, res.data).result()
+		)

@@ -9,11 +9,13 @@ export const useLogin = () => {
 
 	const { setData } = useProfileStore()
 
-	return useAppMutation<TLogin, TAuthDto>({
+	return useAppMutation<TLogin, TAuthDto | null>({
 		mutationFn: login,
 		onSuccess: data => {
-			setData(data)
-			navigate('/')
+			if (data) {
+				setData(data)
+				navigate('/')
+			}
 		}
 	})
 }

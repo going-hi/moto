@@ -1,5 +1,5 @@
-import { $api } from '@/shared'
-import { ResetEmailDtoSchema } from '../model'
+import { $api, ZodParseError } from '@/shared'
+import { ResetEmailDtoSchema, TResetEmailDto } from '../model'
 
 export const resetEmail = ({ email }: { email: string }) =>
 	$api
@@ -8,4 +8,9 @@ export const resetEmail = ({ email }: { email: string }) =>
 				email
 			}
 		})
-		.then(res => ResetEmailDtoSchema.parse(res.data))
+		.then(res =>
+			new ZodParseError<TResetEmailDto>(
+				ResetEmailDtoSchema,
+				res.data
+			).result()
+		)

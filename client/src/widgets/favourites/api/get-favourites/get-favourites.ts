@@ -1,5 +1,15 @@
-import { GetFavouritesDtoSchema } from '@/entities/favourites'
-import { $api } from '@/shared'
+import {
+	GetFavouritesDtoSchema,
+	TGetFavouritesDto
+} from '@/entities/favourites'
+import { $api, ZodParseError } from '@/shared'
 
 export const getFavourites = () =>
-	$api.get('/favourites').then(res => GetFavouritesDtoSchema.parse(res.data))
+	$api
+		.get('/favourites')
+		.then(res =>
+			new ZodParseError<TGetFavouritesDto>(
+				GetFavouritesDtoSchema,
+				res.data
+			).result()
+		)

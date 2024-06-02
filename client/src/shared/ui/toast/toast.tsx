@@ -8,7 +8,7 @@ export const Toast = () => {
 				background: 'var(--beige)'
 			}}
 			position='bottom-left'
-			autoClose={225000}
+			autoClose={10000}
 			hideProgressBar
 			newestOnTop={false}
 			closeOnClick

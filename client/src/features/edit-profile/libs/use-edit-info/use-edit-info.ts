@@ -1,10 +1,9 @@
-import { useProfileStore } from '@/entities/profile'
 import { useAppMutation } from '@/shared'
 import { editInfo } from '../../api'
 import type { TEditProfileInfo } from '../../model'
 
 export const useEditInfo = () => {
-	const { setProfile } = useProfileStore()
+	// const { setProfile } = useProfileStore()
 
 	return useAppMutation<TEditProfileInfo, unknown>({
 		mutationKey: ['user/profile/change'],
