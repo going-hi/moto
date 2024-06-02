@@ -5,8 +5,6 @@ import { addToFavourites, removeFromFavourites } from '../../api'
 export const useToggleFavourites = (variant: 'add' | 'remove') => {
 	const client = useQueryClient()
 
-	console.log(variant)
-
 	return useAppMutation({
 		mutationKey: ['user/favourites/toggle'],
 		mutationFn: ({ id, product }: { id?: number; product?: number }) =>

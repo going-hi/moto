@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
-import { useCartStore } from '@/entities/cart'
+import { useGetCart } from '@/entities/cart'
 import { Icon, Typography } from '@/shared'
 import { CartInfo } from '../@info'
 
@@ -10,9 +10,7 @@ export const CartBody = ({
 }: {
 	setIsOpen: Dispatch<SetStateAction<boolean>>
 }) => {
-	const {
-		data: { items }
-	} = useCartStore()
+	const { data } = useGetCart()
 
 	return (
 		<div className='p-[50px]'>
@@ -22,7 +20,7 @@ export const CartBody = ({
 						Корзина
 					</Title>
 					<span className='text-[35px] font-normal inter block pb-[6px]'>
-						({items.length})
+						({data?.items.length})
 					</span>
 				</div>
 				<Icon

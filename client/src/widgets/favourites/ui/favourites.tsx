@@ -1,4 +1,4 @@
-import { useFavouritesStore } from '@/entities/favourites'
+import { useGetFavourites } from '@/entities/favourites'
 import { Typography } from '@/shared'
 import { FavouritesEmpty } from './@empty'
 import { FavouritesList } from './@list'
@@ -7,10 +7,7 @@ import { Container } from '@/layout'
 const { Title } = Typography
 
 export const Favourites = () => {
-	const {
-		data: { items },
-		isLoading
-	} = useFavouritesStore()
+	const { data, isLoading } = useGetFavourites()
 
 	return (
 		<section className='mb-[30px] mt-[50px]'>
@@ -19,17 +16,17 @@ export const Favourites = () => {
 					<Title variant='h2' className='text-white leading-[95px]'>
 						Избранное
 					</Title>
-					{!!items.length && (
+					{!!data?.items.length && (
 						<span className='text-[35px] font-normal inter block pb-[6px] text-white'>
-							({items.length})
+							({data?.items.length})
 						</span>
 					)}
 				</div>
-				{!items.length && !isLoading ? (
+				{!data?.items.length && !isLoading ? (
 					<FavouritesEmpty />
 				) : (
 					<FavouritesList
-						list={isLoading ? [...new Array(9)] : items}
+						list={isLoading ? [...new Array(9)] : data?.items ?? []}
 					/>
 				)}
 			</Container>

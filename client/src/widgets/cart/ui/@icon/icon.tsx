@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
-import { useCartStore } from '@/entities/cart'
+import { useGetCart } from '@/entities/cart'
 import { useProfileStore } from '@/entities/profile'
 import { IconBadge, Icon } from '@/shared'
 
@@ -11,16 +11,12 @@ export const CartIcon = ({
 	setIsOpen: Dispatch<SetStateAction<boolean>>
 }) => {
 	const { accessToken } = useProfileStore()
-	const {
-		isLoading,
-		data: { items }
-	} = useCartStore()
+
+	const { isLoading, data } = useGetCart()
 
 	if (!accessToken) {
 		return <></>
 	}
-
-	console.log('cart', items)
 
 	return isLoading ? (
 		<IconBadge name='Cart' color='white'>
@@ -34,7 +30,7 @@ export const CartIcon = ({
 			onClick={() => setIsOpen(!isOpen)}
 			color='white'
 			name='Cart'
-			count={items.length}
+			count={data?.items.length}
 			className='cursor-pointer dhover:hover:scale-125 duration-700 self-start'
 		/>
 	)

@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { useMemo } from 'react'
-import { useFavouritesStore } from '@/entities/favourites'
+import { useGetFavourites } from '@/entities/favourites'
 import { useProfileStore } from '@/entities/profile'
 import { Button } from '@/shared'
 import { useToggleFavourites } from '../../libs'
@@ -12,16 +12,13 @@ export const ToggleFavouritesButton = ({
 	className?: string
 	id: number
 }) => {
-	const {
-		isLoading: isFavouritesLoading,
-		data: { items }
-	} = useFavouritesStore()
+	const { data, isLoading: isFavouritesLoading } = useGetFavourites()
 
 	const { accessToken } = useProfileStore()
 
 	const favouritesItem = useMemo(
-		() => items.find(i => i.product.id === id),
-		[items, id]
+		() => data?.items.find(i => i.product.id === id),
+		[data, id]
 	)
 
 	const { mutate, isPending } = useToggleFavourites(
@@ -49,7 +46,11 @@ export const ToggleFavouritesButton = ({
 				isLoading && 'animate-spin-1000 w-[28px] h-[28px]'
 			)}
 			disabled={!accessToken || isLoading}
-			onClick={() => mutate({ id: favouritesItem?.id, product: id })}
+			onClick={() =>
+				favouritesItem
+					? mutate({ id: favouritesItem.id })
+					: mutate({ product: id })
+			}
 		/>
 	)
 }
