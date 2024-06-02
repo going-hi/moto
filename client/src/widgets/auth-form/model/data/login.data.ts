@@ -1,9 +1,9 @@
 import type { TLogin } from '@/features/auth-user'
-import type { TAuthField } from '../types'
+import type { TFormField } from '@/shared'
 
 type TLoginFields = keyof TLogin
 
-export const loginFieldsArr: TAuthField<TLoginFields>[] = [
+export const loginFieldsArr: TFormField<TLoginFields>[] = [
 	{
 		label: 'Введите почту',
 		required: true,

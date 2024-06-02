@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom'
 import { Cart } from '@/widgets/cart'
 import { FavouritesIcon } from '@/widgets/favourites'
+import { useProfileStore } from '@/entities/profile'
 import { Icon } from '@/shared'
 import { Container } from '../container'
 import { Navigation } from './@navigation'
 import { Search } from './@search'
 
 export const Header = () => {
+	const { accessToken } = useProfileStore()
+
 	return (
 		<header className='py-[20px]'>
 			<Container>
@@ -17,7 +20,7 @@ export const Header = () => {
 					<Navigation />
 					<div className='flex justify-between gap-x-[40px] pt-[20px] pr-[25px]'>
 						<Search />
-						<Link to='/auth'>
+						<Link to={accessToken ? '/profile' : '/auth'}>
 							<Icon
 								color='white'
 								name='Profile'

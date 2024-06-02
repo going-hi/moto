@@ -1,7 +1,9 @@
-import { $api } from '@/shared'
-import { AuthDtoSchema, TRegistrationDto } from '../model'
+import { $api, ZodParseError } from '@/shared'
+import { AuthDtoSchema, TAuthDto, TRegistrationDto } from '../model'
 
 export const registration = (body: TRegistrationDto) =>
 	$api
 		.post('/auth/registration', body)
-		.then(res => AuthDtoSchema.parse(res.data))
+		.then(res =>
+			new ZodParseError<TAuthDto>(AuthDtoSchema, res.data).result()
+		)

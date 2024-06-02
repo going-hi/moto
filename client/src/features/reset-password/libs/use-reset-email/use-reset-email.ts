@@ -9,8 +9,10 @@ export const useResetEmail = () => {
 		mutationFn: resetEmail,
 		mutationKey: ['auth/reset-email'],
 		retry: false,
-		onSuccess: ({ email }) => {
-			setEmail(email)
+		onSuccess: data => {
+			if (data) {
+				setEmail(data.email)
+			}
 		}
 	})
 }

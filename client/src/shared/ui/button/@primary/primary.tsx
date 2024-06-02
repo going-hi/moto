@@ -1,13 +1,14 @@
 import clsx from 'clsx'
-import { ReactNode } from 'react'
+import { ButtonHTMLAttributes, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 
 export const Primary = ({
 	children,
 	path,
 	className,
+	disabled,
 	...props
-}: {
+}: ButtonHTMLAttributes<HTMLButtonElement> & {
 	children: ReactNode
 	path?: string
 	className?: string
@@ -16,7 +17,7 @@ export const Primary = ({
 		<Link
 			to={path}
 			className={clsx(
-				'py-[23px] w-full bg-black text-beige font-bold dhover:hover:scale-[102%] duration-700 block text-center will-change-transform',
+				'py-[23px] w-full bg-black text-beige font-bold duration-700 block text-center will-change-transform',
 				className
 			)}
 		>
@@ -25,8 +26,10 @@ export const Primary = ({
 	) : (
 		<button
 			{...props}
+			disabled={disabled}
 			className={clsx(
-				'py-[23px] w-full bg-black text-beige font-bold dhover:hover:scale-[102%] duration-700 will-change-transform',
+				'py-[23px] w-full bg-black text-beige font-bold duration-700 will-change-transform',
+				!disabled && 'dhover:hover:scale-[102%]',
 				className
 			)}
 		>

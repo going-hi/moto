@@ -1,18 +1,12 @@
 import { Link } from 'react-router-dom'
-import { useAuthStore } from '@/features/auth-user'
-import { useFavouritesStore } from '@/entities/favourites'
+import { useGetFavourites } from '@/entities/favourites'
+import { useProfileStore } from '@/entities/profile'
 import { Icon, IconBadge } from '@/shared'
-import { useGetFavourites } from '../../libs'
 
 export const FavouritesIcon = () => {
-	const {
-		data: { items },
-		isLoading
-	} = useFavouritesStore()
+	const { data, isLoading } = useGetFavourites()
 
-	useGetFavourites()
-
-	const { accessToken } = useAuthStore()
+	const { accessToken } = useProfileStore()
 
 	if (!accessToken) {
 		return <></>
@@ -35,7 +29,7 @@ export const FavouritesIcon = () => {
 				<IconBadge
 					color='white'
 					name='Favourite'
-					count={items.length}
+					count={(data?.items ?? []).length}
 					className='cursor-pointer dhover:hover:scale-125 duration-700 self-start'
 				/>
 			)}

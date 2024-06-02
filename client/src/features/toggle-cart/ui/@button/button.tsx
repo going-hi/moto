@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useMemo } from 'react'
-import { useAuthStore } from '@/features/auth-user'
-import { useCartStore } from '@/entities/cart'
+import { useGetCart } from '@/entities/cart'
+import { useProfileStore } from '@/entities/profile'
 import { Button, Icon } from '@/shared'
 import { useToggleCart } from '../../libs'
 
@@ -14,28 +14,25 @@ export const ToggleCartButton = ({
 	variant: 'primary' | 'parentheses-button'
 	className?: string
 }) => {
-	const {
-		data: { items },
-		isLoading
-	} = useCartStore()
-
-	const { accessToken } = useAuthStore()
+	const { data, isLoading } = useGetCart()
+	const { accessToken } = useProfileStore()
 
 	const addedItem = useMemo(
-		() => items.find(i => i.product.id === id),
-		[items, id]
+		() => data?.items.find(i => i.product.id === id),
+		[data, id]
 	)
 
 	const { mutate, isPending } = useToggleCart(addedItem ? 'remove' : 'add')
 
 	return (
 		<Button
-			variant={isPending || isLoading ? 'primary' : variant}
+			variant={
+				!accessToken || isPending || isLoading ? 'primary' : variant
+			}
 			className={clsx(
 				'basis-full duration-700 will-change-transform ',
-				isPending || isLoading
-					? '!py-[20px]'
-					: 'dhover:hover:scale-[101%]',
+				(isPending || isLoading) && '!py-[20px]',
+				!!accessToken && 'dhover:hover:scale-[101%]',
 				variant === 'primary' && 'max-h-[66px] !py-[20px]',
 				className
 			)}
@@ -46,7 +43,7 @@ export const ToggleCartButton = ({
 					: `!bg-black `
 			)}
 			isMain
-			disabled={isPending || isLoading}
+			disabled={!accessToken || isPending || isLoading}
 			onClick={() =>
 				accessToken ? mutate(addedItem ? addedItem.id : id) : {}
 			}

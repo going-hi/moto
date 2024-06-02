@@ -1,9 +1,9 @@
 import clsx from 'clsx'
 import { useMemo } from 'react'
-import { useAuthStore } from '@/features/auth-user'
-import { useFavouritesStore } from '@/entities/favourites'
+import { useGetFavourites } from '@/entities/favourites'
+import { useProfileStore } from '@/entities/profile'
 import { Button, Icon } from '@/shared'
-import { useRemoveFromFavourites, useAddToFavourites } from '../../libs'
+import { useToggleFavourites } from '../../libs'
 
 export const ToggleFavouritesLabel = ({
 	className,
@@ -12,22 +12,19 @@ export const ToggleFavouritesLabel = ({
 	className?: string
 	id: number
 }) => {
-	const {
-		isLoading: isFavouritesLoading,
-		data: { items }
-	} = useFavouritesStore()
-	const { accessToken } = useAuthStore()
-
-	const { isPending: isAddPending, mutate: add } = useAddToFavourites()
-	const { isPending: isRemovePending, mutate: remove } =
-		useRemoveFromFavourites()
-
-	const isLoading = isAddPending || isRemovePending || isFavouritesLoading
+	const { isLoading: isFavouritesLoading, data } = useGetFavourites()
+	const { accessToken } = useProfileStore()
 
 	const favouritesItem = useMemo(
-		() => items.find(i => i.product.id === id),
-		[items, id]
+		() => data?.items.find(i => i.product.id === id),
+		[data, id]
 	)
+
+	const { isPending, mutate } = useToggleFavourites(
+		favouritesItem ? 'remove' : 'add'
+	)
+
+	const isLoading = isPending || isFavouritesLoading
 
 	if (!accessToken) {
 		return <></>
@@ -61,8 +58,8 @@ export const ToggleFavouritesLabel = ({
 			disabled={isLoading}
 			onClick={() =>
 				favouritesItem
-					? remove({ id: favouritesItem.id })
-					: add({ product: id })
+					? mutate({ id: favouritesItem.id })
+					: mutate({ product: id })
 			}
 		/>
 	)

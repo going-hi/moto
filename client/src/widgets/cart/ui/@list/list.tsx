@@ -1,10 +1,10 @@
 import clsx from 'clsx'
-import { useCartStore, type TCardCart } from '@/entities/cart'
+import { useGetCart, type TCardCart } from '@/entities/cart'
 import { CartItem } from '../@item'
 import { CartItemSkeleton } from '../@item-skeleton'
 
 export const CartList = ({ list }: { list: TCardCart[] }) => {
-	const { isLoading } = useCartStore()
+	const { isLoading } = useGetCart()
 
 	if (!list) {
 		return <></>

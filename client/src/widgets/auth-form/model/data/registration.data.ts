@@ -1,9 +1,9 @@
 import { TRegistration } from '@/features/auth-user'
-import type { TAuthField } from '../types'
+import type { TFormField } from '@/shared'
 
 type TRegistrationFields = keyof TRegistration
 
-export const registrationFieldsArr: TAuthField<TRegistrationFields>[] = [
+export const registrationFieldsArr: TFormField<TRegistrationFields>[] = [
 	{
 		label: 'Введите ваше имя',
 		required: true,
