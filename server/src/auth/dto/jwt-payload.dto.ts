@@ -7,5 +7,7 @@ export class JwtPayload extends PickType(UserEntity, [
 	'name',
 	'role',
 	'isConfirm',
-	'avatar'
+	'avatar',
+	'surname',
+	'phone'
 ]) {}

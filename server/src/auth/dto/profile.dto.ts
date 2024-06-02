@@ -6,15 +6,19 @@ export class ProfileDto {
 	email: string
 	isConfirm: boolean
 	name: string
+	surname: string
 	role: ERoles
 	avatar: string | null
+	phone: string
 
-	constructor({ id, email, isConfirm, name, role, avatar }: JwtPayload) {
+	constructor({ id, email, isConfirm, name, surname, role, avatar, phone }: JwtPayload) {
 		this.id = id
 		this.email = email
-		this.isConfirm = isConfirm
+		this.phone = phone
 		this.name = name
+		this.surname = surname
 		this.role = role
+		this.isConfirm = isConfirm
 		this.avatar = avatar
 	}
 }
