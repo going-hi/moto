@@ -11,15 +11,16 @@ export const ProfileMenu = () => {
 			<nav className='mb-[50px]'>
 				<ul className='flex flex-col gap-y-[20px]'>
 					{profileMenuItemsArr.map(i => (
-						<li
-							key={i.path}
-							className={clsx(
-								'font-medium',
-								pathname === i.path &&
-									'relative after:absolute after:bottom-0 after:right-0 after:w-full after:bg-black after:h-[2px]'
-							)}
-						>
-							<Link to={i.path}>{i.label}</Link>
+						<li key={i.path} className={clsx('font-medium')}>
+							<Link
+								className={clsx(
+									pathname === i.path &&
+										'relative after:absolute after:bottom-0 after:right-0 after:w-full after:bg-black after:h-[2px]'
+								)}
+								to={i.path}
+							>
+								{i.label}
+							</Link>
 						</li>
 					))}
 				</ul>
