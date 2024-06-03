@@ -13,6 +13,7 @@ import { FavouritesModule } from '@/modules/favourites/favourites.module'
 import { RoleModule } from './modules/role/role.module'
 import { ServeStaticModule } from '@nestjs/serve-static'
 import { join } from 'path'
+import { ReviewModule } from './modules/review/review.module'
 
 @Module({
 	imports: [
@@ -31,7 +32,8 @@ import { join } from 'path'
 		OrderModule,
 		BasketModule,
 		FavouritesModule,
-		RoleModule
+		RoleModule,
+		ReviewModule
 	]
 })
 export class AppModule {}

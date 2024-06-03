@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
-import { AuthButton, AuthInput, AuthModal } from '@/features/auth'
+import { AuthButton, AuthInput, AuthModal } from '@/features/auth-user'
 import {
 	useResetEmail,
 	type TResetEmail,

@@ -7,12 +7,15 @@ import { ERoles } from '@/common/enums'
 import { FileService } from '@/core/file/file.service'
 import { skipCount } from '@/core/utils'
 import { PaginationDto } from '@/common/pagination'
+import { MailService } from '@/mail/mail.service'
+import { randomUUID } from 'crypto'
 
 @Injectable()
 export class UserService {
 	constructor(
 		@InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
-		private readonly fileService: FileService
+		private readonly fileService: FileService,
+		private readonly mailService: MailService
 	) {}
 
 	async byId(id: number, withError = false) {
@@ -85,26 +88,29 @@ export class UserService {
 
 	async profile(id: number) {
 		const user = await this.byId(id, true)
-		delete user.link
-		delete user.code
-		delete user.password
 		return user
 	}
 
 	async updateAvatar(userId: number, avatar: Express.Multer.File | null) {
 		const user = await this.byId(userId, true)
-		let link: string | null = null
+		let url: string | null = null
 		if (avatar) {
-			link = await this.fileService.uploadFile(avatar)
+			url = await this.fileService.uploadFile(avatar)
 		} else {
 			user.avatar ? await this.fileService.deleteFile(user.avatar) : {}
 		}
-		user.avatar = link
-		return await this.userRepository.save(user)
+		user.avatar = url
+
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { link, code, password, ...updatedUser } = await this.userRepository.save(user)
+		return updatedUser
 	}
 
 	async update(userId: number, dto: UpdateUserDto) {
 		const user = await this.byId(userId, true)
+		let isConfirm = user.isConfirm
+		delete user.isConfirm
+		delete user.link
 		if (user.phone !== dto.phone) {
 			const candidate = await this.byPhone(dto.phone)
 			if (candidate) {
@@ -112,6 +118,26 @@ export class UserService {
 			}
 		}
 
-		return await this.userRepository.save({ ...user, ...dto })
+		if (user.email !== dto.email) {
+			await this.changeEmail(userId, dto.email)
+			isConfirm = false
+		}
+
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { link, code, password, ...updatedUser } = await this.userRepository.save({
+			...user,
+			...dto
+		})
+		return { ...updatedUser, isConfirm }
+	}
+
+	async changeEmail(id: number, newEmail: string) {
+		const candidate = await this.byEmail(newEmail)
+		if (candidate) {
+			throw new BadRequestException('Пользователь с таким email уже существует')
+		}
+		const link = randomUUID()
+		await this.userRepository.update({ id }, { link, isConfirm: false, email: newEmail })
+		await this.mailService.sendActiveLink(newEmail, link)
 	}
 }

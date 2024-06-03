@@ -16,6 +16,7 @@ export const Button = ({
 	iconName,
 	bodyClassName,
 	color,
+	lineClassName,
 	...props
 }: {
 	variant:
@@ -32,6 +33,7 @@ export const Button = ({
 	iconName?: TIconName
 	bodyClassName?: string
 	color?: string
+	lineClassName?: string
 } & ButtonHTMLAttributes<HTMLButtonElement>) => {
 	switch (variant) {
 		case 'more':
@@ -53,7 +55,10 @@ export const Button = ({
 					{...props}
 					className={clsx(isMain && 'group', className)}
 				>
-					<Parentheses bodyClassName={bodyClassName}>
+					<Parentheses
+						bodyClassName={bodyClassName}
+						lineClassName={lineClassName}
+					>
 						{children}
 					</Parentheses>
 				</button>
@@ -73,7 +78,11 @@ export const Button = ({
 				</button>
 			)
 		case 'primary':
-			return <Primary {...props}>{children}</Primary>
+			return (
+				<Primary path={path} {...props} className={className}>
+					{children}
+				</Primary>
+			)
 		default:
 			return <></>
 	}

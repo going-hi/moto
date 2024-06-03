@@ -5,5 +5,8 @@ export const CardSchema = BaseSchema.extend({
 	price: z.number(),
 	name: z.string(),
 	images: z.array(z.string()),
-	description: z.string().optional()
+	description: z.string().optional(),
+	category: z.string(),
+	type: z.string(),
+	countOrders: z.number()
 })

@@ -1,9 +1,9 @@
+import { useEffect } from 'react'
 import { z } from 'zod'
-import { CardBody } from '@/widgets/card-body'
-import { CardGallery } from '@/widgets/card-gallery'
+import { CardBody, useCardStore } from '@/widgets/card-body'
 import { OtherModels } from '@/widgets/other-models'
-import { Typography, cards, useValidParams } from '@/shared'
-import { Header, Footer, Container } from '@/layout'
+import { Typography, useValidParams } from '@/shared'
+import { Header, Footer, Container, Wrapper } from '@/layout'
 
 const { Text } = Typography
 
@@ -12,21 +12,27 @@ export const CardPage = () => {
 		id: z.string().regex(/^[0-9]+$/)
 	})
 
+	const { data, isLoading } = useCardStore()
+
+	useEffect(() => {
+		scrollTo(0, 0)
+	}, [])
+
 	if (!id) {
 		return <Text>Параметр id карточки должен быть числом</Text>
 	}
 
 	return (
-		<div className='bg-red-light pb-[10px]'>
+		<Wrapper>
 			<Header />
 			<Container className='mb-[10px]'>
-				<section className='flex h-[874px]'>
-					<CardGallery />
-					<CardBody {...cards[0]} />
-				</section>
+				<CardBody id={+id} />
 			</Container>
-			<OtherModels />
+			<OtherModels
+				isCardLoading={isLoading}
+				body={{ category: data?.category }}
+			/>
 			<Footer />
-		</div>
+		</Wrapper>
 	)
 }

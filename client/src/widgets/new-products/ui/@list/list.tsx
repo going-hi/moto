@@ -14,6 +14,10 @@ export const List = ({
 	mainTitle?: string
 	title: string
 }) => {
+	if (!list) {
+		return <></>
+	}
+
 	return (
 		<div>
 			{mainTitle ? (
@@ -30,7 +34,7 @@ export const List = ({
 			)}
 			<div className='flex flex-wrap gap-x-[50px] gap-y-[30px]'>
 				{list.slice(0, 9).map(i => (
-					<Card {...i} key={i.id} type='small' />
+					<Card {...i} key={i.id} variant='primary' />
 				))}
 				<More />
 			</div>

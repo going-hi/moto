@@ -60,6 +60,7 @@ export class ProductService {
 				characteristics: true
 			}
 		})
+		if (!product) throw new NotFoundException(`Товар с id: ${id} не найден`)
 		let arrayIsLikeProducts = []
 		if (user) {
 			arrayIsLikeProducts = await this.getIsLikeProducts([id], user.id)
@@ -70,7 +71,6 @@ export class ProductService {
 			: false
 		product['isLike'] = isLike
 
-		if (!product) throw new NotFoundException(`Товар с id: ${id} не найден`)
 		return product
 	}
 	async getAll(

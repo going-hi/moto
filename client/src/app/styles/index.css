@@ -33,8 +33,9 @@ ul {
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
 	transition:
-		background-color 600000s 0s,
-		color 600000s 0s;
+		background-color 5000s ease-in-out,
+		transform 0.7s ease-in-out;
+	/* transform auto linear; */
 }
 input[data-autocompleted] {
 	background-color: transparent !important;
@@ -42,4 +43,14 @@ input[data-autocompleted] {
 
 html {
 	scrollbar-gutter: stable;
+}
+
+*::-webkit-scrollbar {
+	width: 5px;
+	background-color: var(--gray-medium);
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: black;
+	border-radius: 10px;
 }
