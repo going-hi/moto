@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { ConfirmRules } from '@/features/confirm-rules'
+import { useGetCart } from '@/entities/cart'
 import { CreateOrderSchema, TCreateOrder } from '@/entities/order'
 import { Button, Typography } from '@/shared'
 import { OrderFormContact } from './@contact'
@@ -10,6 +11,8 @@ import { OrderFormRadio } from './@radio'
 const { Text } = Typography
 
 export const OrderForm = () => {
+	const { data, isLoading } = useGetCart()
+
 	const form = useForm<TCreateOrder>({
 		defaultValues: {
 			paymentMethod: 'by_card',
@@ -72,7 +75,11 @@ export const OrderForm = () => {
 						<ConfirmRules field={field} className='mb-[30px]' />
 					)}
 				/>
-				<Button variant='primary' className='uppercase !py-[16px]'>
+				<Button
+					disabled={isLoading || (data?.items ?? []).length === 0}
+					variant='primary'
+					className='uppercase !py-[16px]'
+				>
 					Оформить заказ
 				</Button>
 			</form>
