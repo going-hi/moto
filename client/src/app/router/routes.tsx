@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { CardPage } from '@/pages/card'
 import { CatalogPage, RedirectCatalogPage } from '@/pages/catalog'
+import { CreateOrderPage } from '@/pages/create-order'
 import { FavouritesPage } from '@/pages/favourites'
 import { HomePage } from '@/pages/home'
 import { NotFoundPage } from '@/pages/not-found'
@@ -103,6 +104,14 @@ export const router = createBrowserRouter([
 				)
 			}
 		]
+	},
+	{
+		path: '/create-order',
+		element: (
+			<AuthRoute variant='authorized'>
+				<CreateOrderPage />
+			</AuthRoute>
+		)
 	},
 	{
 		path: '*',

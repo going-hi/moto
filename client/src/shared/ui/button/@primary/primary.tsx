@@ -17,7 +17,7 @@ export const Primary = ({
 		<Link
 			to={path}
 			className={clsx(
-				'py-[23px] w-full bg-black text-beige font-bold duration-700 block text-center will-change-transform',
+				'py-[23px] w-full bg-black text-beige font-bold duration-700 block text-center will-change-transform dhover:hover:scale-[102%]',
 				className
 			)}
 		>

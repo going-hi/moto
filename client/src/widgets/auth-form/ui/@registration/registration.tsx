@@ -7,9 +7,9 @@ import {
 	type TRegistration,
 	RegistrationSchema
 } from '@/features/auth-user'
+import { ConfirmRules } from '@/features/confirm-rules'
 import { Typography } from '@/shared'
 import { registrationFieldsArr } from '../../model'
-import { AuthConfirmRules } from '../@confirm-rules'
 
 const { Text } = Typography
 
@@ -48,9 +48,7 @@ export const AuthRegistration = () => {
 					<Controller
 						name={'confirmRules'}
 						control={control}
-						render={({ field }) => (
-							<AuthConfirmRules field={field} />
-						)}
+						render={({ field }) => <ConfirmRules field={field} />}
 					/>
 				</div>
 				<AuthButton isPending={isPending} variant='create' />

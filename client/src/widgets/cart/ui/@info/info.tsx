@@ -27,7 +27,11 @@ export const CartInfo = () => {
 						</span>
 					</Title>
 				</div>
-				<Button className='py-[19px]' variant='primary'>
+				<Button
+					variant='primary'
+					path='/create-order'
+					className='py-[19px]'
+				>
 					ПЕРЕЙТИ К ОФОРМЛЕНИЮ
 				</Button>
 			</div>
