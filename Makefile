@@ -11,7 +11,7 @@ stop:
 login:
 	docker login -u ${DOCKER_LOGIN} -p ${DOCKER_PASSWORD}
 build-client:
-	docker build --build-arg VITE_API_URL=${VITE_API_URL} -t ${DOCKER_LOGIN}/${DOCKER_CLIENT_NAME}:deploy -f ./client/Dockerfile ./client
+	docker build --build-arg VITE_API_URL=${VITE_API_URL} --build-arg VITE_IMAGES_URL=${VITE_IMAGES_URL} -t ${DOCKER_LOGIN}/${DOCKER_CLIENT_NAME}:deploy -f ./client/Dockerfile ./client
 build-server:
 	docker build -t ${DOCKER_LOGIN}/${DOCKER_SERVER_NAME}:deploy -f ./server/Dockerfile ./server
 push-client:
