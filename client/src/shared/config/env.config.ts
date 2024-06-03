@@ -6,8 +6,17 @@ class EnvConfig {
 	constructor() {
 		const env = import.meta.env
 
-		EnvSchema.parse(env)
-		this.env = env
+		const { success, error, data } = EnvSchema.safeParse(env)
+
+		if (!success) {
+			const errMessage = error.issues.reduce(
+				(acc, i) => acc + i.message + ', ',
+				''
+			)
+			throw new Error(errMessage.substring(0, errMessage.length - 2))
+		}
+
+		this.env = data
 	}
 
 	public getValue(name: string) {
