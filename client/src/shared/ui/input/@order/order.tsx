@@ -27,12 +27,14 @@ export const OrderInput = forwardRef<HTMLInputElement, TInputProps>(
 					onChange={onChange}
 					value={value}
 					className={clsx(
-						'placeholder:text-[#9B978B] placeholder:text-[14px] placeholder:font-medium bg-beige px-[10px] py-[5px] w-full border-[#41403B] border',
+						'placeholder:text-[#9B978B] placeholder:text-[14px] tex-[14px] placeholder:font-medium bg-beige px-[10px] py-[5px] w-full border-[#41403B] border',
 						classNameBody
 					)}
 				/>
 				{err?.message && (
-					<Text className='text-red-700'>{err.message}</Text>
+					<Text className='text-red-700 text-[14px] mt-[2px]'>
+						{err.message}
+					</Text>
 				)}
 			</div>
 		)

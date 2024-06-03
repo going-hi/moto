@@ -46,7 +46,7 @@ export const AuthRegistration = () => {
 						/>
 					))}
 					<Controller
-						name={'confirmRules'}
+						name='confirmRules'
 						control={control}
 						render={({ field }) => <ConfirmRules field={field} />}
 					/>

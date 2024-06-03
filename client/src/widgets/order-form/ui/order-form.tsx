@@ -1,6 +1,7 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { ConfirmRules } from '@/features/confirm-rules'
-import { TCreateOrder } from '@/entities/order'
+import { CreateOrderSchema, TCreateOrder } from '@/entities/order'
 import { Button, Typography } from '@/shared'
 import { OrderFormContact } from './@contact'
 import { OrderFormDelivery } from './@delivery'
@@ -12,13 +13,17 @@ export const OrderForm = () => {
 	const form = useForm<TCreateOrder>({
 		defaultValues: {
 			paymentMethod: 'by_card',
-			shippingMethod: 'pickup'
-		}
+			shippingMethod: 'pickup',
+			confirmRules: false
+		},
+		resolver: zodResolver(CreateOrderSchema)
 	})
 
 	const { handleSubmit, control } = form
 
-	const onSubmit = () => {}
+	const onSubmit = (data: TCreateOrder) => {
+		console.log(data)
+	}
 
 	return (
 		<FormProvider {...form}>
@@ -38,6 +43,7 @@ export const OrderForm = () => {
 								className='mb-[10px]'
 								{...field}
 								name='paymentMethod'
+								value='by_card'
 							>
 								Банковской картой при получении
 							</OrderFormRadio>
@@ -47,7 +53,11 @@ export const OrderForm = () => {
 						name='paymentMethod'
 						control={control}
 						render={({ field }) => (
-							<OrderFormRadio {...field} name='paymentMethod'>
+							<OrderFormRadio
+								{...field}
+								name='paymentMethod'
+								value='by_cash'
+							>
 								Наличными
 							</OrderFormRadio>
 						)}
@@ -56,7 +66,7 @@ export const OrderForm = () => {
 				<OrderFormDelivery />
 				<OrderFormContact />
 				<Controller
-					name={'confirmRules'}
+					name='confirmRules'
 					control={control}
 					render={({ field }) => (
 						<ConfirmRules field={field} className='mb-[30px]' />
