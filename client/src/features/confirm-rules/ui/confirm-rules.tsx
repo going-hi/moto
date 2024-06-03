@@ -28,7 +28,7 @@ export const ConfirmRules = forwardRef<
 		<div className={clsx('flex justify-between items-center', className)}>
 			<label
 				htmlFor={id}
-				className='flex gap-x-[10px] items-center cursor-pointer select-none'
+				className='flex gap-x-[10px] items-center cursor-pointer select-none text-[14px]'
 			>
 				<Checkbox
 					id={id}
@@ -40,7 +40,7 @@ export const ConfirmRules = forwardRef<
 				/>
 				<Text>
 					Даю согласие на обработку{' '}
-					<Link to='/rules' className='underline'>
+					<Link to='/rules' className='underline text-[14px]'>
 						Персональных данных
 					</Link>
 				</Text>

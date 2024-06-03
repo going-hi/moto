@@ -3,12 +3,18 @@ import { ConfirmRules } from '@/features/confirm-rules'
 import { TCreateOrder } from '@/entities/order'
 import { Button, Typography } from '@/shared'
 import { OrderFormContact } from './@contact'
+import { OrderFormDelivery } from './@delivery'
 import { OrderFormRadio } from './@radio'
 
 const { Text } = Typography
 
 export const OrderForm = () => {
-	const form = useForm<TCreateOrder>()
+	const form = useForm<TCreateOrder>({
+		defaultValues: {
+			paymentMethod: 'by_card',
+			shippingMethod: 'pickup'
+		}
+	})
 
 	const { handleSubmit, control } = form
 
@@ -18,30 +24,36 @@ export const OrderForm = () => {
 		<FormProvider {...form}>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className='text-[18px] font-medium basis-[50%]'
+				className='text-[18px] font-medium basis-[50%] -tracking-2per'
 			>
 				<div className='mb-[50px]'>
 					<Text className='text-[24px] font-extrabold -tracking-2per mb-[20px] uppercase'>
 						Выберите способ оплаты
 					</Text>
-					<OrderFormRadio name='paymentMethod' className='mb-[10px]'>
-						Банковской картой при получении
-					</OrderFormRadio>
-					<OrderFormRadio name='paymentMethod'>
-						Наличными
-					</OrderFormRadio>
+					<Controller
+						name='paymentMethod'
+						control={control}
+						render={({ field }) => (
+							<OrderFormRadio
+								className='mb-[10px]'
+								{...field}
+								name='paymentMethod'
+							>
+								Банковской картой при получении
+							</OrderFormRadio>
+						)}
+					/>
+					<Controller
+						name='paymentMethod'
+						control={control}
+						render={({ field }) => (
+							<OrderFormRadio {...field} name='paymentMethod'>
+								Наличными
+							</OrderFormRadio>
+						)}
+					/>
 				</div>
-				<div className='mb-[50px]'>
-					<Text className='text-[24px] font-extrabold -tracking-2per mb-[20px] uppercase'>
-						Выберите способ доставки
-					</Text>
-					<OrderFormRadio name='shippingMethod' className='mb-[10px]'>
-						Самовывоз
-					</OrderFormRadio>
-					<OrderFormRadio name='shippingMethod'>
-						Доставка
-					</OrderFormRadio>
-				</div>
+				<OrderFormDelivery />
 				<OrderFormContact />
 				<Controller
 					name={'confirmRules'}
