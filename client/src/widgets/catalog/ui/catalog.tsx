@@ -1,11 +1,13 @@
 import { useGetQuerySearchCards } from '../libs'
+import { useSearchQueryStore } from '../model'
 import { CatalogFilter } from './@filter'
 import { CatalogList } from './@list'
 import { CatalogSort } from './@sort'
 import { Container } from '@/layout'
 
 export const Catalog = () => {
-	const { isLoading, data } = useGetQuerySearchCards()
+	const { isFetching, data } = useGetQuerySearchCards()
+	const { page } = useSearchQueryStore()
 
 	return (
 		<>
@@ -18,7 +20,7 @@ export const Catalog = () => {
 				</Container>
 			</div>
 			<CatalogList
-				data={isLoading ? [...new Array(9)] : data?.pages ?? []}
+				data={isFetching ? [...new Array(9 * page)] : data?.pages ?? []}
 			/>
 		</>
 	)
