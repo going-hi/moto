@@ -1,6 +1,8 @@
+import type { TSortBy } from '../types'
+
 export type TSortItem = {
 	label: string
-	value: string
+	value: TSortBy
 	order: 'ASC' | 'DESC'
 }
 
@@ -13,7 +15,7 @@ export const sortItemsArr: TSortItem[] = [
 	{
 		label: 'по популярности',
 		order: 'ASC',
-		value: 'popular'
+		value: 'countOrders'
 	},
 	{
 		label: 'по убыванию цены',

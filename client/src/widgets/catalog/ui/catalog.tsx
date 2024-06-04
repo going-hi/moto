@@ -1,11 +1,11 @@
-import { useGetCards } from '@/entities/card'
+import { useGetQuerySearchCards } from '../libs'
 import { CatalogFilter } from './@filter'
 import { CatalogList } from './@list'
 import { CatalogSort } from './@sort'
 import { Container } from '@/layout'
 
 export const Catalog = () => {
-	const { isLoading, data } = useGetCards()
+	const { isLoading, data } = useGetQuerySearchCards()
 
 	return (
 		<>
@@ -18,7 +18,7 @@ export const Catalog = () => {
 				</Container>
 			</div>
 			<CatalogList
-				list={isLoading ? [...new Array(9)] : data?.items ?? []}
+				data={isLoading ? [...new Array(9)] : data?.pages ?? []}
 			/>
 		</>
 	)
