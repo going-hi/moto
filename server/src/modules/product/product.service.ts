@@ -18,6 +18,7 @@ import { PaginationDto } from '@/common/pagination'
 import * as filterData from './dto/filter.json'
 import { JwtPayload } from '@/auth/dto'
 import { FavouritesService } from '../favourites/favourites.service'
+import { productGenerate } from '@/core/seeder/generate'
 
 @Injectable()
 export class ProductService {
@@ -270,5 +271,14 @@ export class ProductService {
 		}
 
 		return [min, max]
+	}
+
+	async _seeding(count: number = 10) {
+		const products = []
+		for (let i = 0; i < count; i++) {
+			const newProduct = productGenerate()
+			products.push(newProduct)
+		}
+		await this.productRepository.save(products)
 	}
 }
