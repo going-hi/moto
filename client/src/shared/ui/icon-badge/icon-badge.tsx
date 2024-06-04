@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { ReactNode } from 'react'
 import type { TIconName } from '../icon/@libs'
 import { Icon } from '../icon/icon'
 import { Badge } from './@badge'
@@ -8,18 +9,25 @@ export const IconBadge = ({
 	name,
 	className,
 	iconClassName,
-	color
+	color,
+	onClick,
+	children
 }: {
-	count: number
+	count?: number
 	name: TIconName
 	className?: string
 	iconClassName?: string
 	color?: string
+	onClick?: () => void
+	children?: ReactNode
 }) => {
 	return (
-		<div className={clsx('relative inline-block', className)}>
+		<div
+			onClick={onClick}
+			className={clsx('relative inline-block', className)}
+		>
 			<Icon color={color} name={name} className={iconClassName} />
-			<Badge count={count} />
+			{count ? <Badge count={count} /> : <Badge>{children}</Badge>}
 		</div>
 	)
 }

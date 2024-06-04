@@ -1,34 +1,23 @@
-import clsx from 'clsx'
-import { useId } from 'react'
+import { forwardRef } from 'react'
+import { BoxRadio } from './@box'
+import type { TRadioProps } from './@model'
+import { PrimaryRadio } from './@primary'
 
-export const Radio = ({
-	name,
-	className,
-	isChecked
-}: {
-	name: string
-	className?: string
-	isChecked: boolean
-}) => {
-	const id = useId()
-
-	return (
-		<>
-			<input type='radio' name={name} id={id} className='hidden' />
-			<label
-				htmlFor={id}
-				className={clsx(
-					'border-[#000000] border rounded-[2px] w-[20px] h-[20px] flex items-center justify-center',
-					className
-				)}
-			>
-				<span
-					className={clsx(
-						'p-[5px] bg-[#000]',
-						isChecked ? 'block' : 'hidden'
-					)}
-				/>
-			</label>
-		</>
-	)
-}
+// eslint-disable-next-line react/display-name
+export const Radio = forwardRef<
+	HTMLInputElement,
+	TRadioProps & {
+		variant: 'box' | 'primary'
+		value: string
+		onChange: (e: unknown) => void
+	}
+>(({ variant, ...props }, ref) => {
+	switch (variant) {
+		case 'box':
+			return <BoxRadio {...props} />
+		case 'primary':
+			return <PrimaryRadio ref={ref} {...props} />
+		default:
+			return <></>
+	}
+})

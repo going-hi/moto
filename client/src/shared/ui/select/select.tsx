@@ -34,7 +34,7 @@ export const Select = ({
 			<div
 				className={clsx(
 					'text-[18px]',
-					width !== 'w-[100dvw]' && 'relative'
+					width !== 'w-[99.76dvw]' && 'relative'
 				)}
 				onClick={e => e.stopPropagation()}
 			>

@@ -5,6 +5,7 @@ import { Icon, TIconName } from '../icon'
 import { Catalog } from './@catalog'
 import { More } from './@more'
 import { Parentheses } from './@parentheses'
+import { Primary } from './@primary'
 
 export const Button = ({
 	variant,
@@ -15,6 +16,7 @@ export const Button = ({
 	iconName,
 	bodyClassName,
 	color,
+	lineClassName,
 	...props
 }: {
 	variant:
@@ -23,6 +25,7 @@ export const Button = ({
 		| 'catalog'
 		| 'parentheses-link'
 		| 'icon'
+		| 'primary'
 	path?: string
 	isMain?: boolean
 	className?: string
@@ -30,6 +33,7 @@ export const Button = ({
 	iconName?: TIconName
 	bodyClassName?: string
 	color?: string
+	lineClassName?: string
 } & ButtonHTMLAttributes<HTMLButtonElement>) => {
 	switch (variant) {
 		case 'more':
@@ -51,13 +55,16 @@ export const Button = ({
 					{...props}
 					className={clsx(isMain && 'group', className)}
 				>
-					<Parentheses bodyClassName={bodyClassName}>
+					<Parentheses
+						bodyClassName={bodyClassName}
+						lineClassName={lineClassName}
+					>
 						{children}
 					</Parentheses>
 				</button>
 			)
 		case 'catalog':
-			return <Catalog />
+			return <Catalog {...props} />
 		case 'icon':
 			return (
 				<button {...props} className={className}>
@@ -69,6 +76,12 @@ export const Button = ({
 						/>
 					)}
 				</button>
+			)
+		case 'primary':
+			return (
+				<Primary path={path} {...props} className={className}>
+					{children}
+				</Primary>
 			)
 		default:
 			return <></>

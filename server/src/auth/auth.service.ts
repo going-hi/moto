@@ -5,13 +5,15 @@ import {
 	RefreshDto,
 	JwtPayload,
 	ChangePasswordDto,
-	ProfileDto
+	ProfileDto,
+	CodeDto
 	// RecoveryPasswordDto
 } from './dto'
 import { HashService } from '@/core/hash/hash.service'
 import { UserService } from '@/modules/user/user.service'
 import { TokenService } from './token.service'
 import { MailService } from '@/mail/mail.service'
+import { generateRandomCode, generateRandomPassword } from '@/core/utils'
 
 @Injectable()
 export class AuthService {
@@ -29,15 +31,18 @@ export class AuthService {
 		const isMatch = await this.hashService.compare(password, candidate.password)
 		if (!isMatch) throw new BadRequestException('Неверный пароль')
 
-		const { refreshToken } = this.tokenService.generateTokens(candidate)
-		await this.tokenService.saveToken(refreshToken, candidate.id)
-		return refreshToken
+		const tokens = this.tokenService.generateTokens(candidate)
+		await this.tokenService.saveToken(tokens.refreshToken, candidate.id)
+		return {
+			tokens,
+			profile: new ProfileDto(candidate)
+		}
 	}
 
 	async registration(dto: RegistrationDto) {
 		const candidate = await this.userService.byEmail(dto.email)
 		if (candidate) throw new BadRequestException('Пользователь с таким email уже существует')
-
+		await this.checkPhone(dto.phone)
 		const hashPassword = await this.hashService.hash(dto.password)
 		const user = await this.userService.create({
 			...dto,
@@ -45,9 +50,18 @@ export class AuthService {
 		})
 
 		this.mailService.sendActiveLink(user.email, user.link)
-		const { refreshToken } = this.tokenService.generateTokens(user)
-		await this.tokenService.saveToken(refreshToken, user.id)
-		return refreshToken
+		const tokens = this.tokenService.generateTokens(user)
+		await this.tokenService.saveToken(tokens.refreshToken, user.id)
+		return {
+			tokens,
+			profile: new ProfileDto(user)
+		}
+	}
+
+	async checkPhone(phone: string) {
+		const user = await this.userService.byPhone(phone)
+		if (user) throw new BadRequestException('Пользователь с таким телефоном уже существует')
+		return true
 	}
 
 	async refresh(
@@ -76,14 +90,22 @@ export class AuthService {
 		if (token) await this.tokenService.removeTokenFromDb(refresh)
 	}
 
-	// ! потом сделать
-	//* async recoveryPassword(dto: RecoveryPasswordDto) {}
+	async generateCodeForReset(email: string) {
+		const code = generateRandomCode()
+		await this.userService.setCode(email, code)
+		await this.mailService.sendCodeForResetPassword(email, code)
+		return { email }
+	}
+
+	async codeConfirmation({ email, code }: CodeDto) {
+		const user = await this.userService.checkCode(email, code)
+		const randomPassword = generateRandomPassword()
+		await this.mailService.sendNewRandomPassword(email, randomPassword)
+		const hashPassword = await this.hashService.hash(randomPassword)
+		await this.userService.changePassword(user.id, hashPassword)
+	}
 
 	async changePassword(dto: ChangePasswordDto, userId: number) {
-		if (dto.newPassword === dto.password) {
-			throw new BadRequestException('Нельзя менять на тот же пароль')
-		}
-
 		const user = await this.userService.byId(userId)
 
 		const isMatch = await this.hashService.compare(dto.password, user.password)

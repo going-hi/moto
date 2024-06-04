@@ -48,7 +48,7 @@ export const Footer = () => {
 							</div>
 						</nav>
 						<Title
-							className='text-beige font-extrabold leading-[85px]'
+							className='text-beige font-extrabold leading-[90px]'
 							variant='h2'
 						>
 							+7 (920) 909-58-24

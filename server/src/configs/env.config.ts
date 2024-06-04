@@ -1,12 +1,13 @@
 import { envValidate } from '@/core/utils'
 import { ConfigModuleOptions } from '@nestjs/config'
 import { Type } from 'class-transformer'
-import { IsInt, IsString } from 'class-validator'
+import { IsBoolean, IsInt, IsOptional, IsString } from 'class-validator'
+import { join } from 'path'
 
 export class EnvironmentVariables {
 	@Type(() => Number)
 	@IsInt()
-	PORT: number
+	SERVER_PORT: number
 
 	// * DataBase
 	@IsString()
@@ -24,6 +25,10 @@ export class EnvironmentVariables {
 
 	@IsString()
 	POSTGRES_DATABASE: string
+
+	@IsOptional()
+	@IsBoolean()
+	POSTGRES_SSL: boolean = false
 
 	// * Jwt
 	@IsString()
@@ -49,5 +54,6 @@ export class EnvironmentVariables {
 
 export const EnvConfigOptions: ConfigModuleOptions = {
 	validate: envValidate(EnvironmentVariables),
-	isGlobal: true
+	isGlobal: true,
+	envFilePath: join(__dirname, '../../../', `/.env.development`)
 }

@@ -10,6 +10,10 @@ import { CharacteristicModule } from '@/modules/characteristic/characteristic.mo
 import { OrderModule } from '@/modules/order/order.module'
 import { BasketModule } from '@/modules/basket/basket.module'
 import { FavouritesModule } from '@/modules/favourites/favourites.module'
+import { RoleModule } from './modules/role/role.module'
+import { ServeStaticModule } from '@nestjs/serve-static'
+import { join } from 'path'
+import { ReviewModule } from './modules/review/review.module'
 
 @Module({
 	imports: [
@@ -19,11 +23,17 @@ import { FavouritesModule } from '@/modules/favourites/favourites.module'
 		MailModule,
 		FileModule,
 		// * @/modules
+		ServeStaticModule.forRoot({
+			rootPath: join(__dirname, '..', 'static'),
+			serveRoot: '/api/files'
+		}),
 		ProductModule,
 		CharacteristicModule,
 		OrderModule,
 		BasketModule,
-		FavouritesModule
+		FavouritesModule,
+		RoleModule,
+		ReviewModule
 	]
 })
 export class AppModule {}

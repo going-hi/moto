@@ -1,1 +1,1 @@
-export * from './header.data'
+export * from './data'

@@ -8,6 +8,7 @@ import { ProductModule } from '../product/product.module'
 @Module({
 	imports: [TypeOrmModule.forFeature([BasketEntity]), ProductModule],
 	controllers: [BasketController],
-	providers: [BasketService]
+	providers: [BasketService],
+	exports: [BasketService]
 })
 export class BasketModule {}

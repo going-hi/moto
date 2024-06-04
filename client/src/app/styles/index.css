@@ -29,3 +29,28 @@ ul {
 	list-style-type: none;
 	padding: 0;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+	transition:
+		background-color 5000s ease-in-out,
+		transform 0.7s ease-in-out;
+	/* transform auto linear; */
+}
+input[data-autocompleted] {
+	background-color: transparent !important;
+}
+
+html {
+	scrollbar-gutter: stable;
+}
+
+*::-webkit-scrollbar {
+	width: 5px;
+	background-color: var(--gray-medium);
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: black;
+	border-radius: 10px;
+}

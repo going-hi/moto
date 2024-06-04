@@ -1,6 +1,4 @@
-import { Slider, reviews, SliderProvider } from '@/shared'
-
-import { ReviewsSlide } from '../@slide'
+import { Slider, SliderProvider } from '@/shared'
 
 export const ReviewsSlider = () => {
 	return (
@@ -13,9 +11,10 @@ export const ReviewsSlider = () => {
 			}}
 		>
 			<Slider type='more'>
-				{reviews.map(i => (
+				<></>
+				{/* {reviews.map(i => (
 					<ReviewsSlide {...i} key={String(i.id)} />
-				))}
+				))} */}
 			</Slider>
 		</SliderProvider>
 	)

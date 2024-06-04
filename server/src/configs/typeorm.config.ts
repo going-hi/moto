@@ -9,5 +9,6 @@ export const getTypeOrmConfig = (configService: ConfigService): TypeOrmModuleOpt
 	database: configService.get('POSTGRES_DATABASE'),
 	port: configService.get('POSTGRES_PORT'),
 	autoLoadEntities: true,
-	synchronize: true
+	synchronize: true,
+	ssl: configService.get('POSTGRES_SSL')
 })

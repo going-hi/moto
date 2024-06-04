@@ -15,8 +15,8 @@ export class TokenService {
 		private readonly configService: ConfigService
 	) {}
 
-	generateTokens({ id, email, name, role, isConfirm }: JwtPayload) {
-		const payload = { id, email, name, role, isConfirm }
+	generateTokens({ id, email, name, role, isConfirm, avatar }: JwtPayload) {
+		const payload = { id, email, name, role, isConfirm, avatar }
 
 		const accessToken = this.jwtService.sign(payload, {
 			secret: this.configService.get('ACCESS_JWT_SECRET'),
@@ -41,6 +41,16 @@ export class TokenService {
 		}
 
 		return this.sessionRepository.save({ token, user: { id: userId } })
+	}
+
+	async validateAccessToken(accessToken: string) {
+		try {
+			return this.jwtService.verify(accessToken, {
+				secret: this.configService.get('ACCESS_JWT_SECRET')
+			})
+		} catch (e) {
+			return null
+		}
 	}
 
 	async findToken(token: string) {

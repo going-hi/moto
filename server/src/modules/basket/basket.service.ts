@@ -6,6 +6,7 @@ import { BasketEntity } from './entities'
 import { ProductService } from '../product/product.service'
 import { skipCount } from '@/core/utils'
 import { PaginationDto } from '@/common/pagination'
+import { selectUserDto } from '../user/dto'
 
 @Injectable()
 export class BasketService {
@@ -34,6 +35,13 @@ export class BasketService {
 	async findAll({ count, page, user, sortBy, sortOrder }: BasketAllQueryDto) {
 		const where = {}
 		user ? (where['user'] = { id: user }) : {}
+		const { totalPrice } = await this.basketRepository
+			.createQueryBuilder('baskets')
+			.leftJoinAndSelect('products', 'p', 'baskets.productId = p.id')
+			.select('SUM(p.price * baskets.count)', 'totalPrice')
+			.where(user ? 'baskets.userId = :user' : '', { user })
+			.getRawOne()
+
 		const [items, total] = await this.basketRepository.findAndCount({
 			where,
 			order: {
@@ -46,16 +54,12 @@ export class BasketService {
 				product: true
 			},
 			select: {
-				user: {
-					id: true,
-					email: true,
-					name: true,
-					role: true
-				}
+				user: selectUserDto
 			}
 		})
-
-		return new PaginationDto(items, total)
+		const data = new PaginationDto(items, total)
+		data.meta['totalPrice'] = +totalPrice || 0
+		return data
 	}
 
 	async findOne(id: number, userId?: number) {
@@ -70,12 +74,7 @@ export class BasketService {
 				product: true
 			},
 			select: {
-				user: {
-					id: true,
-					email: true,
-					name: true,
-					role: true
-				}
+				user: selectUserDto
 			}
 		})
 		if (!basket) throw new NotFoundException(`Корзина с id: ${id} не найдена`)
@@ -107,5 +106,9 @@ export class BasketService {
 		const basket = await this.findOne(id)
 		if (basket.user.id !== userId) throw new ForbiddenException()
 		return basket
+	}
+
+	async clearByUserId(userId: number) {
+		await this.basketRepository.delete({ user: { id: userId } })
 	}
 }
