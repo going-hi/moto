@@ -107,4 +107,8 @@ export class BasketService {
 		if (basket.user.id !== userId) throw new ForbiddenException()
 		return basket
 	}
+
+	async clearByUserId(userId: number) {
+		await this.basketRepository.delete({ user: { id: userId } })
+	}
 }

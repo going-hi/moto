@@ -9,6 +9,7 @@ import { skipCount } from '@/core/utils'
 import { EOrderStatus } from '@/common/enums'
 import { selectUserDto } from '../user/dto'
 import { AddCountOrders } from '../product/dto'
+import { BasketService } from '../basket/basket.service'
 
 @Injectable()
 export class OrderService {
@@ -17,7 +18,8 @@ export class OrderService {
 		private readonly orderRepository: Repository<OrderEntity>,
 		@InjectRepository(OrderItemEntity)
 		private readonly orderItemRepository: Repository<OrderItemEntity>,
-		private readonly productService: ProductService
+		private readonly productService: ProductService,
+		private readonly basketService: BasketService
 	) {}
 
 	async create(dto: CreateOrderDto, userId: number) {
@@ -43,7 +45,9 @@ export class OrderService {
 			total,
 			user: { id: userId }
 		})
-		return await this.orderRepository.save(order)
+		const savedOrder = await this.orderRepository.save(order)
+		await this.basketService.clearByUserId(userId)
+		return savedOrder
 	}
 
 	async findAll({ count, page, sortBy, sortOrder, user, status }: OrderAllQueryDto) {
