@@ -1,8 +1,8 @@
 import clsx from 'clsx'
 import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useOrderCartModalStore } from '@/features/create-order'
 import { Button, Icon, Modal, Typography } from '@/shared'
-import { useOrderCartModalStore } from '../../model'
 
 const { Text } = Typography
 
@@ -30,10 +30,10 @@ export const OrderCartModal = () => {
 		<Modal onClick={closeModal} className={clsx(data ? 'flex' : 'hidden')}>
 			<div
 				onClick={e => e.stopPropagation()}
-				className='bg-beige relative max-h-[70dvh] w-[29.5dvw] p-[50px]'
+				className='bg-beige relative max-h-[70dvh] w-[32dvw] p-[50px]'
 			>
 				<div
-					onClick={() => closeModal()}
+					onClick={closeModal}
 					className='absolute top-[20px] right-[20px] p-[5px] block cursor-pointer'
 				>
 					<Icon className='w-[25px] h-[25px]' name='Close' />
@@ -45,9 +45,9 @@ export const OrderCartModal = () => {
 					<Text className='leading-[20px]'>
 						Для просмотра истории заказов <br /> можете перейти в
 						<Link
-							onClick={() => close()}
+							onClick={close}
 							className='ml-[5px] underline'
-							to='/my-orders'
+							to='/profile/orders'
 						>
 							личный кабинет
 						</Link>
@@ -57,7 +57,7 @@ export const OrderCartModal = () => {
 					path={'/'}
 					variant='primary'
 					className='!py-[20px]'
-					onClick={() => close()}
+					onClick={close}
 				>
 					НА ГЛАВНУЮ
 				</Button>

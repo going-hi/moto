@@ -1,13 +1,10 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
-
-type TModalData = {
-	id: number
-}
+import type { TCreateOrderDto } from '../types'
 
 type TOrderCartModalStore = {
-	data: null | TModalData
-	setData: (d: TModalData) => void
+	data: null | TCreateOrderDto
+	setData: (d: TCreateOrderDto) => void
 	close: () => void
 }
 

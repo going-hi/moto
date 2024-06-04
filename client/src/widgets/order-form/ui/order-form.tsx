@@ -1,9 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { ConfirmRules } from '@/features/confirm-rules'
+import { useCreateOrder } from '@/features/create-order'
 import { useGetCart } from '@/entities/cart'
 import { CreateOrderSchema, TCreateOrder } from '@/entities/order'
-import { Button, Typography } from '@/shared'
+import { Button, Icon, Typography } from '@/shared'
+import { formatCart } from '../libs'
 import { OrderFormContact } from './@contact'
 import { OrderFormDelivery } from './@delivery'
 import { OrderFormRadio } from './@radio'
@@ -11,7 +13,8 @@ import { OrderFormRadio } from './@radio'
 const { Text } = Typography
 
 export const OrderForm = () => {
-	const { data, isLoading } = useGetCart()
+	const { data: cart, isLoading } = useGetCart()
+	const { mutate, isPending } = useCreateOrder()
 
 	const form = useForm<TCreateOrder>({
 		defaultValues: {
@@ -25,7 +28,7 @@ export const OrderForm = () => {
 	const { handleSubmit, control } = form
 
 	const onSubmit = (data: TCreateOrder) => {
-		console.log(data)
+		mutate({ ...data, products: formatCart(cart) })
 	}
 
 	return (
@@ -76,11 +79,22 @@ export const OrderForm = () => {
 					)}
 				/>
 				<Button
-					disabled={isLoading || (data?.items ?? []).length === 0}
+					disabled={
+						isLoading ||
+						isPending ||
+						(cart?.items ?? []).length === 0
+					}
 					variant='primary'
 					className='uppercase !py-[16px]'
 				>
-					Оформить заказ
+					{isPending ? (
+						<Icon
+							name='Loading'
+							className='w-[25px] h-[25px] animate-spin-1000'
+						/>
+					) : (
+						'Оформить заказ'
+					)}
 				</Button>
 			</form>
 		</FormProvider>

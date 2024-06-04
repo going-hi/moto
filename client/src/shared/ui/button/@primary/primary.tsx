@@ -7,6 +7,7 @@ export const Primary = ({
 	path,
 	className,
 	disabled,
+	onClick,
 	...props
 }: ButtonHTMLAttributes<HTMLButtonElement> & {
 	children: ReactNode
@@ -16,6 +17,8 @@ export const Primary = ({
 	return path ? (
 		<Link
 			to={path}
+			// @ts-expect-error onClick for link or button
+			onClick={onClick}
 			className={clsx(
 				'py-[23px] w-full bg-black text-beige font-bold duration-700 block text-center will-change-transform dhover:hover:scale-[102%]',
 				className
