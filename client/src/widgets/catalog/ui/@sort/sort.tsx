@@ -8,22 +8,26 @@ const { Text } = Typography
 export const CatalogSort = () => {
 	const {
 		setData,
-		data: { sortBy }
+		data: { sortBy, sortOrder }
 	} = useSearchQueryStore()
 
 	const [isOpen, setIsOpen] = useState<boolean>(false)
 
 	const choose = (i: TSortItem) => {
-		if (i.value === sortBy) return
+		if (i.value === sortBy && i.order === sortOrder) return
 		setIsOpen(false)
-		setData({ sortBy: i.value })
+		setData({ sortBy: i.value, sortOrder: i.order })
 	}
 
 	return (
 		<Select
 			isOpen={isOpen}
 			setIsOpen={setIsOpen}
-			label={sortItemsArr.find(i => i.value === sortBy)?.label ?? ''}
+			label={
+				sortItemsArr.find(
+					i => i.value === sortBy && i.order === sortOrder
+				)?.label ?? ''
+			}
 			width='w-[280px]'
 			maxHeight='max-h-[500px]'
 			position='right'
@@ -34,13 +38,18 @@ export const CatalogSort = () => {
 						onClick={() => choose(i)}
 						className={clsx(
 							'flex gap-x-[10px] items-center',
-							i.value !== sortBy && 'cursor-pointer'
+							(i.value !== sortBy ||
+								(i.value === 'price' &&
+									i.order !== sortOrder)) &&
+								'cursor-pointer'
 						)}
 						key={i.label}
 					>
 						<Radio
 							name='sort'
-							isChecked={i.value === sortBy}
+							isChecked={
+								i.value === sortBy && i.order === sortOrder
+							}
 							variant='box'
 						/>
 						<Text className='font-medium'>{i.label}</Text>

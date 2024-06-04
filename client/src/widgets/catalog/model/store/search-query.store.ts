@@ -5,10 +5,11 @@ import type { TSortBy, TSortOrder } from '../types'
 
 type TData = {
 	sortBy: TSortBy
-	page: number
+	page: string
 	q: string
 	sortOrder: TSortOrder
 	enabled: boolean
+	price: [string, string]
 }
 
 type TParamsStore = {
@@ -20,10 +21,11 @@ export const useSearchQueryStore = create<TParamsStore>()(
 	immer(set => ({
 		data: {
 			sortBy: sortItemsArr[0].value,
-			page: 1,
+			page: '1',
 			q: '',
 			sortOrder: 'ASC',
-			enabled: false
+			enabled: false,
+			price: ['0', '1000000']
 		},
 		setData: data =>
 			set(state => {
@@ -31,7 +33,7 @@ export const useSearchQueryStore = create<TParamsStore>()(
 					state.data
 
 				Object.keys(data).forEach(key => {
-					if (data[key]) {
+					if (data[key] || (key === 'sortBy' && data[key] === '')) {
 						updatedState[key] = data[key]
 					}
 				})

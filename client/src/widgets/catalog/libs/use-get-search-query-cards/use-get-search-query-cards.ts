@@ -23,7 +23,7 @@ export const useGetQuerySearchCards = () => {
 	>({
 		queryKey: ['user/catalog', params],
 		queryFn: ({ pageParam: page = 1 }) => {
-			setData({ page })
+			setData({ page: String(page) })
 			return getCards({ ...params, page })
 		},
 		getNextPageParam: (lastPage, allPages) => {

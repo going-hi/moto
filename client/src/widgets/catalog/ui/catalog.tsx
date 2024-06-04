@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { z } from 'zod'
 import { useValidQueryParams } from '@/shared'
-import { useGetQuerySearchCards } from '../libs'
+import { useGetQuerySearchCards, useSetCatalogQuery } from '../libs'
 import { SortBySchema, SortOrderSchema, useSearchQueryStore } from '../model'
 import { CatalogFilter } from './@filter'
 import { CatalogList } from './@list'
@@ -10,25 +10,21 @@ import { Container } from '@/layout'
 
 export const Catalog = () => {
 	const { data, setData } = useSearchQueryStore()
-	const isMounted = useRef<boolean>(false)
-
 	const { isFetching, data: cards } = useGetQuerySearchCards()
+	const isSetQueries = useRef<boolean>(false)
+	useSetCatalogQuery(isSetQueries.current)
 
 	const params = useValidQueryParams({
 		sortBy: SortBySchema,
 		sortOrder: SortOrderSchema,
-		q: z.string().optional()
+		q: z.string().optional(),
+		price: z.tuple([z.string().regex(/^\d+$/), z.string().regex(/^\d+$/)])
 	})
 
 	useEffect(() => {
 		setData({ ...params, enabled: true })
+		isSetQueries.current = true
 	}, [setData, params])
-
-	useEffect(() => {}, [data])
-
-	useEffect(() => {
-		isMounted.current = true
-	}, [])
 
 	return (
 		<>
@@ -43,7 +39,7 @@ export const Catalog = () => {
 			<CatalogList
 				data={
 					isFetching
-						? [...new Array(9 * data?.page)]
+						? [...new Array(9 * Number(data?.page))]
 						: cards?.pages ?? []
 				}
 			/>

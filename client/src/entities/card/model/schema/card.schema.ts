@@ -8,7 +8,7 @@ export const CardSchema = BaseSchema.extend({
 	images: z.array(z.string()),
 	description: z.string().optional(),
 	category: z.string(),
-	type: z.string(),
+	type: z.string().nullable(),
 	countOrders: z.number()
 })
 
