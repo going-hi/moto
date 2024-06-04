@@ -1,13 +1,34 @@
+import { useEffect, useRef } from 'react'
+import { z } from 'zod'
+import { useValidQueryParams } from '@/shared'
 import { useGetQuerySearchCards } from '../libs'
-import { useSearchQueryStore } from '../model'
+import { SortBySchema, SortOrderSchema, useSearchQueryStore } from '../model'
 import { CatalogFilter } from './@filter'
 import { CatalogList } from './@list'
 import { CatalogSort } from './@sort'
 import { Container } from '@/layout'
 
 export const Catalog = () => {
-	const { isFetching, data } = useGetQuerySearchCards()
-	const { page } = useSearchQueryStore()
+	const { data, setData } = useSearchQueryStore()
+	const isMounted = useRef<boolean>(false)
+
+	const { isFetching, data: cards } = useGetQuerySearchCards()
+
+	const params = useValidQueryParams({
+		sortBy: SortBySchema,
+		sortOrder: SortOrderSchema,
+		q: z.string().optional()
+	})
+
+	useEffect(() => {
+		setData({ ...params, enabled: true })
+	}, [setData, params])
+
+	useEffect(() => {}, [data])
+
+	useEffect(() => {
+		isMounted.current = true
+	}, [])
 
 	return (
 		<>
@@ -20,7 +41,11 @@ export const Catalog = () => {
 				</Container>
 			</div>
 			<CatalogList
-				data={isFetching ? [...new Array(9 * page)] : data?.pages ?? []}
+				data={
+					isFetching
+						? [...new Array(9 * data?.page)]
+						: cards?.pages ?? []
+				}
 			/>
 		</>
 	)

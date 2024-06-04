@@ -10,7 +10,7 @@ export const sortItemsArr: TSortItem[] = [
 	{
 		label: 'по умолчанию',
 		order: 'ASC',
-		value: '*'
+		value: ''
 	},
 	{
 		label: 'по популярности',
