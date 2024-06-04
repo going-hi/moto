@@ -8,8 +8,8 @@ export const Radio = forwardRef<
 	HTMLInputElement,
 	TRadioProps & {
 		variant: 'box' | 'primary'
-		value: string
-		onChange: (e: unknown) => void
+		value?: string
+		onChange?: (e: unknown) => void
 	}
 >(({ variant, ...props }, ref) => {
 	switch (variant) {
