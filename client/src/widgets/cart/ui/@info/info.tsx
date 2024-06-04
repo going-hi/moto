@@ -1,3 +1,4 @@
+import { useIsMutating } from '@tanstack/react-query'
 import { useGetCart } from '@/entities/cart'
 import { Typography, Button } from '@/shared'
 import { CartEmpty } from '../@empty'
@@ -6,16 +7,32 @@ import { CartList } from '../@list'
 const { Title } = Typography
 
 export const CartInfo = () => {
-	const { data, isLoading } = useGetCart()
+	const { data, isFetching } = useGetCart()
+	const isCountCartMutating = useIsMutating({
+		mutationKey: ['user/cart/add']
+	})
+	const isRemoveFromCartMutating = useIsMutating({
+		mutationKey: ['user/cart/remove']
+	})
+	const isToggleCartMutating = useIsMutating({
+		mutationKey: ['user/card/toggle']
+	})
 
-	if (!isLoading && !data?.items.length) {
+	if (!isFetching && !data?.items.length) {
 		return <CartEmpty />
 	}
 
 	return (
 		<>
 			<CartList
-				list={isLoading ? [...new Array(2)] : data?.items ?? []}
+				list={
+					isFetching ||
+					isCountCartMutating ||
+					isRemoveFromCartMutating ||
+					isToggleCartMutating
+						? [...new Array(2)]
+						: data?.items ?? []
+				}
 			/>
 			<div className='pr-[20px]'>
 				<div className='flex justify-between items-center after:w-full after:h-[2px] after:content-[""] after:bg-gray-medium relative after:absolute after:bottom-0 after:left-0 mb-[50px]'>

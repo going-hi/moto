@@ -1,17 +1,26 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
+type TModalData = {
+	id: number
+}
+
 type TOrderCartModalStore = {
-	isShow: boolean
-	setIsShow: (s: boolean) => void
+	data: null | TModalData
+	setData: (d: TModalData) => void
+	close: () => void
 }
 
 export const useOrderCartModalStore = create<TOrderCartModalStore>()(
 	immer(set => ({
-		isShow: false,
-		setIsShow: isShow =>
+		data: null,
+		setData: data =>
 			set(state => {
-				state.isShow = isShow
+				state.data = data
+			}),
+		close: () =>
+			set(state => {
+				state.data = null
 			})
 	}))
 )

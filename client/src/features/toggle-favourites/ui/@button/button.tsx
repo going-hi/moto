@@ -12,7 +12,7 @@ export const ToggleFavouritesButton = ({
 	className?: string
 	id: number
 }) => {
-	const { data, isLoading: isFavouritesLoading } = useGetFavourites()
+	const { data, isFetching: isFavouritesLoading } = useGetFavourites()
 
 	const { accessToken } = useProfileStore()
 

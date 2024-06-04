@@ -14,7 +14,7 @@ export const ToggleCartButton = ({
 	variant: 'primary' | 'parentheses-button'
 	className?: string
 }) => {
-	const { data, isLoading } = useGetCart()
+	const { data, isFetching } = useGetCart()
 	const { accessToken } = useProfileStore()
 
 	const addedItem = useMemo(
@@ -27,11 +27,11 @@ export const ToggleCartButton = ({
 	return (
 		<Button
 			variant={
-				!accessToken || isPending || isLoading ? 'primary' : variant
+				!accessToken || isPending || isFetching ? 'primary' : variant
 			}
 			className={clsx(
 				'basis-full duration-700 will-change-transform ',
-				(isPending || isLoading) && '!py-[20px]',
+				(isPending || isFetching) && '!py-[20px]',
 				!!accessToken && 'dhover:hover:scale-[101%]',
 				variant === 'primary' && 'max-h-[66px] !py-[20px]',
 				className
@@ -43,13 +43,13 @@ export const ToggleCartButton = ({
 					: `!bg-black `
 			)}
 			isMain
-			disabled={!accessToken || isPending || isLoading}
+			disabled={!accessToken || isPending || isFetching}
 			onClick={() =>
 				accessToken ? mutate(addedItem ? addedItem.id : id) : {}
 			}
 			lineClassName={addedItem ? '!bg-black' : 'bg-beige'}
 		>
-			{isPending || isLoading ? (
+			{isPending || isFetching ? (
 				<Icon
 					name='Loading'
 					className='w-[25px] h-[25px] animate-spin-1000'
