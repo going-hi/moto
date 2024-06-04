@@ -49,7 +49,7 @@ export class AuthService {
 			password: hashPassword
 		})
 
-		this.mailService.sendActiveLink(user.email, user.link)
+		await this.mailService.sendActiveLink(user.email, user.link)
 		const tokens = this.tokenService.generateTokens(user)
 		await this.tokenService.saveToken(tokens.refreshToken, user.id)
 		return {

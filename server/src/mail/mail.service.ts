@@ -13,6 +13,8 @@ export class MailService {
 	async sendActiveLink(to: string, link: string) {
 		const API_URL = this.configService.get('API_URL')
 		const PORT = this.configService.get('SERVER_PORT')
+		const url = `${API_URL}:${PORT}`
+		console.log(url, 'url')
 		try {
 			await this.mailerService.sendMail({
 				to,
@@ -22,7 +24,7 @@ export class MailService {
 				html: `
                     <div>
                     <h1>Ваша ссылка активации для онлайн магазина Moto</h1>
-					<a href="${API_URL}:${PORT}/api/auth/active/${link}">Нажмите на это ссылку, чтобы подтвердить почту</a>
+					<a href="${url}/api/auth/active/${link}">Нажмите на это ссылку, чтобы подтвердить почту</a>
                     </div>
                 `
 			})
