@@ -7,6 +7,7 @@ export const useRemoveFromCart = () => {
 
 	return useAppMutation({
 		mutationFn: removeFromCart,
+		mutationKey: ['user/cart/remove'],
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ['user/cart'] })
 		}

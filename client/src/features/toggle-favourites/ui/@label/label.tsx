@@ -12,7 +12,7 @@ export const ToggleFavouritesLabel = ({
 	className?: string
 	id: number
 }) => {
-	const { isLoading: isFavouritesLoading, data } = useGetFavourites()
+	const { isFetching: isFavouritesLoading, data } = useGetFavourites()
 	const { accessToken } = useProfileStore()
 
 	const favouritesItem = useMemo(

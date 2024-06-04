@@ -1,6 +1,6 @@
 import { InputHTMLAttributes } from 'react'
 
 export type TInputProps = InputHTMLAttributes<HTMLInputElement> & {
-	label: string
+	label?: string
 	classNameBody?: string
 }

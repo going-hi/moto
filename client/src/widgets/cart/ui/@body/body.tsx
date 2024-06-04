@@ -10,7 +10,7 @@ export const CartBody = ({
 }: {
 	setIsOpen: Dispatch<SetStateAction<boolean>>
 }) => {
-	const { data } = useGetCart()
+	const { data, isLoading } = useGetCart()
 
 	return (
 		<div className='p-[50px]'>
@@ -20,7 +20,7 @@ export const CartBody = ({
 						Корзина
 					</Title>
 					<span className='text-[35px] font-normal inter block pb-[6px]'>
-						({data?.items.length})
+						({isLoading ? 0 : data?.items.length})
 					</span>
 				</div>
 				<Icon
