@@ -49,8 +49,9 @@ export enum EAutoChemistryTypes {
 	AUTOCHEMISTRY = 'auto_chemistry'
 }
 
-export enum ESparePartsTypes {}
-// // * Мотозапчасти
-// MOTO_PARTS = 'motorcycle_parts',
-// // * Автозапчасти
-// AUTO_PARTS = 'auto_parts'
+export enum ESparePartsTypes {
+	// * Мотозапчасти
+	MOTO_PARTS = 'motorcycle_parts',
+	// * Автозапчасти
+	AUTO_PARTS = 'auto_parts'
+}
