@@ -12,7 +12,10 @@ export const MyOrdersList = ({ list }: { list: TOrder[] }) => {
 				<Text className='mb-[10px]'>Здесь будут ваши покупки!</Text>
 				<Text>
 					Загляните в
-					<Link className='underline font-bold' to='/catalog'>
+					<Link
+						className='underline font-bold ml-[5px]'
+						to='/catalog'
+					>
 						каталог
 					</Link>
 					, чтобы выбрать товары

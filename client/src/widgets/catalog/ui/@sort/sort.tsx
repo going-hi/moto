@@ -38,7 +38,11 @@ export const CatalogSort = () => {
 						)}
 						key={i.label}
 					>
-						<Radio name='sort' isChecked={i.label === label} />
+						<Radio
+							name='sort'
+							isChecked={i.label === label}
+							variant='box'
+						/>
 						<Text className='font-medium'>{i.label}</Text>
 					</li>
 				))}

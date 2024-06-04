@@ -1,3 +1,3 @@
-import { CardSchema } from '@/entities/card'
+import { CardFullSchema } from '@/entities/card'
 
-export const GetCardDtoSchema = CardSchema
+export const GetCardDtoSchema = CardFullSchema

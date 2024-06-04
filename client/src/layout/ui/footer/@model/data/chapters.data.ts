@@ -18,10 +18,6 @@ export const chapterItemsArr: TNavItem[] = [
 		path: '/'
 	},
 	{
-		label: 'ОТЗЫВЫ',
-		path: '/'
-	},
-	{
 		label: 'КОНТАКТЫ',
 		path: '/'
 	}

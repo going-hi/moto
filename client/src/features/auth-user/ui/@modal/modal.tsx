@@ -49,7 +49,7 @@ export const AuthModal = ({
 
 				<div className='py-[40px] px-[60px]'>
 					<Title
-						className='mb-[10px] uppercase text-left'
+						className='mb-[10px] uppercase text-left !font-black'
 						variant='h3'
 					>
 						{pathname === '/auth/reset'

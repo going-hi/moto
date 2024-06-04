@@ -24,6 +24,7 @@ export const OrderFormContact = () => {
 								variant='order'
 								{...i}
 								{...field}
+								// @ts-expect-error only string
 								value={field.value ?? ''}
 								className='basis-[48.8%]'
 							/>

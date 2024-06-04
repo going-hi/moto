@@ -27,7 +27,7 @@ export const OrderInput = forwardRef<HTMLInputElement, TInputProps>(
 					onChange={onChange}
 					value={value}
 					className={clsx(
-						'placeholder:text-[#9B978B] placeholder:text-[14px] tex-[14px] placeholder:font-medium bg-beige px-[10px] py-[5px] w-full border-[#41403B] border',
+						'placeholder:text-[#9B978B] placeholder:text-[14px] tex-[14px] placeholder:font-medium bg-beige px-[10px] py-[5px] w-full border-[#41403B] border dhover:hover:scale-[101%] focus:border-[2px] transition-transform duration-700 focus:scale-[101%]',
 						classNameBody
 					)}
 				/>
