@@ -263,7 +263,6 @@ export class ProductService {
 		let min = 0
 		let max = 100000000
 		if (type) {
-			console.log('time')
 			max = (await queryMax.andWhere('type = :type', { type }).getRawOne()).max || max
 			min = (await queryMin.andWhere('type = :type', { type }).getRawOne()).min || min
 		} else {

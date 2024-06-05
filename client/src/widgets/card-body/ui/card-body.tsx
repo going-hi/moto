@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { ToggleCartButton } from '@/features/toggle-cart'
 import { ToggleFavourites } from '@/features/toggle-favourites'
-import { Typography, SliderProvider, specifications, Skeleton } from '@/shared'
+import { Typography, SliderProvider, Skeleton } from '@/shared'
 import { useGetCard } from '../libs'
 import { CardGalleryBody } from './@body'
 import { CardBodyDelivery } from './@delivery'
@@ -66,7 +66,9 @@ export const CardBody = ({ id }: { id: number }) => {
 							/>
 						</div>
 						<div>
-							<Specifications list={specifications} />
+							<Specifications
+								list={data?.characteristics ?? []}
+							/>
 							<CardBodyPaymentMethod />
 							<CardBodyDelivery />
 						</div>

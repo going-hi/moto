@@ -1,6 +1,6 @@
+import { useParamNameStore } from '@/entities/catalog'
 import { Typography } from '@/shared'
 import { CategoriesRuMap } from '@/shared'
-import { useParamNameStore } from '../model'
 import { CatalogHeaderList } from './@list'
 import { Container } from '@/layout'
 

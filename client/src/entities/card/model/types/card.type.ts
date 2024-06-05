@@ -1,4 +1,5 @@
 import { z } from 'zod'
-import { CardSchema } from '../schema'
+import { CardSchema, CardFullSchema } from '../schema'
 
 export type TCard = z.infer<typeof CardSchema>
+export type TCardFull = z.infer<typeof CardFullSchema>

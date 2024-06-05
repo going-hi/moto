@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { forwardRef } from 'react'
+import { ReactNode, forwardRef } from 'react'
 import { ControllerRenderProps } from 'react-hook-form'
 import { Icon } from '../icon'
 
@@ -9,10 +9,11 @@ export const Checkbox = forwardRef<
 	{
 		id: string
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		field: ControllerRenderProps<any, any>
+		field?: Partial<ControllerRenderProps<any, any>>
 		className?: string
+		icon?: ReactNode
 	}
->(({ id, field, className }, ref) => {
+>(({ id, field, className, icon }, ref) => {
 	return (
 		<label
 			htmlFor={id}
@@ -28,7 +29,7 @@ export const Checkbox = forwardRef<
 				{...field}
 				ref={ref}
 			/>
-			{field.value === true && <Icon name='Check' />}
+			{field?.value === true && (icon ? icon : <Icon name='Check' />)}
 		</label>
 	)
 })

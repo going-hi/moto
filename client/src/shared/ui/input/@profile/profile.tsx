@@ -58,8 +58,9 @@ export const ProfileInput = forwardRef<HTMLInputElement, TInputProps>(
 						value={value}
 						disabled={isDisabled}
 						className={clsx(
-							'placeholder:text-[#9B978B] bg-beige px-[10px] py-[12px] w-full border-[#41403B] border',
-							classNameBody
+							'placeholder:text-[#9B978B] bg-beige px-[10px] py-[12px] w-full border-[#41403B] border focus:border-[2px] transition-transform duration-700 focus:scale-[101%]',
+							classNameBody,
+							!isDisabled && 'dhover:hover:scale-[101%] '
 						)}
 					/>
 					{isDisabled && (
