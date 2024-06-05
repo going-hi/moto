@@ -5,7 +5,7 @@ export enum ECategories {
 	MOTORCYCLES = 'motorcycles',
 	BICYCLES = 'bicycles',
 	GARDEN_TOOLS = 'garden_tools',
-	SPARE_PARTS = 'spare_parrs',
+	SPARE_PARTS = 'spare_parts',
 	AUTO_CHEMISTRY = 'auto_chemistry',
 	ELECTRO_BENZO_TOOLS = 'electro_benzo_tools'
 }

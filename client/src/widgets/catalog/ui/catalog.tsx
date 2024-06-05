@@ -38,7 +38,7 @@ export const Catalog = () => {
 			price: {
 				state: [
 					params['price[0]'] ?? '0',
-					params['price[0]'] ?? '0' ?? '0'
+					params['price[1]'] ?? '0'
 				] as [string, string],
 				default: ['0', '0']
 			},
@@ -47,7 +47,8 @@ export const Catalog = () => {
 				(CatalogCardsTypesMap[name] ?? [])[0]?.value
 		})
 		isSetQueries.current = true
-	}, [setData, params, name])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [name])
 
 	return (
 		<>

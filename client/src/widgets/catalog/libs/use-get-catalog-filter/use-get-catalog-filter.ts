@@ -24,7 +24,8 @@ export const useGetCatalogFilter = () => {
 			name !== 'all' &&
 			!!type &&
 			CatalogCardsTypesMap[name]?.some(i => i.value === type),
-		throwOnError: false
+		throwOnError: false,
+		refetchOnMount: false
 	})
 
 	useEffect(() => {

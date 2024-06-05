@@ -8,4 +8,6 @@ export type TGetCards = {
 	sortBy?: 'price' | 'createDate' | 'countOrders'
 	sortOrder?: 'ASC' | 'DESC'
 	page?: number
+	['price[0]']?: string
+	['price[1]']?: string
 }

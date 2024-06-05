@@ -1,6 +1,7 @@
 import { Typography } from '@/shared'
 import { TGetFiltersDto } from '../../model'
 import { CatalogFilterItem } from '../@filter-item'
+import { CatalogFilterPrice } from '../@filter-price'
 import { CatalogTypeRadio } from '../@type-radio'
 import cl from './filter-body.module.css'
 
@@ -30,7 +31,7 @@ export const CatalogFilterBody = ({ filters }: { filters: TGetFiltersDto }) => {
 								))}
 							</ul>
 						) : (
-							<></>
+							<CatalogFilterPrice />
 						)}
 					</li>
 				))}

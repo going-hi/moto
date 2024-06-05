@@ -2,6 +2,7 @@ import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query'
 import debounce from 'lodash.debounce'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { type TGetCards, getCards, TCardsDto } from '@/entities/card'
+import { useParamNameStore } from '@/entities/catalog'
 import {
 	TStoreData,
 	useSearchFiltersStore,
@@ -10,14 +11,22 @@ import {
 import { formatQueryFilters } from '../formatQueryFilters'
 
 export const useGetQuerySearchCards = () => {
-	const {
-		data: { sortBy, sortOrder, enabled },
-		setData
-	} = useSearchQueryStore()
+	const { data, setData } = useSearchQueryStore()
+
+	const { sortBy, sortOrder, enabled, price } = data
+
 	const [filterParams, setFilterParams] = useState<string>()
 	const isMountQuerySet = useRef<boolean>(false)
+	const { name } = useParamNameStore()
 
-	const params: TGetCards = {}
+	const params: TGetCards = {
+		'price[0]': price.state[0],
+		'price[1]': price.state[1]
+	}
+
+	if (name !== 'all') {
+		params.category = name
+	}
 
 	if (sortBy) {
 		params.sortBy = sortBy
@@ -34,7 +43,7 @@ export const useGetQuerySearchCards = () => {
 	>({
 		queryKey: ['user/catalog', params, filterParams],
 		queryFn: ({ pageParam: page = 1 }) => {
-			setData({ page: String(page) })
+			setData({ ...data, page: String(page) })
 			return getCards({ ...params, page }, filterParams)
 		},
 		getNextPageParam: (lastPage, allPages) => {

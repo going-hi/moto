@@ -14,7 +14,8 @@ export const useSetCatalogQuery = (isSet: boolean) => {
 			const params: { [key: string]: unknown } = { ...data }
 
 			if (price.state[0] !== '0' || price.state[1] !== '0') {
-				params['price'] = price.state
+				params['price[0]'] = price.state[0]
+				params['price[1]'] = price.state[1]
 			}
 
 			if (isSet) {

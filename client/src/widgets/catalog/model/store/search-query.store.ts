@@ -19,6 +19,7 @@ type TData = {
 type TParamsStore = {
 	data: TData
 	setData: (data: Partial<TData> & { [key: string]: unknown }) => void
+	changePrice: (p: [string, string]) => void
 }
 
 export const useSearchQueryStore = create<TParamsStore>()(
@@ -31,7 +32,7 @@ export const useSearchQueryStore = create<TParamsStore>()(
 			enabled: false,
 			price: {
 				default: ['0', '1000000'],
-				state: ['1', '0']
+				state: ['0', '0']
 			},
 			type: ''
 		},
@@ -49,7 +50,15 @@ export const useSearchQueryStore = create<TParamsStore>()(
 					}
 				})
 
+				if (data.price) {
+					state.data.price = data.price
+				}
+
 				state.data = updatedState
+			}),
+		changePrice: p =>
+			set(state => {
+				state.data.price.state = p
 			})
 	}))
 )
