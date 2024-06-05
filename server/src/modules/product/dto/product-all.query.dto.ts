@@ -3,7 +3,14 @@ import { ECategory, ESortOrder } from '@/common/enums'
 import { PaginationQuery } from '@/common/pagination'
 import { ApiProperty } from '@nestjs/swagger'
 import { Type } from 'class-transformer'
-import { ArrayMaxSize, ArrayMinSize, IsEnum, IsOptional, IsPositive } from 'class-validator'
+import {
+	ArrayMaxSize,
+	ArrayMinSize,
+	IsEnum,
+	IsOptional,
+	IsPositive,
+	IsString
+} from 'class-validator'
 
 export enum EProductSort {
 	PRICE = 'price',
@@ -36,6 +43,11 @@ export class ProductAllQueryDto extends PaginationQuery {
 	@IsOptional()
 	@IsEnum(ECategory)
 	category?: ECategory
+
+	@ApiProperty()
+	@IsOptional()
+	@IsString()
+	type: string
 
 	@ApiProperty()
 	@IsOptional()
