@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import type { ReactNode } from 'react'
 import { Icon } from '../icon'
 import { Typography } from '../typography'
+import { Container } from '@/layout'
 
 const { Text } = Typography
 
@@ -12,7 +13,8 @@ export const Select = ({
 	children,
 	isOpen,
 	setIsOpen,
-	position
+	position,
+	withContainer
 }: {
 	maxHeight: string
 	label: string
@@ -21,6 +23,7 @@ export const Select = ({
 	isOpen: boolean
 	setIsOpen: (o: boolean) => void
 	position: 'left' | 'right'
+	withContainer?: boolean
 }) => {
 	return (
 		<>
@@ -65,7 +68,11 @@ export const Select = ({
 						width
 					)}
 				>
-					{children}
+					{withContainer ? (
+						<Container className='px-0'>{children}</Container>
+					) : (
+						children
+					)}
 				</div>
 			</div>
 		</>

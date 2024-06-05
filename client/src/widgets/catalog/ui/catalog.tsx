@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { z } from 'zod'
-import { useValidQueryParams } from '@/shared'
+import { useParamNameStore } from '@/entities/catalog'
+import { useValidQueryParams, CatalogCardsTypesMap } from '@/shared'
 import { useGetQuerySearchCards, useSetCatalogQuery } from '../libs'
 import { SortBySchema, SortOrderSchema, useSearchQueryStore } from '../model'
 import { CatalogFilter } from './@filter'
@@ -13,18 +14,26 @@ export const Catalog = () => {
 	const { isFetching, data: cards } = useGetQuerySearchCards()
 	const isSetQueries = useRef<boolean>(false)
 	useSetCatalogQuery(isSetQueries.current)
+	const { name } = useParamNameStore()
 
 	const params = useValidQueryParams({
 		sortBy: SortBySchema,
 		sortOrder: SortOrderSchema,
 		q: z.string().optional(),
-		price: z.tuple([z.string().regex(/^\d+$/), z.string().regex(/^\d+$/)])
+		price: z.tuple([z.string().regex(/^\d+$/), z.string().regex(/^\d+$/)]),
+		type: z.string().optional()
 	})
 
 	useEffect(() => {
-		setData({ ...params, enabled: true })
+		setData({
+			...params,
+			enabled: true,
+			type:
+				(params.type as string) ??
+				(CatalogCardsTypesMap[name] ?? [])[0]?.value
+		})
 		isSetQueries.current = true
-	}, [setData, params])
+	}, [setData, params, name])
 
 	return (
 		<>

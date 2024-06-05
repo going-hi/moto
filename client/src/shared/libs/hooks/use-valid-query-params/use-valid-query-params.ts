@@ -8,7 +8,7 @@ export const useValidQueryParams = <
 ) => {
 	const [searchParams] = useSearchParams()
 
-	const res: Record<string, string | undefined> = {}
+	const res: Record<string, unknown> = {}
 
 	for (const key of Object.keys(body)) {
 		const schema = body[key]

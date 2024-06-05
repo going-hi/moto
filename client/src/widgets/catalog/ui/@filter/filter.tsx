@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Select } from '@/shared'
+import { CatalogTypeRadio } from '../@type-radio'
 
 export const CatalogFilter = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -12,8 +13,11 @@ export const CatalogFilter = () => {
 			maxHeight='max-h-[200px]'
 			label='фильтрация'
 			position='left'
+			withContainer
 		>
-			Фильтрация
+			<div className='p-[30px]'>
+				<CatalogTypeRadio />
+			</div>
 		</Select>
 	)
 }

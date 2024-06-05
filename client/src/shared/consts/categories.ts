@@ -1,23 +1,25 @@
 import { z } from 'zod'
 
-export const CategoriesEnumModel = z.enum([
-	'all',
-	'bikes',
-	'bicycles',
-	'garden_tools',
-	'spare_parts',
-	'chemistry',
-	'electro_tools'
-])
+export enum ECategories {
+	ALL = 'all',
+	MOTORCYCLES = 'motorcycles',
+	BICYCLES = 'bicycles',
+	GARDEN_TOOLS = 'garden_tools',
+	SPARE_PARTS = 'spare_parrs',
+	AUTO_CHEMISTRY = 'auto_chemistry',
+	ELECTRO_BENZO_TOOLS = 'electro_benzo_tools'
+}
 
-export const ECategories = CategoriesEnumModel.enum
+export const CategoriesEnumModel = z.nativeEnum(ECategories)
+
+export const ECategoriess = CategoriesEnumModel.enum
 
 export const CategoriesRuMap: { [key: string]: string } = {
-	[ECategories.all]: 'ВСЕ',
-	[ECategories.bikes]: 'МОТОЦИКЛЫ',
-	[ECategories.bicycles]: 'ВЕЛОСИПЕДЫ',
-	[ECategories.garden_tools]: 'САДОВЫЙ ИНВЕНТАРЬ',
-	[ECategories.electro_tools]: 'ЭЛЕКТРО-БЕНЗО ИНСТРУМЕНТЫ',
-	[ECategories.chemistry]: 'АВТО-МОТО ХИМИЯ',
-	[ECategories.spare_parts]: 'ЗАПЧАСТИ'
+	[ECategories.ALL]: 'ВСЕ',
+	[ECategories.MOTORCYCLES]: 'МОТОЦИКЛЫ',
+	[ECategories.BICYCLES]: 'ВЕЛОСИПЕДЫ',
+	[ECategories.GARDEN_TOOLS]: 'САДОВЫЙ ИНВЕНТАРЬ',
+	[ECategories.ELECTRO_BENZO_TOOLS]: 'ЭЛЕКТРО-БЕНЗО ИНСТРУМЕНТЫ',
+	[ECategories.AUTO_CHEMISTRY]: 'АВТО-МОТО ХИМИЯ',
+	[ECategories.SPARE_PARTS]: 'ЗАПЧАСТИ'
 }

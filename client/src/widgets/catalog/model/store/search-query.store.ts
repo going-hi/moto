@@ -10,6 +10,7 @@ type TData = {
 	sortOrder: TSortOrder
 	enabled: boolean
 	price: [string, string]
+	type: string
 }
 
 type TParamsStore = {
@@ -25,7 +26,8 @@ export const useSearchQueryStore = create<TParamsStore>()(
 			q: '',
 			sortOrder: 'ASC',
 			enabled: false,
-			price: ['0', '1000000']
+			price: ['0', '1000000'],
+			type: ''
 		},
 		setData: data =>
 			set(state => {

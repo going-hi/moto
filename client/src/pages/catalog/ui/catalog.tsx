@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Catalog } from '@/widgets/catalog'
-import { CatalogHeader, useParamNameStore } from '@/widgets/catalog-header'
+import { CatalogHeader } from '@/widgets/catalog-header'
+import { useParamNameStore } from '@/entities/catalog'
 import { Typography, useValidParams, CategoriesEnumModel } from '@/shared'
 import { Footer, Header, Wrapper } from '@/layout'
 
