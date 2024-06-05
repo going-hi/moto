@@ -9,13 +9,15 @@ import { skipCount } from '@/core/utils'
 import { PaginationDto } from '@/common/pagination'
 import { MailService } from '@/mail/mail.service'
 import { randomUUID } from 'crypto'
+import { HashService } from '@/core/hash/hash.service'
 
 @Injectable()
 export class UserService {
 	constructor(
 		@InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
 		private readonly fileService: FileService,
-		private readonly mailService: MailService
+		private readonly mailService: MailService,
+		private readonly hashService: HashService
 	) {}
 
 	async byId(id: number, withError = false) {
@@ -139,5 +141,19 @@ export class UserService {
 		const link = randomUUID()
 		await this.userRepository.update({ id }, { link, isConfirm: false, email: newEmail })
 		await this.mailService.sendActiveLink(newEmail, link)
+	}
+
+	async _seedingOwner(email: string, password: string) {
+		const hashPassword = await this.hashService.hash(password)
+		const user = this.userRepository.create({
+			email,
+			isConfirm: true,
+			name: 'Owner',
+			surname: 'Account',
+			password: hashPassword,
+			role: ERoles.OWNER,
+			phone: '+79999999999'
+		})
+		return await this.userRepository.save(user)
 	}
 }
