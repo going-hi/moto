@@ -1,6 +1,10 @@
 import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query'
+import debounce from 'lodash.debounce'
+import { useEffect } from 'react'
 import { type TGetCards, getCards, TCardsDto } from '@/entities/card'
-import { useSearchQueryStore } from '../../model'
+import { useSearchFiltersStore, useSearchQueryStore } from '../../model'
+import { formatQueryFilters } from '../formatQueryFilters'
+import { useGetCatalogFilter } from '../use-get-catalog-filter'
 
 export const useGetQuerySearchCards = () => {
 	const {
@@ -15,7 +19,7 @@ export const useGetQuerySearchCards = () => {
 		params.sortOrder = sortOrder
 	}
 
-	return useInfiniteQuery<
+	const query = useInfiniteQuery<
 		TCardsDto | null,
 		unknown,
 		InfiniteData<TCardsDto[]>,
@@ -35,4 +39,12 @@ export const useGetQuerySearchCards = () => {
 		},
 		enabled
 	})
+
+	useEffect(() => {
+		useSearchFiltersStore.subscribe(state => {
+			formatQueryFilters(state.data)
+		})
+	}, [])
+
+	return query
 }

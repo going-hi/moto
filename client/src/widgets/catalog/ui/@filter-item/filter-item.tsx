@@ -23,7 +23,7 @@ export const CatalogFilterItem = ({
 				className='flex gap-x-[10px] cursor-pointer items-center'
 			>
 				<Checkbox
-					className='w-[17px] h-[17px] border-[2px] rounded-[2px]'
+					className='!w-[17px] !h-[17px] border-[2px] !rounded-[2px]'
 					field={{
 						value,
 						onChange: () => toggleActive(objKey, filterKey)

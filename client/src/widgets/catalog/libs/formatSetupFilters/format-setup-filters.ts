@@ -8,13 +8,10 @@ export const formatSetupFilters = (data: TGetFiltersDto) =>
 	}>((acc, key) => {
 		const arrKeys = key !== 'цена' ? data[key] : []
 
-		const obj = arrKeys.reduce<{ [key: string]: boolean }>(
-			(acc, i, index) => {
-				acc[String(i)] = index === 0
-				return acc
-			},
-			{}
-		)
+		const obj = arrKeys.reduce<{ [key: string]: boolean }>((acc, i) => {
+			acc[String(i)] = false
+			return acc
+		}, {})
 
 		if (key !== 'цена') {
 			acc[key] = obj

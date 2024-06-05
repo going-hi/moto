@@ -2,15 +2,10 @@ import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 import { formatSetupFilters } from '../../libs/formatSetupFilters'
 import { TGetFiltersDto } from '../types'
-
-type TData = {
-	[key: string]: {
-		[key: string]: boolean
-	}
-}
+import type { TStoreData } from '../types'
 
 type TSearchFiltersStore = {
-	data: TData
+	data: TStoreData
 	setData: (d: TGetFiltersDto) => void
 	toggleActive: (n: string, key: string) => void
 }
