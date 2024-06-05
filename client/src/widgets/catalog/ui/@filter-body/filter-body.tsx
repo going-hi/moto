@@ -1,48 +1,33 @@
-import { Checkbox, Typography } from '@/shared'
-import { TGetFiltersDto, useSearchFiltersStore } from '../../model'
+import { Typography } from '@/shared'
+import { TGetFiltersDto } from '../../model'
+import { CatalogFilterItem } from '../@filter-item'
 import { CatalogTypeRadio } from '../@type-radio'
+import cl from './filter-body.module.css'
 
-const { Title, Text } = Typography
+const { Title } = Typography
 
 export const CatalogFilterBody = ({ filters }: { filters: TGetFiltersDto }) => {
-	const { data } = useSearchFiltersStore()
-
 	return (
 		<>
 			<CatalogTypeRadio />
 			<ul className='flex flex-wrap'>
-				{Object.keys(filters).map(key => (
-					<li
-						className='basis-[20%] border border-black p-[20px]'
-						key={key}
-					>
+				{Object.keys(filters).map(objKey => (
+					<li className={cl.cell} key={objKey}>
 						<Title
 							variant='h5'
 							className='uppercase -tracking-2per mb-[15px]'
 						>
-							{key}
+							{objKey}
 						</Title>
-						{key !== 'цена' ? (
+						{objKey !== 'цена' ? (
 							<ul>
-								{filters[key].map(i => {
-									return (
-										<li
-											className='mb-[10px] last:mb-0 flex gap-x-[10px]'
-											key={i}
-										>
-											<Checkbox
-												field={{
-													value: [data[key]]
-												}}
-												id={key + i}
-												icon={
-													<span className='block w-[10px] h-[10px] bg-black' />
-												}
-											/>
-											<label htmlFor={key + i}>{i}</label>
-										</li>
-									)
-								})}
+								{filters[objKey].map(i => (
+									<CatalogFilterItem
+										key={i}
+										item={i}
+										objKey={objKey}
+									/>
+								))}
 							</ul>
 						) : (
 							<></>

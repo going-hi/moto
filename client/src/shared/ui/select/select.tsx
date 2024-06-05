@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import type { ReactNode } from 'react'
+import { useEffect, type ReactNode } from 'react'
 import { Icon } from '../icon'
 import { Typography } from '../typography'
 import { Container } from '@/layout'
@@ -25,6 +25,16 @@ export const Select = ({
 	position: 'left' | 'right'
 	withContainer?: boolean
 }) => {
+	useEffect(() => {
+		if (isOpen) {
+			document.body.style.overflow = 'hidden'
+		}
+
+		return () => {
+			document.body.style.overflow = 'auto'
+		}
+	}, [isOpen])
+
 	return (
 		<>
 			<div
