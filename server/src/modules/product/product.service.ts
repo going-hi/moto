@@ -81,7 +81,7 @@ export class ProductService {
 		const where = {}
 
 		if (price) {
-			const sortedPrice = price.sort()
+			const sortedPrice = price.sort((a, b) => a - b)
 			where['price'] = Between(sortedPrice[0], sortedPrice[1])
 		}
 		if (filters) {
