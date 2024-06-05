@@ -10,4 +10,5 @@ export type TGetCards = {
 	page?: number
 	['price[0]']?: string
 	['price[1]']?: string
+	type?: string
 }

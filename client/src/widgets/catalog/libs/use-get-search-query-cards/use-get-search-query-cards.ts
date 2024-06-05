@@ -13,13 +13,15 @@ import { formatQueryFilters } from '../formatQueryFilters'
 export const useGetQuerySearchCards = () => {
 	const { data, setData } = useSearchQueryStore()
 
-	const { sortBy, sortOrder, enabled, price } = data
+	const { sortBy, sortOrder, enabled, price, type } = data
 
 	const [filterParams, setFilterParams] = useState<string>('')
 	const isMountQuerySet = useRef<boolean>(false)
 	const { name } = useParamNameStore()
 
-	const params: TGetCards = {}
+	const params: TGetCards = {
+		type
+	}
 
 	if (name !== 'all') {
 		params.category = name
