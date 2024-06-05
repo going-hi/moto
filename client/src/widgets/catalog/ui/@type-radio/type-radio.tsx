@@ -17,7 +17,7 @@ export const CatalogTypeRadio = () => {
 	}
 
 	return (
-		<ul className='flex gap-x-[30px]'>
+		<ul className='flex gap-x-[30px] mb-[20px]'>
 			{list.map(({ value, label }) => (
 				<li
 					className={clsx(

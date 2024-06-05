@@ -1,7 +1,9 @@
 import { useState } from 'react'
-import { Select } from '@/shared'
+import { Select, Typography, Icon } from '@/shared'
 import type { TGetFiltersDto } from '../../model'
-import { CatalogTypeRadio } from '../@type-radio'
+import { CatalogFilterBody } from '../@filter-body'
+
+const { Text } = Typography
 
 export const CatalogFilter = ({
 	isLoading,
@@ -12,22 +14,33 @@ export const CatalogFilter = ({
 }) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false)
 
-	if (!filters) {
-		return <></>
-	}
-
 	return (
 		<Select
 			isOpen={isOpen}
 			setIsOpen={setIsOpen}
 			width='w-[99.76dvw]'
-			maxHeight='max-h-[200px]'
+			maxHeight='max-h-[70dvh] overflow-y-auto'
 			label='фильтрация'
 			position='left'
 			withContainer
 		>
-			<div className='p-[30px]'>
-				<CatalogTypeRadio />
+			<div className='py-[30px]'>
+				{isLoading ? (
+					<div className='flex justify-center'>
+						<Icon
+							className='w-[40px] h-[40px] animate-spin-1000'
+							name='Loading'
+						/>
+					</div>
+				) : filters ? (
+					<CatalogFilterBody filters={filters} />
+				) : (
+					<>
+						<Text className='text-[20px] font-bold uppercase'>
+							Фильтров нет!
+						</Text>
+					</>
+				)}
 			</div>
 		</Select>
 	)
