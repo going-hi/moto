@@ -24,7 +24,7 @@ export const CatalogFilter = ({
 			position='left'
 			withContainer
 		>
-			<div className='py-[30px]'>
+			<div className='py-[32px]'>
 				{isLoading ? (
 					<div className='flex justify-center'>
 						<Icon
