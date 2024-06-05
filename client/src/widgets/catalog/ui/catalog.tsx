@@ -2,7 +2,11 @@ import { useEffect, useRef } from 'react'
 import { z } from 'zod'
 import { useParamNameStore } from '@/entities/catalog'
 import { useValidQueryParams, CatalogCardsTypesMap } from '@/shared'
-import { useGetQuerySearchCards, useSetCatalogQuery } from '../libs'
+import {
+	useGetCatalogFilter,
+	useGetQuerySearchCards,
+	useSetCatalogQuery
+} from '../libs'
 import { SortBySchema, SortOrderSchema, useSearchQueryStore } from '../model'
 import { CatalogFilter } from './@filter'
 import { CatalogList } from './@list'
@@ -11,6 +15,8 @@ import { Container } from '@/layout'
 
 export const Catalog = () => {
 	const { data, setData } = useSearchQueryStore()
+	const { data: filters, isFetching: isFiltersLoading } =
+		useGetCatalogFilter()
 	const { isFetching, data: cards } = useGetQuerySearchCards()
 	const isSetQueries = useRef<boolean>(false)
 	useSetCatalogQuery(isSetQueries.current)
@@ -40,7 +46,10 @@ export const Catalog = () => {
 			<div className='relative'>
 				<Container>
 					<div className='flex justify-between mb-[30px]'>
-						<CatalogFilter />
+						<CatalogFilter
+							isLoading={isFiltersLoading}
+							filters={filters}
+						/>
 						<CatalogSort />
 					</div>
 				</Container>

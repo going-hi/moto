@@ -3,8 +3,10 @@ import { type TGetCards, getCards, TCardsDto } from '@/entities/card'
 import { useSearchQueryStore } from '../../model'
 
 export const useGetQuerySearchCards = () => {
-	const { data, setData } = useSearchQueryStore()
-	const { sortBy, sortOrder } = data
+	const {
+		data: { sortBy, sortOrder, enabled },
+		setData
+	} = useSearchQueryStore()
 
 	const params: TGetCards = {}
 
@@ -31,6 +33,6 @@ export const useGetQuerySearchCards = () => {
 				? allPages.length + 1
 				: null
 		},
-		enabled: data.enabled
+		enabled
 	})
 }

@@ -1,9 +1,20 @@
 import { useState } from 'react'
 import { Select } from '@/shared'
+import type { TGetFiltersDto } from '../../model'
 import { CatalogTypeRadio } from '../@type-radio'
 
-export const CatalogFilter = () => {
+export const CatalogFilter = ({
+	isLoading,
+	filters
+}: {
+	isLoading: boolean
+	filters?: TGetFiltersDto
+}) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false)
+
+	if (!filters) {
+		return <></>
+	}
 
 	return (
 		<Select
