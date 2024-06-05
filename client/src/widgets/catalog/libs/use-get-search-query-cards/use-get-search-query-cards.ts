@@ -15,17 +15,19 @@ export const useGetQuerySearchCards = () => {
 
 	const { sortBy, sortOrder, enabled, price } = data
 
-	const [filterParams, setFilterParams] = useState<string>()
+	const [filterParams, setFilterParams] = useState<string>('')
 	const isMountQuerySet = useRef<boolean>(false)
 	const { name } = useParamNameStore()
 
-	const params: TGetCards = {
-		'price[0]': price.state[0],
-		'price[1]': price.state[1]
-	}
+	const params: TGetCards = {}
 
 	if (name !== 'all') {
 		params.category = name
+	}
+
+	if (price.state[0] !== '0' || price.state[1] !== '0') {
+		;(params['price[0]'] = price.state[0]),
+			(params['price[1]'] = price.state[1])
 	}
 
 	if (sortBy) {
@@ -62,6 +64,8 @@ export const useGetQuerySearchCards = () => {
 			const formattedData = formatQueryFilters(data)
 			if (Object.keys(formattedData).length) {
 				setFilterParams(encodeURI(JSON.stringify(formattedData)))
+			} else {
+				setFilterParams('')
 			}
 		}, 1000),
 		[]

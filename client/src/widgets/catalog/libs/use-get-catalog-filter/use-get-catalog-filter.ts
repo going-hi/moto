@@ -6,11 +6,11 @@ import { TGetFiltersDto, useSearchQueryStore } from '../../model'
 import { useSearchFiltersStore } from '../../model/store/search-filters.store'
 
 export const useGetCatalogFilter = () => {
-	const {
-		data: { type }
-	} = useSearchQueryStore()
+	const { data: queries, setData: setSearchData } = useSearchQueryStore()
 	const { name } = useParamNameStore()
 	const { setData } = useSearchFiltersStore()
+
+	const { type } = queries
 
 	const params = {
 		category: name,
