@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { Link } from 'react-router-dom'
+import { useParamNameStore } from '@/entities/catalog'
 import { CategoriesRuMap, UnderlineWave } from '@/shared'
-import { useParamNameStore } from '../../model'
 
 export const CatalogHeaderItem = ({ keyMap }: { keyMap: string }) => {
 	const { name } = useParamNameStore()

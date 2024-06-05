@@ -18,6 +18,7 @@ import { PaginationDto } from '@/common/pagination'
 import * as filterData from './dto/filter.json'
 import { JwtPayload } from '@/auth/dto'
 import { FavouritesService } from '../favourites/favourites.service'
+import { productGenerate } from '@/core/seeder/generate'
 
 @Injectable()
 export class ProductService {
@@ -74,13 +75,13 @@ export class ProductService {
 		return product
 	}
 	async getAll(
-		{ count, page, sortBy, sortOrder, price, filters, category }: ProductAllQueryDto,
+		{ count, page, sortBy, sortOrder, price, filters, category, type }: ProductAllQueryDto,
 		user?: JwtPayload | null
 	) {
 		const where = {}
 
 		if (price) {
-			const sortedPrice = price.sort()
+			const sortedPrice = price.sort((a, b) => a - b)
 			where['price'] = Between(sortedPrice[0], sortedPrice[1])
 		}
 		if (filters) {
@@ -97,6 +98,7 @@ export class ProductService {
 		}
 
 		category ? (where['category'] = category) : {}
+		type ? (where['type'] = type) : {}
 
 		const [products, total] = await this.productRepository.findAndCount({
 			order: {
@@ -261,7 +263,6 @@ export class ProductService {
 		let min = 0
 		let max = 100000000
 		if (type) {
-			console.log('time')
 			max = (await queryMax.andWhere('type = :type', { type }).getRawOne()).max || max
 			min = (await queryMin.andWhere('type = :type', { type }).getRawOne()).min || min
 		} else {
@@ -270,5 +271,14 @@ export class ProductService {
 		}
 
 		return [min, max]
+	}
+
+	async _seeding(count: number = 10) {
+		const products = []
+		for (let i = 0; i < count; i++) {
+			const newProduct = productGenerate()
+			products.push(newProduct)
+		}
+		await this.productRepository.save(products)
 	}
 }

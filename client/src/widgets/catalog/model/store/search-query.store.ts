@@ -1,25 +1,64 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
-import { type TSortItem, sortItemsArr } from '../data'
+import { sortItemsArr } from '../data'
+import type { TSortBy, TSortOrder } from '../types'
+
+type TData = {
+	sortBy: TSortBy
+	page: string
+	q: string
+	sortOrder: TSortOrder
+	enabled: boolean
+	price: {
+		default: [string, string]
+		state: [string, string]
+	}
+	type: string
+}
 
 type TParamsStore = {
-	page: number
-	incrementPage: () => void
-	sort: TSortItem
-	setSort: (s: TSortItem) => void
+	data: TData
+	setData: (data: Partial<TData> & { [key: string]: unknown }) => void
+	changePrice: (p: [string, string]) => void
 }
 
 export const useSearchQueryStore = create<TParamsStore>()(
 	immer(set => ({
-		page: 1,
-		sort: sortItemsArr[0],
-		incrementPage: () =>
+		data: {
+			sortBy: sortItemsArr[0].value,
+			page: '1',
+			q: '',
+			sortOrder: 'ASC',
+			enabled: false,
+			price: {
+				default: ['0', '1000000'],
+				state: ['0', '0']
+			},
+			type: ''
+		},
+		setData: data =>
 			set(state => {
-				state.page += 1
+				const updatedState: TData & { [key: string]: unknown } =
+					state.data
+
+				Object.keys(data).forEach(key => {
+					if (
+						key !== 'price' &&
+						(data[key] || (key === 'sortBy' && data[key] === ''))
+					) {
+						updatedState[key] = data[key]
+					}
+				})
+
+				if (data.price) {
+					state.data.price = data.price
+				}
+
+				state.data = updatedState
 			}),
-		setSort: sort =>
+		changePrice: p =>
 			set(state => {
-				state.sort = sort
+				state.data.price.state = p
 			})
 	}))
 )

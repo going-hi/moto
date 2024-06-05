@@ -54,7 +54,7 @@ export const AuthInput = forwardRef<
 					ref={ref}
 					spellCheck={false}
 					className={clsx(
-						'px-[15px] py-[20px] w-full bg-transparent border-gray-dark border placeholder:text-[#9B978B] dhover:hover:scale-[101%] duration-700',
+						'px-[15px] py-[20px] w-full bg-transparent border-gray-dark border placeholder:text-[#9B978B] dhover:hover:scale-[101%] focus:border-[2px] transition-transform duration-700 focus:scale-[101%]',
 						!!err?.message && 'border-red-700'
 					)}
 					id={id}

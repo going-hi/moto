@@ -1,14 +1,17 @@
 import { Button } from '@/shared'
-import { useSearchQueryStore } from '../../model'
+import { useGetQuerySearchCards } from '../../libs'
 
 export const CatalogMore = ({ isLoading }: { isLoading: boolean }) => {
-	const { incrementPage } = useSearchQueryStore()
+	const { fetchNextPage, isFetching } = useGetQuerySearchCards()
+
+	if (isLoading || isFetching) {
+		return <></>
+	}
 
 	return (
 		<div className='flex justify-center mb-[50px]'>
 			<Button
-				disabled={isLoading}
-				onClick={incrementPage}
+				onClick={() => fetchNextPage()}
 				variant='parentheses-button'
 				isMain
 			>

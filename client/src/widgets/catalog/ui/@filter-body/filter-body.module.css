@@ -1,0 +1,7 @@
+.cell {
+	@apply basis-[20%] border border-black p-[20px];
+}
+
+.cell + .cell {
+	margin: -0.3px 0;
+}
