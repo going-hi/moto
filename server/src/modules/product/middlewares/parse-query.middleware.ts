@@ -10,7 +10,6 @@ export class LoggerMiddleware implements NestMiddleware {
 			try {
 				//@ts-expect-error to pt
 				req.query.filters = JSON.parse(decodeURI(query.filters))
-				console.log(query.filters, 'fil')
 			} catch (e) {
 				console.error(e)
 				return next()
