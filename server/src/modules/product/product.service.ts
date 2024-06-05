@@ -75,7 +75,7 @@ export class ProductService {
 		return product
 	}
 	async getAll(
-		{ count, page, sortBy, sortOrder, price, filters, category }: ProductAllQueryDto,
+		{ count, page, sortBy, sortOrder, price, filters, category, type }: ProductAllQueryDto,
 		user?: JwtPayload | null
 	) {
 		const where = {}
@@ -98,6 +98,7 @@ export class ProductService {
 		}
 
 		category ? (where['category'] = category) : {}
+		type ? (where['type'] = type) : {}
 
 		const [products, total] = await this.productRepository.findAndCount({
 			order: {
