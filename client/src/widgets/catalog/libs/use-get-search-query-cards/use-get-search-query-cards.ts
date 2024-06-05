@@ -50,7 +50,10 @@ export const useGetQuerySearchCards = () => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const debouncedFetch = useCallback(
 		debounce((data: TStoreData) => {
-			setFilterParams(encodeURI(JSON.stringify(formatQueryFilters(data))))
+			const formattedData = formatQueryFilters(data)
+			if (Object.keys(formattedData).length) {
+				setFilterParams(encodeURI(JSON.stringify(formattedData)))
+			}
 		}, 1000),
 		[]
 	)

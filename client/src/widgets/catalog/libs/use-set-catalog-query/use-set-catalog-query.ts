@@ -9,9 +9,16 @@ export const useSetCatalogQuery = (isSet: boolean) => {
 	useEffect(() => {
 		useSearchQueryStore.subscribe(state => {
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-			const { enabled, ...data } = state.data
+			const { enabled, price, ...data } = state.data
+
+			const params: { [key: string]: unknown } = { ...data }
+
+			if (price.state[0] !== '0' || price.state[1] !== '0') {
+				params['price'] = price.state
+			}
+
 			if (isSet) {
-				navigate(`?${qs.stringify(data)}`)
+				navigate(`?${qs.stringify(params)}`)
 			}
 		})
 	}, [navigate, isSet])

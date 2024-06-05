@@ -26,7 +26,8 @@ export const Catalog = () => {
 		sortBy: SortBySchema,
 		sortOrder: SortOrderSchema,
 		q: z.string().optional(),
-		price: z.tuple([z.string().regex(/^\d+$/), z.string().regex(/^\d+$/)]),
+		'price[0]': z.string().regex(/^\d+$/),
+		'price[1]': z.string().regex(/^\d+$/),
 		type: z.string().optional()
 	})
 
@@ -34,6 +35,13 @@ export const Catalog = () => {
 		setData({
 			...params,
 			enabled: true,
+			price: {
+				state: [
+					params['price[0]'] ?? '0',
+					params['price[0]'] ?? '0' ?? '0'
+				] as [string, string],
+				default: ['0', '0']
+			},
 			type:
 				(params.type as string) ??
 				(CatalogCardsTypesMap[name] ?? [])[0]?.value

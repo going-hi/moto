@@ -14,7 +14,7 @@ export const catalogAccordionItemsArr: TCatalogAccordionItem[] = [
         Мы предоставляем гарантию и сервисное обслуживание после продажи.
         Наша цель - лояльность клиентов и долгосрочное сотрудничество, а не мгновенный доход.`,
 		image: '/bike.png',
-		link: ECategories.bikes
+		link: ECategories.MOTORCYCLES
 	},
 	{
 		title: 'ВЕЛОСИПЕДЫ',
@@ -22,7 +22,7 @@ export const catalogAccordionItemsArr: TCatalogAccordionItem[] = [
         Мы предоставляем гарантию и сервисное обслуживание после продажи.
         Наша цель - лояльность клиентов и долгосрочное сотрудничество, а не мгновенный доход.`,
 		image: '/bicycle.png',
-		link: ECategories.bicycles
+		link: ECategories.BICYCLES
 	},
 	{
 		title: 'САДОВЫЙ ИНСТРУМЕНТ',
@@ -30,7 +30,7 @@ export const catalogAccordionItemsArr: TCatalogAccordionItem[] = [
         Мы гарантируем высокое качество и долговечность нашего оборудования.
         Мы выбираем только надежных поставщиков и проверенные бренды.`,
 		image: '/garden_tools.png',
-		link: ECategories.garden_tools
+		link: ECategories.GARDEN_TOOLS
 	},
 	{
 		title: 'ЭЛЕКТРО-БЕНЗО ИНСТРУМЕНТЫ',
@@ -38,7 +38,7 @@ export const catalogAccordionItemsArr: TCatalogAccordionItem[] = [
         Мы предоставляем гарантию и сервисное обслуживание на все наши инструменты.
         Мы выбираем только качественные инструменты от проверенных поставщиков.`,
 		image: '/electro_tools.png',
-		link: ECategories.electro_tools
+		link: ECategories.ELECTRO_BENZO_TOOLS
 	},
 	{
 		title: 'АВТО-МОТО ХИМИЯ',
@@ -46,7 +46,7 @@ export const catalogAccordionItemsArr: TCatalogAccordionItem[] = [
         Мы гарантируем высокое качество и эффективность всех наших продуктов.
         Мы выбираем продукцию только от проверенных и надежных поставщиков.`,
 		image: '/chemistry.png',
-		link: ECategories.chemistry
+		link: ECategories.AUTO_CHEMISTRY
 	},
 	{
 		title: 'ЗАПЧАСТИ',
@@ -54,6 +54,6 @@ export const catalogAccordionItemsArr: TCatalogAccordionItem[] = [
         Мы гарантируем высокое качество и эффективность всех наших продуктов.
         Мы сотрудничаем только с надежными поставщиками и проверенными брендами.`,
 		image: '/spare_parts.png',
-		link: ECategories.spare_parts
+		link: ECategories.SPARE_PARTS
 	}
 ]

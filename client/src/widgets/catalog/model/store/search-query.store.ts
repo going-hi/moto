@@ -9,7 +9,10 @@ type TData = {
 	q: string
 	sortOrder: TSortOrder
 	enabled: boolean
-	price: [string, string]
+	price: {
+		default: [string, string]
+		state: [string, string]
+	}
 	type: string
 }
 
@@ -26,7 +29,10 @@ export const useSearchQueryStore = create<TParamsStore>()(
 			q: '',
 			sortOrder: 'ASC',
 			enabled: false,
-			price: ['0', '1000000'],
+			price: {
+				default: ['0', '1000000'],
+				state: ['1', '0']
+			},
 			type: ''
 		},
 		setData: data =>
@@ -35,7 +41,10 @@ export const useSearchQueryStore = create<TParamsStore>()(
 					state.data
 
 				Object.keys(data).forEach(key => {
-					if (data[key] || (key === 'sortBy' && data[key] === '')) {
+					if (
+						key !== 'price' &&
+						(data[key] || (key === 'sortBy' && data[key] === ''))
+					) {
 						updatedState[key] = data[key]
 					}
 				})

@@ -1,16 +1,20 @@
 import { TStoreData } from '../../model'
 
-export const formatQueryFilters = (data: TStoreData) => {
-	const str = Object.keys(data).reduce((acc, key) => {
-		const filteredValues = Object.keys(data[key]).filter(i => data[key][i])
-
-		const str = filteredValues.reduce(
-			(acc, i) => acc + `filters[${key}]=${i}&`,
-			''
+export const formatQueryFilters = (data: TStoreData) =>
+	Object.keys(data).reduce<{ [key: string]: string[] }>((acc, name) => {
+		const formattedCategoryArr = Object.keys(data[name]).reduce<string[]>(
+			(acc, i) => {
+				if (data[name][i]) {
+					acc.push(i)
+				}
+				return acc
+			},
+			[]
 		)
 
-		return acc + str
-	}, '')
+		if (formattedCategoryArr.length) {
+			acc[name] = formattedCategoryArr
+		}
 
-	return str.slice(0, -1)
-}
+		return acc
+	}, {})
