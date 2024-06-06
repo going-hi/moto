@@ -10,7 +10,7 @@ export const EditProfile = () => {
 	)
 
 	return (
-		<div className='w-full'>
+		<div className='w-full pb-[200px]'>
 			<EditProfileSwitch
 				value={switchOption}
 				setValue={setSwitchOption}

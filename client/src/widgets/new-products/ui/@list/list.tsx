@@ -1,5 +1,6 @@
 import { Card, TCard } from '@/entities/card'
 import { Typography } from '@/shared'
+import { NewProductsItemSkeleton } from '../@item'
 import { More } from '../@more'
 import { Layout } from '@/layout'
 
@@ -33,9 +34,15 @@ export const List = ({
 				</Layout>
 			)}
 			<div className='flex flex-wrap gap-x-[50px] gap-y-[30px]'>
-				{list.slice(0, 9).map(i => (
-					<Card {...i} key={i.id} variant='primary' />
-				))}
+				{list
+					.slice(0, 9)
+					.map((i, index) =>
+						i ? (
+							<Card {...i} key={i.id} variant='primary' />
+						) : (
+							<NewProductsItemSkeleton key={String(index)} />
+						)
+					)}
 				<More />
 			</div>
 		</div>
