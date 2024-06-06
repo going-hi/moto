@@ -2,7 +2,7 @@ import { IsKeyArrayObject } from '@/common/decorators'
 import { ECategory, ESortOrder } from '@/common/enums'
 import { PaginationQuery } from '@/common/pagination'
 import { ApiProperty } from '@nestjs/swagger'
-import { Type } from 'class-transformer'
+import { Transform, Type } from 'class-transformer'
 import {
 	ArrayMaxSize,
 	ArrayMinSize,
@@ -53,5 +53,13 @@ export class ProductAllQueryDto extends PaginationQuery {
 	@IsOptional()
 	@IsKeyArrayObject()
 	@Type(() => Filter)
+	@Transform(({ value }) => {
+		const object = {}
+		for (const key in value) {
+			const newKey = key.toLowerCase()
+			object[newKey] = value[key]
+		}
+		return object
+	})
 	filters?: Filter
 }
