@@ -51,9 +51,10 @@ export const useGetQuerySearchCards = () => {
 			return getCards({ ...params, page }, filterParams)
 		},
 		getNextPageParam: (lastPage, allPages) =>
-			!!lastPage && (allPages.length + 1) * 10 <= lastPage.meta.total * 10
+			!!lastPage && allPages.length * 10 <= lastPage.meta.total
 				? allPages.length + 1
 				: undefined,
+
 		enabled,
 		throwOnError: false,
 		retry: false

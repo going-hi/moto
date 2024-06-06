@@ -10,7 +10,7 @@ export const getCards = (options: TGetCards = {}, filters?: string) => {
 	}
 
 	if (filters?.length) {
-		params[filters] = filters
+		params['filters'] = filters
 	}
 
 	return $api
