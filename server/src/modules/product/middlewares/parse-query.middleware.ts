@@ -5,10 +5,9 @@ import { Request, Response, NextFunction } from 'express'
 export class LoggerMiddleware implements NestMiddleware {
 	use(req: Request, res: Response, next: NextFunction) {
 		const query = req.query
-
 		if (query.filters) {
 			try {
-				//@ts-expect-error to pt
+				// @ts-expect-error pox wave
 				req.query.filters = JSON.parse(decodeURI(query.filters))
 			} catch (e) {
 				console.error(e)
