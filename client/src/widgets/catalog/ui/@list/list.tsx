@@ -5,7 +5,13 @@ import { CatalogItemSkeleton } from '../@item-skeleton'
 import { CatalogMore } from '../@more'
 import { Container } from '@/layout'
 
-export const CatalogList = ({ data }: { data: TCardsDto[] }) => {
+export const CatalogList = ({
+	data,
+	hasNextPage
+}: {
+	data: TCardsDto[]
+	hasNextPage: boolean
+}) => {
 	if (!data) {
 		return <></>
 	}
@@ -40,7 +46,7 @@ export const CatalogList = ({ data }: { data: TCardsDto[] }) => {
 					</div>
 				))}
 			</div>
-			<CatalogMore isLoading={false} />
+			{hasNextPage && <CatalogMore isLoading={false} />}
 		</Container>
 	)
 }

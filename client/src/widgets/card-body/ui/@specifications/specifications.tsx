@@ -13,8 +13,8 @@ export const Specifications = ({ list }: { list: TCardCharacteristic[] }) => {
 						key={key}
 						className='flex pb-[5px] mb-[20px] last:mb-0 border-b border-[#b8b4a8] last:border-0'
 					>
-						<Text className='basis-[50%]'>{key}</Text>
-						<Text className='basis-[50%]'>{value}</Text>
+						<Text className='basis-[50%] capitalize'>{key}</Text>
+						<Text className='basis-[50%] capitalize'>{value}</Text>
 					</li>
 				))}
 			</ul>

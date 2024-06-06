@@ -7,18 +7,18 @@ export const chapterItemsArr: TNavItem[] = [
 	},
 	{
 		label: 'КАТАЛОГ',
-		path: '/'
+		path: '/catalog'
 	},
 	{
 		label: 'О НАС',
-		path: '/'
+		path: '/about_us'
 	},
 	{
 		label: 'КАК КУПИТЬ',
-		path: '/'
+		path: '/how_buy'
 	},
 	{
 		label: 'КОНТАКТЫ',
-		path: '/'
+		path: '/contacts'
 	}
 ]
