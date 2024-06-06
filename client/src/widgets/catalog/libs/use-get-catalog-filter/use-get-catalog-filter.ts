@@ -29,6 +29,10 @@ export const useGetCatalogFilter = () => {
 	})
 
 	useEffect(() => {
+		setData({})
+	}, [name])
+
+	useEffect(() => {
 		if (data) {
 			setData(data)
 		}
