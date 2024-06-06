@@ -17,7 +17,7 @@ export const Catalog = () => {
 	const { data, setData } = useSearchQueryStore()
 	const { data: filters, isFetching: isFiltersLoading } =
 		useGetCatalogFilter()
-	const { isFetching, data: cards } = useGetQuerySearchCards()
+	const { isFetching, data: cards, hasNextPage } = useGetQuerySearchCards()
 	const isSetQueries = useRef<boolean>(false)
 	useSetCatalogQuery(isSetQueries.current)
 	const { name } = useParamNameStore()
@@ -64,6 +64,7 @@ export const Catalog = () => {
 				</Container>
 			</div>
 			<CatalogList
+				hasNextPage={hasNextPage}
 				data={
 					isFetching
 						? [...new Array(9 * Number(data?.page))]

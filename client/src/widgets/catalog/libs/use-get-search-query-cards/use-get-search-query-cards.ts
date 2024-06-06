@@ -48,11 +48,10 @@ export const useGetQuerySearchCards = () => {
 			setData({ ...data, page: String(page) })
 			return getCards({ ...params, page }, filterParams)
 		},
-		getNextPageParam: (lastPage, allPages) => {
-			return lastPage && allPages.length + 1 <= lastPage.meta.total * 10
+		getNextPageParam: (lastPage, allPages) =>
+			!!lastPage && (allPages.length + 1) * 10 <= lastPage.meta.total * 10
 				? allPages.length + 1
-				: null
-		},
+				: undefined,
 		enabled,
 		throwOnError: false,
 		retry: false
