@@ -12,7 +12,7 @@ export const EditProfileInfoButton = ({
 		<Button
 			disabled={!isChanged}
 			variant='primary'
-			className='!py-[18px] uppercase '
+			className='!py-[18px] uppercase'
 		>
 			{isPending ? (
 				<Icon
