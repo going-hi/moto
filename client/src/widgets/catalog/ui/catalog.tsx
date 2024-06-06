@@ -54,7 +54,7 @@ export const Catalog = () => {
 		<>
 			<div className='relative'>
 				<Container>
-					<div className='flex justify-between mb-[30px]'>
+					<div className='flex justify-between mb-[36px]'>
 						<CatalogFilter
 							isLoading={isFiltersLoading}
 							filters={filters}

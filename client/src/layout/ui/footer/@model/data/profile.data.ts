@@ -3,14 +3,10 @@ import { TNavItem } from '@/shared'
 export const profileItemsArr: TNavItem[] = [
 	{
 		label: 'ЛИЧНЫЙ КАБИНЕТ',
-		path: '/'
+		path: '/profile'
 	},
 	{
 		label: 'ИЗБРАННОЕ',
-		path: '/'
-	},
-	{
-		label: 'КОРЗИНА',
-		path: '/'
+		path: '/favourites'
 	}
 ]

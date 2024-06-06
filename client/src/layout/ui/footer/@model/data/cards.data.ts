@@ -3,26 +3,26 @@ import type { TNavItem } from '@/shared'
 export const cardItemsArr: TNavItem[] = [
 	{
 		label: 'МОТОЦИКЛЫ',
-		path: '/'
+		path: '/catalog/motorcycles'
 	},
 	{
 		label: 'ВЕЛОСИПЕДЫ',
-		path: '/'
+		path: '/catalog/bicycles'
 	},
 	{
 		label: 'САДОВЫЙ ИНСТРУМЕНТ',
-		path: '/'
+		path: '/catalog/garden_tools'
 	},
 	{
 		label: 'ЭЛЕКТРО-БЕНЗО ИНСТРУМЕНТЫ',
-		path: '/'
+		path: '/catalog/electro_benzo_tools'
 	},
 	{
 		label: 'АВТО-МОТО ХИМИЯ',
-		path: '/'
+		path: '/catalog/auto_chemistry'
 	},
 	{
 		label: 'ЗАПЧАСТИ',
-		path: '/'
+		path: '/catalog/spare_parts'
 	}
 ]

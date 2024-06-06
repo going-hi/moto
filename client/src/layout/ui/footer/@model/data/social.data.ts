@@ -3,14 +3,14 @@ import type { TNavItem } from '@/shared'
 export const socialItemsArr: TNavItem[] = [
 	{
 		label: 'ВКОНТАКТЕ',
-		path: '/'
+		path: 'https://vk.com'
 	},
 	{
 		label: 'АВИТО',
-		path: '/'
+		path: 'https://avito.ru'
 	},
 	{
 		label: 'WHATSAPP',
-		path: '/'
+		path: 'https://whatsapp.com/'
 	}
 ]
