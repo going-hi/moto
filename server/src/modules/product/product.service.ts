@@ -79,12 +79,17 @@ export class ProductService {
 		user?: JwtPayload | null
 	) {
 		const where = {}
-
 		if (price) {
 			const sortedPrice = price.sort((a, b) => a - b)
 			where['price'] = Between(sortedPrice[0], sortedPrice[1])
 		}
 		if (filters) {
+			const brands = filters['бренд']
+			if (brands) {
+				where['brand'] = brands.length > 1 ? Or(...brands.map(ILike)) : ILike(brands[0])
+
+				delete filters['бренд']
+			}
 			const array = []
 			for (const key in filters) {
 				const object = {

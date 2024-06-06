@@ -77,6 +77,7 @@ export class ProductController {
 		return this.productService.getOne(id, user)
 	}
 
+	@UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
 	@UserNoRequiredAuthGuard()
 	@HttpCode(HttpStatus.OK)
 	@Get()
