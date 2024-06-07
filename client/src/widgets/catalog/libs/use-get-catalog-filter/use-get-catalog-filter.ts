@@ -3,7 +3,7 @@ import { useParamNameStore } from '@/entities/catalog'
 import { CatalogCardsTypesMap, useAppQuery } from '@/shared'
 import { getCatalogFilters } from '../../api'
 import { TGetFiltersDto, useSearchQueryStore } from '../../model'
-import { useSearchFiltersStore } from '../../model/store/search-filters.store'
+import { useSearchFiltersStore } from '../../model'
 
 export const useGetCatalogFilter = () => {
 	const { data: queries } = useSearchQueryStore()
