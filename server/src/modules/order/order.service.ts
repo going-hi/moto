@@ -1,8 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { CreateOrderDto, OrderAllQueryDto } from './dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { OrderEntity, OrderItemEntity } from './entities'
-import { Repository } from 'typeorm'
+import { In, Repository } from 'typeorm'
 import { ProductService } from '../product/product.service'
 import { PaginationDto } from '@/common/pagination'
 import { skipCount } from '@/core/utils'
@@ -75,7 +75,6 @@ export class OrderService {
 		return new PaginationDto(items, total)
 	}
 
-	// TODO: какие поля нужны из продукта???
 	async findOne(id: number, userId?: number) {
 		const where = { id }
 
@@ -117,5 +116,31 @@ export class OrderService {
 		const order = await this.byId(id, true)
 		order.status = status
 		return await this.orderRepository.save(order)
+	}
+
+	async getByIds(ids: number[]) {
+		const orders = await this.orderRepository.find({
+			where: { id: In(ids) }
+		})
+
+		const errorMessages = []
+
+		ids.forEach(id => {
+			const order = orders.some(g => g.id === id)
+			if (!order) {
+				errorMessages.push(`Товар с id: ${id} не найден`)
+			}
+		})
+
+		if (errorMessages.length) {
+			throw new BadRequestException(errorMessages)
+		}
+
+		return orders
+	}
+
+	async deleteMany(ids: number[]) {
+		const orders = await this.getByIds(ids)
+		await this.orderRepository.remove(orders)
 	}
 }
