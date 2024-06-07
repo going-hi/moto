@@ -14,9 +14,9 @@ async function bootstrap() {
 	const configService = app.get(ConfigService)
 	const PORT = configService.get('SERVER_PORT')
 	const CLIENT_URL = configService.get('CLIENT_URL')
-
+	const ADMIN_URL = configService.get('ADMIN_URL')
 	app.enableCors({
-		origin: CLIENT_URL,
+		origin: [CLIENT_URL, ADMIN_URL],
 		credentials: true
 	})
 
