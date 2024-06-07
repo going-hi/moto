@@ -9,6 +9,15 @@ export class EnvironmentVariables {
 	@IsInt()
 	SERVER_PORT: number
 
+	@IsString()
+	CLIENT_URL: string
+
+	@IsString()
+	ADMIN_URL: string
+
+	@IsString()
+	API_URL: string
+
 	// * DataBase
 	@IsString()
 	POSTGRES_HOST: string
