@@ -29,6 +29,7 @@ export const Primary = ({
 	) : (
 		<button
 			{...props}
+			onClick={onClick}
 			disabled={disabled}
 			className={clsx(
 				'py-[23px] w-full bg-black text-beige font-bold duration-700 will-change-transform',
