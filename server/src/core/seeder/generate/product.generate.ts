@@ -6,6 +6,7 @@ import * as filterData from '@/modules/product/dto/filter.json'
 import { characteristicGenerateByFilter } from './characteristic.generate'
 import { readdirSync } from 'fs'
 import { join } from 'path'
+import { CategoriesToType } from '@/common/dto'
 
 export function productGenerate() {
 	const category = getRandomEnumValue(ECategory)
@@ -19,8 +20,7 @@ export function productGenerate() {
 
 	const filterCategory = filterData[category]
 	if (filterCategory?.common) {
-		type = null
-		filterCategory['char']
+		type = getRandomEnumValue(CategoriesToType[category]) || null
 		filter = filterCategory['char']
 	} else {
 		const typeArray = Object.keys(filterCategory)
