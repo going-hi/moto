@@ -19,12 +19,14 @@ export const useGetQuerySearchCards = () => {
 	const isMountQuerySet = useRef<boolean>(false)
 	const { name } = useParamNameStore()
 
-	const params: TGetCards = {
-		type
-	}
+	const params: TGetCards = {}
 
 	if (name !== 'all') {
 		params.category = name
+	}
+
+	if (!['all', 'bicycles'].includes(name)) {
+		params['type'] = type
 	}
 
 	if (price.state[0] !== '0' || price.state[1] !== '0') {
