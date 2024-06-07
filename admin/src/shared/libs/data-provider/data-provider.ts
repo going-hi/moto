@@ -3,6 +3,7 @@ import { $api } from '../axios'
 import { errorHandler } from '../error-handler'
 import { ListSchema } from '@/shared'
 import qs from 'qs'
+import { removeRelations } from '../removeRelations'
 
 // @ts-ignore. don't need to use updateMany / getManyReference
 export const dataProvider: DataProvider = {
@@ -18,8 +19,23 @@ export const dataProvider: DataProvider = {
 		}
 	},
 
+	// @ts-expect-error
 	getMany: async (res, par) => {
-		return Promise.reject()
+		try {
+			const { ids } = par
+
+			const url = `/${res}/many?${qs.stringify({
+				filters: decodeURI(JSON.stringify({ ids }))
+			})}`
+
+			const data = await $api
+				.get(url)
+				.then(res => ListSchema.parse(res.data))
+
+			return { data: data.items }
+		} catch (e) {
+			return errorHandler(e)
+		}
 	},
 
 	// @ts-expect-error
@@ -39,9 +55,11 @@ export const dataProvider: DataProvider = {
 				.then(res => ListSchema.parse(res.data))
 
 			const {
-				meta: { total },
-				items
+				meta: { total }
 			} = data
+
+			// @ts-expect-error
+			const items = removeRelations(data.items, 'product')
 
 			return { data: [...items], total }
 		} catch (e) {

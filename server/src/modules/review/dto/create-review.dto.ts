@@ -19,7 +19,7 @@ export class CreateReviewDto {
 	// * File upload
 	@ApiProperty({
 		format: 'binary',
-		required: true,
+		// required: true,
 		description: 'file type should be jpeg | png | jpg | webp'
 	})
 	@Exclude()

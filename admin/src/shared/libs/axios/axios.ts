@@ -7,6 +7,7 @@ const $api = axios.create(axiosConfig)
 $api.interceptors.request.use(req => {
 	req.headers.authorization = 'Bearer ' + useAuthStore.getState().accessToken
 	req.headers['Content-Type'] = 'application/json'
+
 	return req
 })
 

@@ -36,7 +36,10 @@ export class ReviewService {
 				[sortBy]: sortOrder
 			},
 			take: count,
-			skip: skipCount(page, count)
+			skip: skipCount(page, count),
+			relations: {
+				product: true
+			}
 		})
 		return new PaginationDto(reviews, total)
 	}

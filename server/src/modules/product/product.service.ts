@@ -9,7 +9,8 @@ import {
 	ProductAllQueryDto,
 	SearchProductDto,
 	UpdateProductDto,
-	AddCountOrders
+	AddCountOrders,
+	GetManyProductsDto
 } from './dto'
 import { FileService } from '@/core/file/file.service'
 import { CharacteristicEntity } from '../characteristic/entities'
@@ -125,6 +126,16 @@ export class ProductService {
 				: false
 			product['isLike'] = isLike
 		}
+		return new PaginationDto(products, total)
+	}
+
+	async getMany({ filters: { ids } }: GetManyProductsDto) {
+		const [products, total] = await this.productRepository.findAndCount({
+			where: {
+				id: In(ids)
+			}
+		})
+
 		return new PaginationDto(products, total)
 	}
 

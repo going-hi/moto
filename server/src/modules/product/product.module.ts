@@ -21,6 +21,11 @@ import { LoggerMiddleware } from './middlewares/parse-query.middleware'
 })
 export class ProductModule implements NestModule {
 	configure(consumer: MiddlewareConsumer) {
-		consumer.apply(LoggerMiddleware).forRoutes({ path: 'product', method: RequestMethod.GET })
+		consumer
+			.apply(LoggerMiddleware)
+			.forRoutes(
+				{ path: 'product', method: RequestMethod.GET },
+				{ path: 'product/many', method: RequestMethod.GET }
+			)
 	}
 }

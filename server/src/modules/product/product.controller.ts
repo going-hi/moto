@@ -21,6 +21,7 @@ import { ApiConsumes, ApiTags } from '@nestjs/swagger'
 import {
 	CreateProductDto,
 	FilterDto,
+	GetManyProductsDto,
 	ImageDto,
 	ProductAllQueryDto,
 	SearchProductDto,
@@ -67,6 +68,12 @@ export class ProductController {
 	@Get('search')
 	search(@Query() dto: SearchProductDto) {
 		return this.productService.search(dto)
+	}
+
+	@HttpCode(HttpStatus.OK)
+	@Get('many')
+	getMany(@Query() query: GetManyProductsDto) {
+		return this.productService.getMany(query)
 	}
 
 	// * обсудить

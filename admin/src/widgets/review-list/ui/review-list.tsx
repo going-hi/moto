@@ -1,4 +1,9 @@
-import { DatagridConfigurable, List, TextField } from 'react-admin'
+import {
+	DatagridConfigurable,
+	List,
+	ReferenceField,
+	TextField
+} from 'react-admin'
 import { Actions } from '@/shared'
 
 export const ReviewList = () => {
@@ -8,8 +13,20 @@ export const ReviewList = () => {
 			resource='review'
 			sort={{ field: 'createDate', order: 'ASC' }}
 		>
-			<DatagridConfigurable>
-				<TextField />
+			<DatagridConfigurable rowClick={(id, res) => `/${res}/${id}/show`}>
+				<TextField source='name' label='Имя покупателя' />
+				<ReferenceField
+					source='product'
+					reference='product'
+					label='Продукт'
+					sortable={false}
+					// @ts-expect-error
+					link={(par, res) => {
+						return `/${res}/${par.id}/show`
+					}}
+				>
+					<TextField source='name' emptyText='none' />
+				</ReferenceField>
 			</DatagridConfigurable>
 		</List>
 	)
