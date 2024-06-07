@@ -15,7 +15,9 @@ import {
 export enum EProductSort {
 	PRICE = 'price',
 	CREATE_DATE = 'createDate',
-	BY_POPULARITY = 'countOrders'
+	BY_POPULARITY = 'countOrders',
+	NAME = 'name',
+	CATEGORY = 'category'
 }
 
 class Filter {
