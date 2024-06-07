@@ -27,7 +27,7 @@ import {
 	UpdateProductDto
 } from './dto'
 import { REGEX_FILE_TYPE_IMG } from '@/common/constants'
-import { GetByIdParamsDto } from '@/common/dto'
+import { GetByIdParamsDto, IdsDto } from '@/common/dto'
 import { FilesInterceptor } from '@nestjs/platform-express'
 import { RolesAuthGuard, UserNoRequiredAuthGuard } from '@/auth/guards'
 import { User } from '@/common/decorators'
@@ -90,6 +90,13 @@ export class ProductController {
 	@Put(':id')
 	update(@Param() { id }: GetByIdParamsDto, @Body() dto: UpdateProductDto) {
 		return this.productService.update(id, dto)
+	}
+
+	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
+	@HttpCode(HttpStatus.NO_CONTENT)
+	@Delete('many')
+	deleteMany(@Body() { ids }: IdsDto) {
+		return this.productService.deleteMany(ids)
 	}
 
 	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)

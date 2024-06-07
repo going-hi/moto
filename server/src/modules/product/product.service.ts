@@ -199,6 +199,17 @@ export class ProductService {
 		return
 	}
 
+	async deleteMany(ids: number[]) {
+		const products = await this.getByIds(ids)
+
+		products.forEach(async product => {
+			product.images.forEach(img => {
+				this.fileService.deleteFile(img)
+			})
+		})
+		await this.productRepository.remove(products)
+	}
+
 	async byId(id: number, withError = false) {
 		const product = await this.productRepository.findOneBy({ id })
 
@@ -225,7 +236,7 @@ export class ProductService {
 
 		const errorMessages = []
 
-		ids.map(id => {
+		ids.forEach(id => {
 			const product = products.some(g => g.id === id)
 			if (!product) {
 				errorMessages.push(`Товар с id: ${id} не найден`)
