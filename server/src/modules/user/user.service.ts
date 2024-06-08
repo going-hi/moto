@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { UserEntity } from './entities'
-import { Repository } from 'typeorm'
+import { Not, Repository } from 'typeorm'
 import { CreateUserDto, UpdateUserDto, UserAllQueryDto } from './dto'
 import { ERoles } from '@/common/enums'
 import { FileService } from '@/core/file/file.service'
@@ -26,11 +26,16 @@ export class UserService {
 		return user
 	}
 
-	async getAll({ count, page, sortBy, sortOrder }: UserAllQueryDto) {
+	async getAll({ count, page, sortBy, sortOrder }: UserAllQueryDto, role: ERoles) {
+		const where = {}
+		role === ERoles.ADMIN ? (where['role'] = ERoles.USER) : {}
+		role === ERoles.OWNER ? (where['role'] = Not(ERoles.OWNER)) : {}
+
 		const [products, total] = await this.userRepository.findAndCount({
 			order: {
 				[sortBy]: sortOrder
 			},
+			where,
 			take: count,
 			skip: skipCount(page, count)
 		})

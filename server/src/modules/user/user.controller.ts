@@ -37,8 +37,8 @@ export class UserController {
 	@HttpCode(HttpStatus.OK)
 	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
 	@Get()
-	getAll(@Query() query: UserAllQueryDto) {
-		return this.userService.getAll(query)
+	getAll(@Query() query: UserAllQueryDto, @User('role') role: ERoles) {
+		return this.userService.getAll(query, role)
 	}
 
 	@HttpCode(HttpStatus.OK)
