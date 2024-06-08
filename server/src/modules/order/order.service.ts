@@ -128,7 +128,7 @@ export class OrderService {
 		ids.forEach(id => {
 			const order = orders.some(g => g.id === id)
 			if (!order) {
-				errorMessages.push(`Товар с id: ${id} не найден`)
+				errorMessages.push(`Заказ с id: ${id} не найден`)
 			}
 		})
 
