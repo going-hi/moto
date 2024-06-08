@@ -99,7 +99,7 @@ export class ReviewService {
 		ids.forEach(id => {
 			const review = reviews.some(g => g.id === id)
 			if (!review) {
-				errorMessages.push(`Товар с id: ${id} не найден`)
+				errorMessages.push(`Отзыв с id: ${id} не найден`)
 			}
 		})
 
