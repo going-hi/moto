@@ -18,5 +18,5 @@ export class UserAllQueryDto extends PaginationQuery {
 
 	@IsOptional()
 	@IsString()
-	q: string
+	q?: string
 }
