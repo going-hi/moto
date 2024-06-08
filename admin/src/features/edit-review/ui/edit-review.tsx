@@ -10,7 +10,7 @@ import { EditReviewSchema } from '../model'
 
 export const EditReview = () => {
 	return (
-		<Edit>
+		<Edit resource='review'>
 			<SimpleForm resolver={zodResolver(EditReviewSchema)}>
 				<TextInput fullWidth source='name' label='Имя человека' />
 				<ReferenceInput

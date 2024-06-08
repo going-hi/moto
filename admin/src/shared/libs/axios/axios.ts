@@ -21,6 +21,8 @@ $api.interceptors.response.use(
 
 			const refreshResult = await refresh()
 
+			console.log(refreshResult)
+
 			if (!refreshResult) {
 				useAuthStore.getState().logout()
 				return

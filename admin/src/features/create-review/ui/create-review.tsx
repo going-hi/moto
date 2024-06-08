@@ -10,7 +10,7 @@ import { CreateReviewSchema } from '../model'
 
 export const CreateReview = () => {
 	return (
-		<Create redirect='list'>
+		<Create redirect='list' resource='review'>
 			<SimpleForm resolver={zodResolver(CreateReviewSchema)}>
 				<TextInput fullWidth source='name' label='Имя человека' />
 				<ReferenceInput

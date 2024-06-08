@@ -4,7 +4,7 @@ import { EditOrderSchema } from '../model'
 
 export const EditOrder = () => {
 	return (
-		<Edit>
+		<Edit resource='order'>
 			<SimpleForm resolver={zodResolver(EditOrderSchema)}>
 				<TextInput disabled source='id' label='Id' fullWidth />
 				<SelectInput
