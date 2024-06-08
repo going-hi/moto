@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 export const EditUser = () => {
 	return (
-		<Edit>
+		<Edit resource='user'>
 			<SimpleForm
 				toolbar={<EditToolbar />}
 				resolver={zodResolver(EditUserSchema)}

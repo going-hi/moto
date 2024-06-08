@@ -1,5 +1,10 @@
-import { $api } from '@/shared'
 import { AuthDtoSchema } from '../model'
+import { envConfig } from '@/shared'
+import axios from 'axios'
 
 export const refresh = () =>
-	$api.get('/auth/refresh').then(res => AuthDtoSchema.parse(res.data))
+	axios
+		.get(`${envConfig.getValue('VITE_API_URL')}auth/refresh`, {
+			withCredentials: true
+		})
+		.then(res => AuthDtoSchema.parse(res.data))

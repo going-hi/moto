@@ -2,6 +2,7 @@ import type { AuthProvider } from 'react-admin'
 import { useAuthStore } from '../../model'
 import { login, refresh } from '../../api'
 import { errorHandler } from '@/shared'
+import { rolesAccess } from '@/shared'
 
 export const authProvider: AuthProvider = {
 	login: async ({
@@ -56,7 +57,7 @@ export const authProvider: AuthProvider = {
 		return Promise.resolve()
 	},
 	getPermissions: () => {
-		return Promise.resolve()
+		return Promise.resolve(rolesAccess)
 	},
 	getIdentity: () => {
 		const { profile } = useAuthStore.getState()
@@ -64,8 +65,6 @@ export const authProvider: AuthProvider = {
 		if (!profile) {
 			return Promise.reject()
 		}
-
-		console.log(profile)
 
 		return Promise.resolve({
 			id: 'user',
