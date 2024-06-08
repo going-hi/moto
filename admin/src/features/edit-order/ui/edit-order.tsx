@@ -1,5 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Edit, SelectInput, SimpleForm, TextInput } from 'react-admin'
+import {
+	Edit,
+	SelectInput,
+	SimpleForm,
+	TextInput,
+	usePermissions
+} from 'react-admin'
 import { EditOrderSchema } from '../model'
 
 export const EditOrder = () => {

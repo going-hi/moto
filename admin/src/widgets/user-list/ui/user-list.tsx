@@ -6,8 +6,14 @@ import {
 	SearchInput,
 	TextField
 } from 'react-admin'
+import { useCanAccess } from '@/shared'
 
 export const UserList = () => {
+	const p = useCanAccess({
+		resource: 'user',
+		action: 'read'
+	})
+
 	return (
 		<List
 			resource='user'

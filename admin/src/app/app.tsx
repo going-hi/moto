@@ -27,6 +27,7 @@ export const App = () => {
 			dataProvider={dataProvider}
 			queryClient={queryClient}
 			authProvider={authProvider}
+			requireAuth
 		>
 			<Resource name='product' show={CardShow} list={CardList} />
 			<Resource

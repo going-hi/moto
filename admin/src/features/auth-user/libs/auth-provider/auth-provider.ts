@@ -2,7 +2,7 @@ import type { AuthProvider } from 'react-admin'
 import { useAuthStore } from '../../model'
 import { login, refresh } from '../../api'
 import { errorHandler } from '@/shared'
-import { adminAccess, ownerAccess } from '@/shared'
+import { rolesAccess } from '@/shared'
 
 export const authProvider: AuthProvider = {
 	login: async ({
@@ -57,22 +57,7 @@ export const authProvider: AuthProvider = {
 		return Promise.resolve()
 	},
 	getPermissions: () => {
-		const { profile } = useAuthStore.getState()
-
-		let access: unknown[] = []
-
-		switch (profile?.role) {
-			case 'admin':
-				access = adminAccess
-				break
-			case 'owner':
-				access = ownerAccess
-				break
-			default:
-				access = []
-		}
-
-		return Promise.resolve(access)
+		return Promise.resolve(rolesAccess)
 	},
 	getIdentity: () => {
 		const { profile } = useAuthStore.getState()
