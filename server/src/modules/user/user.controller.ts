@@ -61,6 +61,16 @@ export class UserController {
 	update(@User('id') userId: number, @Body() dto: UpdateUserDto) {
 		return this.userService.update(userId, dto)
 	}
+	@HttpCode(HttpStatus.OK)
+	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
+	@Put(':id')
+	updateById(
+		@Param() { id }: GetByIdParamsDto,
+		@Body() dto: UpdateUserDto,
+		@User('role') role: ERoles
+	) {
+		return this.userService.updateById(id, dto, role)
+	}
 
 	@HttpCode(HttpStatus.OK)
 	@AccessGuard()

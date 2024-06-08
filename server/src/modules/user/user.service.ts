@@ -115,6 +115,14 @@ export class UserService {
 		return updatedUser
 	}
 
+	async updateById(userId: number, dto: UpdateUserDto, role: ERoles) {
+		const user = await this.byId(userId, true)
+		if (role === ERoles.ADMIN && user.role !== ERoles.USER) {
+			throw new BadRequestException('У вас нет прав менять информацию об этом пользователе')
+		}
+		return await this.update(userId, dto)
+	}
+
 	async update(userId: number, dto: UpdateUserDto) {
 		const user = await this.byId(userId, true)
 		let isConfirm = user.isConfirm
