@@ -85,7 +85,6 @@ export class ReviewService {
 
 	async deleteMany({ filters: { ids } }: DeleteManyReviewsDto) {
 		const reviews = await this.getByIds(ids)
-
 		await this.reviewRepository.remove(reviews)
 	}
 
