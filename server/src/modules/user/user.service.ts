@@ -26,10 +26,12 @@ export class UserService {
 		return user
 	}
 
-	async getAll({ count, page, sortBy, sortOrder }: UserAllQueryDto, role: ERoles) {
+	async getAll({ count, page, sortBy, sortOrder }: UserAllQueryDto, role?: ERoles) {
 		const where = {}
-		role === ERoles.ADMIN ? (where['role'] = ERoles.USER) : {}
-		role === ERoles.OWNER ? (where['role'] = Not(ERoles.OWNER)) : {}
+		if (role) {
+			role === ERoles.ADMIN ? (where['role'] = ERoles.USER) : {}
+			role === ERoles.OWNER ? (where['role'] = Not(ERoles.OWNER)) : {}
+		}
 
 		const [products, total] = await this.userRepository.findAndCount({
 			order: {
