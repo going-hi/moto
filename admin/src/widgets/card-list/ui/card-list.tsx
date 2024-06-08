@@ -1,4 +1,4 @@
-import { DatagridConfigurable, List, TextField } from 'react-admin'
+import { DatagridConfigurable, List, SearchInput, TextField } from 'react-admin'
 import { Actions } from '@/shared'
 
 export const CardList = () => {
@@ -7,6 +7,13 @@ export const CardList = () => {
 			actions={<Actions />}
 			resource='product'
 			sort={{ field: 'name', order: 'ASC' }}
+			filters={[
+				<SearchInput
+					source='q'
+					alwaysOn
+					placeholder='Поиск по названию'
+				/>
+			]}
 		>
 			<DatagridConfigurable rowClick={(id, res) => `/${res}/${id}/show`}>
 				<TextField source='name' label='Название' emptyText='нет' />

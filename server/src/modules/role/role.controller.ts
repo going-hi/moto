@@ -3,7 +3,7 @@ import {
 	Controller,
 	HttpCode,
 	HttpStatus,
-	Post,
+	Put,
 	UsePipes,
 	ValidationPipe
 } from '@nestjs/common'
@@ -21,7 +21,7 @@ export class RoleController {
 
 	@HttpCode(HttpStatus.OK)
 	@RolesAuthGuard(ERoles.OWNER)
-	@Post()
+	@Put()
 	setRoleUser(@Body() dto: SetRoleDto) {
 		return this.roleService.setRoleUser(dto)
 	}

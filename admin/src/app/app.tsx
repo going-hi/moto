@@ -17,6 +17,8 @@ import { UserList } from '@/widgets/user-list'
 import { UserShow } from '@/widgets/user-show'
 import { EditUser } from '@/features/edit-user'
 import { authProvider } from '@/features/auth-user'
+import { CreateProduct } from '@/features/create-product'
+import { EditProduct } from '@/features/edit-product'
 
 export const App = () => {
 	const queryClient = new QueryClient(reactQueryConfig)
@@ -29,7 +31,13 @@ export const App = () => {
 			authProvider={authProvider}
 			requireAuth
 		>
-			<Resource name='product' show={CardShow} list={CardList} />
+			<Resource
+				name='product'
+				show={CardShow}
+				list={CardList}
+				edit={EditProduct}
+				create={CreateProduct}
+			/>
 			<Resource
 				name='review'
 				show={ReviewShow}
