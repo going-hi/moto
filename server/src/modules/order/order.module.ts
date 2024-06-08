@@ -20,7 +20,7 @@ export class OrderModule implements NestModule {
 	configure(consumer: MiddlewareConsumer) {
 		consumer.apply(ParseQueryMiddleware).forRoutes({
 			path: 'order/many',
-			method: RequestMethod.DELETE
+			method: RequestMethod.ALL
 		})
 	}
 }
