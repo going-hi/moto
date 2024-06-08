@@ -3,7 +3,7 @@ import { $api } from '../axios'
 import { errorHandler } from '../error-handler'
 import { ListSchema } from '@/shared'
 import qs from 'qs'
-import { removeRelations } from '../removeRelations'
+import { removeRelation } from '../removeRelation'
 
 // @ts-ignore. don't need to use updateMany / getManyReference
 export const dataProvider: DataProvider = {
@@ -13,7 +13,10 @@ export const dataProvider: DataProvider = {
 
 			const { data } = await $api.get(url)
 
-			return { data }
+			const obj =
+				res === 'review' ? removeRelation(data, 'product') : data
+
+			return { data: obj }
 		} catch (e) {
 			return errorHandler(e)
 		}
@@ -58,8 +61,11 @@ export const dataProvider: DataProvider = {
 				meta: { total }
 			} = data
 
-			// @ts-expect-error
-			const items = removeRelations(data.items, 'product')
+			const items =
+				res === 'review'
+					? // @ts-expect-error
+					  data.items.map(i => removeRelation(i, 'product'))
+					: data.items
 
 			return { data: [...items], total }
 		} catch (e) {
@@ -80,14 +86,44 @@ export const dataProvider: DataProvider = {
 	},
 
 	update: async (res, par) => {
-		return Promise.reject()
+		try {
+			const url = `/${res}/${par.id}`
+
+			const { data } = await $api.put(url, par.data)
+
+			return { data }
+		} catch (e) {
+			return errorHandler(e)
+		}
 	},
 
+	// @ts-expect-error
 	delete: async (res, par) => {
-		return Promise.reject()
+		try {
+			const url = `/${res}/${par.id}`
+
+			await $api.delete(url)
+
+			return { data: par.id }
+		} catch (e) {
+			return errorHandler(e)
+		}
 	},
 
 	deleteMany: async (res, par) => {
-		return Promise.reject()
+		try {
+			const { ids } = par
+
+			const url = `/${res}/many?${qs.stringify({
+				filters: decodeURI(JSON.stringify({ ids }))
+			})}`
+
+			// @ts-expect-error
+			await $api.delete(url, { ids })
+
+			return { data: ids }
+		} catch (e) {
+			return errorHandler(e)
+		}
 	}
 }

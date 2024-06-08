@@ -1,8 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { ReviewEntity } from './entities'
-import { Repository } from 'typeorm'
+import { In, Repository } from 'typeorm'
 import { InjectRepository } from '@nestjs/typeorm'
-import { UpdateReviewDto, CreateReviewDto, ReviewAllDto } from './dto'
+import { UpdateReviewDto, CreateReviewDto, ReviewAllDto, DeleteManyReviewsDto } from './dto'
 import { ProductService } from '../product/product.service'
 import { FileService } from '@/core/file/file.service'
 import { skipCount } from '@/core/utils'
@@ -81,5 +81,32 @@ export class ReviewService {
 	async delete(id: number) {
 		await this.getOne(id)
 		await this.reviewRepository.delete({ id })
+	}
+
+	async deleteMany({ filters: { ids } }: DeleteManyReviewsDto) {
+		const reviews = await this.getByIds(ids)
+
+		await this.reviewRepository.remove(reviews)
+	}
+
+	async getByIds(ids: number[]) {
+		const products = await this.reviewRepository.find({
+			where: { id: In(ids) }
+		})
+
+		const errorMessages = []
+
+		ids.forEach(id => {
+			const product = products.some(g => g.id === id)
+			if (!product) {
+				errorMessages.push(`Товар с id: ${id} не найден`)
+			}
+		})
+
+		if (errorMessages.length) {
+			throw new BadRequestException(errorMessages)
+		}
+
+		return products
 	}
 }

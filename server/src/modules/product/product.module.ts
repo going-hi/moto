@@ -6,7 +6,7 @@ import { ProductService } from './product.service'
 import { FileModule } from '@/core/file/file.module'
 import { AuthModule } from '@/auth/auth.module'
 import { FavouritesModule } from '../favourites/favourites.module'
-import { LoggerMiddleware } from './middlewares/parse-query.middleware'
+import { ParseQueryMiddleware } from '../../common/middlewares/parse-query.middleware'
 
 @Module({
 	imports: [
@@ -22,7 +22,7 @@ import { LoggerMiddleware } from './middlewares/parse-query.middleware'
 export class ProductModule implements NestModule {
 	configure(consumer: MiddlewareConsumer) {
 		consumer
-			.apply(LoggerMiddleware)
+			.apply(ParseQueryMiddleware)
 			.forRoutes(
 				{ path: 'product', method: RequestMethod.GET },
 				{ path: 'product/many', method: RequestMethod.GET }

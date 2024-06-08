@@ -2,7 +2,7 @@ import { Injectable, NestMiddleware } from '@nestjs/common'
 import { Request, Response, NextFunction } from 'express'
 
 @Injectable()
-export class LoggerMiddleware implements NestMiddleware {
+export class ParseQueryMiddleware implements NestMiddleware {
 	use(req: Request, res: Response, next: NextFunction) {
 		const query = req.query
 		if (query.filters) {

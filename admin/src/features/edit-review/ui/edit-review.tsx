@@ -1,17 +1,17 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import {
 	AutocompleteInput,
-	Create,
+	Edit,
 	ReferenceInput,
+	SimpleForm,
 	TextInput
 } from 'react-admin'
-import { SimpleForm } from 'react-admin'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { CreateReviewSchema } from '../model'
+import { EditReviewSchema } from '../model'
 
-export const CreateReview = () => {
+export const EditReview = () => {
 	return (
-		<Create redirect='list'>
-			<SimpleForm resolver={zodResolver(CreateReviewSchema)}>
+		<Edit>
+			<SimpleForm resolver={zodResolver(EditReviewSchema)}>
 				<TextInput fullWidth source='name' label='Имя человека' />
 				<ReferenceInput
 					source='product'
@@ -29,6 +29,6 @@ export const CreateReview = () => {
 				</ReferenceInput>
 				<TextInput source='text' label='Текст отзыва' fullWidth />
 			</SimpleForm>
-		</Create>
+		</Edit>
 	)
 }

@@ -19,7 +19,7 @@ import {
 } from '@nestjs/common'
 import { ApiTags, ApiConsumes } from '@nestjs/swagger'
 import { ReviewService } from './review.service'
-import { CreateReviewDto, ReviewAllDto, UpdateReviewDto } from './dto'
+import { CreateReviewDto, DeleteManyReviewsDto, ReviewAllDto, UpdateReviewDto } from './dto'
 import { RolesAuthGuard } from '@/auth/guards'
 import { ERoles } from '@/common/enums'
 import { FileInterceptor } from '@nestjs/platform-express'
@@ -53,6 +53,13 @@ export class ReviewController {
 	@Get()
 	getAll(@Query() query: ReviewAllDto) {
 		return this.reviewService.getAll(query)
+	}
+
+	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
+	@HttpCode(HttpStatus.NO_CONTENT)
+	@Delete('many')
+	deleteMany(@Query() query: DeleteManyReviewsDto) {
+		return this.reviewService.deleteMany(query)
 	}
 
 	@HttpCode(HttpStatus.OK)
