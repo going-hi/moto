@@ -20,8 +20,6 @@ export const EditProductBody = () => {
 	const record = useRecordContext()
 	const [activeCategory, setActiveCategory] = useState(record.category)
 
-	console.log(record)
-
 	// @ts-expect-error
 	const typesList = CategoryTypesMap[activeCategory] ?? []
 
