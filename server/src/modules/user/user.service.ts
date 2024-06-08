@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { UserEntity } from './entities'
-import { Repository } from 'typeorm'
+import { ILike, Repository } from 'typeorm'
 import { CreateUserDto, UpdateUserDto, UserAllQueryDto } from './dto'
 import { ERoles } from '@/common/enums'
 import { FileService } from '@/core/file/file.service'
@@ -21,17 +21,25 @@ export class UserService {
 	) {}
 
 	async byId(id: number, withError = false) {
-		const user = await this.userRepository.findOneBy({ id })
+		const user = await this.userRepository.findOne({
+			where: { id },
+			relations: {
+				orders: true
+			}
+		})
 		if (!user && withError) throw new NotFoundException('Пользователь с таким id не найден')
 		return user
 	}
 
-	async getAll({ count, page, sortBy, sortOrder }: UserAllQueryDto) {
+	async getAll({ count, page, sortBy, sortOrder, q }: UserAllQueryDto) {
 		const [products, total] = await this.userRepository.findAndCount({
 			order: {
 				[sortBy]: sortOrder
 			},
 			take: count,
+			where: {
+				name: q && ILike(`%${q}%`)
+			},
 			skip: skipCount(page, count)
 		})
 		return new PaginationDto(products, total)

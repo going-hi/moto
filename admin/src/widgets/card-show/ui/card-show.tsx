@@ -8,6 +8,7 @@ import {
 } from 'react-admin'
 import { Show } from 'react-admin'
 import { CardShowImages } from './@images'
+import { EmptyCharacteristic } from './@empty-characteristics'
 
 export const CardShow = () => {
 	return (
@@ -44,7 +45,10 @@ export const CardShowBody = () => {
 			/>
 			<CardShowImages />
 			<ArrayField source='characteristics' label=''>
-				<Datagrid bulkActionButtons={false}>
+				<Datagrid
+					bulkActionButtons={false}
+					empty={<EmptyCharacteristic />}
+				>
 					<TextField
 						sortable={false}
 						source='key'

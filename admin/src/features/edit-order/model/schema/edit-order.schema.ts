@@ -5,7 +5,8 @@ export const EditOrderSchema = z.object({
 		[
 			z.literal('new'),
 			z.literal('processed'),
-			z.literal('accepted', z.literal('executed'))
+			z.literal('accepted'),
+			z.literal('executed')
 		],
 		{ message: 'Неверный статус заказа' }
 	)

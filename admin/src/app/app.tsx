@@ -13,6 +13,9 @@ import { reactQueryConfig } from '@/shared'
 import { QueryClient } from 'react-query'
 import { OrderList } from '@/widgets/order-list'
 import { OrderShow } from '@/widgets/order-show'
+import { UserList } from '@/widgets/user-list'
+import { UserShow } from '@/widgets/user-show'
+import { EditUser } from '@/features/edit-user'
 
 export const App = () => {
 	const queryClient = new QueryClient(reactQueryConfig)
@@ -36,6 +39,12 @@ export const App = () => {
 				edit={EditOrder}
 				list={OrderList}
 				show={OrderShow}
+			/>
+			<Resource
+				name='user'
+				list={UserList}
+				show={UserShow}
+				edit={EditUser}
 			/>
 		</Admin>
 	)

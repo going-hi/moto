@@ -11,7 +11,7 @@ import {
 
 export const OrderShow = () => {
 	return (
-		<Show title={<PageTitle />}>
+		<Show title={<PageTitle field='id' />}>
 			<OrderShowBody />
 		</Show>
 	)

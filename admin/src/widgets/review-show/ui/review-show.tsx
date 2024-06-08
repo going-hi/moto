@@ -1,5 +1,11 @@
 import { PageTitle } from '@/shared'
-import { ReferenceField, Show, SimpleShowLayout, TextField } from 'react-admin'
+import {
+	DateField,
+	ReferenceField,
+	Show,
+	SimpleShowLayout,
+	TextField
+} from 'react-admin'
 
 export const ReviewShow = () => {
 	return (
@@ -12,8 +18,9 @@ export const ReviewShow = () => {
 const ReviewShowBody = () => {
 	return (
 		<SimpleShowLayout>
-			<TextField source='name' />
-			<TextField source='text' />
+			<TextField source='id' label='Id' />
+			<TextField source='name' label='Имя пользователя' />
+			<TextField source='text' label='Текст' />
 			<ReferenceField
 				source='product'
 				reference='product'
@@ -24,8 +31,14 @@ const ReviewShowBody = () => {
 					return `/${res}/${par.id}/show`
 				}}
 			>
-				<TextField source='name' emptyText='none' />
+				<TextField
+					source='name'
+					emptyText='none'
+					label='Название продукта'
+				/>
 			</ReferenceField>
+			<DateField source='createDate' label='Дата создания' />
+			<DateField source='updateDate' label='Дата изменения' />
 		</SimpleShowLayout>
 	)
 }
