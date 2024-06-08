@@ -9,10 +9,22 @@ export const OrderList = () => {
 			sort={{ field: 'createDate', order: 'ASC' }}
 		>
 			<DatagridConfigurable rowClick={(id, res) => `/${res}/${id}/show`}>
-				<TextField source='id' label='Id' />
-				<TextField source='name' label='Имя заказчика' />
-				<TextField source='status' label='Статус заказа' />
-				<TextField source='total' label='Итоговая сумма' />
+				<TextField source='id' label='Id' emptyText='нет' />
+				<TextField
+					source='name'
+					label='Имя заказчика'
+					emptyText='нет'
+				/>
+				<TextField
+					source='status'
+					label='Статус заказа'
+					emptyText='нет'
+				/>
+				<TextField
+					source='total'
+					label='Итоговая сумма'
+					emptyText='нет'
+				/>
 			</DatagridConfigurable>
 		</List>
 	)

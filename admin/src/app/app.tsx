@@ -13,6 +13,10 @@ import { reactQueryConfig } from '@/shared'
 import { QueryClient } from 'react-query'
 import { OrderList } from '@/widgets/order-list'
 import { OrderShow } from '@/widgets/order-show'
+import { UserList } from '@/widgets/user-list'
+import { UserShow } from '@/widgets/user-show'
+import { EditUser } from '@/features/edit-user'
+import { authProvider } from '@/features/auth-user'
 
 export const App = () => {
 	const queryClient = new QueryClient(reactQueryConfig)
@@ -22,6 +26,7 @@ export const App = () => {
 			title='Moto'
 			dataProvider={dataProvider}
 			queryClient={queryClient}
+			authProvider={authProvider}
 		>
 			<Resource name='product' show={CardShow} list={CardList} />
 			<Resource
@@ -36,6 +41,12 @@ export const App = () => {
 				edit={EditOrder}
 				list={OrderList}
 				show={OrderShow}
+			/>
+			<Resource
+				name='user'
+				list={UserList}
+				show={UserShow}
+				edit={EditUser}
 			/>
 		</Admin>
 	)

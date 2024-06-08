@@ -42,7 +42,12 @@ export const dataProvider: DataProvider = {
 			const { ids } = par
 
 			const url = `/${res}/many?${qs.stringify({
-				filters: decodeURI(JSON.stringify({ ids }))
+				filters: decodeURI(
+					JSON.stringify({
+						// @ts-expect-error
+						ids: ids.map(i => (typeof i === 'object' ? i.id : i))
+					})
+				)
 			})}`
 
 			const data = await $api
@@ -62,7 +67,8 @@ export const dataProvider: DataProvider = {
 				page: par.pagination.page,
 				count: par.pagination.perPage,
 				sortBy: par.sort.field,
-				sortOrder: par.sort.order
+				sortOrder: par.sort.order,
+				q: par.filter.q
 			}
 
 			const url = `/${res}?${qs.stringify(query)}`
@@ -101,9 +107,16 @@ export const dataProvider: DataProvider = {
 
 	update: async (res, par) => {
 		try {
-			const url = `/${res}/${par.id}`
+			const url =
+				res === 'order'
+					? `/${res}/${par.id}/status`
+					: `/${res}/${par.id}`
 
-			const { data } = await $api.put(url, par.data)
+			const { data } = await $api({
+				method: res === 'order' ? 'PATCH' : 'PUT',
+				url,
+				data: par.data
+			})
 
 			return { data }
 		} catch (e) {

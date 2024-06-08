@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { UserEntity } from './entities'
-import { Not, Repository } from 'typeorm'
+import { ILike, Not, Repository } from 'typeorm'
 import { CreateUserDto, UpdateUserDto, UserAllQueryDto } from './dto'
 import { ERoles } from '@/common/enums'
 import { FileService } from '@/core/file/file.service'
@@ -26,7 +26,7 @@ export class UserService {
 		return user
 	}
 
-	async getAll({ count, page, sortBy, sortOrder }: UserAllQueryDto, role?: ERoles) {
+	async getAll({ count, page, sortBy, sortOrder, q }: UserAllQueryDto, role?: ERoles) {
 		const where = {}
 		if (role) {
 			role === ERoles.ADMIN ? (where['role'] = ERoles.USER) : {}
@@ -37,7 +37,9 @@ export class UserService {
 			order: {
 				[sortBy]: sortOrder
 			},
-			where,
+			where: {
+				name: q && ILike(`%${q}%`)
+			},
 			take: count,
 			skip: skipCount(page, count)
 		})
@@ -120,6 +122,7 @@ export class UserService {
 		if (role === ERoles.ADMIN && user.role !== ERoles.USER) {
 			throw new BadRequestException('У вас нет прав менять информацию об этом пользователе')
 		}
+
 		return await this.update(userId, dto)
 	}
 

@@ -8,6 +8,7 @@ import {
 } from 'react-admin'
 import { Show } from 'react-admin'
 import { CardShowImages } from './@images'
+import { EmptyCharacteristic } from './@empty-characteristics'
 
 export const CardShow = () => {
 	return (
@@ -20,31 +21,34 @@ export const CardShow = () => {
 export const CardShowBody = () => {
 	return (
 		<SimpleShowLayout>
-			<TextField source='id' label='Id' emptyText='none' />
-			<TextField source='name' label='Название' emptyText='none' />
-			<TextField source='description' label='Описание' emptyText='none' />
-			<TextField source='price' label='Цена' emptyText='none' />
-			<TextField source='category' label='Категория' emptyText='none' />
-			<TextField source='type' label='Тип' emptyText='none' />
-			<TextField source='brand' label='Бренд' emptyText='none' />
+			<TextField source='id' label='Id' emptyText='нет' />
+			<TextField source='name' label='Название' emptyText='нет' />
+			<TextField source='description' label='Описание' emptyText='нет' />
+			<TextField source='price' label='Цена' emptyText='нет' />
+			<TextField source='category' label='Категория' emptyText='нет' />
+			<TextField source='type' label='Тип' emptyText='нет' />
+			<TextField source='brand' label='Бренд' emptyText='нет' />
 			<TextField
 				source='countOrders'
 				label='Количество заказов'
-				emptyText='none'
+				emptyText='нет'
 			/>
 			<DateField
 				source='createDate'
 				label='Дата создания'
-				emptyText='none'
+				emptyText='нет'
 			/>
 			<DateField
 				source='updateDate'
 				label='Дата изменения'
-				emptyText='none'
+				emptyText='нет'
 			/>
 			<CardShowImages />
 			<ArrayField source='characteristics' label=''>
-				<Datagrid bulkActionButtons={false}>
+				<Datagrid
+					bulkActionButtons={false}
+					empty={<EmptyCharacteristic />}
+				>
 					<TextField
 						sortable={false}
 						source='key'
