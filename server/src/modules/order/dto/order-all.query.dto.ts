@@ -23,6 +23,7 @@ export class OrderAllQueryDto extends PaginationUserQuery {
 	status: EOrderStatus
 
 	@ApiProperty()
+	@IsOptional()
 	@Type(() => Number)
 	@IsInt()
 	id: number
