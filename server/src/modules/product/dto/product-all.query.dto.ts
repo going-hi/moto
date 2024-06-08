@@ -53,6 +53,11 @@ export class ProductAllQueryDto extends PaginationQuery {
 
 	@ApiProperty()
 	@IsOptional()
+	@IsString()
+	q?: string
+
+	@ApiProperty()
+	@IsOptional()
 	@IsKeyArrayObject()
 	@Type(() => Filter)
 	@Transform(({ value }) => {
