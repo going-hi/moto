@@ -18,7 +18,8 @@ import {
 	OrderAllQueryDto,
 	OrderAllForUserQueryDto,
 	UpdateStatusDto,
-	DeleteManyOrdersDto
+	DeleteManyOrdersDto,
+	GetManyOrderDto
 } from './dto'
 import { ApiTags } from '@nestjs/swagger'
 import { GetByIdParamsDto } from '@/common/dto'
@@ -46,6 +47,12 @@ export class OrderController {
 	@Get('admin')
 	findAll(@Query() dto: OrderAllQueryDto) {
 		return this.orderService.findAll(dto)
+	}
+
+	@HttpCode(HttpStatus.OK)
+	@Get('many')
+	getMany(@Query() query: GetManyOrderDto) {
+		return this.orderService.getMany(query)
 	}
 
 	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)

@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { UserEntity } from './entities'
-import { ILike, Repository } from 'typeorm'
+import { ILike, Not, Repository } from 'typeorm'
 import { CreateUserDto, UpdateUserDto, UserAllQueryDto } from './dto'
 import { ERoles } from '@/common/enums'
 import { FileService } from '@/core/file/file.service'
@@ -21,25 +21,26 @@ export class UserService {
 	) {}
 
 	async byId(id: number, withError = false) {
-		const user = await this.userRepository.findOne({
-			where: { id },
-			relations: {
-				orders: true
-			}
-		})
+		const user = await this.userRepository.findOneBy({ id })
 		if (!user && withError) throw new NotFoundException('Пользователь с таким id не найден')
 		return user
 	}
 
-	async getAll({ count, page, sortBy, sortOrder, q }: UserAllQueryDto) {
+	async getAll({ count, page, sortBy, sortOrder, q }: UserAllQueryDto, role?: ERoles) {
+		const where = {}
+		if (role) {
+			role === ERoles.ADMIN ? (where['role'] = ERoles.USER) : {}
+			role === ERoles.OWNER ? (where['role'] = Not(ERoles.OWNER)) : {}
+		}
+
 		const [products, total] = await this.userRepository.findAndCount({
 			order: {
 				[sortBy]: sortOrder
 			},
-			take: count,
 			where: {
 				name: q && ILike(`%${q}%`)
 			},
+			take: count,
 			skip: skipCount(page, count)
 		})
 		return new PaginationDto(products, total)
@@ -114,6 +115,15 @@ export class UserService {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const { link, code, password, ...updatedUser } = await this.userRepository.save(user)
 		return updatedUser
+	}
+
+	async updateById(userId: number, dto: UpdateUserDto, role: ERoles) {
+		const user = await this.byId(userId, true)
+		if (role === ERoles.ADMIN && user.role !== ERoles.USER) {
+			throw new BadRequestException('У вас нет прав менять информацию об этом пользователе')
+		}
+
+		return await this.update(userId, dto)
 	}
 
 	async update(userId: number, dto: UpdateUserDto) {

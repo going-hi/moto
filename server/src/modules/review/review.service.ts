@@ -90,16 +90,16 @@ export class ReviewService {
 	}
 
 	async getByIds(ids: number[]) {
-		const products = await this.reviewRepository.find({
+		const reviews = await this.reviewRepository.find({
 			where: { id: In(ids) }
 		})
 
 		const errorMessages = []
 
 		ids.forEach(id => {
-			const product = products.some(g => g.id === id)
-			if (!product) {
-				errorMessages.push(`Товар с id: ${id} не найден`)
+			const review = reviews.some(g => g.id === id)
+			if (!review) {
+				errorMessages.push(`Отзыв с id: ${id} не найден`)
 			}
 		})
 
@@ -107,6 +107,6 @@ export class ReviewService {
 			throw new BadRequestException(errorMessages)
 		}
 
-		return products
+		return reviews
 	}
 }

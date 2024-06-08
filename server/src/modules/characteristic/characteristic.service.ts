@@ -89,7 +89,7 @@ export class CharacteristicService {
 		ids.forEach(id => {
 			const characteristic = characteristics.some(g => g.id === id)
 			if (!characteristic) {
-				errorMessages.push(`Товар с id: ${id} не найден`)
+				errorMessages.push(`Характеристика с id: ${id} не найден`)
 			}
 		})
 
