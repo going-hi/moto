@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import {
 	CharacteristicAllQueryDto,
 	CreateCharacteristicWithProductDto,
@@ -6,7 +6,7 @@ import {
 } from './dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { CharacteristicEntity } from './entities'
-import { Repository } from 'typeorm'
+import { In, Repository } from 'typeorm'
 import { ProductService } from '../product/product.service'
 import { skipCount } from '@/core/utils'
 import { PaginationDto } from '@/common/pagination'
@@ -72,5 +72,31 @@ export class CharacteristicService {
 			throw new NotFoundException(`Характеристика с id: ${id} не найдена`)
 		}
 		return characteristic
+	}
+
+	async deleteMany(ids: number[]) {
+		const products = await this.getByIds(ids)
+		await this.characteristicRepository.remove(products)
+	}
+
+	async getByIds(ids: number[]) {
+		const characteristics = await this.characteristicRepository.find({
+			where: { id: In(ids) }
+		})
+
+		const errorMessages = []
+
+		ids.forEach(id => {
+			const characteristic = characteristics.some(g => g.id === id)
+			if (!characteristic) {
+				errorMessages.push(`Товар с id: ${id} не найден`)
+			}
+		})
+
+		if (errorMessages.length) {
+			throw new BadRequestException(errorMessages)
+		}
+
+		return characteristics
 	}
 }

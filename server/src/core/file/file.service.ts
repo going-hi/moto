@@ -28,7 +28,7 @@ export class FileService {
 			const path = join(__dirname, '..', '..', '../static', `/${dir}`, file)
 			await unlink(path)
 		} catch (e) {
-			console.error(e)
+			console.log('FileService: Не удалось удалить файл, возможно его не существует')
 		}
 	}
 

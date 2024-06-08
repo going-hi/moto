@@ -18,8 +18,10 @@ import {
 	CreateCharacteristicWithProductDto,
 	CharacteristicAllQueryDto
 } from './dto'
-import { GetByIdParamsDto } from '@/common/dto'
+import { GetByIdParamsDto, IdsDto } from '@/common/dto'
 import { ApiTags } from '@nestjs/swagger'
+import { RolesAuthGuard } from '@/auth/guards'
+import { ERoles } from '@/common/enums'
 
 @ApiTags('characteristic')
 @UsePipes(new ValidationPipe({ whitelist: true }))
@@ -51,6 +53,14 @@ export class CharacteristicController {
 		return this.characteristicService.update(id, dto)
 	}
 
+	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
+	@HttpCode(HttpStatus.NO_CONTENT)
+	@Delete('many')
+	deleteMany(@Body() { ids }: IdsDto) {
+		return this.characteristicService.deleteMany(ids)
+	}
+
+	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
 	@HttpCode(HttpStatus.NO_CONTENT)
 	@Delete(':id')
 	delete(@Param() { id }: GetByIdParamsDto) {
