@@ -25,7 +25,7 @@ export class ProductModule implements NestModule {
 			.apply(ParseQueryMiddleware)
 			.forRoutes(
 				{ path: 'product', method: RequestMethod.GET },
-				{ path: 'product/many', method: RequestMethod.GET }
+				{ path: 'product/many', method: RequestMethod.ALL }
 			)
 	}
 }
