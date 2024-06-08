@@ -1,6 +1,6 @@
 import axios, { type AxiosError } from 'axios'
 import { axiosConfig } from '../../config'
-import { useAuthStore } from '@/features/auth-user'
+import { refresh, useAuthStore } from '@/features/auth-user'
 
 const $api = axios.create(axiosConfig)
 
@@ -11,27 +11,27 @@ $api.interceptors.request.use(req => {
 	return req
 })
 
-// $api.interceptors.response.use(
-// 	res => res,
-// 	async (err: AxiosError & { config: { _isRetry: boolean } }) => {
-// 		const origin = err.config
+$api.interceptors.response.use(
+	res => res,
+	async (err: AxiosError & { config: { _isRetry: boolean } }) => {
+		const origin = err.config
 
-// 		if (err.response && err.response.status == 401 && !origin._isRetry) {
-// 			origin._isRetry = true
+		if (err.response && err.response.status == 401 && !origin._isRetry) {
+			origin._isRetry = true
 
-// 			const refreshResult = await refresh(false)
+			const refreshResult = await refresh()
 
-// 			if (!refreshResult) {
-// 				useProfileStore.getState().logout()
-// 				return
-// 			}
+			if (!refreshResult) {
+				useAuthStore.getState().logout()
+				return
+			}
 
-// 			useProfileStore.getState().setData(refreshResult)
+			useAuthStore.getState().setData(refreshResult)
 
-// 			return $api(origin)
-// 		}
-// 		throw err
-// 	}
-// )
+			return $api(origin)
+		}
+		throw err
+	}
+)
 
 export { $api }

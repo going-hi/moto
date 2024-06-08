@@ -21,20 +21,22 @@ export const UserList = () => {
 				className='mt-[10px]'
 				rowClick={(id, res) => `/${res}/${id}/show`}
 			>
-				<TextField source='id' label='Id' />
+				<TextField source='id' label='Id' emptyText='нет' />
 				<FunctionField
 					label='Имя'
 					// @ts-expect-error
 					render={record => `${record.name} ${record.surname}`}
+					emptyText='нет'
 				/>
-				<TextField source='email' label='Почта' />
-				<TextField source='phone' label='Телефон' />
+				<TextField source='email' label='Почта' emptyText='нет' />
+				<TextField source='phone' label='Телефон' emptyText='нет' />
 				<FunctionField
 					label='Роль'
 					render={
 						// @ts-expect-error
 						record => RolesMap[record.role]
 					}
+					emptyText='нет'
 				/>
 			</DatagridConfigurable>
 		</List>

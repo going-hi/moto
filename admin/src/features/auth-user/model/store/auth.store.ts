@@ -1,23 +1,27 @@
 import { immer } from 'zustand/middleware/immer'
 import { create } from 'zustand'
+import type { TProfile } from '../types'
 
 type TAuthStore = {
 	accessToken: string | null
-	setAccessToken: (t: string) => void
+	setData: (t: { accessToken: string; profile: TProfile }) => void
 	logout: () => void
+	profile: TProfile | null
 }
 
 export const useAuthStore = create<TAuthStore>()(
 	immer(set => ({
-		accessToken:
-			'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImVtYWlsIjoic2VsZXplbmZvcndvcmsxMUBnbWFpbC5jb20iLCJuYW1lIjoiUGF1bCIsInJvbGUiOiJhZG1pbiIsImlzQ29uZmlybSI6dHJ1ZSwiYXZhdGFyIjpudWxsLCJpYXQiOjE3MTc4NDAzNzksImV4cCI6MTcxNzg0MjE3OX0.i9sJfrHyqvAKhYv3c4C7AdDWeMd9-bIMQHgSZvh17Rk',
-		setAccessToken: token =>
+		accessToken: null,
+		profile: null,
+		setData: ({ accessToken, profile }) =>
 			set(state => {
-				state.accessToken = token
+				state.accessToken = accessToken
+				state.profile = profile
 			}),
 		logout: () =>
 			set(state => {
 				state.accessToken = null
+				state.profile = null
 			})
 	}))
 )

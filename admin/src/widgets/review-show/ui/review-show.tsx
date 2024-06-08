@@ -18,9 +18,9 @@ export const ReviewShow = () => {
 const ReviewShowBody = () => {
 	return (
 		<SimpleShowLayout>
-			<TextField source='id' label='Id' />
-			<TextField source='name' label='Имя пользователя' />
-			<TextField source='text' label='Текст' />
+			<TextField source='id' label='Id' emptyText='нет' />
+			<TextField source='name' label='Имя пользователя' emptyText='нет' />
+			<TextField source='text' label='Текст' emptyText='нет' />
 			<ReferenceField
 				source='product'
 				reference='product'
@@ -33,12 +33,20 @@ const ReviewShowBody = () => {
 			>
 				<TextField
 					source='name'
-					emptyText='none'
+					emptyText='нет'
 					label='Название продукта'
 				/>
 			</ReferenceField>
-			<DateField source='createDate' label='Дата создания' />
-			<DateField source='updateDate' label='Дата изменения' />
+			<DateField
+				source='createDate'
+				label='Дата создания'
+				emptyText='нет'
+			/>
+			<DateField
+				source='updateDate'
+				label='Дата изменения'
+				emptyText='нет'
+			/>
 		</SimpleShowLayout>
 	)
 }

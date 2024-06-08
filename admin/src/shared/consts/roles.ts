@@ -1,4 +1,5 @@
 export const RolesMap = {
 	admin: 'Администратор',
-	owner: 'Владелец'
+	owner: 'Владелец',
+	user: 'Пользователь'
 }

@@ -14,7 +14,11 @@ export const ReviewList = () => {
 			sort={{ field: 'createDate', order: 'ASC' }}
 		>
 			<DatagridConfigurable rowClick={(id, res) => `/${res}/${id}/show`}>
-				<TextField source='name' label='Имя покупателя' />
+				<TextField
+					source='name'
+					label='Имя покупателя'
+					emptyText='нет'
+				/>
 				<ReferenceField
 					source='product'
 					reference='product'
@@ -25,7 +29,7 @@ export const ReviewList = () => {
 						return `/${res}/${par.id}/show`
 					}}
 				>
-					<TextField source='name' emptyText='none' />
+					<TextField source='name' emptyText='нет' />
 				</ReferenceField>
 			</DatagridConfigurable>
 		</List>
