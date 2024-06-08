@@ -13,8 +13,22 @@ export const dataProvider: DataProvider = {
 
 			const { data } = await $api.get(url)
 
-			const obj =
-				res === 'review' ? removeRelation(data, 'product') : data
+			let obj
+
+			switch (res) {
+				case 'review':
+					obj = removeRelation(data, 'product')
+					break
+				case 'order':
+					obj = {
+						...data,
+						// @ts-expect-error
+						items: data.items.map(i => removeRelation(i, 'product'))
+					}
+					break
+				default:
+					obj = data
+			}
 
 			return { data: obj }
 		} catch (e) {

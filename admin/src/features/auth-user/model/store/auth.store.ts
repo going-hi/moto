@@ -10,7 +10,7 @@ type TAuthStore = {
 export const useAuthStore = create<TAuthStore>()(
 	immer(set => ({
 		accessToken:
-			'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImVtYWlsIjoic2VsZXplbmZvcndvcmsxMUBnbWFpbC5jb20iLCJuYW1lIjoiUGF1bCIsInJvbGUiOiJhZG1pbiIsImlzQ29uZmlybSI6dHJ1ZSwiYXZhdGFyIjpudWxsLCJpYXQiOjE3MTc4MDY1NDksImV4cCI6MTcxNzgwODM0OX0.IN7wl1NBlJL08_WHZVepEm6cIg3FA_hLqZ4gfLm70X4',
+			'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImVtYWlsIjoic2VsZXplbmZvcndvcmsxMUBnbWFpbC5jb20iLCJuYW1lIjoiUGF1bCIsInJvbGUiOiJhZG1pbiIsImlzQ29uZmlybSI6dHJ1ZSwiYXZhdGFyIjpudWxsLCJpYXQiOjE3MTc4MTQwNzksImV4cCI6MTcxNzgxNTg3OX0.8fsxuhRw8tZcrpTtQMCQ5XjKEBko3VKLnmiM3iHJxGo',
 		setAccessToken: token =>
 			set(state => {
 				state.accessToken = token

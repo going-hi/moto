@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
-import { CreateOrderDto, OrderAllQueryDto } from './dto'
+import { CreateOrderDto, DeleteManyOrdersDto, OrderAllQueryDto } from './dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { OrderEntity, OrderItemEntity } from './entities'
 import { In, Repository } from 'typeorm'
@@ -139,7 +139,7 @@ export class OrderService {
 		return orders
 	}
 
-	async deleteMany(ids: number[]) {
+	async deleteMany({ filters: { ids } }: DeleteManyOrdersDto) {
 		const orders = await this.getByIds(ids)
 		await this.orderRepository.remove(orders)
 	}

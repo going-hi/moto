@@ -13,9 +13,15 @@ import {
 	Query
 } from '@nestjs/common'
 import { OrderService } from './order.service'
-import { CreateOrderDto, OrderAllQueryDto, OrderAllForUserQueryDto, UpdateStatusDto } from './dto'
+import {
+	CreateOrderDto,
+	OrderAllQueryDto,
+	OrderAllForUserQueryDto,
+	UpdateStatusDto,
+	DeleteManyOrdersDto
+} from './dto'
 import { ApiTags } from '@nestjs/swagger'
-import { GetByIdParamsDto, IdsDto } from '@/common/dto'
+import { GetByIdParamsDto } from '@/common/dto'
 import { AccessGuard } from '@/auth/guards'
 import { User } from '@/common/decorators'
 import { RolesAuthGuard } from '@/auth/guards/role.guard'
@@ -40,6 +46,13 @@ export class OrderController {
 	@Get('admin')
 	findAll(@Query() dto: OrderAllQueryDto) {
 		return this.orderService.findAll(dto)
+	}
+
+	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
+	@HttpCode(HttpStatus.NO_CONTENT)
+	@Delete('many')
+	deleteMany(@Query() query: DeleteManyOrdersDto) {
+		return this.orderService.deleteMany(query)
 	}
 
 	// * For admins
@@ -69,13 +82,6 @@ export class OrderController {
 	@Patch(':id/status')
 	updateStatus(@Param() { id }: GetByIdParamsDto, @Body() { status }: UpdateStatusDto) {
 		return this.orderService.updateStatus(id, status)
-	}
-
-	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
-	@HttpCode(HttpStatus.NO_CONTENT)
-	@Delete('many')
-	deleteMany(@Body() { ids }: IdsDto) {
-		return this.orderService.deleteMany(ids)
 	}
 
 	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
