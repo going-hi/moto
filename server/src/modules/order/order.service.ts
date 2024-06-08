@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
-import { CreateOrderDto, DeleteManyOrdersDto, OrderAllQueryDto } from './dto'
+import { CreateOrderDto, DeleteManyOrdersDto, GetManyOrderDto, OrderAllQueryDto } from './dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { OrderEntity, OrderItemEntity } from './entities'
 import { In, Repository } from 'typeorm'
@@ -50,10 +50,11 @@ export class OrderService {
 		return savedOrder
 	}
 
-	async findAll({ count, page, sortBy, sortOrder, user, status }: OrderAllQueryDto) {
+	async findAll({ count, page, sortBy, sortOrder, user, status, id }: OrderAllQueryDto) {
 		const where = {}
 		user ? (where['user'] = { id: user }) : {}
 		status ? (where['status'] = status) : {}
+		id ? (where['id'] = id) : {}
 		const [items, total] = await this.orderRepository.findAndCount({
 			where,
 			order: {
@@ -142,5 +143,14 @@ export class OrderService {
 	async deleteMany({ filters: { ids } }: DeleteManyOrdersDto) {
 		const orders = await this.getByIds(ids)
 		await this.orderRepository.remove(orders)
+	}
+
+	async getMany({ filters: { ids } }: GetManyOrderDto) {
+		const [products, total] = await this.orderRepository.findAndCount({
+			where: {
+				id: In(ids)
+			}
+		})
+		return new PaginationDto(products, total)
 	}
 }
