@@ -1,15 +1,3 @@
-import { Type } from 'class-transformer'
-import { IsArray, IsInt, IsOptional, ValidateNested } from 'class-validator'
+import { FiltersIdsDto } from '@/common/dto'
 
-class DeleteReviewsManyDtoFilters {
-	@IsArray()
-	@ValidateNested({ each: true })
-	@IsInt()
-	ids: number[]
-}
-
-export class DeleteManyReviewsDto {
-	@IsOptional()
-	@Type(() => DeleteReviewsManyDtoFilters)
-	filters: DeleteReviewsManyDtoFilters
-}
+export class DeleteManyReviewsDto extends FiltersIdsDto {}

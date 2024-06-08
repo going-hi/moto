@@ -1,16 +1,3 @@
-import { Type } from 'class-transformer'
-import { IsArray, IsInt, IsOptional, ValidateNested } from 'class-validator'
+import { FiltersIdsDto } from '@/common/dto'
 
-class GetManyOrdersDtoFilters {
-	@IsArray()
-	@Type(() => Number)
-	@IsInt({ each: true })
-	ids: number[]
-}
-
-export class GetManyOrderDto {
-	@IsOptional()
-	@Type(() => GetManyOrdersDtoFilters)
-	@ValidateNested()
-	filters: GetManyOrdersDtoFilters
-}
+export class GetManyOrderDto extends FiltersIdsDto {}
