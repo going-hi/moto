@@ -10,7 +10,8 @@ import {
 	SearchProductDto,
 	UpdateProductDto,
 	AddCountOrders,
-	GetManyProductsDto
+	GetManyProductsDto,
+	DeleteManyProductsDto
 } from './dto'
 import { FileService } from '@/core/file/file.service'
 import { CharacteristicEntity } from '../characteristic/entities'
@@ -210,7 +211,7 @@ export class ProductService {
 		return
 	}
 
-	async deleteMany(ids: number[]) {
+	async deleteMany({ filters: { ids } }: DeleteManyProductsDto) {
 		const products = await this.getByIds(ids)
 
 		products.forEach(async product => {
