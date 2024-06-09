@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
+import { AboutPage } from '@/pages/about'
 import { CardPage } from '@/pages/card'
 import { CatalogPage, RedirectCatalogPage } from '@/pages/catalog'
 import { CreateOrderPage } from '@/pages/create-order'
@@ -68,6 +69,14 @@ export const router = createBrowserRouter([
 		element: (
 			<AuthRoute variant='authorized'>
 				<FavouritesPage />
+			</AuthRoute>
+		)
+	},
+	{
+		path: '/about',
+		element: (
+			<AuthRoute variant='public'>
+				<AboutPage />
 			</AuthRoute>
 		)
 	},

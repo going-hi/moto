@@ -10,7 +10,7 @@ export const ProfilePage = () => {
 		<Wrapper>
 			<Header />
 			<Container>
-				<Title className='mb-[20px] text-white' variant='h2'>
+				<Title className='mb-[20px] text-beige' variant='h2'>
 					Личный кабинет
 				</Title>
 				<div className='bg-beige p-[15px] flex gap-x-[200px]'>

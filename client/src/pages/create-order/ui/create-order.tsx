@@ -10,7 +10,7 @@ export const CreateOrderPage = () => {
 		<Wrapper>
 			<Header />
 			<Container className='mb-[10px]'>
-				<Title variant='h2' className='text-white'>
+				<Title variant='h2' className='text-beige'>
 					Оформление заказа
 				</Title>
 				<div className='bg-beige flex p-[15px] justify-between'>

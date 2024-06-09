@@ -7,7 +7,7 @@ export const OtherModelsSlide = (card: TCard) => {
 			<Card
 				variant='primary'
 				{...card}
-				textColor='text-white'
+				textColor='text-beige'
 				className='group-hover:scale-105 block'
 			/>
 		</Slide>

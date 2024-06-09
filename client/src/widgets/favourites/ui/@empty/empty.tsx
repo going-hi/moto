@@ -10,7 +10,7 @@ export const FavouritesEmpty = () => {
 				color='white'
 				className='mb-[20px] w-[170px] h-[170px]'
 			/>
-			<Text className='font-extrabold uppercase mb-[50px] text-[24px] text-white'>
+			<Text className='font-extrabold uppercase mb-[50px] text-[24px] text-beige'>
 				В избранном пока нет товаров
 			</Text>
 			<Button

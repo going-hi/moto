@@ -56,7 +56,7 @@ export const AboutUs = () => {
 						</Text>
 						<Text className='text-right'>
 							ВСЮ ТЕХНИКУ ПОСТАВЛЯЕМ В<br />
-							<span className='bg-black text-white'>
+							<span className='bg-black text-beige'>
 								СОБРАННОМ ВИДЕ.
 							</span>
 						</Text>

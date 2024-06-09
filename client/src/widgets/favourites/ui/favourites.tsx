@@ -13,11 +13,11 @@ export const Favourites = () => {
 		<section className='mb-[30px] mt-[50px]'>
 			<Container>
 				<div className='flex items-end gap-x-[8px] mb-[40px]'>
-					<Title variant='h2' className='text-white leading-[95px]'>
+					<Title variant='h2' className='text-beige leading-[95px]'>
 						Избранное
 					</Title>
 					{!!data?.items.length && (
-						<span className='text-[35px] font-normal inter block pb-[6px] text-white'>
+						<span className='text-[35px] font-normal inter block pb-[6px] text-beige'>
 							({data?.items.length})
 						</span>
 					)}

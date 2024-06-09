@@ -11,7 +11,7 @@ export const CatalogHeader = () => {
 
 	return (
 		<Container className='mb-[60px] pl-[400px]'>
-			<div className='text-white'>
+			<div className='text-beige'>
 				<Title className='leading-[120px]' variant='h1'>
 					{CategoriesRuMap[name]}
 				</Title>

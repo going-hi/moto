@@ -58,7 +58,7 @@ export const Select = ({
 					)}
 					onClick={() => setIsOpen(!isOpen)}
 				>
-					<Text className='text-white font-bold text-[18px] uppercase group-hover:underline'>
+					<Text className='text-beige font-bold text-[18px] uppercase group-hover:underline'>
 						{label}
 					</Text>
 					<Icon
