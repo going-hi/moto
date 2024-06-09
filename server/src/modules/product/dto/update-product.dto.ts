@@ -13,7 +13,7 @@ export class UpdateProductDto extends OmitType(CreateProductDto, ['characteristi
 	@ApiProperty()
 	@IsString({ each: true })
 	@IsArray({ message: 'Список ссылок должен быть массивом строк' })
-	urls: string[]
+	images: string[]
 
 	// * File upload
 	@ApiProperty({
@@ -22,5 +22,5 @@ export class UpdateProductDto extends OmitType(CreateProductDto, ['characteristi
 		description: 'file type should be jpeg | png | jpg | webp'
 	})
 	@Exclude()
-	images: unknown
+	newImages: unknown
 }
