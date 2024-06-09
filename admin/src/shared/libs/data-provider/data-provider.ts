@@ -1,9 +1,46 @@
-import type { DataProvider } from 'react-admin'
+import type { CreateParams, DataProvider } from 'react-admin'
 import { $api } from '../axios'
 import { errorHandler } from '../error-handler'
 import { ListSchema } from '@/shared'
 import qs from 'qs'
 import { removeRelation } from '../removeRelation'
+import { CreateProductSchema } from '@/features/create-product/model'
+import { z } from 'zod'
+
+type TCardParams = z.infer<typeof CreateProductSchema> & {
+	images: [
+		{
+			rawFile: File
+			src?: string
+			title: string
+		}
+	]
+}
+
+const createCardFormData = (params: CreateParams<TCardParams>) => {
+	const formData = new FormData()
+	params.data.images?.forEach(i => {
+		// @ts-expect-error
+		if (i.rawFile) {
+			// @ts-expect-error
+			formData.append('images', i.rawFile, i.title)
+		}
+	})
+
+	params.data.characteristics?.forEach((i, index) => {
+		formData.append(`characteristics[${index}][key]`, i.key)
+		formData.append(`characteristics[${index}][value]`, i.value)
+	})
+	Object.keys(params.data).forEach(key => {
+		// @ts-expect-error
+		if (!['images', 'characteristics'].includes(key) && params.data[key]) {
+			// @ts-expect-error
+			formData.append(key, params.data[key])
+		}
+	})
+
+	return formData
+}
 
 // @ts-ignore. don't need to use updateMany / getManyReference
 export const dataProvider: DataProvider = {
@@ -97,9 +134,15 @@ export const dataProvider: DataProvider = {
 		try {
 			const url = `/${res}/`
 
-			const { data } = await $api.post(url, par.data)
+			const data = res === 'product' ? createCardFormData(par) : par.data
 
-			return { data }
+			const { data: result } = await $api.post(url, data, {
+				headers: {
+					'Content-Type': 'multipart/form-data'
+				}
+			})
+
+			return { data: result }
 		} catch (e) {
 			return errorHandler(e)
 		}
@@ -107,18 +150,35 @@ export const dataProvider: DataProvider = {
 
 	update: async (res, par) => {
 		try {
-			const url =
-				res === 'order'
-					? `/${res}/${par.id}/status`
-					: `/${res}/${par.id}`
+			let data = par.data
 
-			const { data } = await $api({
+			let url = ''
+
+			if (res === 'user') {
+				data = {
+					user: +par.id,
+					...data
+				}
+			}
+
+			switch (res) {
+				case 'order':
+					url = `/${res}/${par.id}/status`
+					break
+				case 'user':
+					url = '/role'
+					break
+				default:
+					url = `/${res}/${par.id}`
+			}
+
+			const { data: result } = await $api({
 				method: res === 'order' ? 'PATCH' : 'PUT',
 				url,
-				data: par.data
+				data
 			})
 
-			return { data }
+			return { data: result }
 		} catch (e) {
 			return errorHandler(e)
 		}

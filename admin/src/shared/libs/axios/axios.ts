@@ -6,8 +6,6 @@ const $api = axios.create(axiosConfig)
 
 $api.interceptors.request.use(req => {
 	req.headers.authorization = 'Bearer ' + useAuthStore.getState().accessToken
-	req.headers['Content-Type'] = 'application/json'
-
 	return req
 })
 
@@ -20,8 +18,6 @@ $api.interceptors.response.use(
 			origin._isRetry = true
 
 			const refreshResult = await refresh()
-
-			console.log(refreshResult)
 
 			if (!refreshResult) {
 				useAuthStore.getState().logout()

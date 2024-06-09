@@ -1,4 +1,4 @@
-import { Admin } from 'react-admin'
+import { Admin, AppBar, Layout, TitlePortal, UserMenu } from 'react-admin'
 import { Resource } from 'react-admin'
 import { CardList } from '@/widgets/card-list'
 import { CardShow } from '@/widgets/card-show'
@@ -16,7 +16,29 @@ import { OrderShow } from '@/widgets/order-show'
 import { UserList } from '@/widgets/user-list'
 import { UserShow } from '@/widgets/user-show'
 import { EditUser } from '@/features/edit-user'
-import { authProvider } from '@/features/auth-user'
+import { authProvider, LogoutButton } from '@/features/auth-user'
+import { CreateProduct } from '@/features/create-product'
+import { EditProduct } from '@/features/edit-product'
+
+const MyUserMenu = () => (
+	<UserMenu>
+		<LogoutButton />
+	</UserMenu>
+)
+
+const MyAppBar = () => (
+	<AppBar userMenu={<MyUserMenu />}>
+		<TitlePortal />
+	</AppBar>
+)
+
+const MyLayout = (props: any) => {
+	return (
+		<>
+			<Layout {...props} appBar={MyAppBar} />
+		</>
+	)
+}
 
 export const App = () => {
 	const queryClient = new QueryClient(reactQueryConfig)
@@ -28,8 +50,15 @@ export const App = () => {
 			queryClient={queryClient}
 			authProvider={authProvider}
 			requireAuth
+			layout={MyLayout}
 		>
-			<Resource name='product' show={CardShow} list={CardList} />
+			<Resource
+				name='product'
+				show={CardShow}
+				list={CardList}
+				edit={EditProduct}
+				create={CreateProduct}
+			/>
 			<Resource
 				name='review'
 				show={ReviewShow}

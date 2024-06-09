@@ -54,8 +54,6 @@ export const useCanAccess = ({
 
 	const accessList = profile && profile?.role ? permissions[profile.role] : {}
 
-	console.log(accessList)
-
 	const isAccess = checkAccess(accessList, resource, action, record)
 
 	return { isAccess, isLoading }
