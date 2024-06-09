@@ -24,7 +24,7 @@ export const Advantages = () => {
 				{reasonsItemsArr.map(i => (
 					<li
 						className='aspect-square bg-black basis-[19%] grow-0 shrink-0 flex items-center justify-center rounded-[50%] font-medium text-[32px] leading-[36px] -tracking-2per uppercase text-beige'
-						key='i'
+						key={i}
 					>
 						<div className='text-center'>{i}</div>
 					</li>

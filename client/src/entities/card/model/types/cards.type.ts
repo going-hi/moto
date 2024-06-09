@@ -11,4 +11,5 @@ export type TGetCards = {
 	['price[0]']?: string
 	['price[1]']?: string
 	type?: string
+	q?: string
 }

@@ -72,7 +72,7 @@ export const Accordion = ({
 								{title}
 							</Title>
 						</div>
-						{variant === 'faq' && !isOpen && (
+						{variant === 'faq' && (
 							<div
 								onClick={onClick}
 								className='w-[35px] p-[5px] h-[35px] flex items-center cursor-pointer'
@@ -111,14 +111,6 @@ export const Accordion = ({
 						>
 							{children}
 						</div>
-						{variant === 'faq' && isOpen && (
-							<div
-								onClick={onClick}
-								className='w-[35px] p-[5px] h-[35px] flex items-center cursor-pointer'
-							>
-								<Icon name={isOpen ? 'Minus' : 'Plus'} />
-							</div>
-						)}
 					</div>
 				</div>
 			</Layout>

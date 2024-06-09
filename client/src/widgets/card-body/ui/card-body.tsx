@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { ToggleCartButton } from '@/features/toggle-cart'
 import { ToggleFavourites } from '@/features/toggle-favourites'
+import { useProfileStore } from '@/entities/profile'
 import { Typography, SliderProvider, Skeleton } from '@/shared'
 import { useGetCard } from '../libs'
 import { CardGalleryBody } from './@body'
@@ -14,6 +15,8 @@ const { Title, Text } = Typography
 
 export const CardBody = ({ id }: { id: number }) => {
 	const { data, isLoading } = useGetCard(id)
+
+	const { accessToken } = useProfileStore()
 
 	return (
 		<section
@@ -58,13 +61,15 @@ export const CardBody = ({ id }: { id: number }) => {
 							</Text>
 						</div>
 						<CardBodyDescription description={data?.description} />
-						<div className='flex gap-x-[15px]'>
-							<ToggleFavourites id={id} variant='button' />
-							<ToggleCartButton
-								variant='parentheses-button'
-								id={id}
-							/>
-						</div>
+						{!!accessToken && (
+							<div className='flex gap-x-[15px]'>
+								<ToggleFavourites id={id} variant='button' />
+								<ToggleCartButton
+									variant='parentheses-button'
+									id={id}
+								/>
+							</div>
+						)}
 						<div>
 							<Specifications
 								list={data?.characteristics ?? []}

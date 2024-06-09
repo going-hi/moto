@@ -13,13 +13,17 @@ import { formatQueryFilters } from '../formatQueryFilters'
 export const useGetQuerySearchCards = () => {
 	const { data, setData } = useSearchQueryStore()
 
-	const { sortBy, sortOrder, enabled, price, type } = data
+	const { sortBy, sortOrder, enabled, price, type, q } = data
+
+	console.log(sortBy)
 
 	const [filterParams, setFilterParams] = useState<string>('')
 	const isMountQuerySet = useRef<boolean>(false)
 	const { name } = useParamNameStore()
 
-	const params: TGetCards = {}
+	const params: TGetCards = {
+		q
+	}
 
 	if (name !== 'all') {
 		params.category = name
@@ -47,7 +51,7 @@ export const useGetQuerySearchCards = () => {
 		unknown,
 		number
 	>({
-		queryKey: ['user/catalog', params, filterParams],
+		queryKey: ['user/catalog', params, filterParams, q],
 		queryFn: ({ pageParam: page = 1 }) => {
 			setData({ ...data, page: String(page) })
 			return getCards({ ...params, page }, filterParams)

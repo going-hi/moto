@@ -13,7 +13,7 @@ export const ProfilePage = () => {
 				<Title className='mb-[20px] text-beige' variant='h2'>
 					Личный кабинет
 				</Title>
-				<div className='bg-beige p-[15px] flex gap-x-[200px]'>
+				<div className='bg-beige p-[15px] flex gap-x-[200px] min-h-[320px]'>
 					<ProfileMenu />
 					<div className='basis-[53%] shrink-0 grow-0'>
 						<Outlet />
