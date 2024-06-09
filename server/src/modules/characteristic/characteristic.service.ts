@@ -1,8 +1,15 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
+import {
+	BadRequestException,
+	Inject,
+	Injectable,
+	NotFoundException,
+	forwardRef
+} from '@nestjs/common'
 import {
 	CharacteristicAllQueryDto,
 	CreateCharacteristicWithProductDto,
-	UpdateCharacteristicDto
+	UpdateCharacteristicDto,
+	UpdateInProductDto
 } from './dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { CharacteristicEntity } from './entities'
@@ -16,6 +23,7 @@ export class CharacteristicService {
 	constructor(
 		@InjectRepository(CharacteristicEntity)
 		private readonly characteristicRepository: Repository<CharacteristicEntity>,
+		@Inject(forwardRef(() => ProductService))
 		private readonly productService: ProductService
 	) {}
 	async create(dto: CreateCharacteristicWithProductDto) {
@@ -77,6 +85,19 @@ export class CharacteristicService {
 	async deleteMany(ids: number[]) {
 		const products = await this.getByIds(ids)
 		await this.characteristicRepository.remove(products)
+	}
+
+	async updateMany(dto: UpdateInProductDto[]) {
+		const ids = dto.map(data => data.id)
+		const characteristics = await this.getByIds(ids)
+		const newCharacteristics = characteristics.map(char => {
+			const charDto = dto.find(data => data.id === char.id)
+			char.key = charDto.key
+			char.value = charDto.value
+			return char
+		})
+
+		return await this.characteristicRepository.save(newCharacteristics)
 	}
 
 	async getByIds(ids: number[]) {
