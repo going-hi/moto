@@ -63,7 +63,7 @@ export class ProductController {
 	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
 	@ApiConsumes('multipart/form-data')
 	@HttpCode(HttpStatus.OK)
-	@UseInterceptors(FilesInterceptor('images'))
+	@UseInterceptors(FilesInterceptor('newImages'))
 	@Put(':id')
 	update(
 		@Param() { id }: GetByIdParamsDto,

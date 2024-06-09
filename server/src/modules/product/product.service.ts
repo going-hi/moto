@@ -58,16 +58,16 @@ export class ProductService {
 		return await this.productRepository.save(product)
 	}
 
-	async update(id: number, dto: UpdateProductDto, images?: Express.Multer.File[]) {
+	async update(id: number, dto: UpdateProductDto, newImages?: Express.Multer.File[]) {
 		const product = await this.byId(id, true)
 
-		const albums = product.images.filter(img => dto.urls.includes(img))
+		const albums = product.images.filter(img => dto.images.includes(img))
 
 		const unnecessaryImgs = product.images.filter(img => !albums.includes(img))
 		unnecessaryImgs.forEach(img => this.fileService.deleteFile(img))
 
-		if (images || images.length) {
-			const orderUrls = images.map((image, index) => ({ image, index }))
+		if (newImages || newImages.length) {
+			const orderUrls = newImages.map((image, index) => ({ image, index }))
 
 			const albumsObj = await Promise.all(
 				orderUrls.map(async imgObj => {
@@ -85,7 +85,6 @@ export class ProductService {
 			albums.push(...sortedAlbum)
 		}
 		const newCharacteristics = await this.characteristicService.updateMany(dto.characteristics)
-		delete dto.urls
 		return await this.productRepository.save({
 			...product,
 			...dto,
