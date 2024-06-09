@@ -14,11 +14,15 @@ build-client:
 	docker build --build-arg VITE_API_URL=${VITE_API_URL} --build-arg VITE_IMAGES_URL=${VITE_IMAGES_URL} -t ${DOCKER_LOGIN}/${DOCKER_CLIENT_NAME}:deploy -f ./client/Dockerfile ./client
 build-server:
 	docker build -t ${DOCKER_LOGIN}/${DOCKER_SERVER_NAME}:deploy -f ./server/Dockerfile ./server
+build-admin:
+	docker build --build-arg VITE_API_URL=${VITE_API_URL} --build-arg VITE_IMAGES_URL=${VITE_IMAGES_URL} -t  ${DOCKER_LOGIN}/${DOCKER_ADMIN_NAME}:deploy -f  ./admin/Dockerfile ./admin
 push-client:
 	docker push ${DOCKER_LOGIN}/${DOCKER_CLIENT_NAME}:deploy
 push-server:
 	docker push ${DOCKER_LOGIN}/${DOCKER_SERVER_NAME}:deploy
+push-admin:
+	docker push ${DOCKER_LOGIN}/${DOCKER_ADMIN_NAME}:deploy
 rerun:
 	curl --header "X-Secret-Key: ${SSH_KEY}" ${SSH_URL}
 deploy:
-	make login && make build-client && make build-server && make push-client && make push-server && make rerun
+	make login && make build-client && make build-server && make build-admin && make push-client && make push-server && make push-admin && make rerun

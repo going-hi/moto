@@ -1,10 +1,13 @@
 import { CategoryArr, CategoryTypesMap } from '@/shared'
 import { useState } from 'react'
 import {
+	ArrayInput,
 	Edit,
 	ImageField,
+	ImageInput,
 	SelectInput,
 	SimpleForm,
+	SimpleFormIterator,
 	TextInput,
 	useRecordContext
 } from 'react-admin'
@@ -37,7 +40,7 @@ export const EditProductBody = () => {
 				choices={CategoryArr}
 				onChange={e => setActiveCategory(e.target.value)}
 			/>
-			{typesList.length && (
+			{!!typesList.length && (
 				<SelectInput
 					fullWidth
 					label='Тип'
@@ -45,7 +48,30 @@ export const EditProductBody = () => {
 					choices={typesList}
 				/>
 			)}
-			<ImageField source='images' src='url' title='desc' />
+			<ArrayInput
+				source='characteristics'
+				fullWidth
+				label='Характеристики'
+			>
+				<SimpleFormIterator fullWidth>
+					<TextInput source='key' label='Название' fullWidth />
+					<TextInput source='value' label='Значение' fullWidth />
+				</SimpleFormIterator>
+			</ArrayInput>
+
+			<ArrayInput source='images' label='Изображения'>
+				<SimpleFormIterator fullWidth>
+					<ImageField source='url' />
+				</SimpleFormIterator>
+			</ArrayInput>
+			<ImageInput
+				source='newImages'
+				multiple
+				label='Добавление изображений'
+				accept='image/png, image/jpeg, image/jpg, image/webp'
+			>
+				<ImageField source='src' title='title' />
+			</ImageInput>
 		</SimpleForm>
 	)
 }

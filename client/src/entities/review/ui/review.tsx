@@ -23,7 +23,7 @@ export const Review = ({
 					</Text>
 				</div>
 				<Text className='text-beige text-[20px] leading-[22px] min-h-[90px]'>
-					{text.slice(0, 200) + (text.length > 200 ? '...' : '')}
+					{text.slice(0, 150) + (text.length > 150 ? '...' : '')}
 				</Text>
 			</div>
 			<Link

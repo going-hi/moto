@@ -33,7 +33,7 @@ export const CreateProduct = () => {
 					choices={CategoryArr}
 					onChange={e => setActiveCategory(e.target.value)}
 				/>
-				{typesList.length && (
+				{!!typesList.length && (
 					<SelectInput
 						fullWidth
 						label='Тип'
@@ -52,7 +52,12 @@ export const CreateProduct = () => {
 					</SimpleFormIterator>
 				</ArrayInput>
 
-				<ImageInput source='images' multiple>
+				<ImageInput
+					source='images'
+					multiple
+					label='Изображения'
+					accept='image/png, image/jpeg, image/jpg, image/webp'
+				>
 					<ImageField source='src' title='title' />
 				</ImageInput>
 			</SimpleForm>

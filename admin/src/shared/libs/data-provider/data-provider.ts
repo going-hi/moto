@@ -4,10 +4,11 @@ import { errorHandler } from '../error-handler'
 import { ListSchema, formatProductImages } from '@/shared'
 import qs from 'qs'
 import { removeRelation } from '../removeRelation'
-import { CreateProductSchema } from '@/features/create-product/model'
+import { CreateProductSchema } from '@/features/create-product'
 import { z } from 'zod'
+import { EditProductSchema } from '@/features/edit-product'
 
-type TCardParams = z.infer<typeof CreateProductSchema> & {
+type TCreateCardParams = Omit<z.infer<typeof CreateProductSchema>, 'images'> & {
 	images: [
 		{
 			rawFile: File
@@ -17,12 +18,10 @@ type TCardParams = z.infer<typeof CreateProductSchema> & {
 	]
 }
 
-const createCardFormData = (params: CreateParams<TCardParams>) => {
+const createCardFormData = (params: CreateParams<TCreateCardParams>) => {
 	const formData = new FormData()
 	params.data.images?.forEach(i => {
-		// @ts-expect-error
 		if (i.rawFile) {
-			// @ts-expect-error
 			formData.append('images', i.rawFile, i.title)
 		}
 	})
@@ -34,6 +33,52 @@ const createCardFormData = (params: CreateParams<TCardParams>) => {
 	Object.keys(params.data).forEach(key => {
 		// @ts-expect-error
 		if (!['images', 'characteristics'].includes(key) && params.data[key]) {
+			// @ts-expect-error
+			formData.append(key, params.data[key])
+		}
+	})
+
+	return formData
+}
+
+type TUpdateCardParams = Omit<
+	z.infer<typeof EditProductSchema>,
+	'newImages'
+> & {
+	newImages: [
+		{
+			rawFile: File
+			src?: string
+			title: string
+		}
+	]
+}
+
+const editCardFormData = (params: CreateParams<TUpdateCardParams>) => {
+	const formData = new FormData()
+
+	params.data.newImages?.forEach(i => {
+		if (i.rawFile) {
+			formData.append('newImages', i.rawFile, i.title)
+		}
+	})
+
+	params.data.characteristics?.forEach((i, index) => {
+		formData.append(`characteristics[${index}][key]`, i.key)
+		formData.append(`characteristics[${index}][value]`, i.value)
+	})
+
+	params.data.images?.forEach((i, index) => {
+		// @ts-expect-error
+		formData.append(`images[${index}]`, i.url?.split('/files/')[1])
+	})
+
+	Object.keys(params.data).forEach(key => {
+		if (
+			!['newImages', 'characteristics', 'images'].includes(key) &&
+			// @ts-expect-error
+			params.data[key]
+		) {
 			// @ts-expect-error
 			formData.append(key, params.data[key])
 		}
@@ -162,6 +207,10 @@ export const dataProvider: DataProvider = {
 					user: +par.id,
 					...data
 				}
+			}
+
+			if (res === 'product') {
+				data = editCardFormData(par)
 			}
 
 			switch (res) {

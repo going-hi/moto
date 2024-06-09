@@ -15,8 +15,6 @@ export const useGetQuerySearchCards = () => {
 
 	const { sortBy, sortOrder, enabled, price, type, q } = data
 
-	console.log(sortBy)
-
 	const [filterParams, setFilterParams] = useState<string>('')
 	const isMountQuerySet = useRef<boolean>(false)
 	const { name } = useParamNameStore()
