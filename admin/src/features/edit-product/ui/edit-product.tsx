@@ -2,6 +2,7 @@ import { CategoryArr, CategoryTypesMap } from '@/shared'
 import { useState } from 'react'
 import {
 	Edit,
+	ImageField,
 	SelectInput,
 	SimpleForm,
 	TextInput,
@@ -36,12 +37,15 @@ export const EditProductBody = () => {
 				choices={CategoryArr}
 				onChange={e => setActiveCategory(e.target.value)}
 			/>
-			<SelectInput
-				fullWidth
-				label='Тип'
-				source='type'
-				choices={typesList}
-			/>
+			{typesList.length && (
+				<SelectInput
+					fullWidth
+					label='Тип'
+					source='type'
+					choices={typesList}
+				/>
+			)}
+			<ImageField source='images' src='url' title='desc' />
 		</SimpleForm>
 	)
 }

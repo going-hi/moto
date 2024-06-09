@@ -3,11 +3,11 @@ import {
 	ArrayField,
 	Datagrid,
 	DateField,
+	ImageField,
 	SimpleShowLayout,
 	TextField
 } from 'react-admin'
 import { Show } from 'react-admin'
-import { CardShowImages } from './@images'
 import { EmptyCharacteristic } from './@empty-characteristics'
 
 export const CardShow = () => {
@@ -43,7 +43,7 @@ export const CardShowBody = () => {
 				label='Дата изменения'
 				emptyText='нет'
 			/>
-			<CardShowImages />
+			<ImageField source='images' src='url' title='desc' />
 			<ArrayField source='characteristics' label=''>
 				<Datagrid
 					bulkActionButtons={false}

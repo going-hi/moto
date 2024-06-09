@@ -33,15 +33,21 @@ export const CreateProduct = () => {
 					choices={CategoryArr}
 					onChange={e => setActiveCategory(e.target.value)}
 				/>
-				<SelectInput
+				{typesList.length && (
+					<SelectInput
+						fullWidth
+						label='Тип'
+						source='type'
+						choices={typesList}
+					/>
+				)}
+				<ArrayInput
+					source='characteristics'
 					fullWidth
-					label='Тип'
-					source='type'
-					choices={typesList}
-				/>
-				<ArrayInput source='characteristics' fullWidth>
+					label='Характеристики'
+				>
 					<SimpleFormIterator fullWidth>
-						<TextInput source='key' label='Ключ' fullWidth />
+						<TextInput source='key' label='Название' fullWidth />
 						<TextInput source='value' label='Значение' fullWidth />
 					</SimpleFormIterator>
 				</ArrayInput>

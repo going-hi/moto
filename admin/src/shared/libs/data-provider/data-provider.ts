@@ -1,7 +1,7 @@
 import type { CreateParams, DataProvider } from 'react-admin'
 import { $api } from '../axios'
 import { errorHandler } from '../error-handler'
-import { ListSchema } from '@/shared'
+import { ListSchema, formatProductImages } from '@/shared'
 import qs from 'qs'
 import { removeRelation } from '../removeRelation'
 import { CreateProductSchema } from '@/features/create-product/model'
@@ -62,6 +62,9 @@ export const dataProvider: DataProvider = {
 						// @ts-expect-error
 						items: data.items.map(i => removeRelation(i, 'product'))
 					}
+					break
+				case 'product':
+					obj = formatProductImages(data)
 					break
 				default:
 					obj = data
