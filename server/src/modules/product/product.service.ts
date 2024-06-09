@@ -84,12 +84,17 @@ export class ProductService {
 
 			albums.push(...sortedAlbum)
 		}
-		const newCharacteristics = await this.characteristicService.updateMany(dto.characteristics)
+
+		if (dto.characteristics.length) {
+			dto['characteristics'] = await this.characteristicService.updateMany(
+				dto.characteristics
+			)
+		}
+
 		return await this.productRepository.save({
 			...product,
 			...dto,
-			images: albums,
-			characteristics: newCharacteristics
+			images: albums
 		})
 	}
 
