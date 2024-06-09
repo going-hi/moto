@@ -60,6 +60,25 @@ export class ProductController {
 		return this.productService.create(dto, files)
 	}
 
+	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
+	@ApiConsumes('multipart/form-data')
+	@HttpCode(HttpStatus.OK)
+	@UseInterceptors(FilesInterceptor('images'))
+	@Put(':id')
+	update(
+		@Param() { id }: GetByIdParamsDto,
+		@Body() dto: UpdateProductDto,
+		@UploadedFiles(
+			new ParseFilePipe({
+				validators: [new FileTypeValidator({ fileType: REGEX_FILE_TYPE_IMG })],
+				fileIsRequired: false
+			})
+		)
+		files?: Express.Multer.File[]
+	) {
+		return this.productService.update(id, dto, files)
+	}
+
 	@Get('filter')
 	getFilter(@Query() query: FilterDto) {
 		return this.productService.getFilter(query)
@@ -91,13 +110,6 @@ export class ProductController {
 	@Get()
 	getAll(@Query() query: ProductAllQueryDto, @User() user?: JwtPayload | undefined) {
 		return this.productService.getAll(query, user)
-	}
-
-	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)
-	@HttpCode(HttpStatus.OK)
-	@Put(':id')
-	update(@Param() { id }: GetByIdParamsDto, @Body() dto: UpdateProductDto) {
-		return this.productService.update(id, dto)
 	}
 
 	@RolesAuthGuard(ERoles.ADMIN, ERoles.OWNER)

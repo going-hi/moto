@@ -21,6 +21,7 @@ import * as filterData from './dto/filter.json'
 import { JwtPayload } from '@/auth/dto'
 import { FavouritesService } from '../favourites/favourites.service'
 import { productGenerate } from '@/core/seeder/generate'
+import { CharacteristicService } from '../characteristic/characteristic.service'
 
 @Injectable()
 export class ProductService {
@@ -28,7 +29,8 @@ export class ProductService {
 		@InjectRepository(ProductEntity)
 		private readonly productRepository: Repository<ProductEntity>,
 		private readonly fileService: FileService,
-		private readonly favouritesService: FavouritesService
+		private readonly favouritesService: FavouritesService,
+		private readonly characteristicService: CharacteristicService
 	) {}
 
 	async create(dto: CreateProductDto, images: Express.Multer.File[]) {
@@ -54,6 +56,42 @@ export class ProductService {
 			characteristics: chars
 		})
 		return await this.productRepository.save(product)
+	}
+
+	async update(id: number, dto: UpdateProductDto, images?: Express.Multer.File[]) {
+		const product = await this.byId(id, true)
+
+		const albums = product.images.filter(img => dto.urls.includes(img))
+
+		const unnecessaryImgs = product.images.filter(img => !albums.includes(img))
+		unnecessaryImgs.forEach(img => this.fileService.deleteFile(img))
+
+		if (images || images.length) {
+			const orderUrls = images.map((image, index) => ({ image, index }))
+
+			const albumsObj = await Promise.all(
+				orderUrls.map(async imgObj => {
+					return {
+						index: imgObj.index,
+						url: await this.fileService.uploadFile(imgObj.image)
+					}
+				})
+			)
+
+			const sortedAlbum = albumsObj
+				.sort((a, b) => a.index - b.index)
+				.map(imgObj => imgObj.url)
+
+			albums.push(...sortedAlbum)
+		}
+		const newCharacteristics = await this.characteristicService.updateMany(dto.characteristics)
+		delete dto.urls
+		return await this.productRepository.save({
+			...product,
+			...dto,
+			images: albums,
+			characteristics: newCharacteristics
+		})
 	}
 
 	async getOne(id: number, user: JwtPayload | null) {
@@ -167,11 +205,6 @@ export class ProductService {
 		} catch (e) {
 			return null
 		}
-	}
-
-	async update(id: number, dto: UpdateProductDto) {
-		const product = await this.byId(id, true)
-		return await this.productRepository.save({ ...product, ...dto })
 	}
 
 	async deleteImages(id: number, dto: ImageDto) {

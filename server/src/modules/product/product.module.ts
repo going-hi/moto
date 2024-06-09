@@ -7,13 +7,15 @@ import { FileModule } from '@/core/file/file.module'
 import { AuthModule } from '@/auth/auth.module'
 import { FavouritesModule } from '../favourites/favourites.module'
 import { ParseQueryMiddleware } from '../../common/middlewares/parse-query.middleware'
+import { CharacteristicModule } from '../characteristic/characteristic.module'
 
 @Module({
 	imports: [
 		TypeOrmModule.forFeature([ProductEntity]),
 		FileModule,
 		AuthModule,
-		forwardRef(() => FavouritesModule)
+		forwardRef(() => FavouritesModule),
+		forwardRef(() => CharacteristicModule)
 	],
 	controllers: [ProductController],
 	providers: [ProductService],
