@@ -1,6 +1,13 @@
+import type { TGetReviewsDto } from '@/entities/review'
 import { Slider, SliderProvider } from '@/shared'
+import { ReviewsSlide } from '../@slide'
+import { ReviewsSlideSkeleton } from '../@slide-skeleton'
 
-export const ReviewsSlider = () => {
+export const ReviewsSlider = ({ list }: { list: TGetReviewsDto['items'] }) => {
+	if (!list) {
+		return <></>
+	}
+
 	return (
 		<SliderProvider
 			options={{
@@ -11,10 +18,13 @@ export const ReviewsSlider = () => {
 			}}
 		>
 			<Slider type='more'>
-				<></>
-				{/* {reviews.map(i => (
-					<ReviewsSlide {...i} key={String(i.id)} />
-				))} */}
+				{list.map((i, index) =>
+					i ? (
+						<ReviewsSlide {...i} key={String(i.id)} />
+					) : (
+						<ReviewsSlideSkeleton key={String(index)} />
+					)
+				)}
 			</Slider>
 		</SliderProvider>
 	)

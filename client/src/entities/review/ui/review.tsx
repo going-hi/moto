@@ -5,25 +5,25 @@ import { TReview } from '../model'
 const { Text } = Typography
 
 export const Review = ({
-	user: { image, name: userName },
+	name,
 	text,
-	card: { id: cardId, name: cardName }
+	product: { id: cardId, name: cardName }
 }: TReview) => {
 	return (
-		<div className='border-[#56544f] border-[1px] border-solid p-[30px] dhover:hover:scale-[102%] duration-700'>
+		<div className='border-[#56544f] border-[1px] border-solid p-[30px] dhover:hover:scale-[102%] duration-700 will-change-transform'>
 			<div className='mb-[60px]'>
-				<div className='mb-[30px]'>
-					<img
-						className='rounded-[50%] w-[100px] h-[100px] mb-[4px]'
-						src={image}
-						alt={cardName}
-					/>
-					<Text className='text-[20px] font-medium leading-[26px] text-beige pl-[8px]'>
-						{userName}
+				<div className='mb-[30px] inline-flex flex-col items-center'>
+					<div className='w-[100px] rounded-[50%] h-[100px] mb-[4px] bg-green-600 flex items-center justify-center'>
+						<Text className='text-white text-[50px] leading-[40px]'>
+							{name.charAt(0)}
+						</Text>
+					</div>
+					<Text className='text-[20px] font-medium leading-[26px] text-beige text-center'>
+						{name.split(' ')[0]}
 					</Text>
 				</div>
 				<Text className='text-beige text-[20px] leading-[22px] min-h-[90px]'>
-					{text}
+					{text.slice(0, 200) + (text.length > 200 ? '...' : '')}
 				</Text>
 			</div>
 			<Link
