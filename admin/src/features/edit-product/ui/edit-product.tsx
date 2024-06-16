@@ -1,4 +1,5 @@
 import { CategoryArr, CategoryTypesMap } from '@/shared'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import {
 	ArrayInput,
@@ -11,6 +12,7 @@ import {
 	TextInput,
 	useRecordContext
 } from 'react-admin'
+import { EditProductSchema } from '../model'
 
 export const EditProduct = () => {
 	return (
@@ -28,7 +30,7 @@ export const EditProductBody = () => {
 	const typesList = CategoryTypesMap[activeCategory] ?? []
 
 	return (
-		<SimpleForm>
+		<SimpleForm resolver={zodResolver(EditProductSchema)}>
 			<TextInput source='name' label='Название' fullWidth />
 			<TextInput source='description' label='Описание' fullWidth />
 			<TextInput source='price' label='Цена' fullWidth />
