@@ -15,15 +15,15 @@ import {
 
 export class CreateProductDto {
 	@ApiProperty()
-	@MaxLength(200, { message: 'Максимальная длина названия товара 200 символа' })
-	@MinLength(2, { message: 'Минимальная длина названия товара 2 символа' })
+	@MaxLength(3000, { message: 'Максимальная длина названия товара 3000 символа' })
+	@MinLength(1, { message: 'Минимальная длина названия товара 1 символа' })
 	@IsString({ message: 'Название товара должно быть строкой' })
 	name: string
 
 	@ApiProperty({ required: false })
 	@IsOptional()
-	@MaxLength(256, { message: 'Максимальная длина описания товара 256 символа' })
-	@MinLength(2, { message: 'Минимальная длина описания товара 2 символа' })
+	@MaxLength(3000, { message: 'Максимальная длина описания товара 3000 символа' })
+	@MinLength(1, { message: 'Минимальная длина описания товара 1 символа' })
 	@IsString({ message: 'Название товара должно быть строкой' })
 	description?: string
 
@@ -33,14 +33,14 @@ export class CreateProductDto {
 	price: number
 
 	@ApiProperty()
-	@MaxLength(64, { message: 'Максимальная длина бренда товара 64 символа' })
-	@MinLength(2, { message: 'Минимальная длина бренда товара 2 символа' })
+	@MaxLength(3000, { message: 'Максимальная длина бренда товара 3000 символа' })
+	@MinLength(1, { message: 'Минимальная длина бренда товара 1 символа' })
 	@IsString({ message: 'Бренд должен быть строкой' })
 	brand: string
 
 	@ApiProperty()
-	@MaxLength(64, { message: 'Максимальная длина типа товара 64 символа' })
-	@MinLength(2, { message: 'Минимальная длина типа товара 2 символа' })
+	@MaxLength(64, { message: 'Максимальная длина типа товара 3000 символа' })
+	@MinLength(1, { message: 'Минимальная длина типа товара 1 символа' })
 	@IsString({ message: 'Тип должен быть строкой' })
 	@IsOptional()
 	type: string
