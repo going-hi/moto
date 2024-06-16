@@ -42,6 +42,7 @@ export class CreateProductDto {
 	@MaxLength(64, { message: 'Максимальная длина типа товара 64 символа' })
 	@MinLength(2, { message: 'Минимальная длина типа товара 2 символа' })
 	@IsString({ message: 'Тип должен быть строкой' })
+	@IsOptional()
 	type: string
 
 	@ApiProperty({ enum: ECategory })
