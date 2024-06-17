@@ -53,5 +53,5 @@ export const EditProductSchema = z.object({
 		)
 		.array(),
 	images: z.string({ message: 'Изображение должно быть строкой' }).array(),
-	newImages: z.unknown().array()
+	newImages: z.unknown().array().optional()
 })

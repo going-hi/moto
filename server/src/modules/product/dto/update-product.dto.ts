@@ -1,7 +1,7 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger'
 import { CreateProductDto } from './create-product.dto'
 import { UpdateInProductDto } from '@/modules/characteristic/dto'
-import { IsArray, IsString, ValidateNested } from 'class-validator'
+import { IsArray, IsOptional, IsString, ValidateNested } from 'class-validator'
 import { Exclude, Type } from 'class-transformer'
 
 export class UpdateProductDto extends OmitType(CreateProductDto, ['characteristics', 'images']) {
@@ -11,6 +11,7 @@ export class UpdateProductDto extends OmitType(CreateProductDto, ['characteristi
 	characteristics: UpdateInProductDto[]
 
 	@ApiProperty()
+	@IsOptional()
 	@IsString({ each: true })
 	@IsArray({ message: 'Список ссылок должен быть массивом строк' })
 	images: string[]
