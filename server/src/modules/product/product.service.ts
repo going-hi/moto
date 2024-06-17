@@ -85,8 +85,9 @@ export class ProductService {
 			albums.push(...sortedAlbum)
 		}
 		if (dto.characteristics && dto.characteristics.length) {
-			dto['characteristics'] = await this.characteristicService.updateMany(
-				dto.characteristics
+			dto['characteristics'] = await this.characteristicService.updateForProduct(
+				dto.characteristics,
+				id
 			)
 		}
 

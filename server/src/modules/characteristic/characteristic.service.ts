@@ -18,13 +18,15 @@ import { ProductService } from '../product/product.service'
 import { skipCount } from '@/core/utils'
 import { PaginationDto } from '@/common/pagination'
 
+import { DataBaseService } from '@/core/database/database.service'
 @Injectable()
 export class CharacteristicService {
 	constructor(
 		@InjectRepository(CharacteristicEntity)
 		private readonly characteristicRepository: Repository<CharacteristicEntity>,
 		@Inject(forwardRef(() => ProductService))
-		private readonly productService: ProductService
+		private readonly productService: ProductService,
+		private readonly databaseService: DataBaseService
 	) {}
 	async create(dto: CreateCharacteristicWithProductDto) {
 		await this.productService.byId(dto.product, true)
@@ -87,17 +89,31 @@ export class CharacteristicService {
 		await this.characteristicRepository.remove(products)
 	}
 
-	async updateMany(dto: UpdateInProductDto[]) {
-		const ids = dto.map(data => data.id)
-		const characteristics = await this.getByIds(ids)
-		const newCharacteristics = characteristics.map(char => {
-			const charDto = dto.find(data => data.id === char.id)
-			char.key = charDto.key
-			char.value = charDto.value
-			return char
-		})
+	async updateForProduct(dto: UpdateInProductDto[], productId: number) {
+		return this.databaseService.transaction(async queryRunner => {
+			await this.deleteByProductId(productId)
 
-		return await this.characteristicRepository.save(newCharacteristics)
+			const createdCharacheristic = dto.map(data => {
+				const char = this.characteristicRepository.create({
+					key: data.key,
+					value: data.key,
+					product: {
+						id: productId
+					}
+				})
+				return char
+			})
+
+			createdCharacheristic.forEach(async char => {
+				await queryRunner.manager.save(CharacteristicEntity, char)
+			})
+
+			return createdCharacheristic
+		})
+	}
+
+	async deleteByProductId(product: number) {
+		await this.characteristicRepository.delete({ product: { id: product } })
 	}
 
 	async getByIds(ids: number[]) {
