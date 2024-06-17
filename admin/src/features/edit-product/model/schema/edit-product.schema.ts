@@ -52,6 +52,11 @@ export const EditProductSchema = z.object({
 			{ message: 'Массив характеристик обязателен' }
 		)
 		.array(),
-	images: z.string({ message: 'Изображение должно быть строкой' }).array(),
+	images: z
+		.object({
+			url: z.string({ message: 'Url картинки должно быть строкой' }),
+			desc: z.string({ message: 'Описание картинки должно быть строкой' })
+		})
+		.array(),
 	newImages: z.unknown().array().optional()
 })
