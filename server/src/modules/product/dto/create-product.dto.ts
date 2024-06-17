@@ -39,7 +39,7 @@ export class CreateProductDto {
 	brand: string
 
 	@ApiProperty()
-	@MaxLength(64, { message: 'Максимальная длина типа товара 3000 символа' })
+	@MaxLength(3000, { message: 'Максимальная длина типа товара 3000 символа' })
 	@MinLength(1, { message: 'Минимальная длина типа товара 1 символа' })
 	@IsString({ message: 'Тип должен быть строкой' })
 	@IsOptional()
