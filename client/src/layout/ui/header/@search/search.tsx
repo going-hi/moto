@@ -12,6 +12,7 @@ export const Search = () => {
 	const search = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		const q = inputRef.current?.value
+
 		setData({
 			q
 		})

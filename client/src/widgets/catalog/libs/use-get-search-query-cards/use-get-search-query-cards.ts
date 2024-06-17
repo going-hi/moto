@@ -20,7 +20,7 @@ export const useGetQuerySearchCards = () => {
 	const { name } = useParamNameStore()
 
 	const params: TGetCards = {
-		q
+		q: q ?? ''
 	}
 
 	if (name !== 'all') {

@@ -44,7 +44,9 @@ export const useSearchQueryStore = create<TParamsStore>()(
 				Object.keys(data).forEach(key => {
 					if (
 						key !== 'price' &&
-						(data[key] || (key === 'sortBy' && data[key] === ''))
+						(data[key] ||
+							key === 'q' ||
+							(key === 'sortBy' && data[key] === ''))
 					) {
 						updatedState[key] = data[key]
 					}
